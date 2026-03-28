@@ -1,0 +1,289 @@
+{
+  "nav": {
+    "features": "Características",
+    "howItWorks": "Cómo funciona",
+    "demo": "Ver en acción",
+    "docs": "Documentación",
+    "trap": "Trap",
+    "getStarted": "Empezar"
+  },
+  "hero": {
+    "badge": {
+      "version": "v{version} · recién lanzada",
+      "free": "Gratuito y de código abierto"
+    },
+    "headline": "Depura todo en tu app PHP.",
+    "headlineSub": "Sin instalar nada.",
+    "starCta": "Star en GitHub",
+    "subheadline": "Excepciones. Dumps. Emails. Profiling. Logs. Todo en una interfaz, lanzado con un comando. Funciona con los SDKs que ya tienes. Sin cuenta en la nube.",
+    "command": "docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 ghcr.io/buggregator/server:latest",
+    "cta": {
+      "copy": "Copiar comando",
+      "copied": "¡Copiado!"
+    },
+    "seeItLive": "Verlo en acción →",
+    "starHelp": "Si Buggregator te ahorra tiempo, una estrella ayuda a otros a encontrarlo.",
+    "trustRow": {
+      "stars": "Estrellas en GitHub",
+      "license": "Licencia MIT",
+      "free": "Gratis para siempre"
+    },
+    "liveFeed": {
+      "live": "En vivo"
+    }
+  },
+  "cleanApp": {
+    "headline": "Tu app no sabe que existimos.",
+    "subheadline": "No es un paquete. Es un servidor.",
+    "telescopeCallout": {
+      "quote": "Telescope funciona dentro de tu app. Buggregator funciona al lado.",
+      "body": "Cero impacto en el rendimiento. Funciona con RoadRunner, FrankenPHP, Swoole y Octane. Captura emails, SMS y HTTP externos — cosas que Telescope nunca ve. Funciona con todos los servicios de tu stack."
+    },
+    "body": "Buggregator funciona junto a tu aplicación como un contenedor Docker independiente. Tu código no cambia. Tus dependencias no cambian. Ya tienes los SDKs instalados — solo necesitan una dirección diferente.",
+    "pillars": {
+      "noDeps": {
+        "title": "Sin nuevas dependencias",
+        "body": "Tu composer.json permanece intacto. Sin service providers. Sin migraciones. Sin código de Buggregator dentro de tu proyecto."
+      },
+      "oneEnvVar": {
+        "title": "Una variable de entorno",
+        "body": "¿Ya usas Sentry SDK, VarDumper o Monolog? Cambia a dónde envían los datos. Eso es todo. Tu código no necesita saber sobre Buggregator."
+      },
+      "crossProject": {
+        "title": "Una instancia, todas tus apps",
+        "body": "Ejecuta un contenedor Buggregator. Apunta todos tus proyectos hacia él. Microservicios, monorepos, múltiples equipos — un dashboard."
+      }
+    },
+    "devEnv": {
+      "headline": "Hecho para entornos de desarrollo.",
+      "subheadline": "Sin cuenta. Sin tarjeta. Sin configuración de proyecto.",
+      "body": "Añade Buggregator a tu docker-compose.yml junto a tus otros servicios. Cambia tu .env. Empieza a depurar. Son 60 segundos — no 15 minutos de configuración en la nube.",
+      "cloudSetup": {
+        "label": "Empezar con Sentry / Mailtrap / Blackfire:",
+        "steps": ["Crear una cuenta", "Verificar tu email", "Crear una organización", "Crear un proyecto", "Elegir plataforma / SDK", "Copiar DSN o credenciales", "Pegar en tu .env", "Esperar el primer evento"],
+        "footer": "~15 minutos antes de ver un solo evento de depuración"
+      },
+      "buggregatorSetup": {
+        "label": "Empezar con Buggregator:",
+        "steps": ["Añadir a docker-compose.yml", "Cambiar tu .env"],
+        "footer": "Abre http://127.0.0.1:8000 — listo."
+      },
+      "composeCaption": "Sin configuración de entorno necesaria. Funciona de inmediato.",
+      "privacy": "Tus datos de depuración nunca salen de tu máquina. Sin almacenamiento en la nube. Sin servidores de terceros. Privacidad total."
+    },
+    "envComparison": {
+      "title": "Solo cambia la dirección",
+      "tabs": {
+        "sentry": "Sentry DSN",
+        "email": "Email",
+        "varDumper": "VarDumper",
+        "logs": "Logs"
+      },
+      "beforeLabel": "ANTES",
+      "afterLabel": "DESPUÉS",
+      "sentryAnnotation": "Solo cambió el host. Tu Sentry SDK sigue funcionando exactamente igual.",
+      "sentryNote": "Buggregator habla el protocolo Sentry."
+    },
+    "table": {
+      "title": "Comparación",
+      "disclaimer": "Telescope y Ray son herramientas excelentes para sus casos de uso. Esta comparación destaca la diferencia arquitectónica: Buggregator es infraestructura, no una biblioteca.",
+      "cols": {
+        "feature": "Característica",
+        "buggregator": "Buggregator",
+        "telescope": "Laravel Telescope",
+        "ray": "Ray (spatie)"
+      }
+    }
+  },
+  "replaces": {
+    "title": "Reemplaza tu stack local de desarrollo — gratis",
+    "footer": "Todo esto. Un comando. Sin costo.",
+    "trapNote": "¿Sin Docker? Usa Buggregator Trap — una alternativa PHP CLI ligera.",
+    "tools": {
+      "sentry": "Excepciones y stack traces",
+      "mailhog": "Captura de emails",
+      "ray": "Dumps de variables",
+      "blackfire": "Profiling de rendimiento",
+      "logviewers": "Logs de aplicación",
+      "requestbin": "Inspección de peticiones HTTP",
+      "inspector": "Monitoreo de rendimiento",
+      "smsgateway": "Pruebas de pasarelas SMS"
+    }
+  },
+  "howItWorks": {
+    "title": "Cómo funciona",
+    "subtitle": "Tres pasos. Eso es todo.",
+    "steps": {
+      "run": {
+        "title": "Ejecuta un comando",
+        "description": "Inicia Buggregator con un solo docker run. Sin instalación, sin registro, sin archivos de configuración."
+      },
+      "connect": {
+        "title": "Añade una variable de entorno",
+        "description": "Cambia una línea en tu .env. Tu Sentry SDK, VarDumper, Monolog o Ray — todos simplemente funcionan."
+      },
+      "open": {
+        "title": "Abre tu navegador",
+        "description": "Ve a http://127.0.0.1:8000 y Buggregator está listo. Sin login."
+      },
+      "everything": {
+        "title": "Todo en un solo lugar",
+        "description": "Excepciones, logs, dumps, emails, profiling, peticiones HTTP — todo en tiempo real, en una pestaña."
+      }
+    }
+  },
+  "showcase": {
+    "title": "Todo en un dashboard",
+    "subtitle": "9 herramientas de depuración. Una interfaz.",
+    "tabs": {
+      "exceptions": "Excepciones",
+      "profiler": "Profiler",
+      "vardump": "VarDump",
+      "ray": "Ray",
+      "emails": "Emails",
+      "logs": "Logs",
+      "http": "HTTP",
+      "inspector": "Inspector",
+      "sms": "SMS"
+    },
+    "descriptions": {
+      "exceptions": "Captura excepciones no manejadas con stack traces completos vía Sentry SDK. Ve exactamente dónde falla tu código.",
+      "profiler": "Visualiza call graphs de XHProf para encontrar cuellos de botella. Haz clic en cualquier nodo para trazar la ruta desde el punto de entrada.",
+      "vardump": "Inspecciona variables con dump(). Propiedades de objetos, contenido de arrays y tipos — directo en el navegador.",
+      "ray": "Depura con ray() — tablas, consultas, modelos, jobs, mail, contadores y 18 tipos más. Funciona con SDKs de PHP, JS, Ruby, Go.",
+      "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — ningún email se envía realmente.",
+      "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Filtra por nivel, busca por mensaje.",
+      "http": "Captura e inspecciona peticiones HTTP entrantes. Headers, body y parámetros de consulta de un vistazo.",
+      "inspector": "Monitorea el rendimiento con trazado de transacciones, seguimiento de memoria y desglose temporal. Alternativa local a APM.",
+      "sms": "Intercepta SMS salientes durante el desarrollo. Auto-detecta 40+ proveedores incluyendo Twilio, Vonage, Plivo, Sinch y más."
+    },
+    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
+  },
+  "install": {
+    "title": "Empieza en 60 segundos",
+    "tabs": {
+      "docker": "Docker",
+      "compose": "Docker Compose",
+      "trap": "Sin Docker"
+    },
+    "trust": {
+      "free": "Gratis para siempre",
+      "noReg": "Sin registro",
+      "noCard": "Sin tarjeta de crédito",
+      "oss": "Código abierto (MIT)"
+    },
+    "trapNote": "No necesitas Docker. Trap funciona como herramienta PHP CLI en tu proyecto.",
+    "links": {
+      "fullGuide": "Guía completa de instalación →"
+    }
+  },
+  "demo": {
+    "headline": "Experimenta Buggregator en acción",
+    "subtitle": "Haz clic en cualquier botón para enviar un evento real a una instancia en vivo. Míralo aparecer en la UI de la izquierda — exactamente como en tu propio proyecto.",
+    "loading": "Conectando al demo...",
+    "mobileTitle": "Verlo en escritorio",
+    "mobileBody": "El demo interactivo se experimenta mejor en una pantalla grande. Visita buggregator.dev en tu portátil o escritorio.",
+    "more": "Más herramientas",
+    "docs": "documentación →"
+  },
+  "frameworks": {
+    "title": "Funciona con tu framework",
+    "subtitle": "Sin vendor lock-in. Tu SDK existente simplemente funciona.",
+    "also": "También: JavaScript, Python, Ruby, Go — vía Sentry SDK",
+    "alsoRuntime": "Funciona con: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
+    "guides": "Ver guías de integración →"
+  },
+  "advanced": {
+    "title": "Listo para equipos en producción",
+    "subtitle": "Funcionalidades enterprise cuando las necesites.",
+    "viewAll": "Ver todas las opciones de configuración →",
+    "features": {
+      "sso": { "title": "Autenticación SSO", "desc": "Soporte para Auth0 y Kinde en entornos de equipo" },
+      "db": { "title": "Base de datos externa", "desc": "PostgreSQL/MySQL para almacenamiento persistente de eventos" },
+      "k8s": { "title": "Listo para Kubernetes", "desc": "Despliega como Deployment + Service en tu clúster" },
+      "webhooks": { "title": "Webhooks", "desc": "Ejecuta acciones externas en eventos entrantes" },
+      "prometheus": { "title": "Métricas Prometheus", "desc": "Monitorea conteos de eventos con Grafana" },
+      "multiproject": { "title": "Multi-proyecto", "desc": "Separa eventos por proyecto o equipo" }
+    }
+  },
+  "ecosystem": {
+    "title": "El ecosistema Buggregator",
+    "trap": {
+      "title": "¿Sin Docker? No hay problema.",
+      "description": "Una alternativa PHP CLI ligera al servidor completo. Cubre la mayoría de necesidades de depuración — dumps, profiler, logs, inspecciones — sin Docker. Solo un paquete composer.",
+      "github": "Ver en GitHub",
+      "docs": "Leer docs"
+    },
+    "jetbrains": {
+      "title": "No salgas de tu IDE",
+      "description": "El plugin de Buggregator para PhpStorm trae dumps, logs y datos de depuración directamente a tu editor.",
+      "install": "Instalar desde Marketplace",
+      "docs": "Leer docs"
+    }
+  },
+  "community": {
+    "title": "Código abierto. Construido con la comunidad.",
+    "description": "Buggregator es gratis para siempre. Sin planes de pago, sin restricciones. Si te ayuda, considera dar una estrella al repo.",
+    "star": "Star en GitHub",
+    "issues": "Ver issues",
+    "contribute": "Guía de contribución",
+    "discord": "Únete a Discord",
+    "stats": {
+      "stars": "Estrellas en GitHub",
+      "forks": "Forks",
+      "contributors": "Contribuidores",
+      "license": "Licencia MIT"
+    }
+  },
+  "sponsors": {
+    "headline": "Respaldado por la comunidad",
+    "subheadline": "Buggregator es gratis para siempre. Los sponsors lo hacen posible.",
+    "patreonBtn": "Apoyar en Patreon",
+    "learnMore": "Ver todas las formas de ayudar →",
+    "becomeCard": "Conviértete en sponsor",
+    "empty": "Sé el primero en apoyar Buggregator.",
+    "page": {
+      "title": "Apoya Buggregator",
+      "subheadline": "Buggregator siempre será gratis. Sin niveles de pago, sin restricciones. Los sponsors ayudan a financiar servidores, tiempo de desarrollo y nuevas funcionalidades.",
+      "ctaPatreon": "Apoyar en Patreon",
+      "ctaEmail": "Contactar para sponsorship empresarial",
+      "why": {
+        "title": "¿Por qué ser sponsor?",
+        "free": { "title": "Mantenerlo gratis", "body": "El sponsorship cubre hosting, CI y tiempo de desarrollo para nuevas funcionalidades." },
+        "recognition": { "title": "Obtener reconocimiento", "body": "Tu logo en la página principal, README y docs. Visible para desarrolladores PHP a diario." },
+        "oss": { "title": "Apoyar el open source", "body": "Buggregator ahorra horas de configuración a equipos de desarrollo cada semana. Devuelve algo." }
+      },
+      "currentSponsors": "Nuestros sponsors",
+      "noSponsors": "Aún no hay sponsors. ¡Sé el primero!",
+      "tiers": {
+        "individual": { "label": "Sponsor individual", "via": "vía Patreon", "from": "Desde $5/mes", "cta": "Apoyar en Patreon →" },
+        "company": { "label": "Sponsor empresarial", "via": "vía contacto directo", "from": "Paquetes personalizados", "cta": "Contactar →" }
+      },
+      "contact": {
+        "title": "¿Quieres ser sponsor empresarial?",
+        "body": "Envíanos un email con el nombre de tu empresa, logo y sitio web. Te responderemos en 48 horas.",
+        "or": "o únete a los desarrolladores que apoyan Buggregator en Patreon:"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Hecho para la comunidad PHP",
+    "product": "Producto",
+    "community": "Comunidad",
+    "resources": "Recursos",
+    "links": {
+      "docs": "Documentación",
+      "features": "Características",
+      "trap": "Trap",
+      "plugin": "Plugin PhpStorm",
+      "gettingStarted": "Empezar",
+      "github": "GitHub",
+      "discord": "Discord",
+      "contributing": "Contribuir",
+      "bugs": "Reportar bugs",
+      "changelog": "Changelog",
+      "releases": "Releases",
+      "sponsors": "Sponsors"
+    }
+  }
+}
