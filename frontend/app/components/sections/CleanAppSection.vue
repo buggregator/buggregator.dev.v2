@@ -67,14 +67,6 @@ const pillars = [
       <!-- Env before/after comparison -->
       <EnvComparison class="mb-16" />
 
-      <!-- Comparison table -->
-      <div class="pt-8">
-        <h3 class="text-2xl font-bold text-white mb-6 text-center font-sans">
-          {{ t('cleanApp.table.title') }}
-        </h3>
-        <ComparisonTable />
-      </div>
-
       <!-- Jump to install CTA -->
       <div class="text-center mt-10">
         <a

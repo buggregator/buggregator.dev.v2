@@ -90,7 +90,7 @@ const formattedStars = computed(() => {
 .hero {
   position: relative;
   background: #000;
-  min-height: 75vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
