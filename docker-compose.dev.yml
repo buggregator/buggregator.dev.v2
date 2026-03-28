@@ -1,0 +1,44 @@
+include:
+  - docker-compose.yml
+
+services:
+  # ── Traefik (Reverse Proxy) ──────────────────────────────────
+  traefik:
+    image: traefik:v3.6
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=app-template_app-network
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+      - "8888:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # ── Frontend (Nuxt SSR Dev Server with hot reload) ───────────
+  frontend:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+    environment:
+      NUXT_API_BASE_URL: http://app:8080
+      NUXT_PUBLIC_APP_URL: http://app.localhost
+
+  # ── Override app for dev: mount source for live reload ───────
+  app:
+    volumes:
+      - .:/app
+      - ${HOME}/.wippy/bin/wippy:/root/.wippy/bin/wippy:ro
+    environment:
+      APP_BASE_URL: http://app.localhost
+
+volumes:
+  frontend-node-modules:

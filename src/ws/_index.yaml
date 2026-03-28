@@ -1,0 +1,59 @@
+version: "1.0"
+namespace: app.ws
+
+entries:
+  # ══════════════════════════════════════════════════════════
+  # Hub Process — tracks WS clients, pushes updates
+  # ══════════════════════════════════════════════════════════
+
+  - name: hub
+    kind: process.lua
+    source: file://hub.lua
+    method: main
+    modules: [json, store, logger]
+
+  - name: hub_service
+    kind: process.service
+    process: app.ws:hub
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 5s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+      restart:
+        initial_delay: 2s
+        max_delay: 60s
+        max_attempts: 10
+        backoff_factor: 2.0
+
+  # ══════════════════════════════════════════════════════════
+  # WS Endpoint Handler — wires up relay
+  # ══════════════════════════════════════════════════════════
+
+  - name: endpoint_handler
+    kind: function.lua
+    source: file://endpoint.lua
+    method: handler
+    modules: [http, json]
+
+  - name: updates.endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:ws
+    method: GET
+    path: /updates
+    func: app.ws:endpoint_handler
+
+  # ══════════════════════════════════════════════════════════
+  # Security Policies
+  # ══════════════════════════════════════════════════════════
+
+  - name: ws.access
+    kind: security.policy
+    policy:
+      resources:
+        - app.ws:endpoint_handler
+        - app:state_store
+      actions: '*'
+      effect: allow

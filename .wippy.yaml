@@ -1,0 +1,8 @@
+version: "1.0"
+
+logger:
+  level: info
+  mode: production
+
+shutdown:
+  timeout: 30s

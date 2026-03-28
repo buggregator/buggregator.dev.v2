@@ -1,0 +1,7 @@
+organization: wippy
+module: app-template
+description: Reusable application template with MCP scaffold and Temporal workflows
+license: MIT
+keywords:
+  - template
+  - mcp

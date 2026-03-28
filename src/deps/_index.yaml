@@ -1,0 +1,18 @@
+version: "1.0"
+namespace: app.deps
+
+entries:
+  - name: bootloader
+    kind: ns.dependency
+    component: wippy/bootloader
+    version: "*"
+    parameters:
+      - name: env_storage
+        value: app.env:store
+      - name: application_host
+        value: app:processes
+
+  - name: security
+    kind: ns.dependency
+    component: wippy/security
+    version: '>=v0.0.7'

@@ -1,0 +1,59 @@
+version: "1.0"
+namespace: app
+
+entries:
+  - name: definition
+    kind: ns.definition
+    meta:
+      title: App Template
+      description: Reusable application template with MCP scaffold and Temporal workflows
+
+  # ── Stores ──────────────────────────────────────────────────
+  - name: state_store
+    kind: store.memory
+    max_size: 1000
+    cleanup_interval: "10m"
+    lifecycle:
+      auto_start: true
+
+  # ── Temporal ────────────────────────────────────────────────
+  - name: temporal_client
+    kind: temporal.client
+    address: "temporal:7233"
+    namespace: "default"
+    lifecycle:
+      auto_start: true
+
+  - name: temporal_worker
+    kind: temporal.worker
+    client: app:temporal_client
+    task_queue: "app-tasks"
+    lifecycle:
+      auto_start: true
+      depends_on:
+        - app:temporal_client
+
+  # ── Process Host ────────────────────────────────────────────
+  - name: processes
+    kind: process.host
+    host:
+      workers: 4
+    lifecycle:
+      auto_start: true
+
+  # ── Exec ────────────────────────────────────────────────────
+  - name: shell
+    kind: exec.native
+
+  # ── Terminal Host ──────────────────────────────────────────
+  - name: terminal
+    kind: terminal.host
+    lifecycle:
+      auto_start: true
+
+  # ── HTTP Server ─────────────────────────────────────────────
+  - name: gateway
+    kind: http.service
+    addr: ":8080"
+    lifecycle:
+      auto_start: true

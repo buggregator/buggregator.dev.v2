@@ -1,0 +1,73 @@
+version: "1.0"
+namespace: app.http
+
+entries:
+  # ── Root router for health and other root-level endpoints ──
+  - name: root
+    kind: http.router
+    meta:
+      server: app:gateway
+    prefix: /
+
+  # ── Public Router (no firewall) ────────────────────────────
+  - name: api_public
+    kind: http.router
+    meta:
+      server: app:gateway
+    prefix: /api/public
+    middleware:
+      - cors
+      - ratelimit
+    options:
+      cors.allow.origins: "*"
+      ratelimit.requests: "500"
+      ratelimit.window: "1m"
+      ratelimit.burst: "5"
+      ratelimit.key: "ip"
+
+  # ── Protected API Router for /api/v1/app/* endpoints ───────
+  - name: api
+    kind: http.router
+    meta:
+      server: app:gateway
+    middleware:
+      - cors
+      - ratelimit
+    options:
+      cors.allow.origins: "*"
+      ratelimit.requests: "2000"
+      ratelimit.window: "1m"
+      ratelimit.burst: "200"
+      ratelimit.key: "ip"
+    prefix: /api/v1/app
+
+  # ── API Router for /api/v1/* endpoints ──
+  - name: api_router
+    kind: http.router
+    meta:
+      server: app:gateway
+    middleware:
+      - cors
+      - ratelimit
+    options:
+      cors.allow.origins: "*"
+      ratelimit.requests: "2000"
+      ratelimit.window: "1m"
+      ratelimit.burst: "200"
+      ratelimit.key: "ip"
+    prefix: /api/v1
+
+  # ── WebSocket Router for /ws/* endpoints ───────────────────
+  - name: ws
+    kind: http.router
+    meta:
+      server: app:gateway
+    prefix: /ws
+    middleware:
+      - cors
+    options:
+      cors.allow.origins: "*"
+    post_middleware:
+      - websocket_relay
+    post_options:
+      wsrelay.allowed.origins: "*"

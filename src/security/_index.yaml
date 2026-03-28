@@ -1,0 +1,17 @@
+version: "1.0"
+namespace: app.security
+
+entries:
+  # ── Store Access Policy ─────────────────────────────────────
+  # Allow application components to access the state store
+  - name: store_access_policy
+    kind: security.policy
+    policy:
+      actions:
+        - store.get
+        - store.key.get
+        - store.key.set
+        - store.key.delete
+      resources:
+        - app:state_store
+      effect: allow

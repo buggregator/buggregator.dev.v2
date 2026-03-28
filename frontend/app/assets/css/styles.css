@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  }
+}
+
+/* Display typography */
+.font-display {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+}
+
+.font-mono-display {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* Section label style */
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* PrimeVue tooltip */
+.p-tooltip .p-tooltip-text {
+  font-size: 0.65rem;
+  line-height: 1.4;
+}

@@ -1,0 +1,154 @@
+version: "1.0"
+namespace: app.env
+
+entries:
+  # ── Storage: .env file ──────────────────────────────────────
+  - name: file
+    kind: env.storage.file
+    meta:
+      comment: Environment variables from .env file
+    file_path: ".env"
+    auto_create: true
+    writable: true
+    lifecycle:
+      auto_start: true
+
+  - name: os
+    kind: env.storage.os
+
+  # ── Router: checks OS then .env file ───────────────────────
+  - name: store
+    kind: env.storage.router
+    storages:
+      - app.env:os
+      - app.env:file
+
+  # ── Environment Variables ───────────────────────────────────
+
+  # ── PostgreSQL Database ───────────────────────────────────
+  - name: db_host
+    kind: env.variable
+    meta:
+      comment: PostgreSQL host address
+    read_only: true
+    storage: app.env:store
+    variable: DB_HOST
+    default: "localhost"
+
+  - name: db_port
+    kind: env.variable
+    meta:
+      comment: PostgreSQL port
+    read_only: true
+    storage: app.env:store
+    variable: DB_PORT
+    default: "5432"
+
+  - name: db_name
+    kind: env.variable
+    meta:
+      comment: PostgreSQL database name
+    read_only: true
+    storage: app.env:store
+    variable: DB_NAME
+    default: "app"
+
+  - name: db_user
+    kind: env.variable
+    meta:
+      comment: PostgreSQL username
+    read_only: true
+    storage: app.env:store
+    variable: DB_USER
+    default: "homestead"
+
+  - name: db_password
+    kind: env.variable
+    meta:
+      comment: PostgreSQL password
+      private: true
+    read_only: true
+    storage: app.env:store
+    variable: DB_PASSWORD
+    default: "secret"
+
+  # ── Public URL ────────────────────────────────────────────
+  - name: base_url
+    kind: env.variable
+    meta:
+      comment: Base URL for public API
+    read_only: true
+    storage: app.env:store
+    variable: APP_BASE_URL
+    default: "https://myapp.example.com"
+
+  # ── Public App Metadata ────────────────────────────────
+  - name: public_app_name
+    kind: env.variable
+    meta:
+      comment: Public application name shown in UI
+    read_only: true
+    storage: app.env:store
+    variable: PUBLIC_APP_NAME
+    default: "App Template"
+
+  - name: public_support_email
+    kind: env.variable
+    meta:
+      comment: Public support email address
+    read_only: true
+    storage: app.env:store
+    variable: PUBLIC_SUPPORT_EMAIL
+    default: "support@example.com"
+
+  - name: public_privacy_email
+    kind: env.variable
+    meta:
+      comment: Public privacy inquiries email address
+    read_only: true
+    storage: app.env:store
+    variable: PUBLIC_PRIVACY_EMAIL
+    default: "privacy@example.com"
+
+  - name: public_legal_email
+    kind: env.variable
+    meta:
+      comment: Public legal inquiries email address
+    read_only: true
+    storage: app.env:store
+    variable: PUBLIC_LEGAL_EMAIL
+    default: "legal@example.com"
+
+  # ── Public ENV endpoint for frontend ──────────────────────
+  - name: public_env_handler
+    kind: function.lua
+    source: file://public_env_handler.lua
+    modules:
+      - http
+      - env
+    method: handler
+
+  - name: public_env_endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:api_public
+    method: GET
+    func: app.env:public_env_handler
+    path: /env/public.js
+
+  # ── Public ENV JSON endpoint for frontend ─────────────────
+  - name: public_env_json_handler
+    kind: function.lua
+    source: file://public_env_json_handler.lua
+    modules:
+      - http
+      - env
+    method: handler
+
+  - name: public_env_json_endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:api_public
+    method: GET
+    func: app.env:public_env_json_handler
+    path: /env/config.json

@@ -1,0 +1,127 @@
+version: "1.0"
+namespace: app.mcp
+
+entries:
+  # ── MCP Router for /mcp (SSE transport) ──────────────────
+  - name: api_mcp
+    kind: http.router
+    meta:
+      server: app:gateway
+    prefix: /mcp
+    middleware:
+      - cors
+      - ratelimit
+    options:
+      cors.allow.origins: "*"
+      ratelimit.requests: "100"
+      ratelimit.window: "1m"
+      ratelimit.burst: "10"
+      ratelimit.key: "ip"
+    post_middleware:
+      - sse_relay
+    post_options:
+      sserelay.allowed.origins: "*"
+
+  - name: dep.mcp
+    kind: ns.dependency
+    component: butschster/mcp-server
+    version: "*"
+    parameters:
+      - name: router
+        value: app.mcp:api_mcp
+
+  # ══════════════════════════════════════════════════════════
+  # MCP Session Store Contract
+  # ══════════════════════════════════════════════════════════
+
+  - name: session_store_def
+    kind: contract.definition
+    methods:
+      - name: create
+        description: Record a new MCP session
+      - name: set_client_info
+        description: Update session with client protocol info
+      - name: touch
+        description: Update last activity, optionally increment tools_called
+      - name: remove
+        description: Delete a session
+      - name: list
+        description: List all active MCP sessions
+      - name: clear_all
+        description: Remove all sessions (startup cleanup)
+
+  - name: session_store_create
+    kind: function.lua
+    source: file://session_store.lua
+    method: create
+    modules: [sql, logger]
+
+  - name: session_store_set_client_info
+    kind: function.lua
+    source: file://session_store.lua
+    method: set_client_info
+    modules: [sql, logger]
+
+  - name: session_store_touch
+    kind: function.lua
+    source: file://session_store.lua
+    method: touch
+    modules: [sql, logger]
+
+  - name: session_store_remove
+    kind: function.lua
+    source: file://session_store.lua
+    method: remove
+    modules: [sql, logger]
+
+  - name: session_store_list
+    kind: function.lua
+    source: file://session_store.lua
+    method: list
+    modules: [sql, logger]
+
+  - name: session_store_clear_all
+    kind: function.lua
+    source: file://session_store.lua
+    method: clear_all
+    modules: [sql, logger]
+
+  - name: mcp_session_store
+    kind: contract.binding
+    contracts:
+      - contract: app.mcp:session_store_def
+        default: true
+        methods:
+          create: app.mcp:session_store_create
+          set_client_info: app.mcp:session_store_set_client_info
+          touch: app.mcp:session_store_touch
+          remove: app.mcp:session_store_remove
+          list: app.mcp:session_store_list
+          clear_all: app.mcp:session_store_clear_all
+
+  # ══════════════════════════════════════════════════════════
+  # MCP Session Watcher Process
+  # ══════════════════════════════════════════════════════════
+
+  - name: session_watcher
+    kind: process.lua
+    source: file://session_watcher.lua
+    method: main
+    modules: [events, contract, json, logger]
+
+  - name: session_watcher_service
+    kind: process.service
+    process: app.mcp:session_watcher
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 5s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+        - app.mcp:mcp_session_store
+      restart:
+        initial_delay: 2s
+        max_delay: 60s
+        max_attempts: 10
+        backoff_factor: 2.0
+
