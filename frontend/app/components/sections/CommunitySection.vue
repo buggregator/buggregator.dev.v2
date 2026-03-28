@@ -17,7 +17,7 @@ const formattedServerStars = computed(() => {
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-dark">
+  <section class="py-20 lg:py-28 bg-section-dark community-glow">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-section font-bold text-white mb-3 font-sans">
         {{ t('community.title') }}
@@ -130,6 +130,11 @@ const formattedServerStars = computed(() => {
 </template>
 
 <style scoped>
+.community-glow {
+  background-image:
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+}
+
 .star-btn {
   display: inline-flex;
   text-decoration: none;

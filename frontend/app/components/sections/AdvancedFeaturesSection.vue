@@ -30,7 +30,7 @@ const features = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-dark">
+  <section class="py-20 lg:py-28 bg-section-dark advanced-gradient">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-white mb-3 font-sans">
@@ -60,3 +60,10 @@ const features = [
     </div>
   </section>
 </template>
+
+<style scoped>
+.advanced-gradient {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+}
+</style>

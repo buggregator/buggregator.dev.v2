@@ -39,7 +39,7 @@ const activeDescription = computed(() =>
 </script>
 
 <template>
-  <section id="showcase" class="py-20 lg:py-28 bg-section-dark">
+  <section id="showcase" class="py-20 lg:py-28 bg-section-dark showcase-glow">
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center mb-12">
@@ -102,6 +102,11 @@ const activeDescription = computed(() =>
 </template>
 
 <style scoped>
+.showcase-glow {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+}
+
 .tab-fade-enter-active,
 .tab-fade-leave-active {
   transition: opacity 150ms ease;

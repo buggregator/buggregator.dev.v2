@@ -14,7 +14,7 @@ const tools = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-mid">
+  <section class="py-20 lg:py-28 bg-section-mid replaces-gradient">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-white mb-3 font-sans">
@@ -50,3 +50,11 @@ const tools = [
     </div>
   </section>
 </template>
+
+<style scoped>
+.replaces-gradient {
+  background-image:
+    radial-gradient(ellipse 50% 60% at 80% 20%, rgba(244, 63, 94, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 20% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
+}
+</style>

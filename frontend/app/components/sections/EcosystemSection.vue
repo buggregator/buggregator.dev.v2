@@ -12,7 +12,7 @@ const formatStars = (n: number) =>
 </script>
 
 <template>
-  <section id="ecosystem" class="py-20 lg:py-28 bg-section-mid border-t border-landing-border-subtle">
+  <section id="ecosystem" class="py-20 lg:py-28 bg-section-mid border-t border-landing-border-subtle ecosystem-gradient">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-white mb-3 font-sans">
@@ -110,3 +110,11 @@ const formatStars = (n: number) =>
     </div>
   </section>
 </template>
+
+<style scoped>
+.ecosystem-gradient {
+  background-image:
+    radial-gradient(ellipse 40% 50% at 0% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 100% 50%, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
+}
+</style>
