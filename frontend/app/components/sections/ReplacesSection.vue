@@ -14,10 +14,10 @@ const tools = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-[#f3f4f6]">
+  <section class="py-20 lg:py-28 bg-section-mid">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-section font-bold text-on-light-primary mb-3 font-sans">
+        <h2 class="text-section font-bold text-white mb-3 font-sans">
           {{ t('replaces.title') }}
         </h2>
       </div>
@@ -26,21 +26,21 @@ const tools = [
         <div
           v-for="item in tools"
           :key="item.key"
-          class="flex items-center gap-3 p-4 rounded-xl bg-white border border-[#e5e7eb] shadow-card"
+          class="flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle"
         >
           <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ background: item.color }" />
           <div class="min-w-0">
-            <p class="text-sm font-medium text-on-light-primary font-sans line-through opacity-60">{{ item.tool }}</p>
-            <p class="text-sm text-on-light-secondary font-sans">{{ t(`replaces.tools.${item.key}`) }}</p>
+            <p class="text-sm font-medium text-on-dark-secondary font-sans line-through opacity-50">{{ item.tool }}</p>
+            <p class="text-sm text-on-dark-secondary font-sans">{{ t(`replaces.tools.${item.key}`) }}</p>
           </div>
         </div>
       </div>
 
-      <p class="text-center mt-10 text-lg font-semibold text-on-light-primary font-sans">
+      <p class="text-center mt-10 text-lg font-semibold text-white font-sans">
         {{ t('replaces.footer') }}
       </p>
 
-      <p class="text-center mt-3 text-sm text-on-light-muted font-sans">
+      <p class="text-center mt-3 text-sm text-on-dark-muted font-sans">
         {{ t('replaces.trapNote') }}
         <a
           href="#ecosystem"

@@ -45,7 +45,7 @@ const active = computed(() => snippets[activeTab.value])
 
 <template>
   <div>
-    <h3 class="text-xl font-bold text-on-light-primary mb-6 text-center font-sans">
+    <h3 class="text-xl font-bold text-white mb-6 text-center font-sans">
       {{ t('cleanApp.envComparison.title') }}
     </h3>
 

@@ -30,13 +30,13 @@ const features = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-[#f3f4f6]">
+  <section class="py-20 lg:py-28 bg-section-dark">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-section font-bold text-on-light-primary mb-3 font-sans">
+        <h2 class="text-section font-bold text-white mb-3 font-sans">
           {{ t('advanced.title') }}
         </h2>
-        <p class="text-lg text-on-light-muted font-sans">
+        <p class="text-lg text-on-dark-secondary font-sans">
           {{ t('advanced.subtitle') }}
         </p>
       </div>
@@ -45,13 +45,13 @@ const features = [
         <div
           v-for="feat in features"
           :key="feat.key"
-          class="rounded-xl bg-white border border-[#e5e7eb] p-5 shadow-card"
+          class="rounded-xl bg-landing-surface border border-landing-border-subtle p-5"
         >
-          <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center mb-3" v-html="feat.icon" />
-          <h3 class="text-sm font-semibold text-on-light-primary mb-1 font-sans">
+          <div class="w-10 h-10 rounded-xl bg-[rgba(59,130,246,0.1)] flex items-center justify-center mb-3" v-html="feat.icon" />
+          <h3 class="text-sm font-semibold text-white mb-1 font-sans">
             {{ t(`advanced.features.${feat.key}.title`) }}
           </h3>
-          <p class="text-sm text-on-light-muted font-sans leading-relaxed">
+          <p class="text-sm text-on-dark-muted font-sans leading-relaxed">
             {{ t(`advanced.features.${feat.key}.desc`) }}
           </p>
         </div>

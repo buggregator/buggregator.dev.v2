@@ -23,17 +23,17 @@ const pillars = [
 </script>
 
 <template>
-  <section id="why-buggregator" class="py-20 lg:py-28 bg-section-light">
+  <section id="why-buggregator" class="py-20 lg:py-28 bg-section-mid">
     <div class="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-on-light-primary mb-3 tracking-tight font-sans">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight font-sans">
           {{ t('cleanApp.headline') }}
         </h2>
         <p class="text-xl font-semibold text-accent mb-4 font-sans">
           {{ t('cleanApp.subheadline') }}
         </p>
-        <p class="text-lg text-on-light-muted max-w-2xl mx-auto leading-relaxed font-sans">
+        <p class="text-lg text-on-dark-secondary max-w-2xl mx-auto leading-relaxed font-sans">
           {{ t('cleanApp.body') }}
         </p>
       </div>
@@ -43,13 +43,13 @@ const pillars = [
         <div
           v-for="p in pillars"
           :key="p.key"
-          class="bg-white border border-[#e5e7eb] rounded-2xl p-6 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
+          class="bg-landing-surface border border-landing-border-subtle rounded-2xl p-6 hover:-translate-y-0.5 transition-all duration-200"
         >
-          <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center mb-4" v-html="p.icon" />
-          <h3 class="font-semibold text-on-light-primary mb-2 font-sans">
+          <div class="w-10 h-10 rounded-xl bg-[rgba(59,130,246,0.1)] flex items-center justify-center mb-4" v-html="p.icon" />
+          <h3 class="font-semibold text-white mb-2 font-sans">
             {{ t(`cleanApp.pillars.${p.key}.title`) }}
           </h3>
-          <p class="text-sm text-on-light-muted leading-relaxed font-sans">
+          <p class="text-sm text-on-dark-muted leading-relaxed font-sans">
             {{ t(`cleanApp.pillars.${p.key}.body`) }}
           </p>
         </div>
@@ -69,7 +69,7 @@ const pillars = [
 
       <!-- Comparison table -->
       <div class="pt-8">
-        <h3 class="text-2xl font-bold text-on-light-primary mb-6 text-center font-sans">
+        <h3 class="text-2xl font-bold text-white mb-6 text-center font-sans">
           {{ t('cleanApp.table.title') }}
         </h3>
         <ComparisonTable />

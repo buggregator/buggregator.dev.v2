@@ -19,12 +19,12 @@ const frameworks = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-light border-t border-[#e5e7eb]">
+  <section class="py-20 lg:py-28 bg-section-mid border-t border-landing-border-subtle">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-section font-bold text-on-light-primary mb-3 font-sans">
+      <h2 class="text-section font-bold text-white mb-3 font-sans">
         {{ t('frameworks.title') }}
       </h2>
-      <p class="text-lg text-on-light-muted mb-12 font-sans">
+      <p class="text-lg text-on-dark-secondary mb-12 font-sans">
         {{ t('frameworks.subtitle') }}
       </p>
 
@@ -34,15 +34,15 @@ const frameworks = [
           :key="fw.name"
           :src="fw.logo"
           :alt="fw.name"
-          class="h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-200"
+          class="h-10 opacity-40 grayscale invert hover:opacity-90 hover:grayscale-0 hover:invert-0 transition-all duration-200"
         />
       </div>
 
-      <p class="text-sm text-on-light-muted font-sans mb-2">
+      <p class="text-sm text-on-dark-muted font-sans mb-2">
         {{ t('frameworks.also') }}
       </p>
 
-      <p class="text-sm text-on-light-muted font-sans mb-6">
+      <p class="text-sm text-on-dark-muted font-sans mb-6">
         {{ t('frameworks.alsoRuntime') }}
       </p>
 

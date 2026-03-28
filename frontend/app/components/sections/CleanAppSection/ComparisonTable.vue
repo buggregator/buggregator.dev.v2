@@ -26,32 +26,28 @@ const rows: Row[] = [
 ]
 
 const statusColor: Record<Status, string> = {
-  yes: 'text-[#16a34a]',
-  no: 'text-[#94a3b8]',
-  warn: 'text-[#d97706]',
+  yes: 'text-[#4ade80]',
+  no: 'text-on-dark-muted',
+  warn: 'text-[#f59e0b]',
 }
 </script>
 
 <template>
   <div>
-    <h3 class="text-xl font-bold text-on-light-primary mb-6 text-center font-sans">
-      {{ t('cleanApp.table.title') }}
-    </h3>
-
-    <div class="overflow-x-auto rounded-xl border border-[#e5e7eb]">
+    <div class="overflow-x-auto rounded-xl border border-landing-border-subtle">
       <table class="w-full text-sm font-sans min-w-[600px]">
         <thead>
-          <tr class="bg-[#f3f4f6]">
-            <th class="text-left px-5 py-3.5 font-semibold text-on-light-primary sticky left-0 bg-[#f3f4f6] z-10">
+          <tr class="bg-landing-surface">
+            <th class="text-left px-5 py-3.5 font-semibold text-on-dark-secondary sticky left-0 bg-landing-surface z-10">
               {{ t('cleanApp.table.cols.feature') }}
             </th>
-            <th class="text-center px-5 py-3.5 font-semibold text-accent bg-blue-50">
+            <th class="text-center px-5 py-3.5 font-semibold text-accent bg-[rgba(59,130,246,0.06)]">
               {{ t('cleanApp.table.cols.buggregator') }}
             </th>
-            <th class="text-center px-5 py-3.5 font-semibold text-on-light-primary">
+            <th class="text-center px-5 py-3.5 font-semibold text-on-dark-secondary">
               {{ t('cleanApp.table.cols.telescope') }}
             </th>
-            <th class="text-center px-5 py-3.5 font-semibold text-on-light-primary">
+            <th class="text-center px-5 py-3.5 font-semibold text-on-dark-secondary">
               {{ t('cleanApp.table.cols.ray') }}
             </th>
           </tr>
@@ -60,20 +56,17 @@ const statusColor: Record<Status, string> = {
           <tr
             v-for="(row, i) in rows"
             :key="i"
-            class="border-t border-[#f0f0f0]"
+            class="border-t border-landing-border-subtle"
           >
-            <td class="px-5 py-3 text-on-light-secondary sticky left-0 bg-white z-10">{{ row.feature }}</td>
-            <td class="px-5 py-3 bg-blue-50/40">
+            <td class="px-5 py-3 text-on-dark-secondary sticky left-0 bg-landing-base z-10">{{ row.feature }}</td>
+            <td class="px-5 py-3 bg-[rgba(59,130,246,0.03)]">
               <span class="inline-flex items-center justify-center gap-1.5 w-full" :class="statusColor[row.bg.status]">
-                <!-- Yes: filled circle with check -->
                 <svg v-if="row.bg.status === 'yes'" class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
                 </svg>
-                <!-- No: dash in circle -->
                 <svg v-else-if="row.bg.status === 'no'" class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM6.75 9.25a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" clip-rule="evenodd" />
                 </svg>
-                <!-- Warn: triangle -->
                 <svg v-else class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
                 </svg>
@@ -113,7 +106,7 @@ const statusColor: Record<Status, string> = {
       </table>
     </div>
 
-    <p class="mt-4 text-xs text-on-light-muted italic text-center max-w-2xl mx-auto font-sans">
+    <p class="mt-4 text-xs text-on-dark-muted italic text-center max-w-2xl mx-auto font-sans">
       {{ t('cleanApp.table.disclaimer') }}
     </p>
   </div>

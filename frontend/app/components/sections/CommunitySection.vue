@@ -75,20 +75,22 @@ const formattedServerStars = computed(() => {
         </div>
       </ClientOnly>
 
-      <!-- Elevated Star button -->
+      <!-- Star button (same style as Hero) -->
       <div class="mb-6">
         <ClientOnly>
           <a
             href="https://github.com/buggregator/server"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center gap-2.5 px-8 py-3 rounded-lg bg-accent hover:bg-accent-hover text-white text-base font-medium transition-colors no-underline font-sans w-full sm:w-auto justify-center"
+            class="star-btn"
           >
-            <svg class="w-5 h-5" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
-            </svg>
-            {{ t('community.star') }}
-            <span v-if="formattedServerStars" class="opacity-75">({{ formattedServerStars }})</span>
+            <span class="star-btn__content">
+              <svg class="star-btn__icon" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
+              </svg>
+              <span>{{ t('community.star') }}</span>
+              <span v-if="formattedServerStars" class="star-btn__count">{{ formattedServerStars }}</span>
+            </span>
           </a>
         </ClientOnly>
       </div>
@@ -126,3 +128,69 @@ const formattedServerStars = computed(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.star-btn {
+  display: inline-flex;
+  text-decoration: none;
+  padding: 1.5px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b, #f97316, #3b82f6, #8b5cf6, #f59e0b);
+  background-size: 300% 300%;
+  animation: glowShift 4s ease-in-out infinite;
+  transition: transform 200ms ease, box-shadow 300ms ease;
+  box-shadow: 0 0 20px -6px rgba(245, 158, 11, 0.3);
+}
+.star-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px -4px rgba(245, 158, 11, 0.5);
+}
+.star-btn:active { transform: translateY(0); }
+.star-btn__content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 28px;
+  border-radius: 10.5px;
+  background: rgba(0, 0, 0, 0.85);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #fff;
+  transition: background 200ms ease;
+}
+.star-btn:hover .star-btn__content { background: rgba(0, 0, 0, 0.7); }
+.star-btn__icon {
+  width: 17px; height: 17px;
+  color: #f59e0b;
+  filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.5));
+  transition: transform 300ms ease, filter 300ms ease;
+}
+.star-btn:hover .star-btn__icon {
+  transform: scale(1.15) rotate(-8deg);
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));
+}
+.star-btn__count {
+  padding: 2px 9px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+}
+@keyframes glowShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@media (max-width: 639px) {
+  .star-btn { display: flex; width: 100%; }
+  .star-btn__content { flex: 1; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .star-btn { animation: none; }
+  .star-btn:hover { transform: none; }
+  .star-btn:hover .star-btn__icon { transform: none; }
+}
+</style>
