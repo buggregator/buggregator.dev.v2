@@ -74,3 +74,33 @@
   outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
 }
+
+/* ── Custom scrollbar (global for landing) ── */
+.landing,
+.landing * {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
+}
+
+.landing ::-webkit-scrollbar,
+.landing::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.landing ::-webkit-scrollbar-track,
+.landing::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.landing ::-webkit-scrollbar-thumb,
+.landing::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.25);
+  border-radius: 4px;
+}
+
+.landing ::-webkit-scrollbar-thumb:hover,
+.landing::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}

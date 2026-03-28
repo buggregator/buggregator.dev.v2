@@ -24,6 +24,65 @@
     },
     "frameworks": "Works with:"
   },
+  "cleanApp": {
+    "headline": "Your app doesn't know we exist.",
+    "subheadline": "Not a package. A server.",
+    "body": "Buggregator runs beside your application as a standalone Docker container. Your codebase doesn't change. Your dependencies don't change. You already have the SDKs installed — they just need a different address.",
+    "pillars": {
+      "noDeps": {
+        "title": "No new dependencies",
+        "body": "Your app's composer.json stays untouched. No service providers. No migrations. No Buggregator code inside your project."
+      },
+      "oneEnvVar": {
+        "title": "One env variable",
+        "body": "Already using Sentry SDK, VarDumper, or Monolog? Change where they send data. That's it. Your code doesn't need to know about Buggregator."
+      },
+      "crossProject": {
+        "title": "One instance, all your apps",
+        "body": "Run one Buggregator container. Point all your projects at it. Microservices, monorepos, multiple teams — one dashboard."
+      }
+    },
+    "devEnv": {
+      "headline": "Made for dev environments.",
+      "subheadline": "No account. No credit card. No project setup.",
+      "body": "Add Buggregator to your docker-compose.yml alongside your other services. Change your .env. Start debugging. That's 60 seconds — not 15 minutes of cloud dashboard configuration.",
+      "cloudSetup": {
+        "label": "Getting started with Sentry / Mailtrap / Blackfire:",
+        "steps": ["Create an account", "Verify your email", "Create an organization", "Create a project", "Choose your platform / SDK", "Copy DSN or credentials", "Paste into your .env", "Wait for first event to arrive"],
+        "footer": "~15 minutes before you see a single debug event"
+      },
+      "buggregatorSetup": {
+        "label": "Getting started with Buggregator:",
+        "steps": ["Add to docker-compose.yml", "Change your .env"],
+        "footer": "Open http://127.0.0.1:8000 — done."
+      },
+      "composeCaption": "No environment configuration needed. Works out of the box.",
+      "privacy": "Your debug data never leaves your machine. No cloud storage. No third-party servers. Full privacy."
+    },
+    "envComparison": {
+      "title": "Just change the address",
+      "tabs": {
+        "sentry": "Sentry DSN",
+        "email": "Email",
+        "varDumper": "VarDumper",
+        "logs": "Logs"
+      },
+      "beforeLabel": "BEFORE",
+      "afterLabel": "AFTER",
+      "sentryAnnotation": "Only the host changed. Your Sentry SDK keeps working exactly the same.",
+      "sentryNote": "Buggregator speaks the Sentry protocol."
+    },
+    "table": {
+      "title": "How does it compare?",
+      "disclaimer": "Telescope and Ray are excellent tools for their use cases. This comparison highlights the architectural difference: Buggregator is infrastructure, not a library.",
+      "cols": {
+        "feature": "Feature",
+        "buggregator": "Buggregator",
+        "telescope": "Laravel Telescope",
+        "ray": "Ray (spatie)"
+      }
+    }
+  },
   "replaces": {
     "title": "Replaces your local dev stack — for free",
     "footer": "All of this. One command. Zero cost.",
@@ -105,6 +164,15 @@
       "fullGuide": "Full installation guide →",
       "config": "Configuration options →"
     }
+  },
+  "demo": {
+    "headline": "Experience Buggregator in Action",
+    "subtitle": "Click any button to send a real event to a live Buggregator instance. Watch it appear in the UI on the left — exactly as it would in your own project.",
+    "loading": "Connecting to demo...",
+    "mobileTitle": "See it live on desktop",
+    "mobileBody": "The interactive demo is best experienced on a larger screen. Visit buggregator.dev on your laptop or desktop to try it live.",
+    "more": "More tools",
+    "docs": "docs →"
   },
   "frameworks": {
     "title": "Works with your framework",

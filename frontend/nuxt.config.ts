@@ -25,11 +25,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8080',
     githubToken: process.env.GITHUB_TOKEN || '',
+    examplesUrl: process.env.EXAMPLES_URL || 'http://buggregator-examples:8000',
 
     public: {
       appUrl: process.env.PUBLIC_APP_URL || '',
       siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
       discordUrl: process.env.DISCORD_URL || 'https://discord.gg/uxr5gw2p',
+      buggregatorUrl: process.env.BUGGREGATOR_URL || 'http://buggregator.app.localhost',
     },
   },
 
