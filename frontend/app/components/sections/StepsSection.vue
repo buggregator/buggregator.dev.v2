@@ -18,7 +18,7 @@ const imageTag = computed(() => {
 type InstallTab = 'docker' | 'compose'
 const installTab = ref<InstallTab>('docker')
 
-const dockerCommand = computed(() => `docker run --pull always \\
+const dockerCommand = computed(() => `docker run \\
   -p 127.0.0.1:8000:8000 \\
   -p 127.0.0.1:1025:1025 \\
   -p 127.0.0.1:9912:9912 \\

@@ -37,28 +37,28 @@ const showPreview = ref(false)
         </div>
 
         <!-- Rendered preview (fake HTML email) -->
-        <div v-if="!showPreview" class="bg-white p-6">
+        <div v-if="!showPreview" class="bg-[#0f1117] p-6">
           <div class="max-w-md mx-auto">
             <!-- Email header -->
-            <div class="text-center mb-6 pb-4 border-b border-gray-200">
-              <div class="text-2xl font-bold text-gray-900 mb-1">Buggregator</div>
-              <div class="text-xs text-gray-400">Debugging Server</div>
+            <div class="text-center mb-6 pb-4 border-b border-[#1e2130]">
+              <div class="text-2xl font-bold text-white mb-1">Buggregator</div>
+              <div class="text-xs text-on-dark-muted">Debugging Server</div>
             </div>
 
             <!-- Email body -->
-            <div class="text-sm text-gray-700 leading-relaxed space-y-3">
+            <div class="text-sm text-on-dark-secondary leading-relaxed space-y-3">
               <p>Hi there!</p>
-              <p>Welcome to <strong>Buggregator</strong>. You're all set to start debugging your PHP applications.</p>
-              <p>Open your browser at <code class="px-1 py-0.5 bg-gray-100 text-gray-800 text-xs font-mono">http://127.0.0.1:8000</code> to see your events.</p>
+              <p>Welcome to <strong class="text-white">Buggregator</strong>. You're all set to start debugging your PHP applications.</p>
+              <p>Open your browser at <code class="px-1 py-0.5 bg-[#1a1d2e] text-accent text-xs font-mono rounded">http://127.0.0.1:8000</code> to see your events.</p>
 
               <!-- CTA Button -->
               <div class="text-center py-4">
-                <span class="inline-block px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded cursor-default">
+                <span class="inline-block px-6 py-2.5 bg-accent text-white text-sm font-medium rounded cursor-default">
                   Open Dashboard
                 </span>
               </div>
 
-              <p class="text-xs text-gray-400 mt-4 pt-4 border-t border-gray-200">
+              <p class="text-xs text-on-dark-muted mt-4 pt-4 border-t border-[#1e2130]">
                 You're receiving this because you started a Buggregator instance. If this wasn't you, feel free to ignore this email.
               </p>
             </div>

@@ -7,6 +7,13 @@ const github = useGitHubStore()
 
 const format = (n: number) =>
   new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
+
+const formattedServerStars = computed(() => {
+  const server = github.getRepo('server')
+  const count = server?.stars ?? 0
+  if (count === 0) return null
+  return format(count)
+})
 </script>
 
 <template>
@@ -15,8 +22,13 @@ const format = (n: number) =>
       <h2 class="text-section font-bold text-white mb-3 font-sans">
         {{ t('community.title') }}
       </h2>
-      <p class="text-lg text-on-dark-secondary mb-10 max-w-xl mx-auto font-sans">
+      <p class="text-lg text-on-dark-secondary mb-4 max-w-xl mx-auto font-sans">
         {{ t('community.description') }}
+      </p>
+
+      <!-- Star help note -->
+      <p class="text-sm text-on-dark-muted mb-10 font-sans">
+        {{ t('hero.starHelp') }}
       </p>
 
       <!-- Stats row -->
@@ -29,7 +41,7 @@ const format = (n: number) =>
           <div class="w-px h-12 bg-landing-border-subtle hidden sm:block" />
           <div class="text-center">
             <p class="text-3xl font-bold text-white font-sans">{{ github.contributors.length }}+</p>
-            <p class="text-sm text-on-dark-muted mt-1 font-sans">Contributors</p>
+            <p class="text-sm text-on-dark-muted mt-1 font-sans">{{ t('community.stats.contributors') }}</p>
           </div>
           <div class="w-px h-12 bg-landing-border-subtle hidden sm:block" />
           <div class="text-center">
@@ -63,16 +75,26 @@ const format = (n: number) =>
         </div>
       </ClientOnly>
 
-      <!-- Buttons -->
+      <!-- Elevated Star button -->
+      <div class="mb-6">
+        <ClientOnly>
+          <a
+            href="https://github.com/buggregator/server"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2.5 px-8 py-3 rounded-lg bg-accent hover:bg-accent-hover text-white text-base font-medium transition-colors no-underline font-sans w-full sm:w-auto justify-center"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
+            </svg>
+            {{ t('community.star') }}
+            <span v-if="formattedServerStars" class="opacity-75">({{ formattedServerStars }})</span>
+          </a>
+        </ClientOnly>
+      </div>
+
+      <!-- Secondary buttons -->
       <div class="flex flex-wrap justify-center gap-3">
-        <a
-          href="https://github.com/buggregator/server"
-          target="_blank"
-          rel="noopener"
-          class="px-5 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors no-underline font-sans"
-        >
-          {{ t('community.star') }}
-        </a>
         <a
           href="https://github.com/buggregator/server/issues"
           target="_blank"

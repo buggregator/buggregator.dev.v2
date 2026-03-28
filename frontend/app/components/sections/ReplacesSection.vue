@@ -14,7 +14,7 @@ const tools = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-white">
+  <section class="py-20 lg:py-28 bg-[#f3f4f6]">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-on-light-primary mb-3 font-sans">
@@ -38,6 +38,14 @@ const tools = [
 
       <p class="text-center mt-10 text-lg font-semibold text-on-light-primary font-sans">
         {{ t('replaces.footer') }}
+      </p>
+
+      <p class="text-center mt-3 text-sm text-on-light-muted font-sans">
+        {{ t('replaces.trapNote') }}
+        <a
+          href="#ecosystem"
+          class="text-accent hover:text-accent-hover transition-colors no-underline"
+        >→</a>
       </p>
     </div>
   </section>

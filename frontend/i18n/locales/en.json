@@ -14,13 +14,15 @@
     },
     "headline": "Debug everything in your PHP app.",
     "headlineSub": "Install nothing.",
-    "subheadline": "One docker run. Exceptions, logs, dumps, emails, SMS and profiling — all in one real-time UI. Works with Sentry SDK, VarDumper, Monolog, XHProf, SMTP and SMS providers you already have. No cloud account. No code changes.",
+    "starCta": "Star on GitHub",
+    "subheadline": "Exceptions. Dumps. Emails. Profiling. Logs. All in one UI, launched with one command. Works with the SDKs you already have. No cloud account.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
       "copied": "Copied!"
     },
     "seeItLive": "See it in action →",
+    "starHelp": "If Buggregator saves you time, a star helps others find it.",
     "trustRow": {
       "stars": "GitHub Stars",
       "license": "MIT License",
@@ -33,6 +35,10 @@
   "cleanApp": {
     "headline": "Your app doesn't know we exist.",
     "subheadline": "Not a package. A server.",
+    "telescopeCallout": {
+      "quote": "Telescope works inside your app. Buggregator works beside it.",
+      "body": "Zero performance overhead. Works with RoadRunner, FrankenPHP, Swoole, and Octane. Catches emails, SMS, and external HTTP — things Telescope never sees. Works across every service in your stack."
+    },
     "body": "Buggregator runs beside your application as a standalone Docker container. Your codebase doesn't change. Your dependencies don't change. You already have the SDKs installed — they just need a different address.",
     "pillars": {
       "noDeps": {
@@ -92,6 +98,7 @@
   "replaces": {
     "title": "Replaces your local dev stack — for free",
     "footer": "All of this. One command. Zero cost.",
+    "trapNote": "No Docker? Use Buggregator Trap — a PHP CLI alternative.",
     "tools": {
       "sentry": "Exceptions & stack traces",
       "mailhog": "Email capture",
@@ -182,7 +189,8 @@
   "frameworks": {
     "title": "Works with your framework",
     "subtitle": "No vendor lock-in. Your existing SDK just works.",
-    "also": "Also: JavaScript, Python, Ruby — via Sentry SDK",
+    "also": "Also: JavaScript, Python, Ruby, Go — via Sentry SDK",
+    "alsoRuntime": "Works with: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "See integration guides →"
   },
   "advanced": {
@@ -202,7 +210,7 @@
     "title": "The Buggregator ecosystem",
     "trap": {
       "title": "No Docker? No problem.",
-      "description": "Trap is a lightweight PHP CLI alternative. Install it as a composer package — no containers, no configuration.",
+      "description": "A lightweight PHP CLI alternative to the full server. Covers most debugging needs — dumps, profiler, logs, inspections — without Docker. Just a composer package.",
       "github": "View on GitHub",
       "docs": "Read docs"
     },

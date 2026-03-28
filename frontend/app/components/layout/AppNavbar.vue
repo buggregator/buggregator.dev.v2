@@ -85,12 +85,6 @@ onUnmounted(() => {
             </svg>
           </a>
           <LanguageSwitcher />
-          <a
-            href="/#install"
-            class="px-5 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors duration-150 no-underline font-sans"
-          >
-            {{ t('nav.getStarted') }}
-          </a>
         </div>
 
         <!-- Mobile hamburger -->
@@ -154,13 +148,6 @@ onUnmounted(() => {
           <LanguageSwitcher />
         </div>
 
-        <a
-          href="/#install"
-          class="mt-2 block text-center px-5 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors no-underline font-sans"
-          @click="mobileOpen = false"
-        >
-          {{ t('nav.getStarted') }}
-        </a>
       </div>
     </div>
   </nav>

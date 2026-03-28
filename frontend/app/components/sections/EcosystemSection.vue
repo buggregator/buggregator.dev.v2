@@ -12,7 +12,7 @@ const formatStars = (n: number) =>
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-white border-t border-[#e5e7eb]">
+  <section id="ecosystem" class="py-20 lg:py-28 bg-white border-t border-[#e5e7eb]">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-on-light-primary mb-3 font-sans">
@@ -103,14 +103,6 @@ const formatStars = (n: number) =>
               class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
             >
               {{ t('ecosystem.jetbrains.install') }} →
-            </a>
-            <a
-              href="https://docs.buggregator.dev/phpstorm"
-              target="_blank"
-              rel="noopener"
-              class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
-            >
-              {{ t('ecosystem.jetbrains.docs') }} →
             </a>
           </div>
         </div>

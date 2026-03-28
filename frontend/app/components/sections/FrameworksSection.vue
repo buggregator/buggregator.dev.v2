@@ -38,8 +38,12 @@ const frameworks = [
         />
       </div>
 
-      <p class="text-sm text-on-light-muted font-sans mb-6">
+      <p class="text-sm text-on-light-muted font-sans mb-2">
         {{ t('frameworks.also') }}
+      </p>
+
+      <p class="text-sm text-on-light-muted font-sans mb-6">
+        {{ t('frameworks.alsoRuntime') }}
       </p>
 
       <a

@@ -17,14 +17,14 @@ definePageMeta({ layout: 'landing' })
 <template>
   <div>
     <HeroSection />
+    <MockShowcase />
     <ReplacesSection />
     <CleanAppSection />
-    <MockShowcase />
     <StepsSection />
-    <DemoSection />
     <FrameworksSection />
-    <EcosystemSection />
     <AdvancedFeaturesSection />
+    <DemoSection />
+    <EcosystemSection />
     <CommunitySection />
     <SponsorsSection />
   </div>

@@ -68,7 +68,22 @@ const pillars = [
       <EnvComparison class="mb-16" />
 
       <!-- Comparison table -->
-      <ComparisonTable />
+      <div class="pt-8">
+        <h3 class="text-2xl font-bold text-on-light-primary mb-6 text-center font-sans">
+          {{ t('cleanApp.table.title') }}
+        </h3>
+        <ComparisonTable />
+      </div>
+
+      <!-- Jump to install CTA -->
+      <div class="text-center mt-10">
+        <a
+          href="#how-it-works"
+          class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+        >
+          Ready to try it? Jump to install →
+        </a>
+      </div>
     </div>
   </section>
 </template>
