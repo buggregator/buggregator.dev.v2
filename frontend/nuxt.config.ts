@@ -34,6 +34,8 @@ export default defineNuxtConfig({
       buggregatorUrl: process.env.BUGGREGATOR_URL || 'http://buggregator.app.localhost',
       patreonUrl: process.env.PATREON_URL || 'https://www.patreon.com/butschster',
       sponsorEmail: process.env.SPONSOR_EMAIL || 'butschster@gmail.com',
+      heroVideoUrl: process.env.HERO_VIDEO_URL || '/video.webm',
+      heroPosterUrl: process.env.HERO_POSTER_URL || '/img.png',
     },
   },
 
@@ -56,11 +58,11 @@ export default defineNuxtConfig({
       style: [
         {
           innerHTML: `
-            html.dark body { background-color: #09090b; color: #f8fafc; }
-            #app-loader { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; background-color:#09090b; }
-            #app-loader .loader-text { font-family:'Bricolage Grotesque',system-ui,sans-serif; font-size:1.25rem; font-weight:700; color:#f8fafc; opacity:0.4; animation:loader-pulse 1.5s ease-in-out infinite; }
-            #app-loader .loader-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#3b82f6; margin-left:8px; animation:loader-pulse 1.5s ease-in-out infinite 0.3s; }
-            @keyframes loader-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+            html.dark body { background-color: #0c0e14; color: #f8fafc; }
+            #app-loader { position:fixed; inset:0; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; background-color:#0c0e14; }
+            #app-loader svg { width:140px; height:auto; opacity:0.4; animation:loader-pulse 2s ease-in-out infinite; }
+            #app-loader .loader-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#3b82f6; margin-top:16px; animation:loader-pulse 2s ease-in-out infinite 0.3s; }
+            @keyframes loader-pulse { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
             #app-loader.fade-out { opacity:0; transition:opacity 0.3s ease; pointer-events:none; }
           `.replace(/\n\s+/g, ' '),
         },

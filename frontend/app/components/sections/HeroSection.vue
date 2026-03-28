@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import VersionBadge from '~/components/ui/VersionBadge.vue'
+import VideoBackground from '~/components/sections/HeroSection/VideoBackground.vue'
 
 const { t } = useI18n()
 
@@ -32,134 +33,93 @@ async function copyCommand() {
     copied.value = false
   }
 }
-
-const eventTypes = [
-  { label: 'Exceptions', color: '#f43f5e', icon: 'sentry' },
-  { label: 'Profiler', color: '#8b5cf6', icon: 'profiler' },
-  { label: 'Emails', color: '#f59e0b', icon: 'smtp' },
-  { label: 'Logs', color: '#6b7280', icon: 'monolog' },
-  { label: 'VarDump', color: '#ef4444', icon: 'vardump' },
-  { label: 'HTTP', color: '#22c55e', icon: 'http' },
-  { label: 'SMS', color: '#a855f7', icon: 'sms' },
-  { label: 'Inspector', color: '#eab308', icon: 'inspector' },
-  { label: 'Ray', color: '#06b6d4', icon: 'ray' },
-]
 </script>
 
 <template>
   <section class="hero">
-    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-      <div class="lg:grid lg:grid-cols-[50%_50%] lg:gap-16 lg:items-start">
-        <!-- Left column -->
-        <div>
-          <!-- Version badge -->
-          <div class="mb-6 hero-stagger" style="--i: 0">
-            <ClientOnly>
-              <VersionBadge />
-            </ClientOnly>
-          </div>
+    <!-- Video background (fullscreen behind content) -->
+    <ClientOnly>
+      <VideoBackground />
+    </ClientOnly>
 
-          <!-- Headline -->
-          <h1 class="hero-stagger mb-5" style="--i: 1">
-            <span class="hero__headline">{{ t('hero.headline') }}</span>
-            <br />
-            <span class="hero__headline-sub">{{ t('hero.headlineSub') }}</span>
-          </h1>
+    <!-- Content (on top of video) -->
+    <div class="relative z-10 max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="hero__content-backdrop rounded-2xl px-8 py-10 lg:px-12 lg:py-14">
+      <!-- Version badge -->
+      <div class="mb-6 hero-stagger" style="--i: 0">
+        <ClientOnly>
+          <VersionBadge />
+        </ClientOnly>
+      </div>
 
-          <!-- Subheadline -->
-          <p class="hero__subheadline hero-stagger" style="--i: 2">
-            {{ t('hero.subheadline') }}
-          </p>
+      <!-- Headline -->
+      <h1 class="hero-stagger mb-5" style="--i: 1">
+        <span class="hero__headline">{{ t('hero.headline') }}</span>
+        <br />
+        <span class="hero__headline-sub">{{ t('hero.headlineSub') }}</span>
+      </h1>
 
-          <!-- Docker command -->
-          <div class="hero-stagger" style="--i: 3">
-            <div class="relative rounded-xl bg-code-bg border border-code-border overflow-hidden">
-              <div class="p-5 pr-14 font-mono text-xs leading-relaxed">
-                <div>
-                  <span class="text-code-prompt select-none">$ </span>
-                  <span class="text-code-text">docker run --pull always \</span>
-                </div>
-                <div v-for="(p, i) in ports" :key="p.port" class="pl-6">
-                  <span class="text-code-text">-p 127.0.0.1:</span>
-                  <span class="port-hint">
-                    <span class="text-accent cursor-help border-b border-dashed border-accent/30">{{ p.port }}</span>
-                    <span class="port-tooltip">{{ p.hint }}</span>
-                  </span>
-                  <span v-if="i < ports.length - 1" class="text-code-text"> \</span>
-                </div>
-                <div class="pl-6">
-                  <span class="text-code-string">ghcr.io/buggregator/server:latest</span>
-                </div>
-              </div>
+      <!-- Subheadline -->
+      <p class="hero__subheadline hero-stagger" style="--i: 2">
+        {{ t('hero.subheadline') }}
+      </p>
 
-              <!-- Copy button -->
-              <button
-                class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
-                :class="copied
-                  ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
-                  : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"
-                :aria-label="copied ? t('hero.cta.copied') : t('hero.cta.copy')"
-                @click="copyCommand"
-              >
-                <svg v-if="!copied" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-              </button>
+      <!-- Docker command -->
+      <div class="hero-stagger max-w-[620px]" style="--i: 3">
+        <div class="relative rounded-xl bg-code-bg/90 backdrop-blur-sm border border-code-border overflow-hidden">
+          <div class="p-5 pr-14 font-mono text-xs leading-relaxed">
+            <div>
+              <span class="text-code-prompt select-none">$ </span>
+              <span class="text-code-text">docker run --pull always \</span>
+            </div>
+            <div v-for="(p, i) in ports" :key="p.port" class="pl-6">
+              <span class="text-code-text">-p 127.0.0.1:</span>
+              <span class="port-hint">
+                <span class="text-accent cursor-help border-b border-dashed border-accent/30">{{ p.port }}</span>
+                <span class="port-tooltip">{{ p.hint }}</span>
+              </span>
+              <span v-if="i < ports.length - 1" class="text-code-text"> \</span>
+            </div>
+            <div class="pl-6">
+              <span class="text-code-string">ghcr.io/buggregator/server:latest</span>
             </div>
           </div>
 
-          <!-- "See it live" + Trust row -->
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-5 hero-stagger" style="--i: 4">
-            <a
-              href="#demo"
-              class="hidden lg:inline-flex text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-150 no-underline"
-            >
-              {{ t('hero.seeItLive') }}
-            </a>
-            <ClientOnly>
-              <template v-if="formattedStars">
-                <span class="font-mono text-xs text-on-dark-muted">{{ formattedStars }} {{ t('hero.trustRow.stars') }}</span>
-              </template>
-              <span class="font-mono text-xs text-on-dark-muted">{{ t('hero.trustRow.license') }}</span>
-              <span class="font-mono text-xs text-on-dark-muted">{{ t('hero.trustRow.free') }}</span>
-            </ClientOnly>
-          </div>
+          <!-- Copy button -->
+          <button
+            class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
+            :class="copied
+              ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
+              : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"
+            :aria-label="copied ? t('hero.cta.copied') : t('hero.cta.copy')"
+            @click="copyCommand"
+          >
+            <svg v-if="!copied" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </button>
         </div>
+      </div>
 
-        <!-- Right column — mock visual, desktop only -->
-        <div class="hidden lg:block hero-stagger" style="--i: 3">
-          <div class="rounded-xl bg-landing-surface border border-landing-border-subtle overflow-hidden">
-            <!-- Window header -->
-            <div class="flex items-center gap-2 px-4 py-3 bg-landing-base border-b border-landing-border-subtle">
-              <span class="w-3 h-3 rounded-full bg-[#ff5f56]" />
-              <span class="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-              <span class="w-3 h-3 rounded-full bg-[#27c93f]" />
-              <span class="ml-3 font-mono text-[11px] text-on-dark-muted">127.0.0.1:8000</span>
-            </div>
-
-            <!-- Event type grid -->
-            <div class="p-5">
-              <div class="grid grid-cols-3 gap-2.5">
-                <div
-                  v-for="evt in eventTypes"
-                  :key="evt.label"
-                  class="flex flex-col items-center gap-2 p-3 rounded-lg bg-[#0f1117] border border-landing-border-subtle hover:border-accent/30 transition-colors"
-                >
-                  <span
-                    class="w-8 h-8 rounded-lg flex items-center justify-center"
-                    :style="{ background: `${evt.color}15` }"
-                  >
-                    <span class="w-3 h-3 rounded-full" :style="{ background: evt.color }" />
-                  </span>
-                  <span class="text-[11px] font-medium text-on-dark-secondary font-sans">{{ evt.label }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- "See it live" + Trust row -->
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-5 hero-stagger" style="--i: 4">
+        <a
+          href="#demo"
+          class="hidden lg:inline-flex text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-150 no-underline"
+        >
+          {{ t('hero.seeItLive') }}
+        </a>
+        <ClientOnly>
+          <template v-if="formattedStars">
+            <span class="font-mono text-xs text-on-dark-muted">{{ formattedStars }} {{ t('hero.trustRow.stars') }}</span>
+          </template>
+          <span class="font-mono text-xs text-on-dark-muted">{{ t('hero.trustRow.license') }}</span>
+          <span class="font-mono text-xs text-on-dark-muted">{{ t('hero.trustRow.free') }}</span>
+        </ClientOnly>
+      </div>
       </div>
     </div>
   </section>
@@ -167,7 +127,8 @@ const eventTypes = [
 
 <style scoped>
 .hero {
-  background: #0c0e14;
+  position: relative;
+  background: #000000;
   min-height: 100vh;
   padding-top: 128px;
   padding-bottom: 96px;
@@ -176,11 +137,18 @@ const eventTypes = [
   align-items: center;
 }
 
+.hero__content-backdrop {
+  background: rgba(12, 14, 20, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
 .hero__headline {
   font-family: "DM Sans", sans-serif;
   font-weight: 700;
-  font-size: 3rem;
-  line-height: 1.15;
+  font-size: 3.5rem;
+  line-height: 1.1;
   letter-spacing: -0.025em;
   color: #ffffff;
 }
@@ -196,10 +164,11 @@ const eventTypes = [
 
 .hero__subheadline {
   font-family: "DM Sans", sans-serif;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.6;
-  color: #8b919a;
-  margin-bottom: 28px;
+  color: rgba(139, 145, 154, 0.9);
+  max-width: 560px;
+  margin-bottom: 32px;
 }
 
 .hero-stagger {
@@ -261,7 +230,7 @@ const eventTypes = [
     padding-bottom: 64px;
   }
   .hero__headline {
-    font-size: 1.875rem;
+    font-size: 2.25rem;
   }
   .hero__headline-sub {
     font-size: 1.5rem;
