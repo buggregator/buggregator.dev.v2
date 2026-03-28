@@ -24,7 +24,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8080',
-    githubToken: process.env.GITHUB_TOKEN || '',
     examplesUrl: process.env.EXAMPLES_URL || 'http://buggregator-examples:8000',
 
     public: {

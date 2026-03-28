@@ -1,8 +1,11 @@
 <script setup lang="ts">
-const { data } = useFetch<{ stars: number }>('/api/stars', { lazy: true })
+import { useGitHubStore } from '~/stores/github'
+
+const github = useGitHubStore()
 
 const formatted = computed(() => {
-  const count = data.value?.stars ?? 0
+  const server = github.getRepo('server')
+  const count = server?.stars ?? 0
   if (count === 0) return null
   return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(count)
 })

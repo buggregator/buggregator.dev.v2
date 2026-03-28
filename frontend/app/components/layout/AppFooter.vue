@@ -8,7 +8,7 @@ const productLinks = [
   { label: 'footer.links.docs', href: 'https://docs.buggregator.dev' },
   { label: 'footer.links.features', href: '#showcase' },
   { label: 'footer.links.trap', href: 'https://github.com/buggregator/trap' },
-  { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/18529-buggregator' },
+  { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/26344-buggregator' },
   { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started' },
 ]
 

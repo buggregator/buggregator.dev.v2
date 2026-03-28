@@ -1,3 +1,5 @@
+import { useGitHubStore } from '~/stores/github'
+
 export type ReleaseInfo = {
   version: string | null
   publishedAt: string | null
@@ -6,18 +8,24 @@ export type ReleaseInfo = {
 }
 
 export const useLatestRelease = () => {
-  const { data, status } = useFetch<Omit<ReleaseInfo, 'isNew'>>('/api/version', {
-    transform: (raw): ReleaseInfo => ({
-      ...raw,
-      isNew: raw.publishedAt
-        ? (Date.now() - new Date(raw.publishedAt).getTime()) < 7 * 24 * 60 * 60 * 1000
+  const store = useGitHubStore()
+
+  const release = computed<ReleaseInfo | null>(() => {
+    const repo = store.getRepo('server')
+    if (!repo?.latest_version) return null
+
+    return {
+      version: repo.latest_version,
+      publishedAt: repo.published_at || null,
+      url: repo.latest_version_url || null,
+      isNew: repo.published_at
+        ? (Date.now() - new Date(repo.published_at).getTime()) < 7 * 24 * 60 * 60 * 1000
         : false,
-    }),
-    lazy: true,
+    }
   })
 
   return {
-    release: data as Ref<ReleaseInfo | null>,
-    isLoading: computed(() => status.value === 'pending'),
+    release,
+    isLoading: computed(() => !store.loaded),
   }
 }

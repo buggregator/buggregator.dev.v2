@@ -3,7 +3,7 @@ import { proxyRequest } from 'h3'
 const PROXY_PATHS = ['/api/', '/mcp/']
 
 // Nuxt server API routes that should NOT be proxied to the backend
-const LOCAL_API_PATHS = ['/api/version', '/api/stars', '/api/demo']
+const LOCAL_API_PATHS = ['/api/demo']
 
 export default defineEventHandler(async (event) => {
   // Skip WebSocket upgrades — handled by defineWebSocketHandler routes

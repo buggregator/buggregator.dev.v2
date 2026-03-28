@@ -4,32 +4,39 @@ import StepItem from '~/components/sections/StepsSection/StepItem.vue'
 import TerminalMockup from '~/components/sections/StepsSection/TerminalMockup.vue'
 import FrameworkTabs from '~/components/sections/StepsSection/FrameworkTabs.vue'
 import BrowserMockup from '~/components/sections/StepsSection/BrowserMockup.vue'
+import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
+const github = useGitHubStore()
+
+const imageTag = computed(() => {
+  const v = github.serverVersion
+  return v ? `v${v}` : 'latest'
+})
 
 // Step 1: install method tabs
 type InstallTab = 'docker' | 'compose'
 const installTab = ref<InstallTab>('docker')
 
-const dockerCommand = `docker run --pull always \\
+const dockerCommand = computed(() => `docker run --pull always \\
   -p 127.0.0.1:8000:8000 \\
   -p 127.0.0.1:1025:1025 \\
   -p 127.0.0.1:9912:9912 \\
   -p 127.0.0.1:9913:9913 \\
   -p 127.0.0.1:9914:9914 \\
-  ghcr.io/buggregator/server:latest`
+  ghcr.io/buggregator/server:${imageTag.value}`)
 
-const composeCommand = `services:
+const composeCommand = computed(() => `services:
   buggregator:
-    image: ghcr.io/buggregator/server:latest
+    image: ghcr.io/buggregator/server:${imageTag.value}
     ports:
       - 127.0.0.1:8000:8000
       - 127.0.0.1:1025:1025
       - 127.0.0.1:9912:9912
       - 127.0.0.1:9913:9913
-      - 127.0.0.1:9914:9914`
+      - 127.0.0.1:9914:9914`)
 
-const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand : composeCommand)
+const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand.value : composeCommand.value)
 
 const eventTypes = [
   { label: 'Exceptions', color: '#f43f5e' },

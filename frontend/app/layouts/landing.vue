@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import AppNavbar from '~/components/layout/AppNavbar.vue'
 import AppFooter from '~/components/layout/AppFooter.vue'
+import { useGitHubStore } from '~/stores/github'
+
+const github = useGitHubStore()
+await github.load()
 </script>
 
 <template>

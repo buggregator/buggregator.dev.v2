@@ -1,0 +1,184 @@
+version: "1.0"
+namespace: app.github
+
+entries:
+  # ══════════════════════════════════════════════════════════
+  # Environment Variables
+  # ══════════════════════════════════════════════════════════
+
+  - name: github_token
+    kind: env.variable
+    meta:
+      comment: GitHub API token (optional, increases rate limit from 60 to 5000 req/hr)
+      private: true
+    read_only: true
+    storage: app.env:store
+    variable: GITHUB_TOKEN
+    default: ""
+
+  # ══════════════════════════════════════════════════════════
+  # Repo Monitor Processes — one per repository
+  # ══════════════════════════════════════════════════════════
+
+  # -- buggregator/server --
+  - name: server_monitor
+    kind: process.lua
+    source: file://repo_monitor.lua
+    method: server_main
+    modules: [json, http_client, store, logger, env, time]
+
+  - name: server_monitor_service
+    kind: process.service
+    process: app.github:server_monitor
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # -- buggregator/frontend --
+  - name: frontend_monitor
+    kind: process.lua
+    source: file://repo_monitor.lua
+    method: frontend_main
+    modules: [json, http_client, store, logger, env, time]
+
+  - name: frontend_monitor_service
+    kind: process.service
+    process: app.github:frontend_monitor
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # -- buggregator/trap --
+  - name: trap_monitor
+    kind: process.lua
+    source: file://repo_monitor.lua
+    method: trap_main
+    modules: [json, http_client, store, logger, env, time]
+
+  - name: trap_monitor_service
+    kind: process.service
+    process: app.github:trap_monitor
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # -- buggregator/phpstorm-plugin --
+  - name: plugin_monitor
+    kind: process.lua
+    source: file://repo_monitor.lua
+    method: plugin_main
+    modules: [json, http_client, store, logger, env, time]
+
+  - name: plugin_monitor_service
+    kind: process.service
+    process: app.github:plugin_monitor
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # ══════════════════════════════════════════════════════════
+  # Contributors Collector — aggregates from all repos
+  # ══════════════════════════════════════════════════════════
+
+  - name: contributors_collector
+    kind: process.lua
+    source: file://contributors_collector.lua
+    method: main
+    modules: [json, store, logger, time]
+
+  - name: contributors_service
+    kind: process.service
+    process: app.github:contributors_collector
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+        - app.github:server_monitor_service
+        - app.github:frontend_monitor_service
+        - app.github:trap_monitor_service
+        - app.github:plugin_monitor_service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # ══════════════════════════════════════════════════════════
+  # API Endpoints — public, no auth required
+  # ══════════════════════════════════════════════════════════
+
+  - name: repos_handler
+    kind: function.lua
+    source: file://api_handler.lua
+    method: repos
+    modules: [http, json, store, logger]
+
+  - name: repos_endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:api_public
+    method: GET
+    path: /github/repos
+    func: app.github:repos_handler
+
+  - name: contributors_handler
+    kind: function.lua
+    source: file://api_handler.lua
+    method: contributors
+    modules: [http, json, store, logger]
+
+  - name: contributors_endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:api_public
+    method: GET
+    path: /github/contributors
+    func: app.github:contributors_handler
+
+  # ══════════════════════════════════════════════════════════
+  # Security Policies
+  # ══════════════════════════════════════════════════════════
+
+  - name: github.access
+    kind: security.policy
+    policy:
+      resources:
+        - app.github:repos_handler
+        - app.github:contributors_handler
+        - app:state_store
+      actions: '*'
+      effect: allow

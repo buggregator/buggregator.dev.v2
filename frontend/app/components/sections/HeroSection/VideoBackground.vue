@@ -14,6 +14,10 @@ function onMouseMove(e: MouseEvent) {
   offsetY.value = y * -10
 }
 
+const parallaxStyle = computed(() => ({
+  transform: `translate(${offsetX.value}px, ${offsetY.value}px) scale(1.1)`,
+}))
+
 onMounted(() => {
   prefersReducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!prefersReducedMotion.value) {
@@ -24,16 +28,11 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('mousemove', onMouseMove)
 })
-
-const parallaxStyle = computed(() => ({
-  transform: `translate(${offsetX.value}px, ${offsetY.value}px) scale(1.1)`,
-}))
 </script>
 
 <template>
   <div class="video-bg" aria-hidden="true">
     <div class="video-bg__inner" :style="parallaxStyle">
-      <!-- Video -->
       <video
         v-if="!prefersReducedMotion && videoSupported"
         autoplay
@@ -47,7 +46,6 @@ const parallaxStyle = computed(() => ({
         <source :src="heroVideoUrl as string" type="video/webm" />
       </video>
 
-      <!-- Poster fallback -->
       <img
         v-if="prefersReducedMotion || !videoSupported"
         :src="heroPosterUrl as string"
@@ -56,7 +54,6 @@ const parallaxStyle = computed(() => ({
       />
     </div>
 
-    <!-- Dark overlay -->
     <div class="video-bg__overlay" />
   </div>
 </template>
@@ -89,9 +86,9 @@ const parallaxStyle = computed(() => ({
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(12, 14, 20, 0.7) 0%,
-    rgba(12, 14, 20, 0.5) 40%,
-    rgba(12, 14, 20, 0.8) 100%
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.8) 100%
   );
 }
 

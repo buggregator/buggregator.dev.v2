@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { useGitHubStore } from '~/stores/github'
+
 const { t } = useI18n()
 const { discordUrl } = useRuntimeConfig().public
-
-const { data: repoData } = useFetch<{ stars: number; forks: number }>('/api/stars', { lazy: true })
+const github = useGitHubStore()
 
 const format = (n: number) =>
   new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
@@ -20,15 +21,44 @@ const format = (n: number) =>
 
       <!-- Stats row -->
       <ClientOnly>
-        <div v-if="repoData" class="flex flex-wrap justify-center gap-8 mb-10">
+        <div v-if="github.totalStars > 0" class="flex flex-wrap justify-center gap-8 mb-10">
           <div class="text-center">
-            <p class="text-3xl font-bold text-white font-sans">{{ format(repoData.stars) }}</p>
+            <p class="text-3xl font-bold text-white font-sans">{{ format(github.totalStars) }}</p>
             <p class="text-sm text-on-dark-muted mt-1 font-sans">{{ t('community.stats.stars') }}</p>
+          </div>
+          <div class="w-px h-12 bg-landing-border-subtle hidden sm:block" />
+          <div class="text-center">
+            <p class="text-3xl font-bold text-white font-sans">{{ github.contributors.length }}+</p>
+            <p class="text-sm text-on-dark-muted mt-1 font-sans">Contributors</p>
           </div>
           <div class="w-px h-12 bg-landing-border-subtle hidden sm:block" />
           <div class="text-center">
             <p class="text-3xl font-bold text-white font-sans">MIT</p>
             <p class="text-sm text-on-dark-muted mt-1 font-sans">{{ t('community.stats.license') }}</p>
+          </div>
+        </div>
+      </ClientOnly>
+
+      <!-- Top contributors -->
+      <ClientOnly>
+        <div v-if="github.contributors.length > 0" class="mb-10">
+          <div class="flex flex-wrap justify-center gap-2">
+            <a
+              v-for="contributor in github.contributors.slice(0, 30)"
+              :key="contributor.login"
+              :href="contributor.html_url"
+              target="_blank"
+              rel="noopener"
+              class="group relative"
+              :title="`${contributor.login} — ${contributor.contributions} contributions`"
+            >
+              <img
+                :src="`${contributor.avatar_url}&s=64`"
+                :alt="contributor.login"
+                class="w-10 h-10 rounded-full border-2 border-transparent transition-all duration-200 group-hover:border-accent group-hover:scale-110"
+                loading="lazy"
+              />
+            </a>
           </div>
         </div>
       </ClientOnly>

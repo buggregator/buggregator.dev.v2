@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import VersionBadge from '~/components/ui/VersionBadge.vue'
 import VideoBackground from '~/components/sections/HeroSection/VideoBackground.vue'
+import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
-
-const { data: repoData } = useFetch<{ stars: number }>('/api/stars', { lazy: true })
+const github = useGitHubStore()
 
 const formattedStars = computed(() => {
-  const count = repoData.value?.stars ?? 0
+  const server = github.getRepo('server')
+  const count = server?.stars ?? 0
   if (count === 0) return null
   return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(count)
 })
 
+const imageTag = computed(() => {
+  const v = github.serverVersion
+  return v ? `v${v}` : 'latest'
+})
+
 const copied = ref(false)
 
-const fullCommand = 'docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 -p 127.0.0.1:9914:9914 ghcr.io/buggregator/server:latest'
+const fullCommand = computed(() =>
+  `docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 -p 127.0.0.1:9914:9914 ghcr.io/buggregator/server:${imageTag.value}`,
+)
 
 const ports = [
   { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector' },
@@ -26,7 +34,7 @@ const ports = [
 
 async function copyCommand() {
   try {
-    await navigator.clipboard.writeText(fullCommand)
+    await navigator.clipboard.writeText(fullCommand.value)
     copied.value = true
     setTimeout(() => { copied.value = false }, 2000)
   } catch {
@@ -44,7 +52,6 @@ async function copyCommand() {
 
     <!-- Content (on top of video) -->
     <div class="relative z-10 max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-      <div class="hero__content-backdrop rounded-2xl px-8 py-10 lg:px-12 lg:py-14">
       <!-- Version badge -->
       <div class="mb-6 hero-stagger" style="--i: 0">
         <ClientOnly>
@@ -81,7 +88,7 @@ async function copyCommand() {
               <span v-if="i < ports.length - 1" class="text-code-text"> \</span>
             </div>
             <div class="pl-6">
-              <span class="text-code-string">ghcr.io/buggregator/server:latest</span>
+              <span class="text-code-string">ghcr.io/buggregator/server:{{ imageTag }}</span>
             </div>
           </div>
 
@@ -120,7 +127,6 @@ async function copyCommand() {
           <span class="font-mono text-xs text-on-dark-muted">{{ t('hero.trustRow.free') }}</span>
         </ClientOnly>
       </div>
-      </div>
     </div>
   </section>
 </template>
@@ -135,13 +141,6 @@ async function copyCommand() {
   overflow: hidden;
   display: flex;
   align-items: center;
-}
-
-.hero__content-backdrop {
-  background: rgba(12, 14, 20, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .hero__headline {

@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import CopyCommand from '~/components/ui/CopyCommand.vue'
+import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
+const github = useGitHubStore()
+
+const trapRepo = computed(() => github.getRepo('trap'))
+const pluginRepo = computed(() => github.getRepo('plugin'))
+
+const formatStars = (n: number) =>
+  new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
 </script>
 
 <template>
@@ -16,10 +23,25 @@ const { t } = useI18n()
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Trap card -->
         <div class="rounded-2xl border border-[#e5e7eb] p-6 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200">
-          <div class="w-10 h-10 rounded-xl bg-[rgba(6,182,212,0.12)] flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-ray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-[rgba(6,182,212,0.12)] flex items-center justify-center">
+              <svg class="w-5 h-5 text-ray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <ClientOnly>
+              <div v-if="trapRepo" class="flex items-center gap-3">
+                <span v-if="trapRepo.latest_version" class="text-xs font-mono text-on-light-muted bg-section-light px-2 py-0.5 rounded-full border border-[#e5e7eb]">
+                  v{{ trapRepo.latest_version }}
+                </span>
+                <span v-if="trapRepo.stars" class="inline-flex items-center gap-1 text-xs text-on-light-muted">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
+                  </svg>
+                  {{ formatStars(trapRepo.stars) }}
+                </span>
+              </div>
+            </ClientOnly>
           </div>
           <h3 class="text-lg font-semibold text-on-light-primary mb-2 font-sans">{{ t('ecosystem.trap.title') }}</h3>
           <p class="text-sm text-on-light-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.trap.description') }}</p>
@@ -50,17 +72,32 @@ const { t } = useI18n()
 
         <!-- JetBrains card -->
         <div class="rounded-2xl border border-[#e5e7eb] p-6 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200">
-          <div class="w-10 h-10 rounded-xl bg-[rgba(139,92,246,0.12)] flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-profiler" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-[rgba(139,92,246,0.12)] flex items-center justify-center">
+              <svg class="w-5 h-5 text-profiler" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <ClientOnly>
+              <div v-if="pluginRepo" class="flex items-center gap-3">
+                <span v-if="pluginRepo.latest_version" class="text-xs font-mono text-on-light-muted bg-section-light px-2 py-0.5 rounded-full border border-[#e5e7eb]">
+                  v{{ pluginRepo.latest_version }}
+                </span>
+                <span v-if="pluginRepo.stars" class="inline-flex items-center gap-1 text-xs text-on-light-muted">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
+                  </svg>
+                  {{ formatStars(pluginRepo.stars) }}
+                </span>
+              </div>
+            </ClientOnly>
           </div>
           <h3 class="text-lg font-semibold text-on-light-primary mb-2 font-sans">{{ t('ecosystem.jetbrains.title') }}</h3>
           <p class="text-sm text-on-light-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.jetbrains.description') }}</p>
 
           <div class="flex flex-wrap gap-3">
             <a
-              href="https://plugins.jetbrains.com/plugin/18529-buggregator"
+              href="https://plugins.jetbrains.com/plugin/26344-buggregator"
               target="_blank"
               rel="noopener"
               class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
