@@ -1,0 +1,11 @@
+{
+  "method": "POST",
+  "uri": "/api/orders",
+  "httpVersion": "HTTP/1.1",
+  "host": "api.example.com",
+  "headers": {
+    "Authorization": "Bearer eyJ0eXAiOiJKV1Q...",
+    "Content-Type": "application/json"
+  },
+  "body": "{\n  \"product_id\": 42,\n  \"quantity\": 1,\n  \"user_id\": 7\n}"
+}

@@ -1,13 +1,35 @@
 export default defineNuxtConfig({
   ssr: true,
 
-  modules: ['@pinia/nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/i18n',
+    'nuxt-gtag',
+  ],
+
+  i18n: {
+    locales: [
+      { code: 'en', file: 'en.json', name: 'English' },
+    ],
+    defaultLocale: 'en',
+    lazy: false,
+    langDir: 'locales/',
+    strategy: 'prefix_except_default',
+  },
+
+  gtag: {
+    id: process.env.GTAG_ID || '',
+    enabled: !!process.env.GTAG_ID,
+  },
 
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8080',
+    githubToken: process.env.GITHUB_TOKEN || '',
 
     public: {
       appUrl: process.env.PUBLIC_APP_URL || '',
+      siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
+      discordUrl: process.env.DISCORD_URL || 'https://discord.gg/uxr5gw2p',
     },
   },
 
@@ -49,7 +71,12 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/styles.css'],
+  css: [
+    '~/assets/css/styles.css',
+    '~/assets/css/design-tokens.css',
+    '~/assets/css/landing.css',
+    '~/assets/css/symfony-var-dump.css',
+  ],
 
   postcss: {
     plugins: {

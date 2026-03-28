@@ -2,12 +2,18 @@ import { proxyRequest } from 'h3'
 
 const PROXY_PATHS = ['/api/', '/mcp/']
 
+// Nuxt server API routes that should NOT be proxied to the backend
+const LOCAL_API_PATHS = ['/api/version', '/api/stars']
+
 export default defineEventHandler(async (event) => {
   // Skip WebSocket upgrades — handled by defineWebSocketHandler routes
   if (event.node.req.headers.upgrade === 'websocket') return
 
   const url = getRequestURL(event)
   const path = url.pathname
+
+  // Skip local Nuxt server routes
+  if (LOCAL_API_PATHS.some(p => path.startsWith(p))) return
 
   if (!PROXY_PATHS.some(p => path.startsWith(p))) return
 

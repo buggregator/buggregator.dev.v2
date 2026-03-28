@@ -1,0 +1,20 @@
+[
+  {
+    "level": "DEBUG",
+    "time": "14:23:01",
+    "message": "Request completed",
+    "context": "GET /api/users · 142ms"
+  },
+  {
+    "level": "ERROR",
+    "time": "14:23:05",
+    "message": "DB Connection failed",
+    "context": "attempt 3/3"
+  },
+  {
+    "level": "INFO",
+    "time": "14:23:07",
+    "message": "Cache warmed",
+    "context": "1,240 items loaded"
+  }
+]

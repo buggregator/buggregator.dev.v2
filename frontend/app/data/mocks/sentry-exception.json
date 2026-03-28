@@ -1,0 +1,41 @@
+{
+  "type": "Illuminate\\Auth\\AuthenticationException",
+  "value": "Unauthenticated. User session has expired.",
+  "mechanism": { "type": "exception_handler", "handled": false },
+  "stacktrace": {
+    "frames": [
+      {
+        "filename": "vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php",
+        "lineno": 44,
+        "function": "unauthenticated",
+        "context_line": "        throw new AuthenticationException(",
+        "pre_context": ["    protected function unauthenticated($request, array $guards)", "    {"],
+        "post_context": ["            'Unauthenticated.',", "            $guards, $this->redirectTo($request)", "        );"],
+        "vars": {
+          "request": "Illuminate\\Http\\Request {uri: '/dashboard', method: 'GET'}",
+          "guards": "['web']"
+        }
+      },
+      {
+        "filename": "app/Http/Controllers/DashboardController.php",
+        "lineno": 23,
+        "function": "index",
+        "context_line": "        $user = auth()->user();",
+        "pre_context": ["    public function index(Request $request)", "    {"],
+        "post_context": ["        $stats = $this->statsService->getFor($user);", "        return view('dashboard', compact('stats'));"],
+        "vars": {
+          "request": "Illuminate\\Http\\Request {uri: '/dashboard', method: 'GET', ip: '127.0.0.1'}"
+        }
+      },
+      {
+        "filename": "routes/web.php",
+        "lineno": 15,
+        "function": null,
+        "context_line": "Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');",
+        "pre_context": [],
+        "post_context": [],
+        "vars": {}
+      }
+    ]
+  }
+}

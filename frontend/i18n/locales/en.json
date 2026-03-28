@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "features": "Features",
+    "howItWorks": "How it works",
+    "docs": "Documentation",
+    "trap": "Trap",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "badge": {
+      "version": "v{version} · just released",
+      "stars": "{count} GitHub Stars",
+      "free": "Free & Open Source"
+    },
+    "headline1": "One docker run. All your debug data in one place.",
+    "headline2": "Stop switching tabs. Debug your PHP app from one place.",
+    "subheadline": "Buggregator captures exceptions, logs, dumps, emails, profiling and HTTP requests in a real-time UI — using the Sentry SDK, VarDumper, Monolog and Ray you already have. Free, open-source, no registration.",
+    "command": "docker run --rm -p 8000:8000 ghcr.io/buggregator/server:latest",
+    "cta": {
+      "copy": "Copy command",
+      "copied": "Copied!",
+      "docs": "Read the docs →",
+      "trap": "Or use Trap (no Docker required) →"
+    },
+    "frameworks": "Works with:"
+  },
+  "replaces": {
+    "title": "Replaces your local dev stack — for free",
+    "footer": "All of this. One command. Zero cost.",
+    "tools": {
+      "sentry": "Exceptions & stack traces",
+      "mailhog": "Email capture",
+      "ray": "Variable dumps",
+      "blackfire": "Performance profiling",
+      "logviewers": "Application logs",
+      "requestbin": "HTTP request inspection",
+      "inspector": "Application performance monitoring",
+      "smsgateway": "SMS gateway testing"
+    }
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "subtitle": "Three steps. That's it.",
+    "steps": {
+      "run": {
+        "title": "Run one command",
+        "description": "Start Buggregator with a single docker run. No installation, no registration, no configuration files."
+      },
+      "connect": {
+        "title": "Add one env variable",
+        "description": "Change one line in your .env file. Your existing Sentry SDK, VarDumper, Monolog, or Ray — they all just work."
+      },
+      "open": {
+        "title": "Open your browser",
+        "description": "Navigate to http://127.0.0.1:8000 and Buggregator is ready. No login required."
+      },
+      "everything": {
+        "title": "See everything in one place",
+        "description": "Exceptions, logs, dumps, emails, profiling, HTTP requests — all in real time, all in one tab."
+      }
+    }
+  },
+  "showcase": {
+    "title": "Everything in one dashboard",
+    "subtitle": "9 debugging tools. One interface.",
+    "tabs": {
+      "exceptions": "Exceptions",
+      "profiler": "Profiler",
+      "vardump": "VarDump",
+      "ray": "Ray",
+      "emails": "Emails",
+      "logs": "Logs",
+      "http": "HTTP",
+      "inspector": "Inspector",
+      "sms": "SMS"
+    },
+    "descriptions": {
+      "exceptions": "Catch unhandled exceptions with full stack traces via Sentry SDK. See exactly where your code breaks.",
+      "profiler": "Visualize XHProf call graphs to find performance bottlenecks. Click any node to trace the path from entry point.",
+      "vardump": "Inspect variables with dump(). See object properties, array contents, and types — right in the browser.",
+      "ray": "Debug with ray() — tables, queries, models, jobs, mail, counters and 18 more payload types. Works with PHP, JS, Ruby, Go SDKs.",
+      "emails": "Intercept outgoing emails during development. Preview HTML, inspect headers — no emails actually sent.",
+      "logs": "Aggregate Monolog, Symfony, and Laravel logs in real time. Filter by level, search by message.",
+      "http": "Capture and inspect incoming HTTP requests. See headers, body, and query parameters at a glance.",
+      "inspector": "Monitor application performance with transaction tracing, memory tracking, and timeline breakdowns. Local APM alternative.",
+      "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more."
+    },
+    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
+  },
+  "install": {
+    "title": "Get started in 60 seconds",
+    "tabs": {
+      "docker": "Docker",
+      "compose": "Docker Compose",
+      "trap": "Without Docker"
+    },
+    "trust": {
+      "free": "Free forever",
+      "noReg": "No registration",
+      "noCard": "No credit card",
+      "oss": "Open source (MIT)"
+    },
+    "trapNote": "No Docker needed. Trap runs as a PHP CLI tool in your project.",
+    "links": {
+      "fullGuide": "Full installation guide →",
+      "config": "Configuration options →"
+    }
+  },
+  "frameworks": {
+    "title": "Works with your framework",
+    "subtitle": "No vendor lock-in. Your existing SDK just works.",
+    "also": "Also: JavaScript, Python, Ruby — via Sentry SDK",
+    "guides": "See integration guides →"
+  },
+  "advanced": {
+    "title": "Ready for production teams",
+    "subtitle": "Enterprise features when you need them.",
+    "viewAll": "View all configuration options →",
+    "features": {
+      "sso": { "title": "SSO Authentication", "desc": "Auth0 & Kinde support for team environments" },
+      "db": { "title": "External Database", "desc": "PostgreSQL/MySQL for persistent event storage" },
+      "k8s": { "title": "Kubernetes Ready", "desc": "Deploy as Deployment + Service in your cluster" },
+      "webhooks": { "title": "Webhooks", "desc": "Trigger external actions on incoming events" },
+      "prometheus": { "title": "Prometheus Metrics", "desc": "Monitor event counts with Grafana" },
+      "multiproject": { "title": "Multi-project Support", "desc": "Separate events by project or team" }
+    }
+  },
+  "ecosystem": {
+    "title": "The Buggregator ecosystem",
+    "trap": {
+      "title": "No Docker? No problem.",
+      "description": "Trap is a lightweight PHP CLI alternative. Install it as a composer package — no containers, no configuration.",
+      "github": "View on GitHub",
+      "docs": "Read docs"
+    },
+    "jetbrains": {
+      "title": "Never leave your IDE",
+      "description": "The Buggregator plugin for PhpStorm brings dumps, logs, and debug data directly into your editor.",
+      "install": "Install from Marketplace",
+      "docs": "Read docs"
+    }
+  },
+  "community": {
+    "title": "Open source. Built with the community.",
+    "description": "Buggregator is free forever. No paid plans, no feature gates. If it helps you, consider starring the repo.",
+    "star": "Star on GitHub",
+    "issues": "Browse issues",
+    "contribute": "Contribution guide",
+    "discord": "Join our Discord",
+    "stats": {
+      "stars": "GitHub Stars",
+      "forks": "Forks",
+      "contributors": "Contributors",
+      "license": "MIT License"
+    }
+  },
+  "footer": {
+    "tagline": "Made for the PHP community",
+    "product": "Product",
+    "community": "Community",
+    "resources": "Resources",
+    "links": {
+      "docs": "Documentation",
+      "features": "Features",
+      "trap": "Trap",
+      "plugin": "PhpStorm Plugin",
+      "gettingStarted": "Getting Started",
+      "github": "GitHub",
+      "discord": "Discord",
+      "contributing": "Contributing",
+      "bugs": "Bug Reports",
+      "changelog": "Changelog",
+      "releases": "Releases"
+    }
+  }
+}

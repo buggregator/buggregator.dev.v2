@@ -1,0 +1,26 @@
+{
+  "uuid": "7d9fa620-4c71-41a2-b620-fa33cbe74f07",
+  "type": "var-dump",
+  "payload": {
+    "payload": {
+      "type": "array",
+      "value": "<pre class=sf-dump id=sf-dump-41611500 data-indent-pad=\"  \"><span class=sf-dump-note>array:2</span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>foo</span>\" => \"<span class=sf-dump-str title=\"3 characters\">bar</span>\"\n  \"<span class=sf-dump-key>baz</span>\" => <span class=sf-dump-note>array:1</span> [<samp data-depth=2 class=sf-dump-compact>\n    \"<span class=sf-dump-key>bar</span>\" => \"<span class=sf-dump-str title=\"3 characters\">foo</span>\"\n  </samp>]\n</samp>]\n</pre><script>Sfdump(\"sf-dump-41611500\")</script>\n",
+      "label": null
+    },
+    "context": {
+      "timestamp": 1678272087.616514,
+      "cli": {
+        "command_line": "app.php",
+        "identifier": "26112f4b"
+      },
+      "source": {
+        "name": "HomeController.php",
+        "file": "/root/repos/spiral-apps/filters-bridge/app/src/Controller/HomeController.php",
+        "line": 48,
+        "file_excerpt": false
+      }
+    }
+  },
+  "timestamp": 1678272087,
+  "project": null
+}
