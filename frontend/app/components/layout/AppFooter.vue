@@ -15,12 +15,10 @@ const productLinks = [
 const communityLinks = computed(() => [
   { label: 'footer.links.github', href: 'https://github.com/buggregator/server' },
   { label: 'footer.links.discord', href: discordUrl as string },
-  { label: 'footer.links.contributing', href: 'https://github.com/buggregator/server/blob/master/CONTRIBUTING.md' },
   { label: 'footer.links.bugs', href: 'https://github.com/buggregator/server/issues' },
 ])
 
 const resourceLinks = [
-  { label: 'footer.links.changelog', href: 'https://github.com/buggregator/server/blob/master/CHANGELOG.md' },
   { label: 'footer.links.releases', href: 'https://github.com/buggregator/server/releases' },
 ]
 </script>

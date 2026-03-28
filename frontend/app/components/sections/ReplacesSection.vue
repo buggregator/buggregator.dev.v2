@@ -14,7 +14,7 @@ const tools = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-light">
+  <section class="py-20 lg:py-28 bg-white">
     <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-on-light-primary mb-3 font-sans">

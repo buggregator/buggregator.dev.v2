@@ -7,11 +7,14 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
   const examplesUrl = config.examplesUrl
 
+  const isProfiler = body.action.startsWith('profiler:')
+  const endpoint = isProfiler ? '/example/call/profiler' : '/example/call'
+
   try {
-    await $fetch(`${examplesUrl}/example/call`, {
+    await $fetch(`${examplesUrl}${endpoint}`, {
       method: 'POST',
       body: { action: body.action },
-      timeout: 5000,
+      timeout: 10000,
     })
     return { ok: true }
   } catch {

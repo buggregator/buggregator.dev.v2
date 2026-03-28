@@ -59,7 +59,7 @@ const pillars = [
       <ArchDiagram class="mb-16" />
 
       <!-- Divider -->
-      <div class="border-t border-[#e5e7eb] my-16" />
+      <div class="my-16" />
 
       <!-- Dev environment block -->
       <DevEnvBlock class="mb-16" />

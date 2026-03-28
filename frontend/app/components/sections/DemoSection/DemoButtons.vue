@@ -35,7 +35,7 @@ const primarySections: Section[] = [
   {
     key: 'sentry', title: 'Sentry Exceptions', color: '#f43f5e',
     docs: 'https://docs.buggregator.dev/config/sentry.html',
-    actions: ['Report', 'Event', 'ModelNotFound', 'Validation', 'WithContext', 'NestedExceptions', 'DatabaseError', 'TypeError'],
+    actions: ['Report', 'DatabaseError', 'ModelNotFound', 'TypeError'],
   },
   {
     key: 'profiler', title: 'XHProf Profiler', color: '#8b5cf6',
@@ -43,42 +43,42 @@ const primarySections: Section[] = [
     actions: ['Report'],
   },
   {
-    key: 'monolog', title: 'Monolog Logs', color: '#6b7280',
-    docs: 'https://docs.buggregator.dev/config/monolog.html',
-    actions: ['Debug', 'Info', 'Warning', 'Error', 'Critical', 'Notice', 'Alert', 'Emergency', 'Exception'],
-  },
-  {
     key: 'smtp', title: 'SMTP Email', color: '#f59e0b',
     docs: 'https://docs.buggregator.dev/config/smtp.html',
-    actions: ['WelcomeMail', 'OrderShipped', 'PasswordReset', 'WeeklyReport', 'Invoice'],
+    actions: ['WelcomeMail', 'OrderShipped', 'PasswordReset', 'Invoice'],
+  },
+  {
+    key: 'sms', title: 'SMS Gateway', color: '#a855f7',
+    docs: 'https://docs.buggregator.dev/config/sms.html',
+    actions: ['Twilio', 'Vonage', 'Plivo', 'Sinch', 'Infobip'],
   },
   {
     key: 'var_dump', title: 'Var Dumper', color: '#ef4444',
     docs: 'https://docs.buggregator.dev/config/var-dumper.html',
-    actions: ['String', 'Array', 'Bool', 'Int', 'Object', 'Exception'],
+    actions: ['String', 'Array', 'Object', 'Exception'],
+  },
+  {
+    key: 'monolog', title: 'Monolog Logs', color: '#6b7280',
+    docs: 'https://docs.buggregator.dev/config/monolog.html',
+    actions: ['Debug', 'Info', 'Warning', 'Error', 'Critical', 'Exception'],
   },
   {
     key: 'http', title: 'HTTP Requests', color: '#22c55e',
     docs: 'https://docs.buggregator.dev/config/http-dumps.html',
-    actions: ['Get', 'Post', 'Put', 'Patch', 'Delete'],
+    actions: ['Get', 'Post', 'Put', 'Delete'],
   },
 ]
 
 const secondarySections: Section[] = [
   {
-    key: 'ray', title: 'Ray', color: '#06b6d4',
-    docs: 'https://docs.buggregator.dev/config/ray.html',
-    actions: ['Int', 'String', 'Array', 'Bool', 'Object', 'Exception', 'Table', 'Json', 'Measure', 'Counter', 'Colors', 'Sizes', 'Labels'],
-  },
-  {
     key: 'inspector', title: 'Inspector', color: '#eab308',
     docs: 'https://docs.buggregator.dev/config/inspector.html',
-    actions: ['Request', 'Command', 'Queries', 'Relationships', 'Transaction', 'SlowQuery'],
+    actions: ['Request', 'Command', 'Transaction'],
   },
   {
-    key: 'sms', title: 'SMS Gateway', color: '#a855f7',
-    docs: 'https://docs.buggregator.dev/config/sms.html',
-    actions: ['Twilio', 'Vonage', 'Plivo', 'Sinch', 'Infobip', 'Messagebird', 'Telnyx'],
+    key: 'ray', title: 'Ray', color: '#06b6d4',
+    docs: 'https://docs.buggregator.dev/config/ray.html',
+    actions: ['String', 'Array', 'Table', 'Json', 'Measure', 'Exception'],
   },
 ]
 </script>

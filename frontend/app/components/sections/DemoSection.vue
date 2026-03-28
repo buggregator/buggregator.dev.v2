@@ -7,7 +7,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section id="demo" class="bg-section-dark">
+  <section id="demo" class="bg-section-mid">
     <!-- Desktop: iframe + buttons -->
     <div class="hidden lg:block py-20" style="min-width: 1024px;">
       <div class="w-[95%] mx-auto">

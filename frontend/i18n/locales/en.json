@@ -2,6 +2,7 @@
   "nav": {
     "features": "Features",
     "howItWorks": "How it works",
+    "demo": "See in Action",
     "docs": "Documentation",
     "trap": "Trap",
     "getStarted": "Get Started"
@@ -161,8 +162,7 @@
     },
     "trapNote": "No Docker needed. Trap runs as a PHP CLI tool in your project.",
     "links": {
-      "fullGuide": "Full installation guide →",
-      "config": "Configuration options →"
+      "fullGuide": "Full installation guide →"
     }
   },
   "demo": {

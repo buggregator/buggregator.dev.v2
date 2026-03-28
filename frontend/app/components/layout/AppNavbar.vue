@@ -14,6 +14,7 @@ const docsUrl = 'https://docs.buggregator.dev'
 const navLinks = computed(() => [
   { label: t('nav.howItWorks'), href: '#how-it-works' },
   { label: t('nav.features'), href: '#showcase' },
+  { label: t('nav.demo'), href: '#demo' },
   { label: t('nav.docs'), href: docsUrl, external: true },
   { label: t('nav.trap'), href: 'https://github.com/buggregator/trap', external: true },
 ])

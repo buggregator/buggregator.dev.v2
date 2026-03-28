@@ -34,13 +34,13 @@ const activeSnippet = computed(() => snippets[activeFramework.value])
 </script>
 
 <template>
-  <div>
+  <div class="rounded-xl border border-code-border overflow-hidden">
     <!-- Framework tabs -->
-    <div class="flex gap-1 mb-0 bg-code-bg rounded-t-lg px-2 pt-2 border border-b-0 border-code-border">
+    <div class="flex gap-1 bg-code-bg px-2 pt-2 border-b border-code-border">
       <button
         v-for="fw in frameworks"
         :key="fw.id"
-        class="px-4 py-2 font-mono text-sm transition-colors duration-150 border-b-2"
+        class="px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
         :class="activeFramework === fw.id
           ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
           : 'text-[#6e7681] border-transparent hover:text-code-text'"
@@ -51,7 +51,7 @@ const activeSnippet = computed(() => snippets[activeFramework.value])
     </div>
 
     <!-- Code block -->
-    <div class="bg-code-bg border border-t-0 border-code-border rounded-b-lg p-4 font-mono text-sm overflow-x-auto">
+    <div class="bg-code-bg p-4 font-mono text-xs overflow-x-auto">
       <pre class="text-code-text whitespace-pre"><template
         v-for="(line, i) in activeSnippet.split('\n')"
         :key="i"

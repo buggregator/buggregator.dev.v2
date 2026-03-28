@@ -39,7 +39,7 @@ const activeDescription = computed(() =>
 </script>
 
 <template>
-  <section id="showcase" class="py-20 lg:py-28 bg-section-light">
+  <section id="showcase" class="py-20 lg:py-28 bg-white">
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center mb-12">

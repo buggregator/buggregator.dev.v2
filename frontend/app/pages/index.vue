@@ -4,7 +4,6 @@ import ReplacesSection from '~/components/sections/ReplacesSection.vue'
 import CleanAppSection from '~/components/sections/CleanAppSection.vue'
 import MockShowcase from '~/components/showcase/MockShowcase.vue'
 import StepsSection from '~/components/sections/StepsSection.vue'
-import InstallSection from '~/components/sections/InstallSection.vue'
 import DemoSection from '~/components/sections/DemoSection.vue'
 import FrameworksSection from '~/components/sections/FrameworksSection.vue'
 import EcosystemSection from '~/components/sections/EcosystemSection.vue'
@@ -21,7 +20,6 @@ definePageMeta({ layout: 'landing' })
     <CleanAppSection />
     <MockShowcase />
     <StepsSection />
-    <InstallSection />
     <DemoSection />
     <FrameworksSection />
     <EcosystemSection />
