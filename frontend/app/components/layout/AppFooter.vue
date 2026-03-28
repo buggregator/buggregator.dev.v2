@@ -16,6 +16,7 @@ const communityLinks = computed(() => [
   { label: 'footer.links.github', href: 'https://github.com/buggregator/server' },
   { label: 'footer.links.discord', href: discordUrl as string },
   { label: 'footer.links.bugs', href: 'https://github.com/buggregator/server/issues' },
+  { label: 'footer.links.sponsors', href: '/sponsors' },
 ])
 
 const resourceLinks = [

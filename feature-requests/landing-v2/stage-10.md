@@ -23,12 +23,14 @@ new features. No guilt, no pressure — just an open invitation.
 ## Files
 
 CREATE:
+
 - `buggregator.dev/spa-v2/components/sections/SponsorsSection.vue` — landing block
 - `buggregator.dev/spa-v2/components/sections/SponsorsSection/SponsorCard.vue` — individual card
 - `buggregator.dev/spa-v2/pages/sponsors.vue` — full sponsors page
 - `buggregator.dev/spa-v2/data/sponsors.ts` — static sponsor list (source of truth)
 
 MODIFY:
+
 - `buggregator.dev/spa-v2/pages/index.vue` — insert `<SponsorsSection>` before `<AppFooter>`
 - `buggregator.dev/spa-v2/components/layout/AppFooter.vue` — add "Sponsors" link
 - `buggregator.dev/spa-v2/components/layout/AppNavbar.vue` — add "Sponsors" link (optional)
@@ -54,13 +56,13 @@ When a new sponsor joins, update this file + redeploy. Simple and maintainable.
 export type SponsorTier = 'gold' | 'silver' | 'community'
 
 export type Sponsor = {
-  id: string
-  name: string           // Display name or company name
-  url: string            // Link when clicking the card
-  avatar: string         // URL to avatar/logo image
-  tier: SponsorTier
-  since?: string         // "2024-01" — shown as "Sponsor since Jan 2024"
-  description?: string   // Optional one-liner (shown on /sponsors page only)
+    id: string
+    name: string           // Display name or company name
+    url: string            // Link when clicking the card
+    avatar: string         // URL to avatar/logo image
+    tier: SponsorTier
+    since?: string         // "2024-01" — shown as "Sponsor since Jan 2024"
+    description?: string   // Optional one-liner (shown on /sponsors page only)
 }
 
 // Tier visual differences:
@@ -69,26 +71,26 @@ export type Sponsor = {
 //   community: Small card, avatar only (with name on hover)
 
 export const sponsors: Sponsor[] = [
-  // Example gold sponsor:
-  // {
-  //   id: 'acme',
-  //   name: 'Acme Corp',
-  //   url: 'https://acme.example.com',
-  //   avatar: 'https://acme.example.com/logo.png',
-  //   tier: 'gold',
-  //   since: '2024-06',
-  //   description: 'Cloud infrastructure for developers',
-  // },
+    // Example gold sponsor:
+    // {
+    //   id: 'acme',
+    //   name: 'Acme Corp',
+    //   url: 'https://acme.example.com',
+    //   avatar: 'https://acme.example.com/logo.png',
+    //   tier: 'gold',
+    //   since: '2024-06',
+    //   description: 'Cloud infrastructure for developers',
+    // },
 
-  // Example community sponsor (individual via Patreon):
-  // {
-  //   id: 'john-doe',
-  //   name: 'John Doe',
-  //   url: 'https://github.com/johndoe',
-  //   avatar: 'https://avatars.githubusercontent.com/u/12345?v=4',
-  //   tier: 'community',
-  //   since: '2024-03',
-  // },
+    // Example community sponsor (individual via Patreon):
+    // {
+    //   id: 'john-doe',
+    //   name: 'John Doe',
+    //   url: 'https://github.com/johndoe',
+    //   avatar: 'https://avatars.githubusercontent.com/u/12345?v=4',
+    //   tier: 'community',
+    //   since: '2024-03',
+    // },
 ]
 ```
 
@@ -118,6 +120,7 @@ and `AppFooter` (`#111318`). Blends naturally with both.
 ```
 
 **Gold card (`tier === 'gold'`):**
+
 ```
 ┌─────────────────────────────────────────────┐
 │  [Logo 48px]  Company Name                  │
@@ -125,27 +128,33 @@ and `AppFooter` (`#111318`). Blends naturally with both.
 │               Sponsor since June 2024       │
 └─────────────────────────────────────────────┘
 ```
+
 `bg rgba(255,255,255,0.04)`, `border #2a2f38`, `rounded-xl`, `p-5`
 Name: `font-semibold text-sm text-primary`
 Description: `text-xs text-muted`
 
 **Silver card:**
+
 ```
 ┌────────────────┐
 │   [Logo 40px]  │
 │   Name         │
 └────────────────┘
 ```
+
 `bg rgba(255,255,255,0.03)`, `rounded-lg`, `p-3`
 
 **Community card:**
+
 ```
 [Avatar 32px, rounded-full]
 — name appears as tooltip on hover
 ```
+
 Inline, no border, tight spacing.
 
 **"Become a sponsor" card (always last):**
+
 ```
 ┌ ─ ─ ─ ─ ─ ─ ─ ┐
 │    +            │
@@ -153,12 +162,14 @@ Inline, no border, tight spacing.
 │  sponsor        │
 └ ─ ─ ─ ─ ─ ─ ─ ┘
 ```
+
 `border-dashed border-2 border-dark-600`, `text-muted`, hover: `border-accent-blue text-accent-blue`
 Links to `/sponsors`
 
 ### Patreon CTA
 
 Below the grid:
+
 ```
 [♥ Support on Patreon]   [→ See all ways to help]
 ```
@@ -175,6 +186,7 @@ Be the first to support Buggregator.
 ```
 
 ```vue
+
 <template>
   <section class="sponsors-section">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -188,19 +200,19 @@ Be the first to support Buggregator.
 
       <!-- Gold sponsors row -->
       <div v-if="goldSponsors.length" class="sponsors-gold-row mb-6">
-        <SponsorCard v-for="s in goldSponsors" :key="s.id" :sponsor="s" tier="gold" />
+        <SponsorCard v-for="s in goldSponsors" :key="s.id" :sponsor="s" tier="gold"/>
       </div>
 
       <!-- Silver + community + "become" card -->
       <div class="sponsors-grid">
-        <SponsorCard v-for="s in otherSponsors" :key="s.id" :sponsor="s" :tier="s.tier" />
-        <BecomeASponsorCard />
+        <SponsorCard v-for="s in otherSponsors" :key="s.id" :sponsor="s" :tier="s.tier"/>
+        <BecomeASponsorCard/>
       </div>
 
       <!-- Patreon CTA -->
       <div class="sponsors-cta mt-10">
         <a :href="patreonUrl" target="_blank" rel="noopener" class="btn-patreon">
-          <PatreonIcon />
+          <PatreonIcon/>
           {{ t('sponsors.patreonBtn') }}
         </a>
         <NuxtLink to="/sponsors" class="btn-ghost">
@@ -256,12 +268,14 @@ as the main page (Navbar + Footer).
 
 **H1:** `"Support Buggregator"`
 **Subheadline:**
+
 ```
 "Buggregator is and will always be free. No paid tiers, no feature gates.
  Sponsors help fund server costs, development time, and new features."
 ```
 
 **Two CTA buttons:**
+
 - `[♥ Support on Patreon]` — Patreon brand red, opens Patreon in new tab
 - `[✉ Contact for company sponsorship]` — ghost, `mailto:sponsor@buggregator.dev`
 
@@ -292,6 +306,7 @@ Body: `text-sm text-secondary`
 ### Block 3: Current Sponsors Grid
 
 Same component as landing section, but **expanded**:
+
 - Gold tier: show `description` + `since` date
 - Silver: show name + since date
 - Community: show name + avatar + since date (all visible, not tooltip-only)
@@ -305,6 +320,7 @@ Same component as landing section, but **expanded**:
 Two columns side by side:
 
 **Left — Individual (Patreon):**
+
 ```
 ♥ Individual sponsor
 via Patreon
@@ -318,9 +334,11 @@ What you get:
 
 [Support on Patreon →]
 ```
+
 Card: `bg rgba(255,69,77,0.08)`, `border rgba(255,69,77,0.2)`, `rounded-xl`, `p-6`
 
 **Right — Company (email):**
+
 ```
 🏢 Company sponsor
 via direct contact
@@ -335,6 +353,7 @@ What you get:
 
 [Contact us →]  sponsor@buggregator.dev
 ```
+
 Card: `bg rgba(59,130,246,0.08)`, `border rgba(59,130,246,0.2)`, `rounded-xl`, `p-6`
 
 **Checkmark color:** `#22c55e`
@@ -368,10 +387,13 @@ Simple centered text block, dark background, `max-w-lg mx-auto`.
 ```ts
 // nuxt.config.ts
 runtimeConfig: {
-  public: {
-    patreonUrl:   process.env.PATREON_URL   || 'https://www.patreon.com/buggregator',
-    sponsorEmail: process.env.SPONSOR_EMAIL || 'sponsor@buggregator.dev',
-  }
+public:
+    {
+        patreonUrl:   process.env.PATREON_URL || 'https://www.patreon.com/buggregator',
+            sponsorEmail
+    :
+        process.env.SPONSOR_EMAIL || 'sponsor@buggregator.dev',
+    }
 }
 ```
 
@@ -381,70 +403,65 @@ runtimeConfig: {
 
 ```json
 "sponsors": {
-  "headline":    "Backed by the community",
-  "subheadline": "Buggregator is free forever. Sponsors make that possible.",
-  "patreonBtn":  "Support on Patreon",
-  "learnMore":   "See all ways to help →",
-  "becomeCard":  "Become a sponsor",
-  "empty":       "Be the first to support Buggregator.",
-
-  "page": {
-    "title":      "Support Buggregator",
-    "subheadline": "Buggregator is and will always be free. No paid tiers, no feature gates. Sponsors help fund server costs, development time, and new features.",
-    "ctaPatreon": "Support on Patreon",
-    "ctaEmail":   "Contact for company sponsorship",
-
-    "why": {
-      "title": "Why sponsor?",
-      "free": {
-        "title": "Keep it free",
-        "body":  "Sponsorship covers hosting, CI, and development time to ship new features."
-      },
-      "recognition": {
-        "title": "Get recognized",
-        "body":  "Your logo on the homepage, README, and docs. Seen by PHP developers daily."
-      },
-      "oss": {
-        "title": "Support open source",
-        "body":  "Buggregator saves dev teams hours of setup every week. Give back."
-      }
-    },
-
-    "currentSponsors": "Our sponsors",
-    "noSponsors":      "No sponsors yet. Be the first!",
-
-    "tiers": {
-      "individual": {
-        "label":    "Individual sponsor",
-        "via":      "via Patreon",
-        "from":     "Starting from $5/month",
-        "perks": [
-          "Your name in the FUNDING.yml",
-          "Your avatar in the Sponsors section",
-          "Our eternal gratitude"
-        ],
-        "cta": "Support on Patreon →"
-      },
-      "company": {
-        "label":    "Company sponsor",
-        "via":      "via direct contact",
-        "from":     "Custom packages",
-        "perks": [
-          "Your logo on buggregator.dev homepage",
-          "Your logo in the GitHub README",
-          "Your logo in the docs header",
-          "A thank-you post on our socials"
-        ],
-        "cta": "Contact us →"
-      }
-    },
-
-    "contact": {
-      "title":   "Want to become a company sponsor?",
-      "body":    "Send us an email with your company name, logo, and website. We'll get back to you within 48 hours.",
-      "or":      "or join developers supporting Buggregator on Patreon:"
-    }
-  }
+"headline": "Backed by the community",
+"subheadline": "Buggregator is free forever. Sponsors make that possible.",
+"patreonBtn":  "Support on Patreon",
+"learnMore": "See all ways to help →",
+"becomeCard": "Become a sponsor",
+"empty": "Be the first to support Buggregator.",
+"page": {
+"title": "Support Buggregator",
+"subheadline": "Buggregator is and will always be free. No paid tiers, no feature gates. Sponsors help fund server costs, development time, and new features.",
+"ctaPatreon": "Support on Patreon",
+"ctaEmail": "Contact for company sponsorship",
+"why": {
+"title": "Why sponsor?",
+"free": {
+"title": "Keep it free",
+"body": "Sponsorship covers hosting, CI, and development time to ship new features."
+},
+"recognition": {
+"title": "Get recognized",
+"body": "Your logo on the homepage, README, and docs. Seen by PHP developers daily."
+},
+"oss": {
+"title": "Support open source",
+"body": "Buggregator saves dev teams hours of setup every week. Give back."
+}
+},
+"currentSponsors": "Our sponsors",
+"noSponsors": "No sponsors yet. Be the first!",
+"tiers": {
+"individual": {
+"label": "Individual sponsor",
+"via": "via Patreon",
+"from":     "Starting from $5/month",
+"perks": [
+"Your name in the FUNDING.yml",
+"Your avatar in the Sponsors section",
+"Our eternal gratitude"
+],
+"cta": "Support on Patreon →"
+},
+"company": {
+"label": "Company sponsor",
+"via": "via direct contact",
+"from":     "Custom packages",
+"perks": [
+"Your logo on buggregator.dev homepage",
+"Your logo in the GitHub README",
+"Your logo in the docs header",
+"A thank-you post on our socials"
+],
+"cta": "Contact us →"
+}
+},
+"contact": {
+"title": "Want to become a company sponsor?",
+"body": "Send us an email with your company name, logo, and website. We'll get back to you within 48 hours.",
+"or":      "or join developers supporting Buggregator on Patreon:"
+}
+}
 }
 ```
 
@@ -455,10 +472,10 @@ runtimeConfig: {
 ```ts
 // pages/sponsors.vue — useHead / useSeoMeta
 useSeoMeta({
-  title: 'Sponsor Buggregator — Support Free Open Source PHP Debugging',
-  description: 'Buggregator is a free, open-source debugging server for PHP developers. Support its development via Patreon or company sponsorship.',
-  ogTitle: 'Sponsor Buggregator',
-  ogDescription: 'Keep Buggregator free forever. Support via Patreon or become a company sponsor.',
+    title: 'Sponsor Buggregator — Support Free Open Source PHP Debugging',
+    description: 'Buggregator is a free, open-source debugging server for PHP developers. Support its development via Patreon or company sponsorship.',
+    ogTitle: 'Sponsor Buggregator',
+    ogDescription: 'Keep Buggregator free forever. Support via Patreon or become a company sponsor.',
 })
 ```
 
@@ -501,6 +518,7 @@ with a single `border-t border-dark-600` separating them.
 ## Definition of Done
 
 **SponsorsSection (landing):**
+
 - [ ] Section renders at correct position (before footer)
 - [ ] Gold sponsors (if any) render in top row with logo + name + description
 - [ ] Silver/community sponsors render in flex-wrap grid below
@@ -511,6 +529,7 @@ with a single `border-t border-dark-600` separating them.
 - [ ] Section is visible and correct on 375px, 768px, 1280px
 
 **`/sponsors` page:**
+
 - [ ] Page loads at `/sponsors` route
 - [ ] SEO `<head>` set (title, description, og tags)
 - [ ] H1 "Support Buggregator" renders
@@ -525,6 +544,7 @@ with a single `border-t border-dark-600` separating them.
 - [ ] Mobile: two-tier cards stack vertically, readable
 
 **Data:**
+
 - [ ] `data/sponsors.ts` file exists with correct type definitions
 - [ ] Empty `sponsors[]` array is the default (no fake data)
 - [ ] `patreonUrl` and `sponsorEmail` configurable via `.env`

@@ -10,20 +10,25 @@
   "hero": {
     "badge": {
       "version": "v{version} · just released",
-      "stars": "{count} GitHub Stars",
       "free": "Free & Open Source"
     },
-    "headline1": "One docker run. All your debug data in one place.",
-    "headline2": "Stop switching tabs. Debug your PHP app from one place.",
-    "subheadline": "Buggregator captures exceptions, logs, dumps, emails, profiling and HTTP requests in a real-time UI — using the Sentry SDK, VarDumper, Monolog and Ray you already have. Free, open-source, no registration.",
-    "command": "docker run --rm -p 8000:8000 ghcr.io/buggregator/server:latest",
+    "headline": "Debug everything in your PHP app.",
+    "headlineSub": "Install nothing.",
+    "subheadline": "One docker run. Exceptions, logs, dumps, emails, SMS and profiling — all in one real-time UI. Works with Sentry SDK, VarDumper, Monolog, XHProf, SMTP and SMS providers you already have. No cloud account. No code changes.",
+    "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
-      "copied": "Copied!",
-      "docs": "Read the docs →",
-      "trap": "Or use Trap (no Docker required) →"
+      "copied": "Copied!"
     },
-    "frameworks": "Works with:"
+    "seeItLive": "See it in action →",
+    "trustRow": {
+      "stars": "GitHub Stars",
+      "license": "MIT License",
+      "free": "Free forever"
+    },
+    "liveFeed": {
+      "live": "Live"
+    }
   },
   "cleanApp": {
     "headline": "Your app doesn't know we exist.",
@@ -222,6 +227,37 @@
       "license": "MIT License"
     }
   },
+  "sponsors": {
+    "headline": "Backed by the community",
+    "subheadline": "Buggregator is free forever. Sponsors make that possible.",
+    "patreonBtn": "Support on Patreon",
+    "learnMore": "See all ways to help →",
+    "becomeCard": "Become a sponsor",
+    "empty": "Be the first to support Buggregator.",
+    "page": {
+      "title": "Support Buggregator",
+      "subheadline": "Buggregator is and will always be free. No paid tiers, no feature gates. Sponsors help fund server costs, development time, and new features.",
+      "ctaPatreon": "Support on Patreon",
+      "ctaEmail": "Contact for company sponsorship",
+      "why": {
+        "title": "Why sponsor?",
+        "free": { "title": "Keep it free", "body": "Sponsorship covers hosting, CI, and development time to ship new features." },
+        "recognition": { "title": "Get recognized", "body": "Your logo on the homepage, README, and docs. Seen by PHP developers daily." },
+        "oss": { "title": "Support open source", "body": "Buggregator saves dev teams hours of setup every week. Give back." }
+      },
+      "currentSponsors": "Our sponsors",
+      "noSponsors": "No sponsors yet. Be the first!",
+      "tiers": {
+        "individual": { "label": "Individual sponsor", "via": "via Patreon", "from": "Starting from $5/month", "cta": "Support on Patreon →" },
+        "company": { "label": "Company sponsor", "via": "via direct contact", "from": "Custom packages", "cta": "Contact us →" }
+      },
+      "contact": {
+        "title": "Want to become a company sponsor?",
+        "body": "Send us an email with your company name, logo, and website. We'll get back to you within 48 hours.",
+        "or": "or join developers supporting Buggregator on Patreon:"
+      }
+    }
+  },
   "footer": {
     "tagline": "Made for the PHP community",
     "product": "Product",
@@ -238,7 +274,8 @@
       "contributing": "Contributing",
       "bugs": "Bug Reports",
       "changelog": "Changelog",
-      "releases": "Releases"
+      "releases": "Releases",
+      "sponsors": "Sponsors"
     }
   }
 }

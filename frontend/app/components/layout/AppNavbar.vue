@@ -12,9 +12,8 @@ const mobileOpen = ref(false)
 const docsUrl = 'https://docs.buggregator.dev'
 
 const navLinks = computed(() => [
-  { label: t('nav.howItWorks'), href: '#how-it-works' },
-  { label: t('nav.features'), href: '#showcase' },
-  { label: t('nav.demo'), href: '#demo' },
+  { label: t('nav.howItWorks'), href: '/#how-it-works' },
+  { label: t('nav.features'), href: '/#showcase' },
   { label: t('nav.docs'), href: docsUrl, external: true },
   { label: t('nav.trap'), href: 'https://github.com/buggregator/trap', external: true },
 ])
@@ -43,9 +42,9 @@ onUnmounted(() => {
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <a href="#" class="flex items-center shrink-0">
+        <NuxtLink to="/" class="flex items-center shrink-0">
           <img :src="logoSvg" alt="Buggregator" class="h-7" />
-        </a>
+        </NuxtLink>
 
         <!-- Desktop nav links -->
         <div class="hidden md:flex items-center gap-6">
@@ -87,7 +86,7 @@ onUnmounted(() => {
           </a>
           <LanguageSwitcher />
           <a
-            href="#install"
+            href="/#install"
             class="px-5 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors duration-150 no-underline font-sans"
           >
             {{ t('nav.getStarted') }}
@@ -156,7 +155,7 @@ onUnmounted(() => {
         </div>
 
         <a
-          href="#install"
+          href="/#install"
           class="mt-2 block text-center px-5 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors no-underline font-sans"
           @click="mobileOpen = false"
         >

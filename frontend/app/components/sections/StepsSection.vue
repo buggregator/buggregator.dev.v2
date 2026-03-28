@@ -15,6 +15,8 @@ const dockerCommand = `docker run --pull always \\
   -p 127.0.0.1:8000:8000 \\
   -p 127.0.0.1:1025:1025 \\
   -p 127.0.0.1:9912:9912 \\
+  -p 127.0.0.1:9913:9913 \\
+  -p 127.0.0.1:9914:9914 \\
   ghcr.io/buggregator/server:latest`
 
 const composeCommand = `services:

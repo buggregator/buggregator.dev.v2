@@ -9,6 +9,7 @@ import FrameworksSection from '~/components/sections/FrameworksSection.vue'
 import EcosystemSection from '~/components/sections/EcosystemSection.vue'
 import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSection.vue'
 import CommunitySection from '~/components/sections/CommunitySection.vue'
+import SponsorsSection from '~/components/sections/SponsorsSection.vue'
 
 definePageMeta({ layout: 'landing' })
 </script>
@@ -25,5 +26,6 @@ definePageMeta({ layout: 'landing' })
     <EcosystemSection />
     <AdvancedFeaturesSection />
     <CommunitySection />
+    <SponsorsSection />
   </div>
 </template>

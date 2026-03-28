@@ -32,6 +32,8 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
       discordUrl: process.env.DISCORD_URL || 'https://discord.gg/uxr5gw2p',
       buggregatorUrl: process.env.BUGGREGATOR_URL || 'http://buggregator.app.localhost',
+      patreonUrl: process.env.PATREON_URL || 'https://www.patreon.com/butschster',
+      sponsorEmail: process.env.SPONSOR_EMAIL || 'butschster@gmail.com',
     },
   },
 
