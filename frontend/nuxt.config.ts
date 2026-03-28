@@ -60,7 +60,7 @@ export default defineNuxtConfig({
           innerHTML: `
             html.dark body { background-color: #0c0e14; color: #f8fafc; }
             #app-loader { position:fixed; inset:0; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; background-color:#0c0e14; }
-            #app-loader svg { width:140px; height:auto; opacity:0.4; animation:loader-pulse 2s ease-in-out infinite; }
+            #app-loader svg { width:200px; height:auto; opacity:0.4; animation:loader-pulse 2s ease-in-out infinite; }
             #app-loader .loader-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#3b82f6; margin-top:16px; animation:loader-pulse 2s ease-in-out infinite 0.3s; }
             @keyframes loader-pulse { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
             #app-loader.fade-out { opacity:0; transition:opacity 0.3s ease; pointer-events:none; }
