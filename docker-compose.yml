@@ -81,6 +81,7 @@ services:
       SESSION_DRIVER: file
       LOG_CHANNEL: slack
       LOG_LEVEL: debug
+      LOG_SOCKET_URL: buggregator:9913
       LOG_SLACK_WEBHOOK_URL: http://buggregator:8000/slack
       MAIL_MAILER: smtp
       MAIL_HOST: buggregator
