@@ -55,15 +55,15 @@ local function handle()
 
     -- Verify signature
     local secret, _ = env.get("GITHUB_WEBHOOK_SECRET")
-    local signature = req:header("X-Hub-Signature-256")
+    local signature = req:header("X-Hub-Signature-256") or req:header("x-hub-signature-256")
 
     if not verify_signature(secret, body, signature) then
         res:set_status(401)
         return res:write_json({ error = "invalid signature" })
     end
 
-    -- Determine event type
-    local event_type = req:header("X-GitHub-Event")
+    -- Determine event type (GitHub sends "X-Github-Event", case may vary)
+    local event_type = req:header("X-GitHub-Event") or req:header("X-Github-Event") or req:header("x-github-event")
     if not event_type then
         res:set_status(400)
         return res:write_json({ error = "missing X-GitHub-Event header" })
