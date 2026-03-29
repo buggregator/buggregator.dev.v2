@@ -1,4 +1,3 @@
-local http = require("http")
 local json = require("json")
 local logger = require("logger")
 local crypto = require("crypto")
@@ -43,9 +42,7 @@ local function verify_signature(secret, body, signature)
     return crypto.constant_time_compare(computed_hex, expected_hex)
 end
 
-local function handle(req)
-    local res = http.response()
-
+local function handle(req, res)
     local body = req:body()
     if not body or body == "" then
         res:set_status(400)
