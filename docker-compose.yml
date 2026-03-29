@@ -29,6 +29,8 @@ services:
     environment:
       NUXT_API_BASE_URL: http://app:8080
       NUXT_PUBLIC_APP_URL: ${APP_BASE_URL:-}
+      NUXT_PUBLIC_BUGGREGATOR_URL: ${BUGGREGATOR_URL:-https://test.buggregator.dev}
+      NUXT_EXAMPLES_URL: http://buggregator-examples:8000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`app.localhost`)"
