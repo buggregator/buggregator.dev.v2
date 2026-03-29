@@ -3,7 +3,7 @@ services:
   app:
     #    ports:
     #      - ${APP_PORT_HTTP:-7070}:8080
-    image: ${APP_IMAGE:-ghcr.io/buggregator/app-template/app:latest}
+    image: ${APP_IMAGE:-ghcr.io/buggregator/buggregator.dev.v2/app:latest}
     volumes:
       - app-data:/app/data
     env_file:
@@ -44,7 +44,7 @@ services:
   buggregator:
     ports:
       - ${BUGGREGATOR_DEMO_PORT_HTTP:-7072}:8000
-    image: ghcr.io/buggregator/buggregator.dev.v2/server:latest
+    image: ghcr.io/buggregator/server:latest
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.buggregator.rule=Host(`buggregator.app.localhost`)"
