@@ -2,9 +2,30 @@
 import AppNavbar from '~/components/layout/AppNavbar.vue'
 import AppFooter from '~/components/layout/AppFooter.vue'
 import { useGitHubStore } from '~/stores/github'
+import { useRealtimeUpdates } from '~/composables/useRealtimeUpdates'
 
 const github = useGitHubStore()
 await github.load()
+
+const { connect, disconnect, onMessage } = useRealtimeUpdates()
+
+onMessage('github.stars', (data: { slug: string, stars: number }) => {
+  github.updateStars(data.slug, data.stars)
+})
+
+onMessage('github.release', (data: { slug: string, version: string, url: string, published_at?: string }) => {
+  github.updateRelease(data.slug, data.version, data.url, data.published_at)
+})
+
+if (import.meta.client) {
+  connect()
+}
+
+onScopeDispose(() => {
+  if (import.meta.client) {
+    disconnect()
+  }
+})
 </script>
 
 <template>

@@ -16,6 +16,16 @@ entries:
     variable: GITHUB_TOKEN
     default: ""
 
+  - name: github_webhook_secret
+    kind: env.variable
+    meta:
+      comment: GitHub webhook secret for signature verification (optional, skips verification if empty)
+      private: true
+    read_only: true
+    storage: app.env:store
+    variable: GITHUB_WEBHOOK_SECRET
+    default: ""
+
   # ══════════════════════════════════════════════════════════
   # Repo Monitor Processes — one per repository
   # ══════════════════════════════════════════════════════════
@@ -170,6 +180,24 @@ entries:
     func: app.github:contributors_handler
 
   # ══════════════════════════════════════════════════════════
+  # Webhook Endpoint — receives GitHub webhook events
+  # ══════════════════════════════════════════════════════════
+
+  - name: webhook_handler
+    kind: function.lua
+    source: file://webhook_handler.lua
+    method: handle
+    modules: [http, json, logger, crypto, env]
+
+  - name: webhook_endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:api_public
+    method: POST
+    path: /github/webhook
+    func: app.github:webhook_handler
+
+  # ══════════════════════════════════════════════════════════
   # Security Policies
   # ══════════════════════════════════════════════════════════
 
@@ -179,6 +207,7 @@ entries:
       resources:
         - app.github:repos_handler
         - app.github:contributors_handler
+        - app.github:webhook_handler
         - app:state_store
       actions: '*'
       effect: allow

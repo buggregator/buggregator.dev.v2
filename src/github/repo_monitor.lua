@@ -104,6 +104,39 @@ local function fetch_contributors(log, repo)
     return contributors
 end
 
+local function broadcast(topic, data)
+    local hub_pid = process.registry.lookup("ws_hub")
+    if hub_pid then
+        process.send(hub_pid, "ws.broadcast", {
+            topic = topic,
+            data = data,
+        })
+    end
+end
+
+local function get_cached(slug)
+    local cache, cache_err = store.get(STORE_ID)
+    if cache_err then
+        return nil
+    end
+    local raw = cache:get("github:repo:" .. slug)
+    cache:release()
+    if raw then
+        return json.decode(tostring(raw))
+    end
+    return nil
+end
+
+local function save_cached(log, slug, result)
+    local cache, cache_err = store.get(STORE_ID)
+    if cache_err then
+        log:error("failed to get store", { error = tostring(cache_err) })
+        return
+    end
+    cache:set("github:repo:" .. slug, json.encode(result), 0)
+    cache:release()
+end
+
 local function fetch_and_cache(log, slug, repo)
     log:info("fetching github data", { repo = repo })
 
@@ -124,14 +157,7 @@ local function fetch_and_cache(log, slug, repo)
         contributors = contributors,
     }
 
-    local cache, cache_err = store.get(STORE_ID)
-    if cache_err then
-        log:error("failed to get store", { error = tostring(cache_err) })
-        return
-    end
-
-    cache:set("github:repo:" .. slug, json.encode(result), 0)
-    cache:release()
+    save_cached(log, slug, result)
 
     log:info("cached github data", {
         repo = repo,
@@ -162,9 +188,64 @@ local function monitor_repo(slug, repo)
 
         if r.channel == inbox then
             local msg = r.value
-            if msg:topic() == "stop" then
+            local topic = msg:topic()
+
+            if topic == "stop" then
                 ticker:stop()
                 break
+
+            elseif topic == "webhook.star" then
+                local data = msg:payload()
+                if type(data) == "userdata" then
+                    local d, _ = data:data()
+                    data = d
+                end
+
+                if data then
+                    local stars = data.stars
+                    log:info("webhook: star event", { action = data.action, stars = stars })
+
+                    -- Update stars in cache
+                    local cached = get_cached(slug)
+                    if cached and stars then
+                        cached.stars = stars
+                        save_cached(log, slug, cached)
+                    end
+
+                    -- Broadcast to frontend
+                    broadcast("github.stars", {
+                        slug = slug,
+                        stars = stars,
+                    })
+                end
+
+            elseif topic == "webhook.release" then
+                local data = msg:payload()
+                if type(data) == "userdata" then
+                    local d, _ = data:data()
+                    data = d
+                end
+
+                if data then
+                    log:info("webhook: release event", { version = data.version })
+
+                    -- Update release in cache
+                    local cached = get_cached(slug)
+                    if cached then
+                        cached.latest_version = data.version
+                        cached.latest_version_url = data.url
+                        cached.published_at = data.published_at
+                        save_cached(log, slug, cached)
+                    end
+
+                    -- Broadcast to frontend
+                    broadcast("github.release", {
+                        slug = slug,
+                        version = data.version,
+                        url = data.url,
+                        published_at = data.published_at,
+                    })
+                end
             end
         else
             fetch_and_cache(log, slug, repo)

@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { useRealtimeUpdates } from '~/composables/useRealtimeUpdates'
 import { useAppConfig } from '~/composables/useAppConfig'
+import { useGitHubStore } from '~/stores/github'
 
 const { appName } = useAppConfig()
+const github = useGitHubStore()
 
 const route = useRoute()
 const { connect, disconnect, onMessage } = useRealtimeUpdates()
 
 const mobileMenuOpen = ref(false)
+
+onMessage('github.stars', (data: { slug: string, stars: number }) => {
+  github.updateStars(data.slug, data.stars)
+})
+
+onMessage('github.release', (data: { slug: string, version: string, url: string, published_at?: string }) => {
+  github.updateRelease(data.slug, data.version, data.url, data.published_at)
+})
 
 if (import.meta.client) {
   connect()

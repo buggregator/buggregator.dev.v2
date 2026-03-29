@@ -52,6 +52,24 @@ export const useGitHubStore = defineStore('github', () => {
     loaded.value = true
   }
 
+  function updateStars(slug: string, stars: number) {
+    const repo = repos.value.find(r => r.slug === slug)
+    if (repo) {
+      repo.stars = stars
+    }
+  }
+
+  function updateRelease(slug: string, version: string, url: string, publishedAt?: string) {
+    const repo = repos.value.find(r => r.slug === slug)
+    if (repo) {
+      repo.latest_version = version
+      repo.latest_version_url = url
+      if (publishedAt) {
+        repo.published_at = publishedAt
+      }
+    }
+  }
+
   return {
     repos,
     contributors,
@@ -60,5 +78,7 @@ export const useGitHubStore = defineStore('github', () => {
     serverVersion,
     getRepo,
     load,
+    updateStars,
+    updateRelease,
   }
 })
