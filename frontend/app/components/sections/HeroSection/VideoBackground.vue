@@ -6,12 +6,36 @@ const prefersReducedMotion = ref(false)
 const offsetX = ref(0)
 const offsetY = ref(0)
 
+// Autonomous drift state
+let driftFrame = 0
+let mouseActive = false
+let mouseTimer: ReturnType<typeof setTimeout> | null = null
+
 function onMouseMove(e: MouseEvent) {
   if (prefersReducedMotion.value) return
   const x = (e.clientX / window.innerWidth - 0.5) * 2
   const y = (e.clientY / window.innerHeight - 0.5) * 2
   offsetX.value = x * -15
   offsetY.value = y * -10
+  mouseActive = true
+
+  // Resume drift after mouse stops for 2s
+  if (mouseTimer) clearTimeout(mouseTimer)
+  mouseTimer = setTimeout(() => { mouseActive = false }, 2000)
+}
+
+function startDrift() {
+  function tick(time: number) {
+    if (!mouseActive) {
+      // Slow organic drift — different speeds/phases per axis
+      const dx = Math.sin(time * 0.0003) * 18 + Math.sin(time * 0.00017) * 15
+      const dy = Math.cos(time * 0.00025) * 16 + Math.cos(time * 0.00013) * 14
+      offsetX.value = dx
+      offsetY.value = dy
+    }
+    driftFrame = requestAnimationFrame(tick)
+  }
+  driftFrame = requestAnimaFix tionFrame(tick)
 }
 
 const parallaxStyle = computed(() => ({
@@ -22,11 +46,14 @@ onMounted(() => {
   prefersReducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!prefersReducedMotion.value) {
     window.addEventListener('mousemove', onMouseMove, { passive: true })
+    startDrift()
   }
 })
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', onMouseMove)
+  if (driftFrame) cancelAnimationFrame(driftFrame)
+  if (mouseTimer) clearTimeout(mouseTimer)
 })
 </script>
 

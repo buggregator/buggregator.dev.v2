@@ -175,7 +175,7 @@ function onMouseLeave() {
           {{ t('community.issues') }}
         </a>
         <a
-          href="https://github.com/buggregator/server/blob/master/CONTRIBUTING.md"
+          href="https://docs.buggregator.dev/contributing.html"
           target="_blank"
           rel="noopener"
           class="community-btn"

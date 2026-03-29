@@ -62,7 +62,7 @@ const formatStars = (n: number) =>
               {{ t('ecosystem.trap.github') }} →
             </a>
             <a
-              href="https://docs.buggregator.dev/trap"
+              href="https://docs.buggregator.dev/trap/what-is-trap.html"
               target="_blank"
               rel="noopener"
               class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
