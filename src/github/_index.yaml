@@ -187,7 +187,7 @@ entries:
     kind: function.lua
     source: file://webhook_handler.lua
     method: handle
-    modules: [json, logger, crypto, env]
+    modules: [http, json, logger, crypto, env]
 
   - name: webhook_endpoint
     kind: http.endpoint
