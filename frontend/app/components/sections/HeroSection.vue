@@ -4,6 +4,7 @@ import VideoBackground from '~/components/sections/HeroSection/VideoBackground.v
 import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
+const { trackEvent } = useGtag()
 const github = useGitHubStore()
 
 const formattedStars = computed(() => {
@@ -51,6 +52,7 @@ const formattedStars = computed(() => {
               target="_blank"
               rel="noopener"
               class="star-btn"
+              @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'star_github' })"
             >
               <span class="star-btn__content">
                 <svg class="star-btn__icon" viewBox="0 0 16 16" fill="currentColor">
@@ -65,7 +67,7 @@ const formattedStars = computed(() => {
 
         <!-- Trust row -->
         <div class="hero__trust hero-stagger" style="--i: 4">
-          <a href="#showcase" class="hero__trust-link">
+          <a href="#showcase" class="hero__trust-link" @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'see_it_live' })">
             {{ t('hero.seeItLive') }}
           </a>
           <span class="hero__trust-dot" />

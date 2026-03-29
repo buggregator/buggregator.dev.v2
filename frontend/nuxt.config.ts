@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    'nuxt-gtag',
   ],
 
   i18n: {
@@ -19,16 +18,12 @@ export default defineNuxtConfig({
     strategy: 'prefix_except_default',
   },
 
-  gtag: {
-    id: process.env.GTAG_ID || '',
-    enabled: !!process.env.GTAG_ID,
-  },
-
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8080',
     examplesUrl: process.env.EXAMPLES_URL || 'http://buggregator-examples:8000',
 
     public: {
+      gaMeasurementId: process.env.PUBLIC_GA_MEASUREMENT_ID || '',
       appUrl: process.env.PUBLIC_APP_URL || '',
       siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
       discordUrl: process.env.DISCORD_URL || 'https://discord.gg/uxr5gw2p',
