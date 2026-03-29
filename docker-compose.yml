@@ -4,9 +4,6 @@ services:
     #    ports:
     #      - ${APP_PORT_HTTP:-7070}:8080
     image: ${APP_IMAGE:-ghcr.io/buggregator/app-template/app:latest}
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
     volumes:
       - app-data:/app/data
     env_file:
@@ -26,12 +23,9 @@ services:
 
   # ── Frontend (Nuxt SSR) ──────────────────────────────────────
   frontend:
-    #    ports:
-    #      - ${FRONTEND_PORT_HTTP:-7071}:3000
+    ports:
+      - ${FRONTEND_PORT_HTTP:-7071}:3000
     image: ${FRONTEND_IMAGE:-ghcr.io/buggregator/app-template/frontend:latest}
-    build:
-      context: ./frontend
-      dockerfile: .docker/Dockerfile
     environment:
       NUXT_API_BASE_URL: http://app:8080
       NUXT_PUBLIC_APP_URL: ${APP_BASE_URL:-}
