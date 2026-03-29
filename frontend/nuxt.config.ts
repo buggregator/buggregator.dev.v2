@@ -46,10 +46,18 @@ export default defineNuxtConfig({
       bodyAttrs: {
         class: 'theme-dark',
       },
+      title: 'Buggregator — Free Debugging Server for PHP',
+      titleTemplate: '%s | Buggregator',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'App Template — MCP server, Temporal workflows, and WebSocket support.' },
+        { name: 'description', content: 'Debug everything in your PHP app. Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. Free & open source.' },
+        { name: 'author', content: 'Pavel Buchnev' },
+        { name: 'theme-color', content: '#0c0e14' },
+        { property: 'og:site_name', content: 'Buggregator' },
+        { property: 'og:image', content: 'https://buggregator.dev/buggregator.png' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:image', content: 'https://buggregator.dev/buggregator.png' },
       ],
       style: [
         {

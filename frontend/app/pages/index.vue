@@ -12,6 +12,21 @@ import CommunitySection from '~/components/sections/CommunitySection.vue'
 import SponsorsSection from '~/components/sections/SponsorsSection.vue'
 
 definePageMeta({ layout: 'landing' })
+
+useSeoMeta({
+  title: 'Buggregator — Free Debugging Server for PHP',
+  description: 'Debug everything in your PHP app. Exceptions, dumps, emails, profiling, logs — all in one UI. One docker run. Works with Sentry, VarDumper, Monolog, XHProf. Free & open source.',
+  ogTitle: 'Buggregator — Debug Everything in Your PHP App',
+  ogDescription: 'Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. No cloud account. Free forever.',
+  ogImage: 'https://buggregator.dev/buggregator.png',
+  ogUrl: 'https://buggregator.dev',
+  ogType: 'website',
+  ogSiteName: 'Buggregator',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Buggregator — Free Debugging Server for PHP',
+  twitterDescription: 'Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. Free forever.',
+  twitterImage: 'https://buggregator.dev/buggregator.png',
+})
 </script>
 
 <template>

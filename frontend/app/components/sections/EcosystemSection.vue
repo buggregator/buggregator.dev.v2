@@ -2,6 +2,7 @@
 import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
+const { trackEvent } = useGtag()
 const github = useGitHubStore()
 
 const trapRepo = computed(() => github.getRepo('trap'))
@@ -56,6 +57,7 @@ const formatStars = (n: number) =>
               target="_blank"
               rel="noopener"
               class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+              @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'trap_github' })"
             >
               {{ t('ecosystem.trap.github') }} →
             </a>
@@ -64,6 +66,7 @@ const formatStars = (n: number) =>
               target="_blank"
               rel="noopener"
               class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+              @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'trap_docs' })"
             >
               {{ t('ecosystem.trap.docs') }} →
             </a>
@@ -101,6 +104,7 @@ const formatStars = (n: number) =>
               target="_blank"
               rel="noopener"
               class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+              @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'jetbrains_install' })"
             >
               {{ t('ecosystem.jetbrains.install') }} →
             </a>

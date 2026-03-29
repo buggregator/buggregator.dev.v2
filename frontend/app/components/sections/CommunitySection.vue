@@ -3,6 +3,7 @@ import { useGitHubStore } from '~/stores/github'
 import RevealWords from '~/components/ui/RevealWords.vue'
 
 const { t } = useI18n()
+const { trackEvent } = useGtag()
 const { discordUrl } = useRuntimeConfig().public
 const github = useGitHubStore()
 const revealRef = ref<InstanceType<typeof RevealWords>>()
@@ -149,6 +150,7 @@ function onMouseLeave() {
             target="_blank"
             rel="noopener"
             class="star-btn"
+            @click="trackEvent('cta_click', { cta_location: 'community', cta_text: 'star_github' })"
           >
             <span class="star-btn__content">
               <svg class="star-btn__icon" viewBox="0 0 16 16" fill="currentColor">
@@ -168,6 +170,7 @@ function onMouseLeave() {
           target="_blank"
           rel="noopener"
           class="community-btn"
+          @click="trackEvent('cta_click', { cta_location: 'community', cta_text: 'browse_issues' })"
         >
           {{ t('community.issues') }}
         </a>
@@ -176,6 +179,7 @@ function onMouseLeave() {
           target="_blank"
           rel="noopener"
           class="community-btn"
+          @click="trackEvent('cta_click', { cta_location: 'community', cta_text: 'contribute' })"
         >
           {{ t('community.contribute') }}
         </a>
@@ -184,6 +188,7 @@ function onMouseLeave() {
           target="_blank"
           rel="noopener"
           class="community-btn"
+          @click="trackEvent('cta_click', { cta_location: 'community', cta_text: 'discord' })"
         >
           {{ t('community.discord') }}
         </a>

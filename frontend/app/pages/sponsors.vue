@@ -6,6 +6,7 @@ import PatreonIcon from '~/components/icons/PatreonIcon.vue'
 definePageMeta({ layout: 'landing' })
 
 const { t } = useI18n()
+const { trackEvent } = useGtag()
 const { patreonUrl, sponsorEmail } = useRuntimeConfig().public
 
 const mascotRef = ref<HTMLElement | null>(null)
@@ -92,6 +93,7 @@ const companyPerks = [
             rel="noopener"
             class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium text-white no-underline"
             style="background: #FF424D;"
+            @click="trackEvent('cta_click', { cta_location: 'sponsors_hero', cta_text: 'patreon' })"
           >
             <PatreonIcon />
             {{ t('sponsors.page.ctaPatreon') }}
