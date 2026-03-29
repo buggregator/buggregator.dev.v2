@@ -178,7 +178,7 @@ const companyPerks = [
           class="inline-flex items-center gap-2 mt-3 text-sm text-[#FF424D] no-underline hover:underline font-mono"
         >
           <PatreonIcon />
-          patreon.com/buggregator
+          patreon.com/butschster
         </a>
       </div>
     </section>
