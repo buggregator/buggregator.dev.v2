@@ -16,22 +16,22 @@ entries:
     lifecycle:
       auto_start: true
 
-  # ── Temporal ────────────────────────────────────────────────
-  - name: temporal_client
-    kind: temporal.client
-    address: "temporal:7233"
-    namespace: "default"
-    lifecycle:
-      auto_start: true
+  # ── Temporal (disabled — no workflows yet) ──────────────────
+  # - name: temporal_client
+  #   kind: temporal.client
+  #   address: "temporal:7233"
+  #   namespace: "default"
+  #   lifecycle:
+  #     auto_start: true
 
-  - name: temporal_worker
-    kind: temporal.worker
-    client: app:temporal_client
-    task_queue: "app-tasks"
-    lifecycle:
-      auto_start: true
-      depends_on:
-        - app:temporal_client
+  # - name: temporal_worker
+  #   kind: temporal.worker
+  #   client: app:temporal_client
+  #   task_queue: "app-tasks"
+  #   lifecycle:
+  #     auto_start: true
+  #     depends_on:
+  #       - app:temporal_client
 
   # ── Process Host ────────────────────────────────────────────
   - name: processes

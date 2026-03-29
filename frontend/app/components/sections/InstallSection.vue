@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import CopyCommand from '~/components/ui/CopyCommand.vue'
+import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
+const github = useGitHubStore()
+
+const imageTag = computed(() => {
+  const v = github.serverVersion
+  return v ? `v${v}` : 'latest'
+})
 
 type TabId = 'docker' | 'compose' | 'trap'
 const activeTab = ref<TabId>('docker')
@@ -12,17 +19,17 @@ const tabs: { id: TabId; label: string }[] = [
   { id: 'trap', label: 'install.tabs.trap' },
 ]
 
-const snippets: Record<TabId, string> = {
-  docker: `docker run --pull always \\
+const snippets = computed<Record<TabId, string>>(() => ({
+  docker: `docker run \\
   -p 127.0.0.1:8000:8000 \\
   -p 127.0.0.1:1025:1025 \\
   -p 127.0.0.1:9912:9912 \\
   -p 127.0.0.1:9913:9913 \\
   -p 127.0.0.1:9914:9914 \\
-  ghcr.io/buggregator/server:latest`,
+  ghcr.io/buggregator/server:${imageTag.value}`,
   compose: `services:
   buggregator:
-    image: ghcr.io/buggregator/server:latest
+    image: ghcr.io/buggregator/server:${imageTag.value}
     ports:
       - 127.0.0.1:8000:8000
       - 127.0.0.1:1025:1025
@@ -30,7 +37,7 @@ const snippets: Record<TabId, string> = {
       - 127.0.0.1:9913:9913
       - 127.0.0.1:9914:9914`,
   trap: 'composer require --dev buggregator/trap -W',
-}
+}))
 
 const trustBadges = computed(() => [
   t('install.trust.free'),

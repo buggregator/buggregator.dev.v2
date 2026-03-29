@@ -78,7 +78,7 @@ end
 local function fetch_contributors(log, repo)
     local headers = get_github_headers()
 
-    local resp, err = http_client.get("https://api.github.com/repos/" .. repo .. "/contributors?per_page=30", {
+    local resp, err = http_client.get("https://api.github.com/repos/" .. repo .. "/contributors?per_page=100", {
         headers = headers,
     })
     if err then

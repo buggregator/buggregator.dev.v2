@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import RevealWords from '~/components/ui/RevealWords.vue'
+
 const { t } = useI18n()
+const revealRef = ref<InstanceType<typeof RevealWords>>()
 
 const features = [
   {
@@ -30,8 +33,31 @@ const features = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-dark advanced-gradient">
-    <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section
+    class="py-28 lg:py-36 bg-section-dark advanced-section"
+    @mousemove="revealRef?.handleMouse($event)"
+    @mouseleave="revealRef?.handleLeave()"
+  >
+    <ClientOnly>
+      <RevealWords
+        ref="revealRef"
+        :words="['SSO', 'Auth0', 'Kinde', 'K8s', 'PostgreSQL', 'Prometheus', 'Grafana', 'Webhooks', 'OAuth', 'RBAC', 'Helm', 'Docker', 'MySQL', 'Redis', 'AMQP', 'CI/CD', 'GitHub Actions', 'deploy', 'kubectl apply', 'enterprise ready', 'production grade', 'zero downtime', 'MIT License', 'git blame', '// FIXME', 'catch (\\Throwable $e)']"
+        color="#06b6d4"
+        :radius="200"
+        :density="28"
+      />
+    </ClientOnly>
+    <!-- Mascot background -->
+    <div class="advanced-mascot" aria-hidden="true">
+      <img
+        src="/teams.png"
+        alt=""
+        class="w-full h-full object-contain"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-white mb-3 font-sans">
           {{ t('advanced.title') }}
@@ -45,7 +71,7 @@ const features = [
         <div
           v-for="feat in features"
           :key="feat.key"
-          class="rounded-xl bg-landing-surface border border-landing-border-subtle p-5"
+          class="rounded-xl bg-black/40 backdrop-blur-md border border-white/[0.08] p-5"
         >
           <div class="w-10 h-10 rounded-xl bg-[rgba(59,130,246,0.1)] flex items-center justify-center mb-3" v-html="feat.icon" />
           <h3 class="text-sm font-semibold text-white mb-1 font-sans">
@@ -62,8 +88,29 @@ const features = [
 </template>
 
 <style scoped>
-.advanced-gradient {
-  background-image:
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+.advanced-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.advanced-mascot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 1200px;
+  opacity: 0.14;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
+}
+
+@media (min-width: 1024px) {
+  .advanced-mascot {
+    width: 1800px;
+    height: 1800px;
+  }
 }
 </style>

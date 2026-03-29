@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
+import RevealWords from '~/components/ui/RevealWords.vue'
 
 const { t } = useI18n()
+const revealRef = ref<InstanceType<typeof RevealWords>>()
 
 const ExceptionsTab = defineAsyncComponent(() => import('~/components/showcase/tabs/ExceptionsTab.vue'))
 const ProfilerTab = defineAsyncComponent(() => import('~/components/showcase/tabs/ProfilerTab.vue'))
@@ -39,8 +41,22 @@ const activeDescription = computed(() =>
 </script>
 
 <template>
-  <section id="showcase" class="py-20 lg:py-28 bg-section-dark showcase-glow">
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section
+    id="showcase"
+    class="py-20 lg:py-28 bg-section-dark showcase-glow relative"
+    @mousemove="revealRef?.handleMouse($event)"
+    @mouseleave="revealRef?.handleLeave()"
+  >
+    <ClientOnly>
+      <RevealWords
+        ref="revealRef"
+        :words="['dump()', 'ray()', 'dd()', 'Sentry', 'XHProf', 'SMTP', 'Monolog', ':8000', ':1025', ':9912', 'PSR-3', 'HTTP/2', 'var_dump()', 'stack trace', 'breakpoint', 'VarDumper', 'Inspector', 'Profiler', 'print_r()', 'xdebug', 'star me ★', 'WebSocket', 'SSE', '// TODO: fix later', 'docker run', 'install me!']"
+        color="#3b82f6"
+        :radius="250"
+        :density="30"
+      />
+    </ClientOnly>
+    <div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-white mb-3">

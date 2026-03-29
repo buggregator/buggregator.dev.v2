@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buggregator — Access Denied</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+            background: #09090b;
+            color: #a1a1aa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .font-display {
+            font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+        }
+
+        .dot-grid {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(148, 163, 184, 0.18) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+        }
+
+        .dot-glow {
+            position: fixed;
+            inset: 0;
+            background-size: 28px 28px;
+            background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+            mask-size: 55vw 55vw;
+            -webkit-mask-size: 55vw 55vw;
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            mask-image: radial-gradient(circle, black 0%, transparent 60%);
+            -webkit-mask-image: radial-gradient(circle, black 0%, transparent 60%);
+            will-change: mask-position, opacity;
+            pointer-events: none;
+        }
+
+        .glow-red    { color: rgba(239,68,68,0.14);  animation: drift-1 22s ease-in-out infinite; }
+        .glow-purple { color: rgba(139,92,246,0.11);  animation: drift-2 28s ease-in-out infinite; }
+        .glow-orange { color: rgba(249,115,22,0.10);  animation: drift-3 25s ease-in-out infinite; }
+
+        @keyframes drift-1 {
+            0%   { mask-position: 10% 20%; opacity:.6 }
+            25%  { mask-position: 60% 10%; opacity:1  }
+            50%  { mask-position: 80% 70%; opacity:.5 }
+            75%  { mask-position: 30% 80%; opacity:.8 }
+            100% { mask-position: 10% 20%; opacity:.6 }
+        }
+        @keyframes drift-2 {
+            0%   { mask-position: 70% 60%; opacity:.5 }
+            25%  { mask-position: 20% 80%; opacity:.9 }
+            50%  { mask-position: 10% 30%; opacity:.4 }
+            75%  { mask-position: 80% 10%; opacity:.7 }
+            100% { mask-position: 70% 60%; opacity:.5 }
+        }
+        @keyframes drift-3 {
+            0%   { mask-position: 40% 90%; opacity:.7 }
+            25%  { mask-position: 90% 40%; opacity:.5 }
+            50%  { mask-position: 50% 10%; opacity:1  }
+            75%  { mask-position: 10% 50%; opacity:.6 }
+            100% { mask-position: 40% 90%; opacity:.7 }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 420px;
+            padding: 2rem;
+        }
+
+        .icon-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(239,68,68,0.06);
+            border: 1px solid rgba(239,68,68,0.12);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: stagger-in 0.5s ease-out forwards;
+            animation-delay: 0.1s;
+        }
+        .icon-wrap svg { width: 24px; height: 24px; color: #ef4444; }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f4f4f5;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: stagger-in 0.5s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+        h1 span { color: #f87171; }
+
+        .subtitle {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #71717a;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: stagger-in 0.5s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .status-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid rgba(63,63,70,0.5);
+            border-radius: 10px;
+            background: rgba(24,24,27,0.5);
+            opacity: 0;
+            transform: translateY(12px);
+            animation: stagger-in 0.5s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+
+        .status-text {
+            font-size: 0.75rem;
+            color: #a1a1aa;
+            letter-spacing: 0.02em;
+        }
+        .status-code {
+            font-weight: 600;
+            color: #d4d4d8;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #52525b;
+            text-decoration: none;
+            transition: color 0.2s;
+            opacity: 0;
+            animation: stagger-in 0.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        .home-link:hover { color: #a1a1aa; }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.65rem;
+            color: #3f3f46;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: stagger-in 0.5s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes stagger-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dot-grid"></div>
+    <div class="dot-glow glow-red"></div>
+    <div class="dot-glow glow-purple"></div>
+    <div class="dot-glow glow-orange"></div>
+
+    <div class="container">
+        <div class="icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+        </div>
+        <h1 class="font-display">Access <span>denied</span></h1>
+        <p class="subtitle">Your IP address is not authorized to access this resource.</p>
+        <div class="status-card">
+            <span class="status-dot"></span>
+            <span class="status-text"><span class="status-code">403</span> &middot; Forbidden</span>
+        </div>
+        <a href="https://buggregator.dev" class="home-link">&larr; Back to buggregator.dev</a>
+        <div class="footer">buggregator.dev &middot; debugging server for PHP</div>
+    </div>
+</body>
+</html>

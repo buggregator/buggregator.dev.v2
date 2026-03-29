@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import RevealWords from '~/components/ui/RevealWords.vue'
+
 const { t } = useI18n()
+const revealRef = ref<InstanceType<typeof RevealWords>>()
 
 const tools = [
   { key: 'sentry', tool: 'Sentry (local)', color: '#f43f5e' },
@@ -14,8 +17,21 @@ const tools = [
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-mid replaces-gradient">
-    <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section
+    class="py-20 lg:py-28 bg-section-mid replaces-gradient relative"
+    @mousemove="revealRef?.handleMouse($event)"
+    @mouseleave="revealRef?.handleLeave()"
+  >
+    <ClientOnly>
+      <RevealWords
+        ref="revealRef"
+        :words="['Sentry', 'Mailtrap', 'Ray', 'Blackfire', 'Telescope', 'RequestBin', 'Mailhog', 'Inspector', 'Twilio', 'Clockwork', 'Papertrail', 'Bugsnag', 'Rollbar', 'free forever', 'all-in-one', 'zero cost', 'no signup', 'one command', 'replaces them all', 'console.log? nah', 'tail -f laravel.log', '¯\\_(ツ)_/¯', 'buggregator is cool']"
+        color="#f43f5e"
+        :radius="220"
+        :density="28"
+      />
+    </ClientOnly>
+    <div class="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-section font-bold text-white mb-3 font-sans">
           {{ t('replaces.title') }}

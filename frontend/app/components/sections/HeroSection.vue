@@ -124,10 +124,8 @@ const formattedStars = computed(() => {
   border-radius: 24px;
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(20px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 32px 80px -16px rgba(0, 0, 0, 0.6);
+  border: none;
+  box-shadow: none;
 }
 
 /* ── Typography ──────────────────────────────────────────── */

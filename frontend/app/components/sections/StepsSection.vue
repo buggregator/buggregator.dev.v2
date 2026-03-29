@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CopyCommand from '~/components/ui/CopyCommand.vue'
 import StepItem from '~/components/sections/StepsSection/StepItem.vue'
 import TerminalMockup from '~/components/sections/StepsSection/TerminalMockup.vue'
 import FrameworkTabs from '~/components/sections/StepsSection/FrameworkTabs.vue'
@@ -18,25 +17,37 @@ const imageTag = computed(() => {
 type InstallTab = 'docker' | 'compose'
 const installTab = ref<InstallTab>('docker')
 
-const dockerCommand = computed(() => `docker run \\
-  -p 127.0.0.1:8000:8000 \\
-  -p 127.0.0.1:1025:1025 \\
-  -p 127.0.0.1:9912:9912 \\
-  -p 127.0.0.1:9913:9913 \\
-  -p 127.0.0.1:9914:9914 \\
-  ghcr.io/buggregator/server:${imageTag.value}`)
+const ports = [
+  { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector' },
+  { port: '1025:1025', hint: 'SMTP — email capture' },
+  { port: '9912:9912', hint: 'VarDumper — dump() output' },
+  { port: '9913:9913', hint: 'Monolog — application logs' },
+  { port: '9914:9914', hint: 'XHProf — performance profiling' },
+]
 
-const composeCommand = computed(() => `services:
-  buggregator:
-    image: ghcr.io/buggregator/server:${imageTag.value}
-    ports:
-      - 127.0.0.1:8000:8000
-      - 127.0.0.1:1025:1025
-      - 127.0.0.1:9912:9912
-      - 127.0.0.1:9913:9913
-      - 127.0.0.1:9914:9914`)
+const dockerCommand = computed(() => {
+  const portArgs = ports.map(p => `-p 127.0.0.1:${p.port}`).join(' \\\n  ')
+  return `docker run \\\n  ${portArgs} \\\n  ghcr.io/buggregator/server:${imageTag.value}`
+})
+
+const composeCommand = computed(() => {
+  const portLines = ports.map(p => `      - 127.0.0.1:${p.port}`).join('\n')
+  return `services:\n  buggregator:\n    image: ghcr.io/buggregator/server:${imageTag.value}\n    ports:\n${portLines}`
+})
 
 const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand.value : composeCommand.value)
+
+const copied = ref(false)
+
+async function copyCmd() {
+  try {
+    await navigator.clipboard.writeText(activeCommand.value)
+    copied.value = true
+    setTimeout(() => { copied.value = false }, 2000)
+  } catch {
+    copied.value = false
+  }
+}
 
 const eventTypes = [
   { label: 'Exceptions', color: '#f43f5e' },
@@ -102,8 +113,57 @@ const trustBadges = computed(() => [
                   {{ t('install.tabs.compose') }}
                 </button>
               </div>
-              <div class="bg-code-bg p-4">
-                <CopyCommand :command="activeCommand" no-bg />
+              <div class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative">
+                <!-- Docker run with port tooltips -->
+                <div v-if="installTab === 'docker'">
+                  <div>
+                    <span class="text-code-prompt select-none">$ </span>
+                    <span class="text-code-text">docker run \</span>
+                  </div>
+                  <div v-for="(p, i) in ports" :key="p.port" class="pl-6">
+                    <span class="text-code-text">-p 127.0.0.1:</span>
+                    <span class="port-hint">
+                      <span class="text-accent cursor-help border-b border-dashed border-accent/30">{{ p.port }}</span>
+                      <span class="port-tooltip">{{ p.hint }}</span>
+                    </span>
+                    <span class="text-code-text"> \</span>
+                  </div>
+                  <div class="pl-6">
+                    <span class="text-code-string">ghcr.io/buggregator/server:{{ imageTag }}</span>
+                  </div>
+                </div>
+
+                <!-- Docker Compose with port tooltips -->
+                <div v-else>
+                  <div><span class="text-code-keyword">services</span><span class="text-code-text">:</span></div>
+                  <div class="pl-4"><span class="text-code-keyword">buggregator</span><span class="text-code-text">:</span></div>
+                  <div class="pl-8"><span class="text-code-text">image: </span><span class="text-code-string">ghcr.io/buggregator/server:{{ imageTag }}</span></div>
+                  <div class="pl-8"><span class="text-code-text">ports:</span></div>
+                  <div v-for="p in ports" :key="p.port" class="pl-10">
+                    <span class="text-code-text">- 127.0.0.1:</span>
+                    <span class="port-hint">
+                      <span class="text-accent cursor-help border-b border-dashed border-accent/30">{{ p.port }}</span>
+                      <span class="port-tooltip">{{ p.hint }}</span>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Copy button -->
+                <button
+                  class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
+                  :class="copied
+                    ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
+                    : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"
+                  :aria-label="copied ? t('hero.cta.copied') : t('hero.cta.copy')"
+                  @click="copyCmd"
+                >
+                  <svg v-if="!copied" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </button>
               </div>
             </div>
           </template>
@@ -192,3 +252,42 @@ const trustBadges = computed(() => [
     </div>
   </section>
 </template>
+
+<style scoped>
+.port-hint {
+  position: relative;
+  display: inline;
+}
+
+.port-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #22262e;
+  border: 1px solid #2a2f38;
+  color: #8b919a;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.port-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #2a2f38;
+}
+
+.port-hint:hover .port-tooltip {
+  display: block;
+}
+</style>

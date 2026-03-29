@@ -224,6 +224,7 @@
   "community": {
     "title": "Código abierto. Construido con la comunidad.",
     "description": "Buggregator es gratis para siempre. Sin planes de pago, sin restricciones. Si te ayuda, considera dar una estrella al repo.",
+    "contributorsNote": "Gracias a todos los contribuidores que ayudan a mejorar Buggregator.",
     "star": "Star en GitHub",
     "issues": "Ver issues",
     "contribute": "Guía de contribución",

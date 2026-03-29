@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useGitHubStore } from '~/stores/github'
+import RevealWords from '~/components/ui/RevealWords.vue'
 
 const { t } = useI18n()
 const { discordUrl } = useRuntimeConfig().public
 const github = useGitHubStore()
+const revealRef = ref<InstanceType<typeof RevealWords>>()
 
 const format = (n: number) =>
   new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
@@ -14,46 +16,110 @@ const formattedServerStars = computed(() => {
   if (count === 0) return null
   return format(count)
 })
+
+// Parallax
+const mascotRef = ref<HTMLElement | null>(null)
+const mascotTransform = ref('translate(-50%, -50%)')
+
+function onMouseMove(e: MouseEvent) {
+  const section = mascotRef.value?.closest('section')
+  if (!section) return
+  const rect = section.getBoundingClientRect()
+  const x = (e.clientX - rect.left) / rect.width - 0.5
+  const y = (e.clientY - rect.top) / rect.height - 0.5
+  mascotTransform.value = `translate(calc(-50% + ${x * 20}px), calc(-50% + ${y * 15}px)) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) scale(1.01)`
+  revealRef.value?.handleMouse(e)
+}
+
+function onMouseLeave() {
+  mascotTransform.value = 'translate(-50%, -50%)'
+  revealRef.value?.handleLeave()
+}
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-section-dark community-glow">
-    <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <section
+    class="py-20 lg:py-28 bg-section-dark community-section"
+    style="perspective: 800px;"
+    @mousemove="onMouseMove"
+    @mouseleave="onMouseLeave"
+  >
+    <ClientOnly>
+      <RevealWords
+        ref="revealRef"
+        :words="[
+          'star the repo ★', 'create an issue', 'open a PR', 'fork it!',
+          'submit a fix', 'add a feature', 'review code', 'write a test',
+          'improve docs', 'report a bug', 'share with a friend',
+          'join Discord', 'spread the word', 'tell your team',
+          'try it today', 'give feedback', 'suggest an idea',
+          'translate it', 'make it better', 'help others',
+          'contribute ❤️', 'send a PR', 'fix a typo',
+          'add an example', 'test a release', 'triage issues',
+          'star = support', 'your PR matters', 'every commit counts',
+          'be a contributor', 'ship a feature', 'leave a review',
+          'mentor newcomers', 'answer questions', 'build a plugin',
+        ]"
+        color="#f59e0b"
+        :radius="230"
+        :density="35"
+      />
+    </ClientOnly>
+
+    <!-- Mascot background with parallax -->
+    <div
+      ref="mascotRef"
+      class="community-mascot"
+      aria-hidden="true"
+      :style="{ transform: mascotTransform }"
+    >
+      <img
+        src="/buggregator.png"
+        alt=""
+        class="w-full h-full object-contain"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-section font-bold text-white mb-3 font-sans">
         {{ t('community.title') }}
       </h2>
-      <p class="text-lg text-on-dark-secondary mb-4 max-w-xl mx-auto font-sans">
+      <p class="text-lg text-white/70 mb-4 max-w-xl mx-auto font-sans">
         {{ t('community.description') }}
       </p>
 
       <!-- Star help note -->
-      <p class="text-sm text-on-dark-muted mb-10 font-sans">
+      <p class="text-sm text-white/40 mb-12 font-sans">
         {{ t('hero.starHelp') }}
       </p>
 
       <!-- Stats row -->
       <ClientOnly>
-        <div v-if="github.totalStars > 0" class="flex flex-wrap justify-center gap-8 mb-10">
-          <div class="text-center">
+        <div v-if="github.totalStars > 0" class="flex flex-wrap justify-center gap-8 mb-12">
+          <div class="community-stat">
             <p class="text-3xl font-bold text-white font-sans">{{ format(github.totalStars) }}</p>
-            <p class="text-sm text-on-dark-muted mt-1 font-sans">{{ t('community.stats.stars') }}</p>
+            <p class="text-sm text-white/50 mt-1 font-sans">{{ t('community.stats.stars') }}</p>
           </div>
-          <div class="w-px h-12 bg-landing-border-subtle hidden sm:block" />
-          <div class="text-center">
+          <div class="w-px h-12 bg-white/10 hidden sm:block" />
+          <div class="community-stat">
             <p class="text-3xl font-bold text-white font-sans">{{ github.contributors.length }}+</p>
-            <p class="text-sm text-on-dark-muted mt-1 font-sans">{{ t('community.stats.contributors') }}</p>
+            <p class="text-sm text-white/50 mt-1 font-sans">{{ t('community.stats.contributors') }}</p>
           </div>
-          <div class="w-px h-12 bg-landing-border-subtle hidden sm:block" />
-          <div class="text-center">
+          <div class="w-px h-12 bg-white/10 hidden sm:block" />
+          <div class="community-stat">
             <p class="text-3xl font-bold text-white font-sans">MIT</p>
-            <p class="text-sm text-on-dark-muted mt-1 font-sans">{{ t('community.stats.license') }}</p>
+            <p class="text-sm text-white/50 mt-1 font-sans">{{ t('community.stats.license') }}</p>
           </div>
         </div>
       </ClientOnly>
 
       <!-- Top contributors -->
       <ClientOnly>
-        <div v-if="github.contributors.length > 0" class="mb-10">
+        <div v-if="github.contributors.length > 0" class="mb-12">
+          <p class="text-sm text-white/50 mb-4 font-sans">
+            {{ t('community.contributorsNote') }}
+          </p>
           <div class="flex flex-wrap justify-center gap-2">
             <a
               v-for="contributor in github.contributors.slice(0, 30)"
@@ -75,8 +141,8 @@ const formattedServerStars = computed(() => {
         </div>
       </ClientOnly>
 
-      <!-- Star button (same style as Hero) -->
-      <div class="mb-6">
+      <!-- Star button -->
+      <div class="mb-14">
         <ClientOnly>
           <a
             href="https://github.com/buggregator/server"
@@ -101,8 +167,7 @@ const formattedServerStars = computed(() => {
           href="https://github.com/buggregator/server/issues"
           target="_blank"
           rel="noopener"
-          class="px-5 py-2.5 rounded-lg text-sm font-medium text-on-dark-secondary transition-colors no-underline font-sans"
-          style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);"
+          class="community-btn"
         >
           {{ t('community.issues') }}
         </a>
@@ -110,8 +175,7 @@ const formattedServerStars = computed(() => {
           href="https://github.com/buggregator/server/blob/master/CONTRIBUTING.md"
           target="_blank"
           rel="noopener"
-          class="px-5 py-2.5 rounded-lg text-sm font-medium text-on-dark-secondary transition-colors no-underline font-sans"
-          style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);"
+          class="community-btn"
         >
           {{ t('community.contribute') }}
         </a>
@@ -119,8 +183,7 @@ const formattedServerStars = computed(() => {
           :href="discordUrl"
           target="_blank"
           rel="noopener"
-          class="px-5 py-2.5 rounded-lg text-sm font-medium text-on-dark-secondary transition-colors no-underline font-sans"
-          style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);"
+          class="community-btn"
         >
           {{ t('community.discord') }}
         </a>
@@ -130,11 +193,66 @@ const formattedServerStars = computed(() => {
 </template>
 
 <style scoped>
-.community-glow {
-  background-image:
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+.community-section {
+  position: relative;
+  overflow: hidden;
 }
 
+.community-mascot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2200px;
+  height: 2200px;
+  opacity: 0.07;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  transition: transform 400ms ease-out;
+  will-change: transform;
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
+}
+
+@media (min-width: 1024px) {
+  .community-mascot {
+    width: 3200px;
+    height: 3200px;
+  }
+}
+
+/* ── Stats with backdrop for readability ─────────────────── */
+.community-stat {
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+/* ── Secondary buttons ───────────────────────────────────── */
+.community-btn {
+  display: inline-flex;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  transition: all 150ms ease;
+}
+
+.community-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Star button ─────────────────────────────────────────── */
 .star-btn {
   display: inline-flex;
   text-decoration: none;
@@ -158,6 +276,7 @@ const formattedServerStars = computed(() => {
   padding: 11px 28px;
   border-radius: 10.5px;
   background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   font-family: "DM Sans", sans-serif;
   font-weight: 600;
   font-size: 0.9375rem;

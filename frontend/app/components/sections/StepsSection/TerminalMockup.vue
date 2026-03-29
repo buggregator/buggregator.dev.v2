@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { useGitHubStore } from '~/stores/github'
+
+const github = useGitHubStore()
+const imageTag = computed(() => {
+  const v = github.serverVersion
+  return v ? `v${v}` : 'latest'
+})
+</script>
+
 <template>
   <div class="rounded-xl overflow-hidden border border-code-border shadow-code-block">
     <!-- Title bar -->
@@ -12,7 +22,7 @@
     <div class="bg-code-bg p-4 font-mono text-xs leading-relaxed">
       <div class="text-on-dark-muted">
         <span class="text-code-prompt">$</span>
-        <span class="text-code-text"> docker run ghcr.io/buggregator/server:latest</span>
+        <span class="text-code-text"> docker run ghcr.io/buggregator/server:{{ imageTag }}</span>
       </div>
       <div class="mt-2 text-code-prompt">✓ <span class="text-on-dark-muted">Pulling image...</span></div>
       <div class="text-code-prompt">✓ <span class="text-on-dark-muted">Starting server on :8000</span></div>

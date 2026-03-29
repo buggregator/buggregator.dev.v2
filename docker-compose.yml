@@ -1,8 +1,8 @@
 services:
   # ── App (Wippy) ──────────────────────────────────────────────
   app:
-#    ports:
-#      - "8060:8080"
+    #    ports:
+    #      - ${APP_PORT_HTTP:-7070}:8080
     build:
       context: .
       dockerfile: .docker/Dockerfile
@@ -11,14 +11,6 @@ services:
     env_file:
       - .env
     environment:
-      # Database
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: app
-      DB_USER: homestead
-      DB_PASSWORD: secret
-      # Services
-      TEMPORAL_ADDRESS: temporal:7233
       # App
       ENCRYPTION_KEY: ${ENCRYPTION_KEY:-2cc4088b5e9210275798cfbe961afeae040dc27ed078d3d2a9f5659b81cae974}
       APP_BASE_URL: ${APP_BASE_URL:-}
@@ -27,19 +19,14 @@ services:
       - "traefik.http.routers.app-api.rule=Host(`api.app.localhost`)"
       - "traefik.http.routers.app-api.entrypoints=web"
       - "traefik.http.services.app-api.loadbalancer.server.port=8080"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      temporal:
-        condition: service_started
     networks:
-      - app-network
+      - buggregator-network
     restart: unless-stopped
 
   # ── Frontend (Nuxt SSR) ──────────────────────────────────────
   frontend:
-#    ports:
-#      - "8070:3000"
+    #    ports:
+    #      - ${FRONTEND_PORT_HTTP:-7071}:3000
     build:
       context: ./frontend
       dockerfile: .docker/Dockerfile
@@ -54,82 +41,82 @@ services:
     depends_on:
       - app
     networks:
-      - app-network
+      - buggregator-network
     restart: unless-stopped
 
-  # ── PostgreSQL ───────────────────────────────────────────────
-  postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_USER: homestead
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: app
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U homestead"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  # ── Temporal (Workflow Engine) ───────────────────────────────
-  temporal:
-    image: temporalio/auto-setup:latest
-    environment:
-      - DB=postgres12
-      - DB_PORT=5432
-      - POSTGRES_USER=homestead
-      - POSTGRES_PWD=secret
-      - POSTGRES_SEEDS=postgres
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  temporal-ui:
-    image: temporalio/ui:latest
-#    ports:
-#      - "8061:8080"
-    environment:
-      - TEMPORAL_ADDRESS=temporal:7233
+  # ── Buggregator (Debug Server / Demo) ─────────────────────────
+  buggregator:
+    ports:
+      - ${BUGGREGATOR_DEMO_PORT_HTTP:-7072}:8000
+    image: ghcr.io/buggregator/server:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.temporal-ui.rule=Host(`temporal.app.localhost`)"
-      - "traefik.http.routers.temporal-ui.entrypoints=web"
-      - "traefik.http.services.temporal-ui.loadbalancer.server.port=8080"
-    depends_on:
-      - temporal
+      - "traefik.http.routers.buggregator.rule=Host(`buggregator.app.localhost`)"
+      - "traefik.http.routers.buggregator.entrypoints=web"
+      - "traefik.http.services.buggregator.loadbalancer.server.port=8000"
     networks:
-      - app-network
+      - buggregator-network
     restart: unless-stopped
 
-  # ── Adminer (Database UI) ───────────────────────────────────
-  adminer:
-    image: adminer:latest
-#    ports:
-#      - "8062:8080"
+  buggregator-docs:
+    restart: unless-stopped
+    image: ghcr.io/buggregator/docs:latest
+    ports:
+      - ${BUGGREGATOR_DOCS_PORT_HTTP:-7073}:80
+    networks:
+      - buggregator-network
+
+  # ── Buggregator Examples (Demo event sender) ────────────────
+  buggregator-examples:
+    image: ghcr.io/buggregator/examples:1.7.1
     environment:
-      ADMINER_DEFAULT_SERVER: postgres
+      APP_NAME: Laravel
+      APP_ENV: production
+      APP_KEY: base64:kMvf1mHFIuCf+ZqMiId7yo6v4oKtjuWqnlxJTWsWv7k=
+      APP_DEBUG: "false"
+      APP_URL: http://examples.app.localhost
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/database.sqlite
+      CACHE_DRIVER: file
+      QUEUE_CONNECTION: sync
+      BROADCAST_DRIVER: log
+      SESSION_DRIVER: file
+      LOG_CHANNEL: slack
+      LOG_LEVEL: debug
+      LOG_SLACK_WEBHOOK_URL: http://buggregator:8000/slack
+      MAIL_MAILER: smtp
+      MAIL_HOST: buggregator
+      MAIL_PORT: 1025
+      MAIL_USERNAME: "null"
+      MAIL_PASSWORD: "null"
+      MAIL_ENCRYPTION: "null"
+      MAIL_FROM_ADDRESS: sender@site.com
+      MAIL_FROM_NAME: Examples
+      RAY_HOST: ray@buggregator
+      RAY_PORT: 8000
+      VAR_DUMPER_SERVER: buggregator:9912
+      SENTRY_LARAVEL_DSN: http://sentry@buggregator:8000/1
+      SENTRY_TRACES_SAMPLE_RATE: 1
+      INSPECTOR_URL: http://inspector@buggregator:8000
+      INSPECTOR_API_KEY: test
+      INSPECTOR_ENABLE: "true"
+      PROFILER_ENDPOINT: http://profiler@buggregator:8000
+      BUGGREGATOR_URL: ${BUGGREGATOR_URL:-https://test.buggregator.dev}
+      HTTP_DUMP_ENDPOINT: http://http-dump@buggregator:8000
+      SMS_ENDPOINT: http://buggregator:8000/sms
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.adminer.rule=Host(`adminer.app.localhost`)"
-      - "traefik.http.routers.adminer.entrypoints=web"
-      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
+      - "traefik.http.routers.buggregator-examples.rule=Host(`examples.app.localhost`)"
+      - "traefik.http.routers.buggregator-examples.entrypoints=web"
+      - "traefik.http.services.buggregator-examples.loadbalancer.server.port=8000"
     depends_on:
-      - postgres
+      - buggregator
     networks:
-      - app-network
+      - buggregator-network
     restart: unless-stopped
-
 volumes:
   app-data:
-  pg-data:
 
 networks:
-  app-network:
+  buggregator-network:
     driver: bridge
