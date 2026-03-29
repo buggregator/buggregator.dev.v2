@@ -28,14 +28,14 @@ function startDrift() {
   function tick(time: number) {
     if (!mouseActive) {
       // Slow organic drift — different speeds/phases per axis
-      const dx = Math.sin(time * 0.0003) * 18 + Math.sin(time * 0.00017) * 15
-      const dy = Math.cos(time * 0.00025) * 16 + Math.cos(time * 0.00013) * 14
+      const dx = Math.sin(time * 0.0003) * 25 + Math.sin(time * 0.00017) * 25
+      const dy = Math.cos(time * 0.00025) * 25 + Math.cos(time * 0.00013) * 25
       offsetX.value = dx
       offsetY.value = dy
     }
     driftFrame = requestAnimationFrame(tick)
   }
-  driftFrame = requestAnimaFix tionFrame(tick)
+  driftFrame = requestAnimationFrame(tick)
 }
 
 const parallaxStyle = computed(() => ({
