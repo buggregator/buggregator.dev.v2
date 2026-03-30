@@ -44,17 +44,17 @@ const active = computed(() => snippets[activeTab.value])
 </script>
 
 <template>
-  <div>
+  <div class="overflow-hidden">
     <h3 class="text-xl font-bold text-white mb-6 text-center font-sans">
       {{ t('cleanApp.envComparison.title') }}
     </h3>
 
     <!-- Tabs -->
-    <div class="flex gap-1 bg-code-bg rounded-t-xl px-2 pt-2 border-b border-code-border">
+    <div class="flex gap-1 bg-code-bg rounded-t-xl px-2 pt-2 border-b border-code-border overflow-x-auto">
       <button
         v-for="tab in tabs"
         :key="tab.id"
-        class="px-4 py-2 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md"
+        class="px-4 py-2 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
         :class="activeTab === tab.id
           ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
           : 'text-[#6e7681] border-transparent hover:text-code-text'"
@@ -73,7 +73,7 @@ const active = computed(() => snippets[activeTab.value])
             <span class="text-xs font-mono font-semibold text-[#fb7185] uppercase tracking-wider">
               {{ t('cleanApp.envComparison.beforeLabel') }}
             </span>
-            <pre class="mt-1 font-mono text-sm text-code-text whitespace-pre-wrap"><template
+            <pre class="mt-1 font-mono text-sm text-code-text whitespace-pre-wrap break-all"><template
               v-for="(line, i) in active.before.split('\n')"
               :key="i"
             ><template v-if="line.includes('#')"><span class="text-code-comment">{{ line }}</span>
@@ -88,7 +88,7 @@ const active = computed(() => snippets[activeTab.value])
               {{ t('cleanApp.envComparison.afterLabel') }}
             </span>
             <div class="mt-1 rounded bg-[rgba(34,197,94,0.06)] px-3 py-2">
-              <pre class="font-mono text-sm text-code-text whitespace-pre-wrap"><template
+              <pre class="font-mono text-sm text-code-text whitespace-pre-wrap break-all"><template
                 v-for="(line, i) in active.after.split('\n')"
                 :key="i"
               ><template v-if="line.startsWith('#')"><span class="text-code-comment">{{ line }}</span>

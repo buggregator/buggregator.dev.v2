@@ -58,11 +58,11 @@ const trustBadges = computed(() => [
       </div>
 
       <!-- Tabs -->
-      <div class="flex gap-1 bg-code-bg rounded-t-xl px-2 pt-2 border-b border-code-border">
+      <div class="flex gap-1 bg-code-bg rounded-t-xl px-2 pt-2 border-b border-code-border overflow-x-auto">
         <button
           v-for="tab in tabs"
           :key="tab.id"
-          class="px-5 py-2.5 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md"
+          class="px-5 py-2.5 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
           :class="activeTab === tab.id
             ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
             : 'text-[#6e7681] border-transparent hover:text-code-text'"
