@@ -14,6 +14,7 @@ const LogsTab = defineAsyncComponent(() => import('~/components/showcase/tabs/Lo
 const HttpTab = defineAsyncComponent(() => import('~/components/showcase/tabs/HttpTab.vue'))
 const InspectorTab = defineAsyncComponent(() => import('~/components/showcase/tabs/InspectorTab.vue'))
 const SmsTab = defineAsyncComponent(() => import('~/components/showcase/tabs/SmsTab.vue'))
+const HttpProxyTab = defineAsyncComponent(() => import('~/components/showcase/tabs/HttpProxyTab.vue'))
 
 const tabs = [
   { id: 'exceptions', color: '#f43f5e', component: ExceptionsTab },
@@ -23,6 +24,7 @@ const tabs = [
   { id: 'ray', color: '#06b6d4', component: RayTab },
   { id: 'logs', color: '#6b7280', component: LogsTab },
   { id: 'http', color: '#22c55e', component: HttpTab },
+  { id: 'httpProxy', color: '#10b981', component: HttpProxyTab },
   { id: 'inspector', color: '#eab308', component: InspectorTab },
   { id: 'sms', color: '#a855f7', component: SmsTab },
 ] as const

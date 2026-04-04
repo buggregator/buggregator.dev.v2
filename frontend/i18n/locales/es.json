@@ -77,7 +77,8 @@
         "sentry": "Sentry DSN",
         "email": "Email",
         "varDumper": "VarDumper",
-        "logs": "Logs"
+        "logs": "Logs",
+        "proxy": "HTTP Proxy"
       },
       "beforeLabel": "ANTES",
       "afterLabel": "DESPUÉS",
@@ -107,7 +108,8 @@
       "logviewers": "Logs de aplicación",
       "requestbin": "Inspección de peticiones HTTP",
       "inspector": "Monitoreo de rendimiento",
-      "smsgateway": "Pruebas de pasarelas SMS"
+      "smsgateway": "Pruebas de pasarelas SMS",
+      "proxy": "Inspección de peticiones HTTP salientes"
     }
   },
   "howItWorks": {
@@ -134,7 +136,7 @@
   },
   "showcase": {
     "title": "Todo en un dashboard",
-    "subtitle": "9 herramientas de depuración. Una interfaz.",
+    "subtitle": "10 herramientas de depuración. Una interfaz.",
     "tabs": {
       "exceptions": "Excepciones",
       "profiler": "Profiler",
@@ -143,6 +145,7 @@
       "emails": "Emails",
       "logs": "Logs",
       "http": "HTTP",
+      "httpProxy": "HTTP Proxy",
       "inspector": "Inspector",
       "sms": "SMS"
     },
@@ -154,6 +157,7 @@
       "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — ningún email se envía realmente.",
       "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Filtra por nivel, busca por mensaje.",
       "http": "Captura e inspecciona peticiones HTTP entrantes. Headers, body y parámetros de consulta de un vistazo.",
+      "httpProxy": "Ve cada petición HTTP que tu app hace a APIs externas — con respuesta completa. Configura HTTP_PROXY y captura llamadas de Guzzle, cURL y SDKs. Reemplaza Charles, Fiddler y mitmproxy.",
       "inspector": "Monitorea el rendimiento con trazado de transacciones, seguimiento de memoria y desglose temporal. Alternativa local a APM.",
       "sms": "Intercepta SMS salientes durante el desarrollo. Auto-detecta 40+ proveedores incluyendo Twilio, Vonage, Plivo, Sinch y más."
     },

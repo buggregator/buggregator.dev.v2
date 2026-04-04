@@ -23,6 +23,7 @@ const ports = [
   { port: '9912:9912', hint: 'VarDumper — dump() output' },
   { port: '9913:9913', hint: 'Monolog — application logs' },
   { port: '9914:9914', hint: 'XHProf — performance profiling' },
+  { port: '8080:8080', hint: 'HTTP Proxy — outgoing request capture' },
 ]
 
 const dockerCommand = computed(() => {
@@ -59,6 +60,7 @@ const eventTypes = [
   { label: 'HTTP', color: '#22c55e' },
   { label: 'Inspector', color: '#eab308' },
   { label: 'SMS', color: '#a855f7' },
+  { label: 'HTTP Proxy', color: '#10b981' },
 ]
 
 const trustBadges = computed(() => [
@@ -195,6 +197,7 @@ const trustBadges = computed(() => [
                 <div><span class="text-code-keyword">VAR_DUMPER_SERVER</span><span class="text-code-text">=</span><span class="text-code-string">127.0.0.1:9912</span></div>
                 <div><span class="text-code-keyword">MAIL_HOST</span><span class="text-code-text">=</span><span class="text-code-string">127.0.0.1</span></div>
                 <div><span class="text-code-keyword">MAIL_PORT</span><span class="text-code-text">=</span><span class="text-code-string">1025</span></div>
+                <div><span class="text-code-keyword">HTTP_PROXY</span><span class="text-code-text">=</span><span class="text-code-string">http://127.0.0.1:8080</span></div>
               </div>
             </div>
           </template>

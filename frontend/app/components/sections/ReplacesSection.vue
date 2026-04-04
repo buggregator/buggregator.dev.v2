@@ -13,6 +13,7 @@ const tools = [
   { key: 'requestbin', tool: 'RequestBin', color: '#22c55e' },
   { key: 'inspector', tool: 'Inspector.dev (local)', color: '#eab308' },
   { key: 'smsgateway', tool: 'SMS gateways (dev)', color: '#a855f7' },
+  { key: 'proxy', tool: 'Charles / Fiddler / mitmproxy', color: '#10b981' },
 ]
 </script>
 

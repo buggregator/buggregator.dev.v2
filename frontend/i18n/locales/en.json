@@ -77,7 +77,8 @@
         "sentry": "Sentry DSN",
         "email": "Email",
         "varDumper": "VarDumper",
-        "logs": "Logs"
+        "logs": "Logs",
+        "proxy": "HTTP Proxy"
       },
       "beforeLabel": "BEFORE",
       "afterLabel": "AFTER",
@@ -107,7 +108,8 @@
       "logviewers": "Application logs",
       "requestbin": "HTTP request inspection",
       "inspector": "Application performance monitoring",
-      "smsgateway": "SMS gateway testing"
+      "smsgateway": "SMS gateway testing",
+      "proxy": "Outgoing HTTP request inspection"
     }
   },
   "howItWorks": {
@@ -134,7 +136,7 @@
   },
   "showcase": {
     "title": "Everything in one dashboard",
-    "subtitle": "9 debugging tools. One interface.",
+    "subtitle": "10 debugging tools. One interface.",
     "tabs": {
       "exceptions": "Exceptions",
       "profiler": "Profiler",
@@ -143,6 +145,7 @@
       "emails": "Emails",
       "logs": "Logs",
       "http": "HTTP",
+      "httpProxy": "HTTP Proxy",
       "inspector": "Inspector",
       "sms": "SMS"
     },
@@ -154,6 +157,7 @@
       "emails": "Intercept outgoing emails during development. Preview HTML, inspect headers — no emails actually sent.",
       "logs": "Aggregate Monolog, Symfony, and Laravel logs in real time. Filter by level, search by message.",
       "http": "Capture and inspect incoming HTTP requests. See headers, body, and query parameters at a glance.",
+      "httpProxy": "See every HTTP request your app makes to external APIs — with full response. Set HTTP_PROXY and capture Guzzle, cURL, and SDK calls. Replaces Charles, Fiddler, and mitmproxy.",
       "inspector": "Monitor application performance with transaction tracing, memory tracking, and timeline breakdowns. Local APM alternative.",
       "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more."
     },
