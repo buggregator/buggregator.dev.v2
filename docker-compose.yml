@@ -159,6 +159,7 @@ services:
 volumes:
   app-data:
   typesense-data:
+  docs-node-modules:
 
 networks:
   buggregator-network:
