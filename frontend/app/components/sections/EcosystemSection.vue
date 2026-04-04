@@ -47,8 +47,19 @@ const formatStars = (n: number) =>
           <h3 class="text-lg font-semibold text-white mb-2 font-sans">{{ t('ecosystem.trap.title') }}</h3>
           <p class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.trap.description') }}</p>
 
-          <div class="mb-4 bg-landing-elevated rounded-xl border border-landing-border-subtle p-3">
-            <code class="font-mono text-xs text-on-dark-secondary">composer require --dev buggregator/trap -W</code>
+          <!-- Code examples -->
+          <div class="mb-4 space-y-2">
+            <div class="bg-landing-elevated rounded-xl border border-landing-border-subtle p-3 font-mono text-xs leading-relaxed">
+              <div><span class="text-code-comment">// Dump variables — clean output, never pollutes your response</span></div>
+              <div><span class="text-[#06b6d4]">trap</span><span class="text-code-text">(</span><span class="text-code-string">$user</span><span class="text-code-text">)-></span><span class="text-[#06b6d4]">depth</span><span class="text-code-text">(</span><span class="text-code-string">3</span><span class="text-code-text">);</span></div>
+              <div class="mt-1.5"><span class="text-code-comment">// Dump and return — use inline without breaking flow</span></div>
+              <div><span class="text-code-keyword">$response</span> <span class="text-code-text">=</span> <span class="text-[#06b6d4]">tr</span><span class="text-code-text">(</span><span class="text-code-string">$api</span><span class="text-code-text">-></span><span class="text-code-string">call</span><span class="text-code-text">());</span></div>
+              <div class="mt-1.5"><span class="text-code-comment">// Dump and die</span></div>
+              <div><span class="text-[#06b6d4]">td</span><span class="text-code-text">(</span><span class="text-code-string">$error</span><span class="text-code-text">);</span></div>
+            </div>
+            <div class="bg-landing-elevated rounded-xl border border-landing-border-subtle p-3">
+              <code class="font-mono text-xs text-on-dark-secondary">composer require --dev buggregator/trap -W</code>
+            </div>
           </div>
 
           <div class="flex flex-wrap gap-3">

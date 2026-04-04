@@ -99,7 +99,7 @@
   "replaces": {
     "title": "Reemplaza tu stack local de desarrollo — gratis",
     "footer": "Todo esto. Un comando. Sin costo.",
-    "trapNote": "¿Sin Docker? Usa Buggregator Trap — una alternativa PHP CLI ligera.",
+    "trapNote": "¿Quieres funciones de depuración en tu código? Añade Buggregator Trap — trap(), tr(), td() listas para usar.",
     "tools": {
       "sentry": "Excepciones y stack traces",
       "mailhog": "Captura de emails",
@@ -168,7 +168,7 @@
     "tabs": {
       "docker": "Docker",
       "compose": "Docker Compose",
-      "trap": "Sin Docker"
+      "trap": "Paquete Composer"
     },
     "trust": {
       "free": "Gratis para siempre",
@@ -176,7 +176,7 @@
       "noCard": "Sin tarjeta de crédito",
       "oss": "Código abierto (MIT)"
     },
-    "trapNote": "No necesitas Docker. Trap funciona como herramienta PHP CLI en tu proyecto.",
+    "trapNote": "¿Prefieres Composer? Trap te da trap(), tr(), td() y un servidor de depuración integrado.",
     "links": {
       "fullGuide": "Guía completa de instalación →"
     }
@@ -213,8 +213,8 @@
   "ecosystem": {
     "title": "El ecosistema Buggregator",
     "trap": {
-      "title": "¿Sin Docker? No hay problema.",
-      "description": "Una alternativa PHP CLI ligera al servidor completo. Cubre la mayoría de necesidades de depuración — dumps, profiler, logs, inspecciones — sin Docker. Solo un paquete composer.",
+      "title": "Funciones de depuración para tu código PHP",
+      "description": "Un paquete Composer con trap(), tr() y td() — reemplazos potentes de dump() y dd(). Encadena métodos como .depth(), .once(), .if() para control preciso. Mide rendimiento con tr(). Funciona autónomo o con el servidor completo.",
       "github": "Ver en GitHub",
       "docs": "Leer docs"
     },
