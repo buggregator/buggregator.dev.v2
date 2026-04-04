@@ -32,6 +32,11 @@ export default defineNuxtConfig({
       sponsorEmail: process.env.SPONSOR_EMAIL || 'butschster@gmail.com',
       heroVideoUrl: process.env.HERO_VIDEO_URL || '/video.webm',
       heroPosterUrl: process.env.HERO_POSTER_URL || '/img.png',
+      typesenseHost: process.env.TYPESENSE_HOST || 'localhost',
+      typesensePort: process.env.TYPESENSE_PORT || '8108',
+      typesenseProtocol: process.env.TYPESENSE_PROTOCOL || 'http',
+      typesenseSearchKey: process.env.TYPESENSE_SEARCH_KEY || 'buggregator-search-key',
+      typesenseCollection: process.env.TYPESENSE_COLLECTION || 'buggregator_docs',
     },
   },
 
