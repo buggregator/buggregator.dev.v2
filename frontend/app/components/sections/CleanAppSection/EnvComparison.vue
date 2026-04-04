@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-type TabId = 'sentry' | 'email' | 'varDumper' | 'logs'
+type TabId = 'sentry' | 'email' | 'varDumper' | 'logs' | 'proxy'
 const activeTab = ref<TabId>('sentry')
 
 const tabs: { id: TabId; labelKey: string }[] = [
@@ -9,6 +9,7 @@ const tabs: { id: TabId; labelKey: string }[] = [
   { id: 'email', labelKey: 'cleanApp.envComparison.tabs.email' },
   { id: 'varDumper', labelKey: 'cleanApp.envComparison.tabs.varDumper' },
   { id: 'logs', labelKey: 'cleanApp.envComparison.tabs.logs' },
+  { id: 'proxy', labelKey: 'cleanApp.envComparison.tabs.proxy' },
 ]
 
 const snippets: Record<TabId, { before: string; after: string; annotation?: string }> = {
@@ -37,6 +38,13 @@ VAR_DUMPER_SERVER=127.0.0.1:9912`,
     after: `LOG_CHANNEL=socket
 LOG_SOCKET_URL=127.0.0.1:9913
 # logs appear in Buggregator in real time`,
+  },
+  proxy: {
+    before: `# No visibility into outgoing HTTP requests
+# Add Guzzle middleware or use Charles Proxy`,
+    after: `HTTP_PROXY=http://127.0.0.1:8080
+HTTPS_PROXY=http://127.0.0.1:8080
+# All outgoing HTTP requests are captured with responses`,
   },
 }
 

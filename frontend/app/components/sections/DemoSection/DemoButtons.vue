@@ -67,6 +67,11 @@ const primarySections: Section[] = [
     docs: 'https://docs.buggregator.dev/config/http-dumps.html',
     actions: ['Get', 'Post', 'Put', 'Delete'],
   },
+  {
+    key: 'http_proxy', title: 'HTTP Proxy', color: '#10b981',
+    docs: 'https://docs.buggregator.dev/config/http-proxy.html',
+    actions: ['Get', 'Post', 'Put', 'Delete', 'Headers', 'StatusCodes', 'JsonApi'],
+  },
 ]
 
 const secondarySections: Section[] = [

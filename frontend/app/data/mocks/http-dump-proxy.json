@@ -1,0 +1,18 @@
+{
+  "method": "GET",
+  "uri": "/v1/users/42",
+  "host": "api.stripe.com",
+  "headers": {
+    "Authorization": "Bearer sk_test_abc123...",
+    "Accept": "application/json"
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Request-Id": "req_abc123"
+    },
+    "body": "{\n  \"id\": \"cus_NffrFeUfNV2Hib\",\n  \"object\": \"customer\",\n  \"email\": \"john@example.com\",\n  \"name\": \"John Doe\",\n  \"created\": 1680893993\n}"
+  },
+  "durationMs": 142.3
+}
