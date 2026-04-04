@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DocSearch from '~/components/layout/DocSearch.vue'
 import GitHubStars from '~/components/layout/GitHubStars.vue'
 import LanguageSwitcher from '~/components/ui/LanguageSwitcher.vue'
 import logoSvg from '~/assets/img/logo.svg'
@@ -70,6 +71,9 @@ onUnmounted(() => {
 
         <!-- Right side -->
         <div class="hidden md:flex items-center gap-3">
+          <ClientOnly>
+            <DocSearch />
+          </ClientOnly>
           <ClientOnly>
             <GitHubStars />
           </ClientOnly>

@@ -30,6 +30,11 @@ services:
       NUXT_API_BASE_URL: http://app:8080
       NUXT_PUBLIC_APP_URL: ${APP_BASE_URL:-}
       NUXT_PUBLIC_BUGGREGATOR_URL: ${BUGGREGATOR_URL:-https://test.buggregator.dev}
+      NUXT_PUBLIC_TYPESENSE_HOST: ${TYPESENSE_PUBLIC_HOST:-search.app.localhost}
+      NUXT_PUBLIC_TYPESENSE_PORT: ${TYPESENSE_PUBLIC_PORT:-80}
+      NUXT_PUBLIC_TYPESENSE_PROTOCOL: ${TYPESENSE_PUBLIC_PROTOCOL:-http}
+      NUXT_PUBLIC_TYPESENSE_SEARCH_KEY: ${TYPESENSE_SEARCH_KEY:-buggregator-search-key}
+      NUXT_PUBLIC_TYPESENSE_COLLECTION: ${TYPESENSE_COLLECTION:-buggregator_docs}
       NUXT_EXAMPLES_URL: http://buggregator-examples:8000
     labels:
       - "traefik.enable=true"
@@ -61,6 +66,23 @@ services:
     image: ghcr.io/buggregator/docs:latest
     ports:
       - ${BUGGREGATOR_DOCS_PORT_HTTP:-7073}:80
+    networks:
+      - buggregator-network
+
+  # ── Typesense (Search Engine) ───────────────────────────────
+  typesense:
+    image: typesense/typesense:27.1
+    restart: unless-stopped
+    volumes:
+      - typesense-data:/data
+    environment:
+      TYPESENSE_API_KEY: ${TYPESENSE_API_KEY:-buggregator-search-key}
+      TYPESENSE_DATA_DIR: /data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.typesense.rule=Host(`search.app.localhost`)"
+      - "traefik.http.routers.typesense.entrypoints=web"
+      - "traefik.http.services.typesense.loadbalancer.server.port=8108"
     networks:
       - buggregator-network
 
@@ -115,6 +137,7 @@ services:
     restart: unless-stopped
 volumes:
   app-data:
+  typesense-data:
 
 networks:
   buggregator-network:
