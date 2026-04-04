@@ -99,7 +99,7 @@
   "replaces": {
     "title": "Replaces your local dev stack — for free",
     "footer": "All of this. One command. Zero cost.",
-    "trapNote": "No Docker? Use Buggregator Trap — a PHP CLI alternative.",
+    "trapNote": "Want debugging functions in your code? Add Buggregator Trap — trap(), tr(), td() out of the box.",
     "tools": {
       "sentry": "Exceptions & stack traces",
       "mailhog": "Email capture",
@@ -168,7 +168,7 @@
     "tabs": {
       "docker": "Docker",
       "compose": "Docker Compose",
-      "trap": "Without Docker"
+      "trap": "Composer Package"
     },
     "trust": {
       "free": "Free forever",
@@ -176,7 +176,7 @@
       "noCard": "No credit card",
       "oss": "Open source (MIT)"
     },
-    "trapNote": "No Docker needed. Trap runs as a PHP CLI tool in your project.",
+    "trapNote": "Prefer a Composer package? Trap gives you trap(), tr(), td() and a built-in debug server.",
     "links": {
       "fullGuide": "Full installation guide →"
     }
@@ -213,8 +213,8 @@
   "ecosystem": {
     "title": "The Buggregator ecosystem",
     "trap": {
-      "title": "No Docker? No problem.",
-      "description": "A lightweight PHP CLI alternative to the full server. Covers most debugging needs — dumps, profiler, logs, inspections — without Docker. Just a composer package.",
+      "title": "Debugging functions for your PHP code",
+      "description": "A Composer package that gives you trap(), tr(), and td() — powerful replacements for dump() and dd(). Chain methods like .depth(), .once(), .if() for precise control. Measure performance with tr() tickers. Works standalone or with the full server.",
       "github": "View on GitHub",
       "docs": "Read docs"
     },
