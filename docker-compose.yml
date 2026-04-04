@@ -135,6 +135,27 @@ services:
     networks:
       - buggregator-network
     restart: unless-stopped
+
+  # ── Docs Indexer (builds docs + indexes into Typesense) ──────
+  docs-indexer:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run docs:build"
+    volumes:
+      - ./docs:/app
+      - docs-node-modules:/app/node_modules
+    environment:
+      TYPESENSE_HOST: typesense
+      TYPESENSE_PORT: "8108"
+      TYPESENSE_PROTOCOL: http
+      TYPESENSE_API_KEY: buggregator-dev-key
+      TYPESENSE_COLLECTION: buggregator_docs
+      DOCS_HOSTNAME: https://docs.buggregator.dev
+    depends_on:
+      - typesense
+    networks:
+      - buggregator-network
+
 volumes:
   app-data:
   typesense-data:
