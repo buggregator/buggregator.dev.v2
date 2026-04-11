@@ -63,7 +63,7 @@ const frameworks = [
       </p>
 
       <a
-        href="https://docs.buggregator.dev/integrations"
+        href="https://docs.buggregator.dev/integrations.html"
         target="_blank"
         rel="noopener"
         class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"

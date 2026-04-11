@@ -9,7 +9,7 @@ const productLinks = [
   { label: 'footer.links.features', href: '#showcase' },
   { label: 'footer.links.trap', href: 'https://github.com/buggregator/trap' },
   { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/26344-buggregator' },
-  { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started' },
+  { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started.html' },
 ]
 
 const communityLinks = computed(() => [
@@ -18,6 +18,14 @@ const communityLinks = computed(() => [
   { label: 'footer.links.bugs', href: 'https://github.com/buggregator/server/issues' },
   { label: 'footer.links.sponsors', href: '/sponsors' },
 ])
+
+const featureLinks = [
+  { label: 'Email Testing', href: '/features/email-testing' },
+  { label: 'Exception Tracking', href: '/features/sentry' },
+  { label: 'Performance Profiler', href: '/features/profiler' },
+  { label: 'HTTP Proxy', href: '/features/http-proxy' },
+  { label: 'SMS Testing', href: '/features/sms' },
+]
 
 const resourceLinks = [
   { label: 'footer.links.releases', href: 'https://github.com/buggregator/server/releases' },
@@ -72,12 +80,20 @@ const resourceLinks = [
           </ul>
         </div>
 
-        <!-- Resources -->
+        <!-- Features -->
         <div>
           <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
-            {{ t('footer.resources') }}
+            Features
           </h4>
           <ul class="space-y-2">
+            <li v-for="link in featureLinks" :key="link.href">
+              <NuxtLink
+                :to="link.href"
+                class="text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
+              >
+                {{ link.label }}
+              </NuxtLink>
+            </li>
             <li v-for="link in resourceLinks" :key="link.href">
               <a
                 :href="link.href"
