@@ -21,6 +21,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8080',
     examplesUrl: process.env.EXAMPLES_URL || 'http://buggregator-examples:8000',
+    typesenseInternalHost: process.env.TYPESENSE_INTERNAL_HOST || 'typesense',
+    typesenseInternalPort: process.env.TYPESENSE_INTERNAL_PORT || '8108',
+    typesenseInternalProtocol: process.env.TYPESENSE_INTERNAL_PROTOCOL || 'http',
+    typesenseApiKey: process.env.TYPESENSE_API_KEY || process.env.TYPESENSE_SEARCH_KEY || 'buggregator-search-key',
 
     public: {
       gaMeasurementId: process.env.PUBLIC_GA_MEASUREMENT_ID || '',
