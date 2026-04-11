@@ -18,6 +18,16 @@ const navLinks = computed(() => [
   { label: t('nav.docs'), href: docsUrl, external: true },
 ])
 
+const featureLinks = [
+  { label: 'Email Testing', to: '/features/email-testing', color: '#f59e0b' },
+  { label: 'Exception Tracking', to: '/features/sentry', color: '#f43f5e' },
+  { label: 'Profiler', to: '/features/profiler', color: '#8b5cf6' },
+  { label: 'HTTP Proxy', to: '/features/http-proxy', color: '#10b981' },
+  { label: 'SMS Testing', to: '/features/sms', color: '#a855f7' },
+]
+
+const featuresOpen = ref(false)
+
 function onScroll() {
   scrolled.value = window.scrollY > 10
 }
@@ -66,6 +76,39 @@ onUnmounted(() => {
               {{ link.label }}
             </a>
           </template>
+
+          <!-- Features dropdown -->
+          <div
+            class="relative"
+            @mouseenter="featuresOpen = true"
+            @mouseleave="featuresOpen = false"
+          >
+            <button
+              class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 font-sans flex items-center gap-1"
+            >
+              Guides
+              <svg class="w-3.5 h-3.5 transition-transform duration-150" :class="featuresOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              v-show="featuresOpen"
+              class="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
+            >
+              <div class="bg-landing-elevated border border-landing-border rounded-xl shadow-card-hover py-2 min-w-[200px]">
+                <NuxtLink
+                  v-for="fl in featureLinks"
+                  :key="fl.to"
+                  :to="fl.to"
+                  class="flex items-center gap-2.5 px-4 py-2 text-sm text-on-dark-secondary hover:text-white hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-150 no-underline font-sans"
+                  @click="featuresOpen = false"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: fl.color }" />
+                  {{ fl.label }}
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Right side -->
@@ -132,6 +175,23 @@ onUnmounted(() => {
             {{ link.label }}
           </a>
         </template>
+
+        <!-- Feature links (mobile) -->
+        <div class="pt-2 border-t border-landing-border-subtle">
+          <p class="text-xs font-semibold uppercase tracking-wider text-on-dark-muted mb-2 font-sans">Guides</p>
+          <div class="flex flex-col gap-1">
+            <NuxtLink
+              v-for="fl in featureLinks"
+              :key="fl.to"
+              :to="fl.to"
+              class="flex items-center gap-2 text-sm text-on-dark-secondary hover:text-on-dark-primary transition-colors no-underline font-sans py-1.5"
+              @click="mobileOpen = false"
+            >
+              <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: fl.color }" />
+              {{ fl.label }}
+            </NuxtLink>
+          </div>
+        </div>
 
         <div class="flex items-center gap-3 pt-2 border-t border-landing-border-subtle">
           <ClientOnly>

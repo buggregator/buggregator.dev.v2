@@ -104,7 +104,7 @@ const trustBadges = computed(() => [
       <!-- Links -->
       <div class="flex flex-wrap justify-center gap-6 mt-8">
         <a
-          href="https://docs.buggregator.dev/getting-started"
+          href="https://docs.buggregator.dev/getting-started.html"
           target="_blank"
           rel="noopener"
           class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
@@ -112,7 +112,7 @@ const trustBadges = computed(() => [
           {{ t('install.links.fullGuide') }}
         </a>
         <a
-          href="https://docs.buggregator.dev/config"
+          href="https://docs.buggregator.dev/config/"
           target="_blank"
           rel="noopener"
           class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
