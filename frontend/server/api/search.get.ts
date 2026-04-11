@@ -2,13 +2,13 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const query = getQuery(event)
 
-  const host = config.public.typesenseHost as string
-  const port = Number(config.public.typesensePort)
-  const protocol = config.public.typesenseProtocol as string
+  const host = config.typesenseInternalHost as string
+  const port = Number(config.typesenseInternalPort)
+  const protocol = config.typesenseInternalProtocol as string
   const portStr = (protocol === 'https' && port === 443) || (protocol === 'http' && port === 80) ? '' : `:${port}`
   const baseUrl = `${protocol}://${host}${portStr}`
   const collection = config.public.typesenseCollection as string
-  const apiKey = config.public.typesenseSearchKey as string
+  const apiKey = config.typesenseApiKey as string
 
   const params = new URLSearchParams({
     q: String(query.q || ''),
