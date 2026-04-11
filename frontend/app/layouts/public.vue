@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useAppConfig } from '~/composables/useAppConfig'
+import { useSiteConfig } from '~/composables/useAppConfig'
 
-const { appName } = useAppConfig()
+const { appName } = useSiteConfig()
 const route = useRoute()
 
 const navLinks = [

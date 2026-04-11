@@ -76,7 +76,7 @@ services:
     volumes:
       - typesense-data:/data
     environment:
-      TYPESENSE_API_KEY: ${TYPESENSE_API_KEY:-buggregator-dev-key}
+      TYPESENSE_API_KEY: ${TYPESENSE_SEARCH_KEY:-buggregator-search-key}
       TYPESENSE_DATA_DIR: /data
     labels:
       - "traefik.enable=true"
@@ -148,7 +148,7 @@ services:
       TYPESENSE_HOST: typesense
       TYPESENSE_PORT: "8108"
       TYPESENSE_PROTOCOL: http
-      TYPESENSE_API_KEY: buggregator-dev-key
+      TYPESENSE_API_KEY: ${TYPESENSE_SEARCH_KEY:-buggregator-search-key}
       TYPESENSE_COLLECTION: buggregator_docs
       DOCS_HOSTNAME: https://docs.buggregator.dev
     depends_on:

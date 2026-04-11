@@ -75,6 +75,50 @@ local function fetch_latest_release(log, repo)
     }
 end
 
+local function fetch_all_releases(log, repo)
+    local headers = get_github_headers()
+
+    local resp, err = http_client.get("https://api.github.com/repos/" .. repo .. "/releases?per_page=100", {
+        headers = headers,
+    })
+    if err then
+        log:warn("failed to fetch releases", { error = tostring(err), repo = repo })
+        return 0, {}
+    end
+    if resp.status_code ~= 200 then
+        log:warn("releases api error", { status = resp.status_code, repo = repo })
+        return 0, {}
+    end
+
+    local data = json.decode(resp.body)
+    local total_downloads = 0
+    local releases = {}
+
+    for _, release in ipairs(data) do
+        local release_downloads = 0
+        if release.assets then
+            for _, asset in ipairs(release.assets) do
+                release_downloads = release_downloads + (asset.download_count or 0)
+            end
+        end
+        total_downloads = total_downloads + release_downloads
+
+        local tag = release.tag_name or ""
+        if string.sub(tag, 1, 1) == "v" then
+            tag = string.sub(tag, 2)
+        end
+
+        table.insert(releases, {
+            tag = tag,
+            name = release.name or tag,
+            date = release.published_at or "",
+            downloads = release_downloads,
+        })
+    end
+
+    return total_downloads, releases
+end
+
 local function fetch_contributors(log, repo)
     local headers = get_github_headers()
 
@@ -143,6 +187,7 @@ local function fetch_and_cache(log, slug, repo)
     local repo_info = fetch_repo_info(log, repo)
     local release = fetch_latest_release(log, repo)
     local contributors = fetch_contributors(log, repo)
+    local total_downloads, releases = fetch_all_releases(log, repo)
 
     local result = {
         slug = slug,
@@ -155,6 +200,8 @@ local function fetch_and_cache(log, slug, repo)
         latest_version_url = release and release.url or nil,
         published_at = release and release.published_at or nil,
         contributors = contributors,
+        total_downloads = total_downloads,
+        releases = releases,
     }
 
     save_cached(log, slug, result)
@@ -164,6 +211,7 @@ local function fetch_and_cache(log, slug, repo)
         stars = result.stars,
         version = result.latest_version or "none",
         contributors = #contributors,
+        downloads = total_downloads,
     })
 end
 

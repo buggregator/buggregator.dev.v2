@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Toast from 'primevue/toast'
-import { useAppConfig } from '~/composables/useAppConfig'
+import { useSiteConfig } from '~/composables/useAppConfig'
 
-const { appName } = useAppConfig()
+const { appName } = useSiteConfig()
 
 useHead({
   title: appName,

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRealtimeUpdates } from '~/composables/useRealtimeUpdates'
-import { useAppConfig } from '~/composables/useAppConfig'
+import { useSiteConfig } from '~/composables/useAppConfig'
 import { useGitHubStore } from '~/stores/github'
 
-const { appName } = useAppConfig()
+const { appName } = useSiteConfig()
 const github = useGitHubStore()
 
 const route = useRoute()

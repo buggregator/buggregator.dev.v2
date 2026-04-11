@@ -9,6 +9,7 @@ import FrameworksSection from '~/components/sections/FrameworksSection.vue'
 import EcosystemSection from '~/components/sections/EcosystemSection.vue'
 import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSection.vue'
 import CommunitySection from '~/components/sections/CommunitySection.vue'
+import StatsSection from '~/components/sections/StatsSection.vue'
 import SponsorsSection from '~/components/sections/SponsorsSection.vue'
 
 definePageMeta({ layout: 'landing' })
@@ -41,6 +42,7 @@ useSeoMeta({
     <DemoSection />
     <EcosystemSection />
     <CommunitySection />
+    <StatsSection />
     <SponsorsSection />
   </div>
 </template>

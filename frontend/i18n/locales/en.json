@@ -25,6 +25,7 @@
     "starHelp": "If Buggregator saves you time, a star helps others find it.",
     "trustRow": {
       "stars": "GitHub Stars",
+      "downloads": "Downloads",
       "license": "MIT License",
       "free": "Free forever"
     },
@@ -239,6 +240,15 @@
       "contributors": "Contributors",
       "license": "MIT License"
     }
+  },
+  "stats": {
+    "title": "Growing every day",
+    "description": "Stars and downloads across all repositories.",
+    "stars": "Total Stars",
+    "downloads": "Total Downloads",
+    "serverDownloads": "Server",
+    "trapDownloads": "Trap",
+    "collectingData": "Collecting data — charts will appear soon."
   },
   "sponsors": {
     "headline": "Backed by the community",

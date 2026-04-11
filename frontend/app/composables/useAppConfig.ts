@@ -1,6 +1,6 @@
 import { useAppConfigStore } from '~/stores/appConfig'
 
-export function useAppConfig() {
+export function useSiteConfig() {
   const store = useAppConfigStore()
   return {
     appName: computed(() => store.config.appName),

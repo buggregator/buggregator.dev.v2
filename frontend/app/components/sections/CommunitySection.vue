@@ -103,6 +103,11 @@ function onMouseLeave() {
             <p class="text-sm text-white/50 mt-1 font-sans">{{ t('community.stats.stars') }}</p>
           </div>
           <div class="w-px h-12 bg-white/10 hidden sm:block" />
+          <div v-if="github.totalDownloads > 0" class="community-stat">
+            <p class="text-3xl font-bold text-white font-sans">{{ format(github.totalDownloads) }}</p>
+            <p class="text-sm text-white/50 mt-1 font-sans">{{ t('hero.trustRow.downloads') }}</p>
+          </div>
+          <div v-if="github.totalDownloads > 0" class="w-px h-12 bg-white/10 hidden sm:block" />
           <div class="community-stat">
             <p class="text-3xl font-bold text-white font-sans">{{ github.contributors.length }}+</p>
             <p class="text-sm text-white/50 mt-1 font-sans">{{ t('community.stats.contributors') }}</p>
@@ -150,6 +155,7 @@ function onMouseLeave() {
             target="_blank"
             rel="noopener"
             class="star-btn"
+            :title="formattedServerStars ? new Intl.NumberFormat('en').format(github.getRepo('server')?.stars ?? 0) + ' stars' : undefined"
             @click="trackEvent('cta_click', { cta_location: 'community', cta_text: 'star_github' })"
           >
             <span class="star-btn__content">
