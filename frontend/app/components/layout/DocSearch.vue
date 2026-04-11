@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const config = useRuntimeConfig()
-
 const isOpen = ref(false)
 const query = ref('')
 const results = ref<SearchHit[]>([])
@@ -19,14 +17,6 @@ interface SearchHit {
 }
 
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
-
-const typesenseUrl = computed(() => {
-  const host = config.public.typesenseHost as string
-  const port = Number(config.public.typesensePort)
-  const protocol = config.public.typesenseProtocol as string
-  const portStr = (protocol === 'https' && port === 443) || (protocol === 'http' && port === 80) ? '' : `:${port}`
-  return `${protocol}://${host}${portStr}`
-})
 
 const open = () => {
   isOpen.value = true
@@ -48,25 +38,7 @@ const search = async (q: string) => {
 
   isLoading.value = true
   try {
-    const params = new URLSearchParams({
-      q,
-      query_by: 'hierarchy.lvl1,hierarchy.lvl2,hierarchy.lvl3,content',
-      include_fields: 'url,content,content_type,html_content,hierarchy.lvl0,hierarchy.lvl1,hierarchy.lvl2,hierarchy.lvl3',
-      highlight_full_fields: 'content,hierarchy.lvl1,hierarchy.lvl2,hierarchy.lvl3',
-      highlight_start_tag: '<mark>',
-      highlight_end_tag: '</mark>',
-      per_page: '20',
-      prioritize_exact_match: 'false',
-    })
-
-    const res = await fetch(
-      `${typesenseUrl.value}/collections/${config.public.typesenseCollection}/documents/search?${params}`,
-      { headers: { 'X-TYPESENSE-API-KEY': config.public.typesenseSearchKey as string } },
-    )
-
-    if (!res.ok) throw new Error(`Search failed: ${res.status}`)
-
-    const data = await res.json()
+    const data = await $fetch<any>('/api/search', { query: { q } })
 
     results.value = (data.hits || []).map((hit: any) => {
       const doc = hit.document

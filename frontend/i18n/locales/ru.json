@@ -25,6 +25,7 @@
     "starHelp": "Если Buggregator экономит вам время, звезда поможет другим найти его.",
     "trustRow": {
       "stars": "Звёзд на GitHub",
+      "downloads": "Скачиваний",
       "license": "Лицензия MIT",
       "free": "Бесплатно навсегда"
     },
@@ -239,6 +240,15 @@
       "contributors": "Контрибьюторов",
       "license": "Лицензия MIT"
     }
+  },
+  "stats": {
+    "title": "Растём каждый день",
+    "description": "Звёзды и скачивания по всем репозиториям.",
+    "stars": "Всего звёзд",
+    "downloads": "Всего скачиваний",
+    "serverDownloads": "Сервер",
+    "trapDownloads": "Trap",
+    "collectingData": "Собираем данные — графики появятся скоро."
   },
   "sponsors": {
     "headline": "При поддержке сообщества",

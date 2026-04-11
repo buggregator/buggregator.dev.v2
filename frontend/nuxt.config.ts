@@ -35,7 +35,7 @@ export default defineNuxtConfig({
       typesenseHost: process.env.TYPESENSE_HOST || 'localhost',
       typesensePort: process.env.TYPESENSE_PORT || '8108',
       typesenseProtocol: process.env.TYPESENSE_PROTOCOL || 'http',
-      typesenseSearchKey: process.env.TYPESENSE_SEARCH_KEY || 'buggregator-search-key',
+      typesenseSearchKey: process.env.TYPESENSE_SEARCH_KEY || 'buggregator-dev-key',
       typesenseCollection: process.env.TYPESENSE_COLLECTION || 'buggregator_docs',
     },
   },

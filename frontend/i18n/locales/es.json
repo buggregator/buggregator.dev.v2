@@ -25,6 +25,7 @@
     "starHelp": "Si Buggregator te ahorra tiempo, una estrella ayuda a otros a encontrarlo.",
     "trustRow": {
       "stars": "Estrellas en GitHub",
+      "downloads": "Descargas",
       "license": "Licencia MIT",
       "free": "Gratis para siempre"
     },
@@ -239,6 +240,15 @@
       "contributors": "Contribuidores",
       "license": "Licencia MIT"
     }
+  },
+  "stats": {
+    "title": "Creciendo cada día",
+    "description": "Estrellas y descargas en todos los repositorios.",
+    "stars": "Total de estrellas",
+    "downloads": "Total de descargas",
+    "serverDownloads": "Servidor",
+    "trapDownloads": "Trap",
+    "collectingData": "Recopilando datos — los gráficos aparecerán pronto."
   },
   "sponsors": {
     "headline": "Respaldado por la comunidad",

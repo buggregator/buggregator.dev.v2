@@ -7,11 +7,20 @@ const { t } = useI18n()
 const { trackEvent } = useGtag()
 const github = useGitHubStore()
 
+const format = (n: number) =>
+  new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
+
 const formattedStars = computed(() => {
   const server = github.getRepo('server')
   const count = server?.stars ?? 0
   if (count === 0) return null
-  return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(count)
+  return format(count)
+})
+
+const formattedDownloads = computed(() => {
+  const count = github.totalDownloads
+  if (count === 0) return null
+  return format(count)
 })
 </script>
 
@@ -52,6 +61,7 @@ const formattedStars = computed(() => {
               target="_blank"
               rel="noopener"
               class="star-btn"
+              :title="formattedStars ? new Intl.NumberFormat('en').format(github.getRepo('server')?.stars ?? 0) + ' stars' : undefined"
               @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'star_github' })"
             >
               <span class="star-btn__content">
@@ -71,6 +81,8 @@ const formattedStars = computed(() => {
             {{ t('hero.seeItLive') }}
           </a>
           <span class="hero__trust-dot" />
+          <span v-if="formattedDownloads">{{ formattedDownloads }}+ {{ t('hero.trustRow.downloads') }}</span>
+          <span v-if="formattedDownloads" class="hero__trust-dot" />
           <span>{{ t('hero.trustRow.license') }}</span>
           <span class="hero__trust-dot" />
           <span>{{ t('hero.trustRow.free') }}</span>

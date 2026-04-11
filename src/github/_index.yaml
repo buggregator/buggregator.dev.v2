@@ -148,6 +148,65 @@ entries:
         backoff_factor: 2.0
 
   # ══════════════════════════════════════════════════════════
+  # Downloads Collector — Packagist + GitHub Releases + Docker baseline
+  # ══════════════════════════════════════════════════════════
+
+  - name: downloads_collector
+    kind: process.lua
+    source: file://downloads_collector.lua
+    method: main
+    modules: [json, http_client, store, logger, time]
+
+  - name: downloads_collector_service
+    kind: process.service
+    process: app.github:downloads_collector
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+        - app.github:server_monitor_service
+        - app.github:frontend_monitor_service
+        - app.github:trap_monitor_service
+        - app.github:plugin_monitor_service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # ══════════════════════════════════════════════════════════
+  # Stats Collector — daily snapshots of stars & downloads
+  # ══════════════════════════════════════════════════════════
+
+  - name: stats_collector
+    kind: process.lua
+    source: file://stats_collector.lua
+    method: main
+    modules: [json, store, logger, time]
+
+  - name: stats_collector_service
+    kind: process.service
+    process: app.github:stats_collector
+    host: app:processes
+    lifecycle:
+      auto_start: true
+      stable_threshold: 10s
+      depends_on:
+        - wippy.bootloader:bootloader.service
+        - app.github:server_monitor_service
+        - app.github:frontend_monitor_service
+        - app.github:trap_monitor_service
+        - app.github:plugin_monitor_service
+        - app.github:downloads_collector_service
+      restart:
+        initial_delay: 5s
+        max_delay: 120s
+        max_attempts: 5
+        backoff_factor: 2.0
+
+  # ══════════════════════════════════════════════════════════
   # API Endpoints — public, no auth required
   # ══════════════════════════════════════════════════════════
 
@@ -179,6 +238,20 @@ entries:
     path: /github/contributors
     func: app.github:contributors_handler
 
+  - name: stats_handler
+    kind: function.lua
+    source: file://api_handler.lua
+    method: stats
+    modules: [http, json, store, logger]
+
+  - name: stats_endpoint
+    kind: http.endpoint
+    meta:
+      router: app.http:api_public
+    method: GET
+    path: /github/stats
+    func: app.github:stats_handler
+
   # ══════════════════════════════════════════════════════════
   # Webhook Endpoint — receives GitHub webhook events
   # ══════════════════════════════════════════════════════════
@@ -207,6 +280,7 @@ entries:
       resources:
         - app.github:repos_handler
         - app.github:contributors_handler
+        - app.github:stats_handler
         - app.github:webhook_handler
         - app:state_store
       actions: '*'

@@ -16,7 +16,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - app-network
+      - buggregator-network
     restart: unless-stopped
 
   # ── Frontend (Nuxt SSR Dev Server with hot reload) ───────────
@@ -28,6 +28,7 @@ services:
       - ./frontend:/app
       - frontend-node-modules:/app/node_modules
     environment:
+      NODE_ENV: development
       NUXT_API_BASE_URL: http://app:8080
       NUXT_PUBLIC_APP_URL: http://app.localhost
       NUXT_PUBLIC_BUGGREGATOR_URL: http://buggregator.app.localhost
@@ -40,6 +41,7 @@ services:
       - ${HOME}/.wippy/bin/wippy:/root/.wippy/bin/wippy:ro
     environment:
       APP_BASE_URL: http://app.localhost
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
 
 volumes:
   frontend-node-modules:

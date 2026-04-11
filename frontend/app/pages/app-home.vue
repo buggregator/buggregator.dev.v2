@@ -2,9 +2,9 @@
 definePageMeta({ layout: false })
 
 import { Icon } from '@iconify/vue'
-import { useAppConfig } from '~/composables/useAppConfig'
+import { useSiteConfig } from '~/composables/useAppConfig'
 
-const { appName } = useAppConfig()
+const { appName } = useSiteConfig()
 
 const features = [
   { icon: 'tabler:plug-connected', title: 'MCP Server', desc: 'Model Context Protocol scaffold ready for tools.' },

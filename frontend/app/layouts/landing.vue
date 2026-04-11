@@ -5,7 +5,7 @@ import { useGitHubStore } from '~/stores/github'
 import { useRealtimeUpdates } from '~/composables/useRealtimeUpdates'
 
 const github = useGitHubStore()
-await github.load()
+await Promise.all([github.load(), github.loadStats()])
 
 const { connect, disconnect, onMessage } = useRealtimeUpdates()
 
