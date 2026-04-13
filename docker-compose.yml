@@ -35,6 +35,7 @@ services:
       NUXT_PUBLIC_TYPESENSE_PROTOCOL: ${TYPESENSE_PUBLIC_PROTOCOL:-http}
       NUXT_PUBLIC_TYPESENSE_SEARCH_KEY: ${TYPESENSE_SEARCH_KEY:-buggregator-search-key}
       NUXT_PUBLIC_TYPESENSE_COLLECTION: ${TYPESENSE_COLLECTION:-buggregator_docs}
+      NUXT_PUBLIC_CRT_BADGE_ID: ${PUBLIC_CRT_BADGE_ID:-}
       NUXT_EXAMPLES_URL: http://buggregator-examples:8000
     labels:
       - "traefik.enable=true"
@@ -66,6 +67,12 @@ services:
     image: ghcr.io/buggregator/docs:latest
     ports:
       - ${BUGGREGATOR_DOCS_PORT_HTTP:-7073}:80
+    environment:
+      TYPESENSE_UPSTREAM: http://typesense:8108
+      TYPESENSE_COLLECTION: ${TYPESENSE_COLLECTION:-buggregator_docs}
+      TYPESENSE_API_KEY: ${TYPESENSE_SEARCH_KEY:-buggregator-search-key}
+    depends_on:
+      - typesense
     networks:
       - buggregator-network
 
@@ -88,7 +95,7 @@ services:
 
   # ── Buggregator Examples (Demo event sender) ────────────────
   buggregator-examples:
-    image: ghcr.io/buggregator/examples:1.7.1
+    image: ghcr.io/buggregator/examples:1.8.0
     environment:
       APP_NAME: Laravel
       APP_ENV: production
@@ -125,6 +132,7 @@ services:
       BUGGREGATOR_URL: ${BUGGREGATOR_URL:-https://test.buggregator.dev}
       HTTP_DUMP_ENDPOINT: http://http-dump@buggregator:8000
       SMS_ENDPOINT: http://buggregator:8000/sms
+      BUGGREGATOR_PROXY_URL: http://buggregator:8080
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.buggregator-examples.rule=Host(`examples.app.localhost`)"

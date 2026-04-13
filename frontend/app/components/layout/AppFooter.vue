@@ -2,7 +2,7 @@
 import logoSvg from '~/assets/img/logo.svg'
 
 const { t } = useI18n()
-const { discordUrl } = useRuntimeConfig().public
+const { discordUrl, crtBadgeId } = useRuntimeConfig().public
 
 const productLinks = [
   { label: 'footer.links.docs', href: 'https://docs.buggregator.dev' },
@@ -133,6 +133,14 @@ const resourceLinks = [
         </a>
 
         <div class="flex items-center gap-4 text-on-dark-muted">
+          <a
+            v-if="crtBadgeId"
+            :href="`https://crt.guru/badge/${crtBadgeId}`"
+            target="_blank"
+            rel="noopener"
+          >
+            <img :src="`https://crt.guru/badge/${crtBadgeId}/shield.svg`" alt="SSL Grade" class="h-5" />
+          </a>
           <span class="font-mono text-[10px]">
             Built with <a href="https://wippy.ai" target="_blank" rel="noopener" class="text-on-dark-secondary hover:text-white transition-colors no-underline">Wippy</a>
           </span>

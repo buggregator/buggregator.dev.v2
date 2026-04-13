@@ -28,6 +28,7 @@ export default defineNuxtConfig({
 
     public: {
       gaMeasurementId: process.env.PUBLIC_GA_MEASUREMENT_ID || '',
+      crtBadgeId: process.env.PUBLIC_CRT_BADGE_ID || '',
       appUrl: process.env.PUBLIC_APP_URL || '',
       siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
       discordUrl: process.env.DISCORD_URL || 'https://discord.gg/uxr5gw2p',
