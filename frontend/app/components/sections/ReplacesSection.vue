@@ -5,15 +5,15 @@ const { t } = useI18n()
 const revealRef = ref<InstanceType<typeof RevealWords>>()
 
 const tools = [
-  { key: 'sentry', tool: 'Sentry (local)', color: '#f43f5e' },
-  { key: 'mailhog', tool: 'Mailhog / Mailtrap', color: '#f59e0b' },
+  { key: 'sentry', tool: 'Sentry (local)', color: '#f43f5e', link: '/features/sentry' },
+  { key: 'mailhog', tool: 'Mailhog / Mailtrap', color: '#f59e0b', link: '/features/email-testing' },
   { key: 'ray', tool: 'Ray', color: '#06b6d4' },
-  { key: 'blackfire', tool: 'Blackfire / XHProf UI', color: '#8b5cf6' },
+  { key: 'blackfire', tool: 'Blackfire / XHProf UI', color: '#8b5cf6', link: '/features/profiler' },
   { key: 'logviewers', tool: 'Log viewers', color: '#6b7280' },
   { key: 'requestbin', tool: 'RequestBin', color: '#22c55e' },
   { key: 'inspector', tool: 'Inspector.dev (local)', color: '#eab308' },
-  { key: 'smsgateway', tool: 'SMS gateways (dev)', color: '#a855f7' },
-  { key: 'proxy', tool: 'Charles / Fiddler / mitmproxy', color: '#10b981' },
+  { key: 'smsgateway', tool: 'SMS gateways (dev)', color: '#a855f7', link: '/features/sms' },
+  { key: 'proxy', tool: 'Charles / Fiddler / mitmproxy', color: '#10b981', link: '/features/http-proxy' },
 ]
 </script>
 
@@ -40,17 +40,23 @@ const tools = [
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div
+        <component
+          :is="item.link ? 'NuxtLink' : 'div'"
           v-for="item in tools"
           :key="item.key"
-          class="flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle"
+          :to="item.link || undefined"
+          class="flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle no-underline"
+          :class="item.link ? 'hover:border-landing-border hover:bg-landing-elevated transition-colors duration-150 cursor-pointer' : ''"
         >
           <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ background: item.color }" />
-          <div class="min-w-0">
+          <div class="min-w-0 flex-1">
             <p class="text-sm font-medium text-on-dark-secondary font-sans line-through opacity-50">{{ item.tool }}</p>
             <p class="text-sm text-on-dark-secondary font-sans">{{ t(`replaces.tools.${item.key}`) }}</p>
           </div>
-        </div>
+          <svg v-if="item.link" class="w-4 h-4 text-on-dark-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </component>
       </div>
 
       <p class="text-center mt-10 text-lg font-semibold text-white font-sans">
