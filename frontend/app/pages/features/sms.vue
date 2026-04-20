@@ -156,7 +156,7 @@ const worksWithItems = [
     <FeatureHero
       title="Test SMS without sending real messages"
       subtitle="SMS Gateway"
-      description="When your app sends SMS \u2014 verification codes, notifications, alerts \u2014 you need to verify they work without actually sending them. Buggregator intercepts SMS API calls and shows you what would have been sent. Supports 40+ providers out of the box."
+      description="When your app sends SMS — verification codes, notifications, alerts — you need to verify they work without actually sending them. Buggregator intercepts SMS API calls and shows you what would have been sent. Supports 40+ providers out of the box."
       :accent-color="accentColor"
     >
       <template #cta>
