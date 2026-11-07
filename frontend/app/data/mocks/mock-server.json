@@ -1,0 +1,19 @@
+{
+  "baseUrl": "http://127.0.0.1:8000/mock/",
+  "rules": [
+    { "order": 1, "method": "GET", "path": "/payments/{id}", "name": "Payment status", "project": "shop", "status": 200, "hits": 4 },
+    { "order": 2, "method": "POST", "path": "/payments", "name": "Create payment", "project": "shop", "status": 201, "hits": 2 },
+    { "order": 3, "method": "GET", "path": "/shipping/rates", "name": "Shipping rates", "project": "shop", "delay": "250 ms", "status": 200, "hits": 2 },
+    { "order": 4, "method": "POST", "path": "/tax/calculate", "name": "Tax calculation", "project": "billing", "status": 200, "hits": 0 },
+    { "order": 5, "method": "GET", "path": "/fx/rates", "name": "FX rates (outage)", "project": "billing", "status": 503, "hits": 0 },
+    { "order": 6, "method": "ANY", "path": "/health", "name": "Health check", "status": 200, "hits": 2 }
+  ],
+  "requests": [
+    { "time": "11:01:09", "method": "GET", "path": "/health", "status": 200, "rule": "#6 Health check" },
+    { "time": "11:01:09", "method": "GET", "path": "/shipping/rates?country=DE&weight=1.2", "status": 200, "rule": "#3 Shipping rates", "delay": "250 ms" },
+    { "time": "11:01:09", "method": "POST", "path": "/payments", "status": 201, "rule": "#2 Create payment" },
+    { "time": "11:01:09", "method": "GET", "path": "/payments/pay_3Lm8", "status": 200, "rule": "#1 Payment status" },
+    { "time": "11:01:09", "method": "GET", "path": "/payments/pay_7Hq2", "status": 200, "rule": "#1 Payment status" },
+    { "time": "10:19:53", "method": "GET", "path": "/orders/7", "status": 404, "rule": null }
+  ]
+}
