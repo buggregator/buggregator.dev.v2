@@ -6,6 +6,8 @@ defineProps<{
     icon: string
     title: string
     description: string
+    // optional «Read more» link under the text
+    link?: { href: string; label: string }
   }>
   accentColor?: string
 }>()
@@ -28,6 +30,11 @@ defineProps<{
           <div class="text-2xl mb-3">{{ item.icon }}</div>
           <h3 class="font-sans text-base font-semibold text-white mb-1.5">{{ item.title }}</h3>
           <p class="font-sans text-sm text-on-dark-secondary leading-relaxed">{{ item.description }}</p>
+          <a
+            v-if="item.link"
+            :href="item.link.href"
+            class="inline-flex items-center min-h-[44px] mt-1 text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+          >{{ item.link.label }}</a>
         </div>
       </div>
     </div>

@@ -25,6 +25,7 @@ useSeoMeta({
 })
 
 const accentColor = '#0ea5e9'
+const TEMPLATE_DOCS = 'https://docs.buggregator.dev/config/mock-templates.html'
 
 const steps = [
   {
@@ -69,6 +70,18 @@ const steps = [
     delay: 150ms`,
       },
       {
+        id: 'template',
+        label: 'Template',
+        code: `mocks:
+  - method: GET
+    path: /users/{id}
+    template: true
+    headers: { Content-Type: application/json }
+    body: '{"id": {{ path "id" }}, "name": {{ fake "name" | json }}}'`,
+        note: 'GET /mock/users/42 → {"id": 42, "name": "Lavina Kuhn"} — the name is fake data, new on every call unless you set a seed.',
+        link: { href: TEMPLATE_DOCS, label: 'Template reference →' },
+      },
+      {
         id: 'api',
         label: 'REST API',
         code: `$ curl -X POST http://127.0.0.1:8000/api/mocks \\
@@ -106,9 +119,10 @@ PAYMENTS_API_URL=http://127.0.0.1:8000/mock`,
 
 const highlights = [
   {
-    icon: '\u{1F4E6}',
-    title: 'Any response',
-    description: 'Status 100–599, your own headers, a body up to 1 MB. JSON, XML or plain text — whatever the real API sends.',
+    icon: '\u{1F9EC}',
+    title: 'Responses that follow the request',
+    description: 'Turn on template for a rule, and its body and headers can use the request: the path {id}, query, headers, JSON body fields. Add fake names, emails and dates, loops and if/else. Body up to 1 MB.',
+    link: { href: TEMPLATE_DOCS, label: 'Template reference →' },
   },
   {
     icon: '\u{1F4A5}',

@@ -4,8 +4,8 @@ import InstallPlatformsNote from '~/components/ui/InstallPlatformsNote.vue'
 
 // A tab with `binary: true` shows the per-platform binary commands
 // (BinaryInstall) instead of `code`. `note` on a tab shows under the code
-// while that tab is active.
-type StepTab = { id: string; label: string; code?: string; binary?: boolean; note?: string }
+// while that tab is active; `link` on a tab shows after its note.
+type StepTab = { id: string; label: string; code?: string; binary?: boolean; note?: string; link?: { href: string; label: string } }
 
 const props = defineProps<{
   steps: Array<{
@@ -56,6 +56,12 @@ function isBinaryTabActive(stepIndex: number, step: typeof props.steps[number]):
 }
 
 const hasBinaryTab = (step: typeof props.steps[number]) => step.tabs?.some(t => t.binary) ?? false
+
+function getActiveLink(stepIndex: number, step: typeof props.steps[number]): StepTab['link'] {
+  if (!step.tabs) return undefined
+  const activeId = getActiveTab(stepIndex, step.tabs)
+  return step.tabs.find(t => t.id === activeId)?.link
+}
 
 // Copy
 const copiedStep = ref<number | null>(null)
@@ -147,6 +153,11 @@ async function copyCode(stepIndex: number, code: string) {
               </div>
             </div>
             <p v-if="getActiveNote(i, step)" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ getActiveNote(i, step) }}</p>
+            <a
+              v-if="getActiveLink(i, step)"
+              :href="getActiveLink(i, step)!.href"
+              class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+            >{{ getActiveLink(i, step)!.label }}</a>
             <p v-if="step.note" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ step.note }}</p>
             <InstallPlatformsNote v-if="hasBinaryTab(step)" class="mt-4" />
           </div>
