@@ -26,17 +26,17 @@ export interface BinaryPlatform {
   arch: string
   /** Release asset name under releases/latest/download/. */
   asset: string
-  /** Asset size in MB from the latest release; null until measured (#4507). */
+  /** Asset size in MiB (as GitHub shows it), measured on release v2.6.0; null hides it. */
   sizeMb: number | null
 }
 
 export const BINARY_PLATFORMS: readonly BinaryPlatform[] = [
-  { id: 'linux-amd64', os: 'linux', label: 'Linux x86-64', arch: 'x86-64', asset: 'buggregator-linux-amd64', sizeMb: null },
-  { id: 'linux-arm64', os: 'linux', label: 'Linux ARM', arch: 'ARM', asset: 'buggregator-linux-arm64', sizeMb: null },
-  { id: 'darwin-arm64', os: 'macos', label: 'macOS Apple Silicon', arch: 'Apple Silicon', asset: 'buggregator-darwin-arm64', sizeMb: null },
-  { id: 'darwin-amd64', os: 'macos', label: 'macOS Intel', arch: 'Intel', asset: 'buggregator-darwin-amd64', sizeMb: null },
-  { id: 'windows-amd64', os: 'windows', label: 'Windows x86-64', arch: 'x86-64', asset: 'buggregator-windows-amd64.exe', sizeMb: null },
-  { id: 'windows-arm64', os: 'windows', label: 'Windows ARM', arch: 'ARM', asset: 'buggregator-windows-arm64.exe', sizeMb: null },
+  { id: 'linux-amd64', os: 'linux', label: 'Linux x86-64', arch: 'x86-64', asset: 'buggregator-linux-amd64', sizeMb: 35 },
+  { id: 'linux-arm64', os: 'linux', label: 'Linux ARM', arch: 'ARM', asset: 'buggregator-linux-arm64', sizeMb: 35 },
+  { id: 'darwin-arm64', os: 'macos', label: 'macOS Apple Silicon', arch: 'Apple Silicon', asset: 'buggregator-darwin-arm64', sizeMb: 37 },
+  { id: 'darwin-amd64', os: 'macos', label: 'macOS Intel', arch: 'Intel', asset: 'buggregator-darwin-amd64', sizeMb: 38 },
+  { id: 'windows-amd64', os: 'windows', label: 'Windows x86-64', arch: 'x86-64', asset: 'buggregator-windows-amd64.exe', sizeMb: 24 },
+  { id: 'windows-arm64', os: 'windows', label: 'Windows ARM', arch: 'ARM', asset: 'buggregator-windows-arm64.exe', sizeMb: 22 },
 ]
 
 /** First row of the picker, in order; the first build of an OS is its default. */
