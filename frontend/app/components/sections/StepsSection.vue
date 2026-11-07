@@ -3,15 +3,10 @@ import StepItem from '~/components/sections/StepsSection/StepItem.vue'
 import TerminalMockup from '~/components/sections/StepsSection/TerminalMockup.vue'
 import FrameworkTabs from '~/components/sections/StepsSection/FrameworkTabs.vue'
 import BrowserMockup from '~/components/sections/StepsSection/BrowserMockup.vue'
-import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
-const github = useGitHubStore()
 
-const imageTag = computed(() => {
-  const v = github.serverVersion
-  return v ? `v${v}` : 'latest'
-})
+const imageTag = useServerImageTag()
 
 // Step 1: install method tabs
 type InstallTab = 'docker' | 'compose'

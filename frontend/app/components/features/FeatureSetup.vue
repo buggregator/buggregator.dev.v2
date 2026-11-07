@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useGitHubStore } from '~/stores/github'
-
 const props = defineProps<{
   steps: Array<{
     title: string
@@ -11,12 +9,7 @@ const props = defineProps<{
   }>
 }>()
 
-const github = useGitHubStore()
-
-const imageTag = computed(() => {
-  const v = github.serverVersion
-  return v ? `v${v}` : 'latest'
-})
+const imageTag = useServerImageTag()
 
 // Track active tab per step
 const activeTabs = ref<Record<number, string>>({})

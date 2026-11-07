@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import { useGitHubStore } from '~/stores/github'
-
-const github = useGitHubStore()
-const imageTag = computed(() => {
-  const v = github.serverVersion
-  return v ? `v${v}` : 'latest'
-})
+const imageTag = useServerImageTag()
 </script>
 
 <template>
