@@ -32,6 +32,12 @@ const featuresOpen = ref(false)
 const guidesButton = ref<HTMLButtonElement | null>(null)
 
 // «Guides» opens on hover, click and Enter/Space; Escape or tabbing out closes it.
+// A tap fires mouseenter and then click: a pointer click only opens, so the
+// menu does not open and close at once. Enter/Space (detail 0) toggle.
+function onGuidesClick(e: MouseEvent) {
+  featuresOpen.value = e.detail === 0 ? !featuresOpen.value : true
+}
+
 function closeGuides() {
   if (!featuresOpen.value) return
   featuresOpen.value = false
@@ -106,7 +112,7 @@ onUnmounted(() => {
               aria-haspopup="true"
               :aria-expanded="featuresOpen"
               aria-controls="nav-guides-menu"
-              @click="featuresOpen = !featuresOpen"
+              @click="onGuidesClick"
               class="min-h-[44px] text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 font-sans flex items-center gap-1"
             >
               Guides

@@ -14,7 +14,6 @@
     },
     "headline": "Debug everything in your PHP app.",
     "headlineSub": "Install nothing.",
-    "starCta": "Star on GitHub",
     "subheadline": "Exceptions. Dumps. Emails. Profiling. Logs. All in one UI, launched with one command. Works with the SDKs you already have. No cloud account.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
