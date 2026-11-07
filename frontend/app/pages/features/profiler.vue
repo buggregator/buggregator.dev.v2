@@ -34,12 +34,17 @@ const flame = flameData as FlameNode[]
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'The profiler endpoint runs on the same port 8000 as everything else.',
+    description: 'The profiler endpoint runs on the same port 8000 as everything else. Or download one small binary — no Docker needed.',
     tabs: [
       {
         id: 'docker',
         label: 'Docker',
         code: '$ docker run -p 127.0.0.1:8000:8000 ghcr.io/buggregator/server:{imageTag}',
+      },
+      {
+        id: 'binary',
+        label: 'Binary',
+        binary: true,
       },
       {
         id: 'compose',
@@ -49,14 +54,6 @@ const steps = [
     image: ghcr.io/buggregator/server:{imageTag}
     ports:
       - 127.0.0.1:8000:8000`,
-      },
-      {
-        id: 'binary',
-        label: 'Binary',
-        code: `# Download the binary for your platform
-$ curl -L https://github.com/buggregator/server/releases/latest/download/buggregator-linux-amd64 -o buggregator
-$ chmod +x buggregator
-$ ./buggregator`,
       },
     ],
   },

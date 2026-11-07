@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import VersionBadge from '~/components/ui/VersionBadge.vue'
 import VideoBackground from '~/components/sections/HeroSection/VideoBackground.vue'
+import BinaryPlatformPicker from '~/components/ui/BinaryPlatformPicker.vue'
+import InstallPlatformsNote from '~/components/ui/InstallPlatformsNote.vue'
 import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
@@ -35,9 +37,21 @@ function commandLines(portsPerLine: number): string {
 const commandWide = computed(() => commandLines(2))
 const commandNarrow = computed(() => commandLines(1))
 
+// Docker or the standalone binary: two equal ways to start. Docker stays
+// the default, so the server HTML is today's command.
+type StartMethod = 'docker' | 'binary'
+const startMethods: StartMethod[] = ['docker', 'binary']
+const startMethod = ref<StartMethod>('docker')
+const binary = useBinaryPlatform()
+
 async function copyStartCommand() {
-  if (await copy(t('hero.command'))) {
-    trackEvent('copy_install_command', { cta_location: 'hero' })
+  const text = startMethod.value === 'binary' ? binary.copyText.value : t('hero.command')
+  if (await copy(text)) {
+    trackEvent('copy_install_command', {
+      cta_location: 'hero',
+      install_method: startMethod.value,
+      ...(startMethod.value === 'binary' ? { platform: binary.platform.value.id } : {}),
+    })
   }
 }
 
@@ -79,7 +93,29 @@ const formattedDownloads = computed(() => {
 
         <!-- Start command -->
         <div class="hero__start hero-stagger" style="--i: 3">
+          <div class="hero__methods" role="group" :aria-label="t('hero.install.label')">
+            <button
+              v-for="m in startMethods"
+              :key="m"
+              type="button"
+              class="hero__method"
+              :class="{ 'hero__method--active': startMethod === m }"
+              :aria-pressed="startMethod === m"
+              @click="startMethod = m"
+            >
+              {{ t(`hero.install.${m}`) }}
+            </button>
+          </div>
+          <div v-if="startMethod === 'binary'" class="hero__command hero__command--binary">
+            <BinaryPlatformPicker class="mb-3" />
+            <pre><template v-for="(cmd, i) in binary.commands.value" :key="i"><span class="hero__prompt" aria-hidden="true">{{ binary.prompt.value }} </span>{{ cmd }}
+</template></pre>
+            <p v-if="binary.platform.value.os === 'windows'" class="hero__binary-note">
+              {{ t('install.binary.windowsNote') }}
+            </p>
+          </div>
           <div
+            v-else
             class="hero__command"
             tabindex="0"
             role="region"
@@ -97,6 +133,7 @@ const formattedDownloads = computed(() => {
             </svg>
             <span aria-live="polite">{{ copied ? t('hero.cta.copied') : t('hero.cta.copy') }}</span>
           </button>
+          <InstallPlatformsNote class="hero__platforms" />
         </div>
 
         <!-- Trust row -->
@@ -230,6 +267,53 @@ h1 {
   margin: 0;
   font: inherit;
   white-space: pre;
+}
+
+.hero__methods {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid theme('colors.code.border');
+}
+
+.hero__method {
+  min-height: 36px;
+  min-width: 96px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: theme('colors.on-dark.secondary');
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.hero__method:hover {
+  color: #fff;
+}
+
+.hero__method--active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.hero__command--binary pre {
+  overflow-x: auto;
+}
+
+.hero__binary-note {
+  margin-top: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.75rem;
+  white-space: normal;
+  color: theme('colors.on-dark.secondary');
+}
+
+.hero__platforms {
+  margin-top: 4px;
+  font-size: 0.8125rem;
 }
 
 .hero__command:focus-visible {

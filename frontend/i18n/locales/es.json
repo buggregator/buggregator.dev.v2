@@ -30,6 +30,11 @@
     },
     "liveFeed": {
       "live": "En vivo"
+    },
+    "install": {
+      "label": "Cómo ejecutarlo",
+      "docker": "Docker",
+      "binary": "Binario"
     }
   },
   "cleanApp": {
@@ -39,7 +44,7 @@
       "quote": "Telescope funciona dentro de tu app. Buggregator funciona al lado.",
       "body": "Cero impacto en el rendimiento. Funciona con RoadRunner, FrankenPHP, Swoole y Octane. Captura emails, SMS y HTTP externos — cosas que Telescope nunca ve. Funciona con todos los servicios de tu stack."
     },
-    "body": "Buggregator funciona junto a tu aplicación como un contenedor Docker independiente. Tu código no cambia. Tus dependencias no cambian. Ya tienes los SDKs instalados — solo necesitan una dirección diferente.",
+    "body": "Buggregator se ejecuta junto a tu aplicación, como un único binario o un contenedor Docker. Tu código no cambia. Tus dependencias no cambian. Ya tienes los SDK instalados: solo necesitan otra dirección.",
     "pillars": {
       "noDeps": {
         "title": "Sin nuevas dependencias",
@@ -51,7 +56,7 @@
       },
       "crossProject": {
         "title": "Una instancia, todas tus apps",
-        "body": "Ejecuta un contenedor Buggregator. Apunta todos tus proyectos hacia él. Microservicios, monorepos, múltiples equipos — un dashboard."
+        "body": "Ejecuta un solo Buggregator, binario o contenedor. Apunta todos tus proyectos a él. Microservicios, monorepos, varios equipos: un solo panel."
       }
     },
     "devEnv": {
@@ -119,7 +124,7 @@
     "steps": {
       "run": {
         "title": "Ejecuta un comando",
-        "description": "Inicia Buggregator con un solo docker run. Sin instalación, sin registro, sin archivos de configuración."
+        "description": "Arráncalo con un solo docker run, o descarga un único binario pequeño y ejecútalo. Sin registro ni cuenta."
       },
       "connect": {
         "title": "Añade una variable de entorno",
@@ -173,8 +178,17 @@
     "title": "Empieza en 60 segundos",
     "tabs": {
       "docker": "Docker",
-      "compose": "Docker Compose"
+      "compose": "Docker Compose",
+      "binary": "Binario"
     },
+    "binary": {
+      "platform": "Plataforma",
+      "note": "Un solo archivo para Linux, macOS y Windows. Descárgalo y ejecútalo: todo se queda en tu ordenador.",
+      "noteSize": "Un solo archivo, de unos {size}, para Linux, macOS y Windows. Descárgalo y ejecútalo: todo se queda en tu ordenador.",
+      "windowsNote": "En Windows, VarDumper (puerto 9912) no está disponible. El resto de módulos funciona."
+    },
+    "platforms": "Funciona en Windows, macOS y Linux, también en Apple Silicon y Linux ARM.",
+    "agent": "¿Prefieres no hacerlo tú? Tu agente de IA puede configurar Buggregator por ti →",
     "trust": {
       "free": "Gratis para siempre",
       "noReg": "Sin registro",
@@ -183,7 +197,7 @@
     },
     "links": {
       "fullGuide": "Guía completa de instalación →",
-      "binaries": "¿Sin Docker? Un binario para Linux, macOS y Windows →"
+      "binaries": "Todas las descargas en GitHub Releases →"
     }
   },
   "demo": {
@@ -316,10 +330,10 @@
   "seo": {
     "home": {
       "title": "Buggregator — servidor de depuración gratuito para PHP",
-      "description": "Depura todo en tu app PHP. Excepciones, dumps, emails, profiling, logs — todo en una sola interfaz. Un docker run. Funciona con Sentry, VarDumper, Monolog, XHProf. Gratis y de código abierto.",
+      "description": "Depura todo en tu app PHP. Excepciones, dumps, emails, profiling, logs — todo en una sola interfaz. Un solo comando, Docker o un único binario. Funciona con Sentry, VarDumper, Monolog, XHProf. Gratis y de código abierto.",
       "ogTitle": "Buggregator — depura todo en tu app PHP",
-      "ogDescription": "Excepciones, dumps, emails, profiling, logs — todo en una interfaz en tiempo real. Un docker run. Sin cuenta en la nube. Gratis para siempre.",
-      "twitterDescription": "Excepciones, dumps, emails, profiling, logs — todo en una interfaz en tiempo real. Un docker run. Gratis para siempre."
+      "ogDescription": "Excepciones, dumps, emails, profiling, logs — todo en una interfaz en tiempo real. Un solo comando. Sin cuenta en la nube. Gratis para siempre.",
+      "twitterDescription": "Excepciones, dumps, emails, profiling, logs — todo en una interfaz en tiempo real. Un solo comando. Gratis para siempre."
     },
     "sponsors": {
       "title": "Patrocina Buggregator — apoya la depuración PHP gratuita y abierta",

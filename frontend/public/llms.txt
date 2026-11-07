@@ -1,6 +1,6 @@
 # Buggregator
 
-> Free, open-source debugging server: exceptions, dumps, emails, profiling and logs from your app in one real-time UI. One docker run, nothing to install in your app.
+> Free, open-source debugging server: exceptions, dumps, emails, profiling and logs from your app in one real-time UI. One command — Docker or a single binary — and nothing to install in your app.
 
 ## Docs
 - [Documentation index for LLMs](https://docs.buggregator.dev/llms.txt): every docs page with a short description
