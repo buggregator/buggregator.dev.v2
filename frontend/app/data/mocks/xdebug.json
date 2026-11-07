@@ -1,0 +1,134 @@
+{
+  "session": {
+    "state": "Paused",
+    "title": "GET /t.php?coupon=WELCOME15",
+    "where": "t.php:36",
+    "id": 1,
+    "started": "11:06:15"
+  },
+  "proxy": {
+    "addr": "9003",
+    "ide": "9004"
+  },
+  "file": "/app/t.php",
+  "currentLine": 36,
+  "variables": [
+    {
+      "depth": 0,
+      "name": "$cart",
+      "value": "Cart {3}",
+      "type": ""
+    },
+    {
+      "depth": 1,
+      "name": "private items",
+      "value": "array (3)",
+      "type": ""
+    },
+    {
+      "depth": 1,
+      "name": "public coupon",
+      "value": "\"WELCOME15\"",
+      "type": "string"
+    },
+    {
+      "depth": 1,
+      "name": "public note",
+      "value": "\"Please leave the…\"",
+      "type": "string"
+    },
+    {
+      "depth": 0,
+      "name": "$code",
+      "value": "uninitialized",
+      "type": ""
+    },
+    {
+      "depth": 0,
+      "name": "$discount",
+      "value": "uninitialized",
+      "type": ""
+    },
+    {
+      "depth": 0,
+      "name": "$subtotal",
+      "value": "12990",
+      "type": "int"
+    },
+    {
+      "depth": 0,
+      "name": "$this",
+      "value": "CartService {0}",
+      "type": ""
+    }
+  ],
+  "stack": [
+    {
+      "fn": "CartService->applyDiscount",
+      "file": "t.php:36",
+      "selected": true
+    },
+    {
+      "fn": "CartService->total",
+      "file": "t.php:30"
+    },
+    {
+      "fn": "{closure:/app/t.php:47-47}",
+      "file": "t.php:47"
+    },
+    {
+      "group": 2
+    },
+    {
+      "fn": "{main}",
+      "file": "t.php:47"
+    }
+  ],
+  "code": [
+    {
+      "n": 33,
+      "text": "    private function applyDiscount(Cart $cart, int $subtotal): int"
+    },
+    {
+      "n": 34,
+      "text": "    {"
+    },
+    {
+      "n": 35,
+      "text": "        // Coupons are stored lower-case."
+    },
+    {
+      "n": 36,
+      "text": "        $code = strtolower($cart->coupon);"
+    },
+    {
+      "n": 37,
+      "text": "        $discount = 0.15;"
+    },
+    {
+      "n": 38,
+      "text": "        if ($subtotal > 0 && $code !== '') {"
+    },
+    {
+      "n": 39,
+      "text": "            $subtotal = (int) round($subtotal * (1 - $discount));"
+    },
+    {
+      "n": 40,
+      "text": "        }"
+    },
+    {
+      "n": 41,
+      "text": ""
+    },
+    {
+      "n": 42,
+      "text": "        return $subtotal;"
+    },
+    {
+      "n": 43,
+      "text": "    }"
+    }
+  ],
+  "breakpointLine": 36
+}

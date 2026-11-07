@@ -15,6 +15,8 @@ const HttpTab = defineAsyncComponent(() => import('~/components/showcase/tabs/Ht
 const InspectorTab = defineAsyncComponent(() => import('~/components/showcase/tabs/InspectorTab.vue'))
 const SmsTab = defineAsyncComponent(() => import('~/components/showcase/tabs/SmsTab.vue'))
 const HttpProxyTab = defineAsyncComponent(() => import('~/components/showcase/tabs/HttpProxyTab.vue'))
+const MockServerTab = defineAsyncComponent(() => import('~/components/showcase/tabs/MockServerTab.vue'))
+const XdebugTab = defineAsyncComponent(() => import('~/components/showcase/tabs/XdebugTab.vue'))
 
 const tabs = [
   { id: 'exceptions', color: '#f43f5e', component: ExceptionsTab },
@@ -27,6 +29,8 @@ const tabs = [
   { id: 'httpProxy', color: '#10b981', component: HttpProxyTab },
   { id: 'inspector', color: '#eab308', component: InspectorTab },
   { id: 'sms', color: '#a855f7', component: SmsTab },
+  { id: 'mockServer', color: '#0ea5e9', component: MockServerTab },
+  { id: 'xdebug', color: '#f97316', component: XdebugTab },
 ] as const
 
 type TabId = (typeof tabs)[number]['id']

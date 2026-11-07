@@ -136,7 +136,7 @@
   },
   "showcase": {
     "title": "Everything in one dashboard",
-    "subtitle": "10 debugging tools. One interface.",
+    "subtitle": "12 debugging tools. One interface.",
     "tabs": {
       "exceptions": "Exceptions",
       "profiler": "Profiler",
@@ -147,7 +147,9 @@
       "http": "HTTP",
       "httpProxy": "HTTP Proxy",
       "inspector": "Inspector",
-      "sms": "SMS"
+      "sms": "SMS",
+      "mockServer": "Mock Server",
+      "xdebug": "Xdebug"
     },
     "descriptions": {
       "exceptions": "Catch unhandled exceptions with full stack traces via Sentry SDK. See exactly where your code breaks.",
@@ -159,7 +161,9 @@
       "http": "Capture and inspect incoming HTTP requests. See headers, body, and query parameters at a glance.",
       "httpProxy": "See every HTTP request your app makes to external APIs — with full response. Set HTTP_PROXY and capture Guzzle, cURL, and SDK calls. Replaces Charles, Fiddler, and mitmproxy.",
       "inspector": "Monitor application performance with transaction tracing, memory tracking, and timeline breakdowns. Local APM alternative.",
-      "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more."
+      "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more.",
+      "mockServer": "Fake the API your app depends on. Set a rule — method, path, status, headers, body, delay — and /mock answers with it. Every call is captured, with the rule that answered or why none matched.",
+      "xdebug": "See a paused Xdebug session in the browser, read-only: stack, variables, watches, source. Your IDE gets the session unchanged, and your AI assistant can read it over MCP. Off by default."
     },
     "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
   },

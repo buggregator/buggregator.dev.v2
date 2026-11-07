@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  type: 'sentry' | 'profiler' | 'smtp' | 'monolog' | 'http-dump' | 'ray' | 'inspector' | 'sms' | 'var-dump'
+  type: 'sentry' | 'profiler' | 'smtp' | 'monolog' | 'http-dump' | 'ray' | 'inspector' | 'sms' | 'var-dump' | 'mock-server' | 'xdebug'
   label: string
   time: string
   noBorder?: boolean
@@ -16,6 +16,8 @@ const colorMap: Record<string, string> = {
   inspector: '#eab308',
   sms: '#a855f7',
   'var-dump': '#ef4444',
+  'mock-server': '#0ea5e9',
+  xdebug: '#f97316',
 }
 </script>
 
