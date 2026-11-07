@@ -6,6 +6,7 @@ const props = defineProps<{
     code?: string
     language?: string
     tabs?: Array<{ id: string; label: string; code: string }>
+    note?: string
   }>
 }>()
 
@@ -121,6 +122,7 @@ async function copyCode(stepIndex: number, code: string) {
                 </ClientOnly>
               </div>
             </div>
+            <p v-if="step.note" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ step.note }}</p>
           </div>
         </div>
       </div>

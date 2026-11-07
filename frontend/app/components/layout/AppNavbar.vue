@@ -30,6 +30,7 @@ const featureLinks = [
   { label: 'Xdebug', to: '/features/xdebug', color: '#f97316' },
   { label: 'Logs', to: '/features/logs', color: '#6b7280' },
   { label: 'HTTP Dumps', to: '/features/http-dumps', color: '#22c55e' },
+  { label: 'MCP & API', to: '/features/mcp-api', color: '#14b8a6' },
 ]
 
 const featuresOpen = ref(false)

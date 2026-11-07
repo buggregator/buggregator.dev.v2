@@ -12,6 +12,7 @@ export const SITEMAP_PAGES = [
   '/features/xdebug',
   '/features/logs',
   '/features/http-dumps',
+  '/features/mcp-api',
   '/sponsors',
   '/ru',
   '/ru/sponsors',

@@ -16,3 +16,4 @@
 - [Xdebug proxy](https://buggregator.dev/features/xdebug)
 - [Logs (Monolog)](https://buggregator.dev/features/logs)
 - [HTTP dumps](https://buggregator.dev/features/http-dumps)
+- [MCP server and REST API](https://buggregator.dev/features/mcp-api): AI assistants (Claude Code, Codex, Cursor) read errors, dumps, profiles and Xdebug sessions; REST API for tests and scripts
