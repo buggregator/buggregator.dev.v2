@@ -12,9 +12,11 @@ const mobileOpen = ref(false)
 
 const docsUrl = 'https://docs.buggregator.dev'
 
+const localePath = useLocalePath()
+
 const navLinks = computed(() => [
-  { label: t('nav.howItWorks'), href: '/#how-it-works' },
-  { label: t('nav.features'), href: '/#showcase' },
+  { label: t('nav.howItWorks'), href: `${localePath('/')}#how-it-works` },
+  { label: t('nav.features'), href: `${localePath('/')}#showcase` },
   { label: t('nav.docs'), href: docsUrl, external: true },
 ])
 

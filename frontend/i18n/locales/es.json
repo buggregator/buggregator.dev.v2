@@ -177,7 +177,8 @@
       "oss": "Código abierto (MIT)"
     },
     "links": {
-      "fullGuide": "Guía completa de instalación →"
+      "fullGuide": "Guía completa de instalación →",
+      "binaries": "¿Sin Docker? Un binario para Linux, macOS y Windows →"
     }
   },
   "demo": {
