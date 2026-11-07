@@ -97,14 +97,32 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
+            # Stop at the first failing command, so the job goes red
+            # instead of reporting a deploy that did not happen.
+            set -eu
+
             cd /servers/buggregator.dev.v2
-            git pull origin main
+
+            # Host files (docker-compose.yml, infra/nginx.conf, pages) come
+            # from the repo's default branch, master. --ff-only: a host
+            # checkout with local changes or commits fails here, not merges.
+            git pull --ff-only origin master
+
+            # Host nginx (system service, certbot TLS) serves infra/nginx.conf.
+            # Test the config before anything restarts; a bad one stops the
+            # deploy and the running nginx keeps its old config.
+            SUDO=""
+            if [ "$(id -u)" -ne 0 ]; then SUDO="sudo -n"; fi
+            $SUDO nginx -t
 
             # Pull latest images
             docker compose pull app frontend
 
             # Restart app + frontend with new images
             docker compose up -d app frontend
+
+            # Apply the pulled nginx config (graceful: open connections finish)
+            $SUDO systemctl reload nginx
 
             # Clean up old images
             docker image prune -f
