@@ -33,7 +33,7 @@ export default defineNuxtConfig({
       crtBadgeId: process.env.PUBLIC_CRT_BADGE_ID || '',
       appUrl: process.env.PUBLIC_APP_URL || '',
       siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
-      discordUrl: process.env.DISCORD_URL || 'https://discord.gg/uxr5gw2p',
+      discordUrl: process.env.DISCORD_URL || 'https://discord.gg/vDsCD3EKUB',
       buggregatorUrl: process.env.BUGGREGATOR_URL || 'http://buggregator.app.localhost',
       patreonUrl: process.env.PATREON_URL || 'https://www.patreon.com/butschster',
       sponsorEmail: process.env.SPONSOR_EMAIL || 'butschster@gmail.com',

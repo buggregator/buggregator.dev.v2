@@ -38,7 +38,7 @@ export default {
         'on-dark': {
           primary: '#ffffff',
           secondary: '#8b919a',
-          muted: '#555b65',
+          muted: '#7f858f',
         },
         // Landing text (light bg)
         'on-light': {
