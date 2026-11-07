@@ -37,6 +37,9 @@ type TabId = (typeof tabs)[number]['id']
 
 const activeTab = ref<TabId>('exceptions')
 
+const tabBar = ref<HTMLElement | null>(null)
+const { canScrollLeft, canScrollRight } = useScrollEdges(tabBar)
+
 const activeComponent = computed(() =>
   tabs.find((tab) => tab.id === activeTab.value)?.component,
 )
@@ -76,25 +79,39 @@ const activeDescription = computed(() =>
       <!-- Showcase container -->
       <div class="mx-auto bg-landing-base border border-landing-border-subtle rounded-2xl overflow-hidden shadow-showcase">
         <!-- Tab bar -->
-        <div
-          class="flex overflow-x-auto bg-landing-surface px-3 py-2.5 border-b border-landing-border-subtle gap-1"
-          role="tablist"
-        >
-          <button
-            v-for="tab in tabs"
-            :key="tab.id"
-            role="tab"
-            :aria-selected="activeTab === tab.id"
-            :aria-controls="`panel-${tab.id}`"
-            class="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-150 shrink-0"
-            :class="activeTab === tab.id
-              ? 'bg-landing-elevated text-white shadow-sm'
-              : 'text-on-dark-muted hover:text-on-dark-secondary hover:bg-white/5'"
-            @click="activeTab = tab.id"
+        <div class="relative">
+          <div
+            ref="tabBar"
+            class="flex overflow-x-auto bg-landing-surface px-3 py-2.5 border-b border-landing-border-subtle gap-1"
+            role="tablist"
           >
-            <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: tab.color }" />
-            {{ t(`showcase.tabs.${tab.id}`) }}
-          </button>
+            <button
+              v-for="tab in tabs"
+              :key="tab.id"
+              role="tab"
+              :aria-selected="activeTab === tab.id"
+              :aria-controls="`panel-${tab.id}`"
+              class="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-150 shrink-0"
+              :class="activeTab === tab.id
+                ? 'bg-landing-elevated text-white shadow-sm'
+                : 'text-on-dark-muted hover:text-on-dark-secondary hover:bg-white/5'"
+              @click="activeTab = tab.id"
+            >
+              <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: tab.color }" />
+              {{ t(`showcase.tabs.${tab.id}`) }}
+            </button>
+          </div>
+          <!-- Edge fades: shown only while the tab row can scroll that way -->
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute top-0 bottom-px left-0 w-6 bg-gradient-to-r from-landing-surface to-transparent transition-opacity duration-150"
+            :class="canScrollLeft ? 'opacity-100' : 'opacity-0'"
+          />
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute top-0 bottom-px right-0 w-6 bg-gradient-to-l from-landing-surface to-transparent transition-opacity duration-150"
+            :class="canScrollRight ? 'opacity-100' : 'opacity-0'"
+          />
         </div>
 
         <!-- Tab description -->
