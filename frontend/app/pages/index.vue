@@ -9,6 +9,7 @@ import FrameworksSection from '~/components/sections/FrameworksSection.vue'
 import EcosystemSection from '~/components/sections/EcosystemSection.vue'
 import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSection.vue'
 import WhatsNewSection from '~/components/sections/WhatsNewSection.vue'
+import HarnsySection from '~/components/sections/HarnsySection.vue'
 import CommunitySection from '~/components/sections/CommunitySection.vue'
 import StatsSection from '~/components/sections/StatsSection.vue'
 import SponsorsSection from '~/components/sections/SponsorsSection.vue'
@@ -67,6 +68,7 @@ const { demoEnabled } = useRuntimeConfig().public
     <FrameworksSection />
     <AdvancedFeaturesSection />
     <WhatsNewSection />
+    <HarnsySection />
     <DemoSection v-if="demoEnabled" />
     <EcosystemSection />
     <CommunitySection />
