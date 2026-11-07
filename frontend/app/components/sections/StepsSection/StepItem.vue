@@ -11,7 +11,7 @@ defineProps<{
   <div class="relative flex gap-6 lg:gap-12">
     <!-- Left: number + connector -->
     <div class="flex flex-col items-center shrink-0">
-      <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold text-lg font-sans shrink-0">
+      <div class="w-10 h-10 rounded-full bg-accent-strong flex items-center justify-center text-white font-semibold text-lg font-sans shrink-0">
         {{ number }}
       </div>
       <div v-if="!isLast" class="w-0.5 flex-1 bg-landing-border-subtle mt-3" />

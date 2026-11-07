@@ -70,7 +70,7 @@ async function copyCode(stepIndex: number, code: string) {
         <div v-for="(step, i) in steps" :key="i" class="relative flex gap-6 lg:gap-10">
           <!-- Left: number + connector -->
           <div class="flex flex-col items-center shrink-0">
-            <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold text-lg font-sans shrink-0">
+            <div class="w-10 h-10 rounded-full bg-accent-strong flex items-center justify-center text-white font-semibold text-lg font-sans shrink-0">
               {{ i + 1 }}
             </div>
             <div v-if="i < steps.length - 1" class="w-0.5 flex-1 bg-landing-border-subtle mt-3" />
@@ -88,7 +88,7 @@ async function copyCode(stepIndex: number, code: string) {
                 <button
                   v-for="tab in step.tabs"
                   :key="tab.id"
-                  class="px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
+                  class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
                   :class="getActiveTab(i, step.tabs!) === tab.id
                     ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
                     : 'text-[#6e7681] border-transparent hover:text-code-text'"
@@ -111,7 +111,7 @@ async function copyCode(stepIndex: number, code: string) {
                 <!-- Copy button -->
                 <ClientOnly>
                   <button
-                    class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
+                    class="hit-area absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
                     :class="copiedStep === i
                       ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
                       : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"

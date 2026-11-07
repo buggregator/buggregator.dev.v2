@@ -47,15 +47,6 @@ const features = [
         :density="28"
       />
     </ClientOnly>
-    <!-- Mascot background -->
-    <div class="advanced-mascot" aria-hidden="true">
-      <img
-        src="/teams.png"
-        alt=""
-        class="w-full h-full object-contain"
-        loading="lazy"
-      />
-    </div>
 
     <div class="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -93,24 +84,12 @@ const features = [
   overflow: hidden;
 }
 
-.advanced-mascot {
+/* Soft accent glow in place of the old mascot picture. */
+.advanced-section::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 1200px;
-  opacity: 0.14;
+  inset: 0;
   pointer-events: none;
-  mix-blend-mode: lighten;
-  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
-  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
-}
-
-@media (min-width: 1024px) {
-  .advanced-mascot {
-    width: 1800px;
-    height: 1800px;
-  }
+  background: radial-gradient(ellipse 50% 45% at 50% 55%, rgba(6, 182, 212, 0.08), transparent 70%);
 }
 </style>

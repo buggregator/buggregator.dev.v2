@@ -37,17 +37,12 @@ const composeCommand = computed(() => {
 
 const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand.value : composeCommand.value)
 
-const copied = ref(false)
+const { copied, copy } = useClipboardCopy()
 const { trackEvent } = useGtag()
 
 async function copyCmd() {
-  try {
-    await navigator.clipboard.writeText(activeCommand.value)
+  if (await copy(activeCommand.value)) {
     trackEvent('copy_install_command', { cta_location: 'steps', install_method: installTab.value })
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  } catch {
-    copied.value = false
   }
 }
 
@@ -98,7 +93,7 @@ const trustBadges = computed(() => [
             <div class="rounded-xl border border-code-border overflow-hidden">
               <div class="flex gap-1 bg-code-bg px-2 pt-2 border-b border-code-border">
                 <button
-                  class="px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
+                  class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
                   :class="installTab === 'docker'
                     ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
                     : 'text-[#6e7681] border-transparent hover:text-code-text'"
@@ -107,7 +102,7 @@ const trustBadges = computed(() => [
                   {{ t('install.tabs.docker') }}
                 </button>
                 <button
-                  class="px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
+                  class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
                   :class="installTab === 'compose'
                     ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
                     : 'text-[#6e7681] border-transparent hover:text-code-text'"
@@ -117,7 +112,7 @@ const trustBadges = computed(() => [
                 </button>
               </div>
               <div class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative">
-                <!-- Docker run with port tooltips -->
+                <!-- Docker run -->
                 <div v-if="installTab === 'docker'">
                   <div>
                     <span class="text-code-prompt select-none">$ </span>
@@ -125,10 +120,7 @@ const trustBadges = computed(() => [
                   </div>
                   <div v-for="(p, i) in ports" :key="p.port" class="pl-6">
                     <span class="text-code-text">-p 127.0.0.1:</span>
-                    <span class="port-hint">
-                      <span class="text-accent cursor-help border-b border-dashed border-accent/30">{{ p.port }}</span>
-                      <span class="port-tooltip">{{ p.hint }}</span>
-                    </span>
+                    <span class="text-accent">{{ p.port }}</span>
                     <span class="text-code-text"> \</span>
                   </div>
                   <div class="pl-6">
@@ -136,7 +128,7 @@ const trustBadges = computed(() => [
                   </div>
                 </div>
 
-                <!-- Docker Compose with port tooltips -->
+                <!-- Docker Compose -->
                 <div v-else>
                   <div><span class="text-code-keyword">services</span><span class="text-code-text">:</span></div>
                   <div class="pl-4"><span class="text-code-keyword">buggregator</span><span class="text-code-text">:</span></div>
@@ -144,16 +136,13 @@ const trustBadges = computed(() => [
                   <div class="pl-8"><span class="text-code-text">ports:</span></div>
                   <div v-for="p in ports" :key="p.port" class="pl-10">
                     <span class="text-code-text">- 127.0.0.1:</span>
-                    <span class="port-hint">
-                      <span class="text-accent cursor-help border-b border-dashed border-accent/30">{{ p.port }}</span>
-                      <span class="port-tooltip">{{ p.hint }}</span>
-                    </span>
+                    <span class="text-accent">{{ p.port }}</span>
                   </div>
                 </div>
 
                 <!-- Copy button -->
                 <button
-                  class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
+                  class="hit-area absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
                   :class="copied
                     ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
                     : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"
@@ -169,6 +158,13 @@ const trustBadges = computed(() => [
                 </button>
               </div>
             </div>
+            <!-- What each port is for: plain text, not a hover-only tooltip -->
+            <dl class="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 font-mono text-xs">
+              <template v-for="p in ports" :key="p.port">
+                <dt class="text-accent">{{ p.port.split(':')[0] }}</dt>
+                <dd class="text-on-dark-secondary">{{ p.hint }}</dd>
+              </template>
+            </dl>
           </template>
           <template #preview>
             <TerminalMockup />
@@ -251,47 +247,17 @@ const trustBadges = computed(() => [
           >
             {{ t('install.links.fullGuide') }}
           </a>
+          <a
+            href="https://github.com/buggregator/server/releases/latest"
+            target="_blank"
+            rel="noopener"
+            class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+          >
+            {{ t('install.links.binaries') }}
+          </a>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<style scoped>
-.port-hint {
-  position: relative;
-  display: inline;
-}
-
-.port-tooltip {
-  display: none;
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 4px 10px;
-  border-radius: 6px;
-  background: #22262e;
-  border: 1px solid #2a2f38;
-  color: #8b919a;
-  font-family: "DM Sans", sans-serif;
-  font-size: 11px;
-  white-space: nowrap;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.port-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 4px solid transparent;
-  border-top-color: #2a2f38;
-}
-
-.port-hint:hover .port-tooltip {
-  display: block;
-}
-</style>

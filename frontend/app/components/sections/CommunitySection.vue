@@ -18,22 +18,11 @@ const formattedServerStars = computed(() => {
   return format(count)
 })
 
-// Parallax
-const mascotRef = ref<HTMLElement | null>(null)
-const mascotTransform = ref('translate(-50%, -50%)')
-
 function onMouseMove(e: MouseEvent) {
-  const section = mascotRef.value?.closest('section')
-  if (!section) return
-  const rect = section.getBoundingClientRect()
-  const x = (e.clientX - rect.left) / rect.width - 0.5
-  const y = (e.clientY - rect.top) / rect.height - 0.5
-  mascotTransform.value = `translate(calc(-50% + ${x * 20}px), calc(-50% + ${y * 15}px)) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) scale(1.01)`
   revealRef.value?.handleMouse(e)
 }
 
 function onMouseLeave() {
-  mascotTransform.value = 'translate(-50%, -50%)'
   revealRef.value?.handleLeave()
 }
 </script>
@@ -41,7 +30,6 @@ function onMouseLeave() {
 <template>
   <section
     class="py-20 lg:py-28 bg-section-dark community-section"
-    style="perspective: 800px;"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
@@ -66,21 +54,6 @@ function onMouseLeave() {
         :density="35"
       />
     </ClientOnly>
-
-    <!-- Mascot background with parallax -->
-    <div
-      ref="mascotRef"
-      class="community-mascot"
-      aria-hidden="true"
-      :style="{ transform: mascotTransform }"
-    >
-      <img
-        src="/buggregator.png"
-        alt=""
-        class="w-full h-full object-contain"
-        loading="lazy"
-      />
-    </div>
 
     <div class="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-section font-bold text-white mb-3 font-sans">
@@ -207,29 +180,6 @@ function onMouseLeave() {
 .community-section {
   position: relative;
   overflow: hidden;
-}
-
-.community-mascot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 2200px;
-  height: 2200px;
-  opacity: 0.07;
-  pointer-events: none;
-  mix-blend-mode: lighten;
-  transition: transform 400ms ease-out;
-  will-change: transform;
-  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
-  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 15%, transparent 65%);
-}
-
-@media (min-width: 1024px) {
-  .community-mascot {
-    width: 3200px;
-    height: 3200px;
-  }
 }
 
 /* ── Stats with backdrop for readability ─────────────────── */

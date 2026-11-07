@@ -26,6 +26,14 @@ export interface Contributor {
   avatar_url: string
   html_url: string
   contributions: number
+  type?: string
+}
+
+// Bots and AI agents are not people to thank on the landing page.
+export function isHumanContributor(c: Contributor): boolean {
+  if (c.type === 'Bot') return false
+  const login = c.login.toLowerCase()
+  return !login.endsWith('[bot]') && login !== 'copilot'
 }
 
 export interface DownloadsInfo {
@@ -88,7 +96,7 @@ export const useGitHubStore = defineStore('github', () => {
       ])
 
       repos.value = reposRes?.repos || []
-      contributors.value = contribRes?.contributors || []
+      contributors.value = (contribRes?.contributors || []).filter(isHumanContributor)
       if (reposRes?.downloads) {
         downloads.value = reposRes.downloads
       }

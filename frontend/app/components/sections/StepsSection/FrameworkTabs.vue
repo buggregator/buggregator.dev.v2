@@ -40,7 +40,7 @@ const activeSnippet = computed(() => snippets[activeFramework.value])
       <button
         v-for="fw in frameworks"
         :key="fw.id"
-        class="px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
+        class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
         :class="activeFramework === fw.id
           ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
           : 'text-[#6e7681] border-transparent hover:text-code-text'"

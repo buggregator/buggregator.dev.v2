@@ -53,6 +53,8 @@ useHead({
     ]),
   }],
 })
+// The demo stand is down: the section shows only when DEMO_ENABLED=true.
+const { demoEnabled } = useRuntimeConfig().public
 </script>
 
 <template>
@@ -65,7 +67,7 @@ useHead({
     <FrameworksSection />
     <AdvancedFeaturesSection />
     <WhatsNewSection />
-    <DemoSection />
+    <DemoSection v-if="demoEnabled" />
     <EcosystemSection />
     <CommunitySection />
     <StatsSection />

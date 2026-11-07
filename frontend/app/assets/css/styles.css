@@ -5,22 +5,22 @@
 @layer base {
   body {
     @apply bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-0;
-    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-family: 'DM Sans', system-ui, sans-serif;
   }
 }
 
 /* Display typography */
 .font-display {
-  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
 
 .font-mono-display {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
 }
 
 /* Section label style */
 .section-label {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.15em;

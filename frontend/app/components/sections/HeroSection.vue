@@ -10,12 +10,36 @@ const github = useGitHubStore()
 const format = (n: number) =>
   new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
 
-const formattedStars = computed(() => {
-  const server = github.getRepo('server')
-  const count = server?.stars ?? 0
-  if (count === 0) return null
-  return format(count)
-})
+// The first thing a visitor does is start the server: the command sits on
+// the first screen and is in the server HTML. Star lives in the header and
+// in the community section.
+const { copied, copy } = useClipboardCopy()
+
+// The one-line command split into shell lines with «\», so it reads whole
+// instead of being cut by the box: two ports a line on wider screens, one
+// on phones. Copy always takes the original one-liner.
+function commandLines(portsPerLine: number): string {
+  const [head, ...rest] = t('hero.command').split(' -p ')
+  const last = rest.pop() ?? ''
+  const cut = last.indexOf(' ')
+  const ports = [...rest, last.slice(0, cut)].map(p => `-p ${p}`)
+  const image = last.slice(cut + 1)
+  const lines = [head]
+  for (let i = 0; i < ports.length; i += portsPerLine) {
+    lines.push('  ' + ports.slice(i, i + portsPerLine).join(' '))
+  }
+  lines.push('  ' + image)
+  return lines.join(' \\\n')
+}
+
+const commandWide = computed(() => commandLines(2))
+const commandNarrow = computed(() => commandLines(1))
+
+async function copyStartCommand() {
+  if (await copy(t('hero.command'))) {
+    trackEvent('copy_install_command', { cta_location: 'hero' })
+  }
+}
 
 const formattedDownloads = computed(() => {
   const count = github.totalDownloads
@@ -53,26 +77,26 @@ const formattedDownloads = computed(() => {
           {{ t('hero.subheadline') }}
         </p>
 
-        <!-- Star CTA -->
-        <div class="hero-stagger mb-7" style="--i: 3">
-          <ClientOnly>
-            <a
-              href="https://github.com/buggregator/server"
-              target="_blank"
-              rel="noopener"
-              class="star-btn"
-              :title="formattedStars ? new Intl.NumberFormat('en').format(github.getRepo('server')?.stars ?? 0) + ' stars' : undefined"
-              @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'star_github' })"
-            >
-              <span class="star-btn__content">
-                <svg class="star-btn__icon" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
-                </svg>
-                <span>{{ t('hero.starCta') }}</span>
-                <span v-if="formattedStars" class="star-btn__count">{{ formattedStars }}</span>
-              </span>
-            </a>
-          </ClientOnly>
+        <!-- Start command -->
+        <div class="hero__start hero-stagger" style="--i: 3">
+          <div
+            class="hero__command"
+            tabindex="0"
+            role="region"
+            :aria-label="t('hero.cta.copy')"
+          >
+            <pre class="hidden sm:block"><span class="hero__prompt" aria-hidden="true">$ </span>{{ commandWide }}</pre>
+            <pre class="sm:hidden"><span class="hero__prompt" aria-hidden="true">$ </span>{{ commandNarrow }}</pre>
+          </div>
+          <button type="button" class="hero__copy" @click="copyStartCommand">
+            <svg v-if="!copied" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span aria-live="polite">{{ copied ? t('hero.cta.copied') : t('hero.cta.copy') }}</span>
+          </button>
         </div>
 
         <!-- Trust row -->
@@ -177,73 +201,65 @@ h1 {
   margin-bottom: 32px;
 }
 
-/* ── Star button ─────────────────────────────────────────── */
-.star-btn {
-  display: inline-flex;
-  text-decoration: none;
-  padding: 1.5px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #f59e0b, #f97316, #3b82f6, #8b5cf6, #f59e0b);
-  background-size: 300% 300%;
-  animation: glowShift 4s ease-in-out infinite;
-  transition: transform 200ms ease, box-shadow 300ms ease;
-  box-shadow: 0 0 20px -6px rgba(245, 158, 11, 0.3);
-}
-
-.star-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 32px -4px rgba(245, 158, 11, 0.5);
-}
-
-.star-btn:active {
-  transform: translateY(0);
-}
-
-.star-btn__content {
+/* ── Start command ───────────────────────────────────────── */
+.hero__start {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 11px 28px;
-  border-radius: 10.5px;
-  background: rgba(0, 0, 0, 0.85);
-  font-family: "DM Sans", sans-serif;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: #fff;
-  transition: background 200ms ease;
+  gap: 8px;
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 20px;
 }
 
-.star-btn:hover .star-btn__content {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.star-btn__icon {
-  width: 17px;
-  height: 17px;
-  color: #f59e0b;
-  filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.5));
-  transition: transform 300ms ease, filter 300ms ease;
-}
-
-.star-btn:hover .star-btn__icon {
-  transform: scale(1.15) rotate(-8deg);
-  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));
-}
-
-.star-btn__count {
-  padding: 2px 9px;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.hero__command {
+  width: 100%;
+  padding: 14px 18px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: theme('colors.code.bg');
+  border: 1px solid theme('colors.code.border');
+  text-align: left;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.8125rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
+  color: theme('colors.code.text');
+  line-height: 1.7;
 }
 
-@keyframes glowShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.hero__command pre {
+  margin: 0;
+  font: inherit;
+  white-space: pre;
+}
+
+.hero__command:focus-visible {
+  outline-offset: -2px;
+}
+
+.hero__prompt {
+  color: theme('colors.code.prompt');
+  user-select: none;
+}
+
+.hero__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: theme('colors.accent.strong');
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 150ms ease;
+}
+
+.hero__copy:hover {
+  background: theme('colors.accent.strong-hover');
 }
 
 /* ── Trust row ───────────────────────────────────────────── */
@@ -254,12 +270,16 @@ h1 {
   justify-content: center;
   gap: 12px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.6875rem;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8125rem;
+  color: theme('colors.on-dark.secondary');
   letter-spacing: 0.02em;
 }
 
 .hero__trust-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.875rem;
   color: var(--accent, #3b82f6);
   text-decoration: none;
   transition: color 150ms ease;
@@ -336,14 +356,8 @@ h1 {
     font-size: 0.9375rem;
   }
 
-  .star-btn {
-    display: flex;
+  .hero__copy {
     width: 100%;
-  }
-
-  .star-btn__content {
-    flex: 1;
-    justify-content: center;
   }
 
   .hero__scroll {
@@ -356,15 +370,6 @@ h1 {
   .hero-stagger {
     animation: none;
     opacity: 1;
-    transform: none;
-  }
-  .star-btn {
-    animation: none;
-  }
-  .star-btn:hover {
-    transform: none;
-  }
-  .star-btn:hover .star-btn__icon {
     transform: none;
   }
   .hero__scroll-dot {

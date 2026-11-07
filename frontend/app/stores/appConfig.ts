@@ -8,7 +8,7 @@ export interface AppConfig {
 }
 
 const DEFAULTS: AppConfig = {
-  appName: 'App Template',
+  appName: 'Buggregator',
   supportEmail: 'support@example.com',
   privacyEmail: 'privacy@example.com',
   legalEmail: 'legal@example.com',

@@ -4,13 +4,16 @@ import logoSvg from '~/assets/img/logo.svg'
 const { t } = useI18n()
 const { discordUrl, crtBadgeId } = useRuntimeConfig().public
 
-const productLinks = [
+const localePath = useLocalePath()
+
+// «#showcase» alone led nowhere on feature pages: point at the home page.
+const productLinks = computed(() => [
   { label: 'footer.links.docs', href: 'https://docs.buggregator.dev' },
-  { label: 'footer.links.features', href: '#showcase' },
+  { label: 'footer.links.features', href: `${localePath('/')}#showcase` },
   { label: 'footer.links.trap', href: 'https://github.com/buggregator/trap' },
   { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/26344-buggregator' },
   { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started.html' },
-]
+])
 
 const communityLinks = computed(() => [
   { label: 'footer.links.github', href: 'https://github.com/buggregator/server' },
@@ -47,13 +50,13 @@ const resourceLinks = [
           <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
             {{ t('footer.product') }}
           </h4>
-          <ul class="space-y-2">
+          <ul class="md:space-y-2">
             <li v-for="link in productLinks" :key="link.href">
               <a
                 :href="link.href"
                 :target="link.href.startsWith('http') ? '_blank' : undefined"
                 :rel="link.href.startsWith('http') ? 'noopener' : undefined"
-                class="text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
+                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
               >
                 {{ t(link.label) }}
               </a>
@@ -66,13 +69,13 @@ const resourceLinks = [
           <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
             {{ t('footer.community') }}
           </h4>
-          <ul class="space-y-2">
+          <ul class="md:space-y-2">
             <li v-for="link in communityLinks" :key="link.href">
               <a
                 :href="link.href"
                 target="_blank"
                 rel="noopener"
-                class="text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
+                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
               >
                 {{ t(link.label) }}
               </a>
@@ -85,11 +88,11 @@ const resourceLinks = [
           <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
             Features
           </h4>
-          <ul class="space-y-2">
+          <ul class="md:space-y-2">
             <li v-for="link in featureLinks" :key="link.href">
               <NuxtLink
                 :to="link.href"
-                class="text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
+                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
               >
                 {{ link.label }}
               </NuxtLink>
@@ -99,7 +102,7 @@ const resourceLinks = [
                 :href="link.href"
                 target="_blank"
                 rel="noopener"
-                class="text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
+                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
               >
                 {{ t(link.label) }}
               </a>

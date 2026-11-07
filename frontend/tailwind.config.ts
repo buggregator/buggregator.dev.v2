@@ -12,8 +12,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Bricolage Grotesque', 'system-ui', 'sans-serif'],
-        'mono-display': ['IBM Plex Mono', 'ui-monospace', 'monospace'],
+        display: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        'mono-display': ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
         // Landing fonts
         sans: ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'Menlo', 'monospace'],
@@ -38,7 +38,7 @@ export default {
         'on-dark': {
           primary: '#ffffff',
           secondary: '#8b919a',
-          muted: '#555b65',
+          muted: '#7f858f',
         },
         // Landing text (light bg)
         'on-light': {
@@ -52,6 +52,9 @@ export default {
           DEFAULT: '#3b82f6',
           hover: '#2563eb',
           subtle: 'rgba(59,130,246,0.12)',
+          // Fill behind white text: #3b82f6 gives only 3.68:1, these pass AA.
+          strong: '#2563eb',
+          'strong-hover': '#1d4ed8',
         },
 
         // Code

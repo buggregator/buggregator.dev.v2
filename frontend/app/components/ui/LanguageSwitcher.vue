@@ -31,7 +31,7 @@ onUnmounted(() => {
 <template>
   <div class="relative" @click.stop>
     <button
-      class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm font-mono text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150"
+      class="hit-area relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm font-mono text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150"
       :aria-label="`Language: ${locale.toUpperCase()}`"
       @click="open = !open"
     >
