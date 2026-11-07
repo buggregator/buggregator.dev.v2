@@ -177,7 +177,7 @@ const highlights = [
   {
     icon: '\u{1F3AF}',
     title: 'At your breakpoint',
-    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Each read it makes on the paused session shows up live in Buggregator. With the Xdebug proxy on, five more tools read the paused session. Evaluating PHP (xdebug_eval) needs xdebug.allow_eval: true.',
+    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Each read it makes on the paused session shows up live in Buggregator. These are five tools; evaluating PHP (xdebug_eval) also needs xdebug.allow_eval: true.',
   },
   {
     icon: '\u{2709}️',
