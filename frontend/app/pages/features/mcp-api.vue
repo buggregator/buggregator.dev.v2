@@ -29,7 +29,7 @@ const accentColor = '#14b8a6'
 const steps = [
   {
     title: 'Turn MCP on',
-    description: 'MCP is off by default. Turn it on with one setting. Locally it listens on a Unix socket; in Docker, use HTTP on port 8001.',
+    description: 'Requires Buggregator v2.6.0 or later. MCP is off by default. Turn it on with one setting. Locally it listens on a Unix socket; in Docker, use HTTP on port 8001.',
     note: 'MCP has its own access rules, separate from SSO. Over HTTP it has no token unless you set MCP_AUTH_TOKEN — keep the port on 127.0.0.1, as above.',
     tabs: [
       {
@@ -78,7 +78,20 @@ const steps = [
       },
       {
         id: 'mcp-json',
-        label: '.mcp.json',
+        label: '.mcp.json (local)',
+        code: `{
+  "mcpServers": {
+    "buggregator": {
+      "type": "stdio",
+      "command": "buggregator",
+      "args": ["mcp"]
+    }
+  }
+}`,
+      },
+      {
+        id: 'mcp-json-http',
+        label: '.mcp.json (HTTP)',
         code: `{
   "mcpServers": {
     "buggregator": {
@@ -115,8 +128,8 @@ or URL:  http://localhost:8001/mcp`,
         code: `"Why did checkout fail?"
   → events_list (type: sentry) → sentry_event
 
-"This endpoint is slow. Profile it and tell me why."
-  → profiler_summary → profiler_top (metric: excl_wt) → profiler_call_graph
+"I profiled this endpoint. Why is it slow?"
+  → events_list (type: profiler) → profiler_summary → profiler_top (metric: excl_wt) → profiler_call_graph
 
 "Why is $total zero here?"   (stopped at a breakpoint)
   → xdebug_location → xdebug_variables → xdebug_property ($cart->items)`,
@@ -161,7 +174,7 @@ const highlights = [
   {
     icon: '\u{1F3AF}',
     title: 'At your breakpoint',
-    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Every call it makes shows up live in Buggregator.',
+    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Each read it makes on the paused session shows up live in Buggregator.',
   },
   {
     icon: '\u{2709}️',
@@ -171,7 +184,7 @@ const highlights = [
   {
     icon: '\u{1F9EA}',
     title: 'Mock rules from scripts',
-    description: 'REST API: create, edit and reorder mock rules, and list the calls your app made to /mock/, with the reason when no rule matched.',
+    description: 'REST API: create, edit and reorder mock rules, and list the calls your app made to /mock/ \u2014 with the rule that almost matched and why.',
   },
 ]
 
@@ -224,7 +237,7 @@ const worksWithItems = [
     <!-- Highlights -->
     <FeatureHighlights
       title="What your assistant and your scripts can do"
-      subtitle="14 MCP tools — almost all of them only read. The REST API covers the rest."
+      subtitle="8 MCP tools, 14 with the Xdebug proxy — all but event_delete and xdebug_eval only read. The REST API covers the rest."
       :items="highlights"
       :accent-color="accentColor"
     />
