@@ -53,7 +53,7 @@ const showPreview = ref(false)
 
               <!-- CTA Button -->
               <div class="text-center py-4">
-                <span class="inline-block px-6 py-2.5 bg-accent text-white text-sm font-medium rounded cursor-default">
+                <span class="inline-block px-6 py-2.5 bg-accent-strong text-white text-sm font-medium rounded cursor-default">
                   Open Dashboard
                 </span>
               </div>

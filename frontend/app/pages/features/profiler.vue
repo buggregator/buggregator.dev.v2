@@ -171,7 +171,7 @@ const worksWithItems = [
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#setup"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-sans font-medium text-sm rounded-xl transition-colors duration-150 no-underline"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-accent-strong hover:bg-accent-strong-hover text-white font-sans font-medium text-sm rounded-xl transition-colors duration-150 no-underline"
           >
             Get started
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

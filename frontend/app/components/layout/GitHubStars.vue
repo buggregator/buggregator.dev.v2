@@ -18,7 +18,7 @@ const formatted = computed(() => {
     target="_blank"
     rel="noopener"
     :title="new Intl.NumberFormat('en').format(github.getRepo('server')?.stars ?? 0) + ' stars'"
-    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-sm text-on-dark-secondary no-underline transition-colors hover:text-on-dark-primary"
+    class="hit-area relative inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-sm text-on-dark-secondary no-underline transition-colors hover:text-on-dark-primary"
     style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);"
   >
     <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">

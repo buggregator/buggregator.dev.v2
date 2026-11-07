@@ -36,19 +36,8 @@ const hasSponsors = computed(() => sponsors.length > 0)
         {{ t('sponsors.empty') }}
       </p>
 
-      <!-- "Become a sponsor" card -->
-      <div class="flex justify-center mb-10">
-        <NuxtLink
-          to="/sponsors"
-          class="flex flex-col items-center justify-center w-32 h-24 rounded-xl border-2 border-dashed border-landing-border text-on-dark-muted hover:border-accent hover:text-accent transition-all duration-200 no-underline"
-        >
-          <span class="text-2xl mb-1">+</span>
-          <span class="text-xs font-sans">{{ t('sponsors.becomeCard') }}</span>
-        </NuxtLink>
-      </div>
-
       <!-- CTAs -->
-      <div class="flex flex-wrap justify-center gap-4">
+      <div class="flex flex-wrap justify-center gap-4 mt-4">
         <a
           :href="patreonUrl as string"
           target="_blank"

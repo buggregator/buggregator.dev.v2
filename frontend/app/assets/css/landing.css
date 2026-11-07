@@ -86,6 +86,25 @@
   outline-offset: 2px;
 }
 
+/* Inside clipping boxes (tab bars, code blocks) an outer ring is cut off: draw it inside. */
+.landing .overflow-hidden *:focus-visible,
+.landing .overflow-x-auto *:focus-visible,
+.landing [role="tab"]:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Small controls keep their look but get a 44×44 px hit area (WCAG 2.5.5).
+   The control needs a position (relative or absolute) of its own. */
+.hit-area::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
+
 /* ── Custom scrollbar (global for landing) ── */
 .landing,
 .landing * {

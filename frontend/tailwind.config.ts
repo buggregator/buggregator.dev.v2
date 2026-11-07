@@ -52,6 +52,9 @@ export default {
           DEFAULT: '#3b82f6',
           hover: '#2563eb',
           subtle: 'rgba(59,130,246,0.12)',
+          // Fill behind white text: #3b82f6 gives only 3.68:1, these pass AA.
+          strong: '#2563eb',
+          'strong-hover': '#1d4ed8',
         },
 
         // Code

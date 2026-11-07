@@ -254,12 +254,16 @@ h1 {
   justify-content: center;
   gap: 12px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.6875rem;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8125rem;
+  color: theme('colors.on-dark.secondary');
   letter-spacing: 0.02em;
 }
 
 .hero__trust-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.875rem;
   color: var(--accent, #3b82f6);
   text-decoration: none;
   transition: color 150ms ease;

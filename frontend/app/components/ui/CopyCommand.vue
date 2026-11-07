@@ -47,7 +47,7 @@ async function copy() {
     </code>
 
     <button
-      class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
+      class="hit-area absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
       :class="copied
         ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
         : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"
