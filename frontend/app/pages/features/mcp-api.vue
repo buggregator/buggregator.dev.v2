@@ -134,6 +134,9 @@ or URL:  http://localhost:8001/mcp`,
 "Why is $total zero here?"   (stopped at a breakpoint)
   → xdebug_location → xdebug_variables → xdebug_property ($cart->items)
 
+"Set a breakpoint where the order total is computed, run the checkout, and tell me why it's negative."
+  → xdebug_breakpoint_set → xdebug_wait → xdebug_variables
+
 "Mock the payments API from ./openapi.yaml."
   → mock_import_openapi → mock_rules_list`,
       },
@@ -177,7 +180,7 @@ const highlights = [
   {
     icon: '\u{1F3AF}',
     title: 'At your breakpoint',
-    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Each read it makes on the paused session shows up live in Buggregator. These are five tools; evaluating PHP (xdebug_eval) also needs xdebug.allow_eval: true.',
+    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables. With no IDE attached, it can also step, continue, stop and set breakpoints, and you see each step on the Xdebug page. That\'s twelve tools: five read, one lists breakpoints, six control the session. xdebug.allow_control: false keeps them to reading. Evaluating PHP (xdebug_eval) also needs xdebug.allow_eval: true.',
   },
   {
     icon: '\u{2709}️',
@@ -240,7 +243,7 @@ const worksWithItems = [
     <!-- Highlights -->
     <FeatureHighlights
       title="What your assistant and your scripts can do"
-      subtitle="19 MCP tools, 24 with the Xdebug proxy. The REST API covers the rest."
+      subtitle="19 MCP tools, 31 with the Xdebug proxy. The REST API covers the rest."
       :items="highlights"
       :accent-color="accentColor"
     />
