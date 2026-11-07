@@ -35,6 +35,12 @@ export const BINARY_LOCAL_ONLY_URL = 'https://docs.buggregator.dev/getting-start
 /** Where install.ps1 puts the binary; it does not add the folder to PATH. */
 const WINDOWS_EXE = '"$env:LOCALAPPDATA\\Programs\\buggregator\\buggregator.exe"'
 
+/**
+ * Where install.sh puts the binary. Called by full path: ~/.local/bin is not
+ * in PATH on a default macOS, nor in the current shell on a fresh Linux.
+ */
+const UNIX_BIN = '~/.local/bin/buggregator'
+
 /** Listeners bound to 127.0.0.1 in every run line. VarDumper is not in the Windows build. */
 const LOCAL_BINDS: ReadonlyArray<{ env: string; port: number; windows: boolean }> = [
   { env: 'HTTP_ADDR', port: 8000, windows: true },
@@ -65,7 +71,7 @@ export function binaryCommands(os: BinaryOs): string[] {
     ]
   }
   const binds = LOCAL_BINDS.map(b => `${b.env}=127.0.0.1:${b.port}`)
-  return [binaryInstallCommand(os), [...binds, 'buggregator'].join(' \\\n  ')]
+  return [binaryInstallCommand(os), [...binds, UNIX_BIN].join(' \\\n  ')]
 }
 
 /** Prompt shown before each command: PowerShell on Windows, sh elsewhere. */
