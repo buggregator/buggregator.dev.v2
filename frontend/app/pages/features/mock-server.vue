@@ -210,7 +210,7 @@ const worksWithItems = [
       <template #related>
         <FeatureRelatedLink to="/features/http-proxy" label="HTTP Proxy" color="#10b981" />
         <FeatureRelatedLink to="/features/xdebug" label="Xdebug Proxy" color="#f97316" />
-        <FeatureRelatedLink to="/features/sentry" label="Exception Tracking" color="#f43f5e" />
+        <FeatureRelatedLink to="/features/sentry" label="Sentry" color="#f43f5e" />
       </template>
     </FeatureCTA>
   </div>

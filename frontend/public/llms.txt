@@ -7,7 +7,7 @@
 - [Getting started](https://docs.buggregator.dev/getting-started.md)
 
 ## Features
-- [Sentry-compatible exceptions](https://buggregator.dev/features/sentry)
+- [Sentry: errors, traces, logs and metrics](https://buggregator.dev/features/sentry)
 - [Email testing (SMTP)](https://buggregator.dev/features/email-testing)
 - [Profiler (XHProf)](https://buggregator.dev/features/profiler)
 - [HTTP proxy](https://buggregator.dev/features/http-proxy)

@@ -22,7 +22,7 @@ const navLinks = computed(() => [
 
 const featureLinks = [
   { label: 'Email Testing', to: '/features/email-testing', color: '#f59e0b' },
-  { label: 'Exception Tracking', to: '/features/sentry', color: '#f43f5e' },
+  { label: 'Sentry', to: '/features/sentry', color: '#f43f5e' },
   { label: 'Profiler', to: '/features/profiler', color: '#8b5cf6' },
   { label: 'HTTP Proxy', to: '/features/http-proxy', color: '#10b981' },
   { label: 'SMS Testing', to: '/features/sms', color: '#a855f7' },

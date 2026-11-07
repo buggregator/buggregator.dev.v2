@@ -234,7 +234,7 @@ const worksWithItems = [
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/monolog.html">
       <template #related>
-        <FeatureRelatedLink to="/features/sentry" label="Exception Tracking" color="#f43f5e" />
+        <FeatureRelatedLink to="/features/sentry" label="Sentry" color="#f43f5e" />
         <FeatureRelatedLink to="/features/http-dumps" label="HTTP Dumps" color="#22c55e" />
         <FeatureRelatedLink to="/features/profiler" label="Performance Profiler" color="#8b5cf6" />
       </template>

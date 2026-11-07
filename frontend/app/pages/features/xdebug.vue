@@ -231,7 +231,7 @@ const worksWithItems = [
       <template #related>
         <FeatureRelatedLink to="/features/mock-server" label="Mock Server" color="#0ea5e9" />
         <FeatureRelatedLink to="/features/profiler" label="Performance Profiler" color="#8b5cf6" />
-        <FeatureRelatedLink to="/features/sentry" label="Exception Tracking" color="#f43f5e" />
+        <FeatureRelatedLink to="/features/sentry" label="Sentry" color="#f43f5e" />
       </template>
     </FeatureCTA>
   </div>
