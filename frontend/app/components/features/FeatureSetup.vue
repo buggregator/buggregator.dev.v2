@@ -56,7 +56,7 @@ async function copyCode(stepIndex: number, code: string) {
     <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
         <h2 class="text-section font-bold text-white mb-3 font-sans">Setup in 60 seconds</h2>
-        <p class="text-lg text-on-dark-secondary font-sans">No registration. No config files. Just run and connect.</p>
+        <p class="text-lg text-on-dark-secondary font-sans">No registration. No account. Start it and point your app at it.</p>
       </div>
 
       <div class="space-y-0">
