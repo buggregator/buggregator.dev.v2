@@ -52,7 +52,7 @@ const query = new URLSearchParams(dump.query).toString()
     <!-- cURL -->
     <section class="rounded-lg border border-landing-border-subtle overflow-hidden">
       <h4 class="px-3 py-2 border-b border-landing-border-subtle bg-[rgba(255,255,255,0.02)] font-sans text-xs font-semibold text-white">cURL</h4>
-      <pre class="p-3 bg-[var(--code-bg)] text-[var(--code-text)] overflow-x-auto">{{ dump.curl }}</pre>
+      <pre class="p-3 bg-[var(--code-bg)] text-[var(--code-text)] whitespace-pre-wrap [overflow-wrap:anywhere] sm:whitespace-pre sm:[overflow-wrap:normal] overflow-x-auto">{{ dump.curl }}</pre>
     </section>
   </div>
 </template>

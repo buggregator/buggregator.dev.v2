@@ -43,7 +43,7 @@ const selected = data.selected
         </section>
         <section>
           <h4 class="mb-1 text-[11px] uppercase tracking-wide text-on-dark-muted">Context</h4>
-          <pre class="bg-[var(--code-bg)] border border-[var(--code-border)] rounded p-2 font-mono text-xs text-[var(--code-string)] overflow-x-auto">{{ selected.context }}</pre>
+          <pre class="bg-[var(--code-bg)] border border-[var(--code-border)] rounded p-2 font-mono text-xs text-[var(--code-string)] whitespace-pre-wrap [overflow-wrap:anywhere] sm:whitespace-pre sm:[overflow-wrap:normal] overflow-x-auto">{{ selected.context }}</pre>
         </section>
         <section>
           <h4 class="mb-1 text-[11px] uppercase tracking-wide text-on-dark-muted">Source</h4>

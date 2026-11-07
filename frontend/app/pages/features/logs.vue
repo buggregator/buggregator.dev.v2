@@ -181,6 +181,7 @@ const worksWithItems = [
       subtitle="Logs"
       description="During development your logs end up in a file you tail -f, in container output you scroll, or in a worker's stdout you never see. Send them to Buggregator instead: logs from every service land in the same live view as your exceptions, dumps and emails — with the context readable as JSON."
       :accent-color="accentColor"
+      accent-text-color="#9ca3af"
     >
       <template #cta>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
