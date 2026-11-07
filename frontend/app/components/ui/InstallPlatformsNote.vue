@@ -4,9 +4,8 @@
 const { t } = useI18n()
 const { trackEvent } = useGtag()
 
-// Docs page for AI assistants. Switch to /agent-setup.html once the docs
-// release with that page (#4509) is live.
-const AGENT_SETUP_URL = 'https://docs.buggregator.dev/llm.html'
+// Docs page that walks an AI assistant through the setup.
+const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 </script>
 
 <template>

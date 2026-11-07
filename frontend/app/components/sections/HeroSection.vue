@@ -118,7 +118,7 @@ const formattedDownloads = computed(() => {
               <a :href="BINARY_LOCAL_ONLY_URL" target="_blank" rel="noopener" class="hero__binary-link">{{ t('install.localOnly') }}</a>
             </p>
             <p class="hero__binary-note">
-              <a href="https://docs.buggregator.dev/getting-started.html" target="_blank" rel="noopener" class="hero__binary-link">{{ t('hero.install.otherPlatforms') }}</a>
+              <a href="https://docs.buggregator.dev/install.html" target="_blank" rel="noopener" class="hero__binary-link">{{ t('hero.install.otherPlatforms') }}</a>
             </p>
           </div>
           <div
