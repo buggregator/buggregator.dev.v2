@@ -213,7 +213,7 @@
     "title": "The Buggregator ecosystem",
     "trap": {
       "title": "Debugging functions for your PHP code",
-      "description": "A Composer package that gives you trap(), tr(), and td() — powerful replacements for dump() and dd(). Chain methods like .depth(), .once(), .if() for precise control. Measure performance with tr() tickers. Works standalone or with the full server.",
+      "description": "A Composer package with trap(), tr() and td() — drop-in replacements for dump() and dd(). Chain .depth(), .once(), .if() to dump only what you need. Call tr() between two lines to see the time and memory spent. Works on its own or with the full server.",
       "github": "View on GitHub",
       "docs": "Read docs"
     },
@@ -222,6 +222,14 @@
       "description": "The Buggregator plugin for PhpStorm brings dumps, logs, and debug data directly into your editor.",
       "install": "Install from Marketplace",
       "docs": "Read docs"
+    },
+    "testo": {
+      "badge": "Partner project",
+      "title": "Tests without the boilerplate",
+      "description": "Testo is a PHP testing framework. Write tests as classes, plain functions or attributes right on your code — no TestCase to extend. Assertions grouped by type, benchmarks with one #[Bench] attribute, and a PhpStorm plugin. PHP 8.2+, now in open beta.",
+      "code": "composer require --dev testo/testo",
+      "cta": "Visit Testo",
+      "github": "View on GitHub"
     }
   },
   "community": {
@@ -338,5 +346,11 @@
       "and": ", and",
       "sentry": "filter Sentry errors, traces, logs and metrics by project and time period"
     }
+  },
+  "harnsy": {
+    "eyebrow": "How we build Buggregator",
+    "title": "An AI team builds Buggregator. We make the decisions.",
+    "description": "The server, the UI, the docs and this website are developed in harnsy. An AI lead plans the work and hands it to roles: Go and Vue developers, a reviewer, a release manager, a designer, a docs writer. They run on the coding CLIs we already use — Claude Code and Codex — on our own machine. We review and accept the results on each task card, and step in only where a decision is needed.",
+    "cta": "Development runs in harnsy"
   }
 }

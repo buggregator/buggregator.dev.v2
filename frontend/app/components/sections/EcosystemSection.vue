@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useGitHubStore } from '~/stores/github'
+import HarnsyCard from './EcosystemSection/HarnsyCard.vue'
+import TestoCard from './EcosystemSection/TestoCard.vue'
 
 const { t } = useI18n()
 const { trackEvent } = useGtag()
@@ -21,9 +23,9 @@ const formatStars = (n: number) =>
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Trap card -->
-        <div class="rounded-2xl border border-landing-border-subtle bg-landing-surface p-6 hover:-translate-y-0.5 transition-all duration-200">
+        <div class="rounded-2xl border border-landing-border-subtle bg-landing-surface p-6 lg:row-span-2 hover:-translate-y-0.5 hover:border-accent/45 transition-all duration-200">
           <div class="flex items-start justify-between mb-4">
             <div class="w-10 h-10 rounded-xl bg-[rgba(6,182,212,0.12)] flex items-center justify-center">
               <svg class="w-5 h-5 text-ray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,12 +64,12 @@ const formatStars = (n: number) =>
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-x-5">
             <a
               href="https://github.com/buggregator/trap"
               target="_blank"
               rel="noopener"
-              class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+              class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
               @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'trap_github' })"
             >
               {{ t('ecosystem.trap.github') }} →
@@ -76,7 +78,7 @@ const formatStars = (n: number) =>
               href="https://docs.buggregator.dev/trap/what-is-trap.html"
               target="_blank"
               rel="noopener"
-              class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+              class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
               @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'trap_docs' })"
             >
               {{ t('ecosystem.trap.docs') }} →
@@ -85,7 +87,7 @@ const formatStars = (n: number) =>
         </div>
 
         <!-- JetBrains card -->
-        <div class="rounded-2xl border border-landing-border-subtle bg-landing-surface p-6 hover:-translate-y-0.5 transition-all duration-200">
+        <div class="rounded-2xl border border-landing-border-subtle bg-landing-surface p-6 hover:-translate-y-0.5 hover:border-accent/45 transition-all duration-200">
           <div class="flex items-start justify-between mb-4">
             <div class="w-10 h-10 rounded-xl bg-[rgba(139,92,246,0.12)] flex items-center justify-center">
               <svg class="w-5 h-5 text-profiler" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,19 +111,22 @@ const formatStars = (n: number) =>
           <h3 class="text-lg font-semibold text-white mb-2 font-sans">{{ t('ecosystem.jetbrains.title') }}</h3>
           <p class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.jetbrains.description') }}</p>
 
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-x-5">
             <a
               href="https://plugins.jetbrains.com/plugin/26344-buggregator"
               target="_blank"
               rel="noopener"
-              class="text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
+              class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
               @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'jetbrains_install' })"
             >
               {{ t('ecosystem.jetbrains.install') }} →
             </a>
           </div>
         </div>
+        <TestoCard />
       </div>
+
+      <HarnsyCard />
     </div>
   </section>
 </template>
