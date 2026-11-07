@@ -60,7 +60,7 @@ services:
     environment:
       XDEBUG_PROXY_ENABLED: "true"
       XDEBUG_PROXY_ADDR: 0.0.0.0:9003
-      XDEBUG_PROXY_IDE_ADDR: host.docker.internal:9003
+      XDEBUG_PROXY_IDE_ADDR: host.docker.internal:9004
       MCP_ENABLED: "true"
     extra_hosts:
       - host.docker.internal:host-gateway   # needed on Linux`,
@@ -98,7 +98,8 @@ xdebug.start_with_request=trigger`,
         code: `{
   "mcpServers": {
     "buggregator": {
-      "command": "./buggregator",
+      "type": "stdio",
+      "command": "buggregator",
       "args": ["mcp"]
     }
   }
