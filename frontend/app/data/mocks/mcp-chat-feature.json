@@ -1,0 +1,16 @@
+{
+  "question": "Why did checkout fail?",
+  "calls": [
+    {
+      "tool": "events_list",
+      "args": "type: \"sentry\", limit: 5",
+      "result": "3 sentry events · newest: 9f2c…a41e, just now"
+    },
+    {
+      "tool": "sentry_event",
+      "args": "uuid: \"9f2c…a41e\"",
+      "result": "RuntimeException: Payment gateway timed out\n  ← GuzzleHttp\\Exception\\ConnectException\n  at app/Services/PaymentService.php:58\n  env: local · tags: route=checkout.store"
+    }
+  ],
+  "answer": "The call to the payment gateway timed out. The exception chain points at the line that threw: PaymentService.php:58."
+}

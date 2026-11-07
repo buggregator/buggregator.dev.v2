@@ -32,6 +32,7 @@ const featureLinks = [
   { label: 'Xdebug Proxy', href: '/features/xdebug' },
   { label: 'Log Viewer', href: '/features/logs' },
   { label: 'HTTP Dumps', href: '/features/http-dumps' },
+  { label: 'MCP Server & API', href: '/features/mcp-api' },
 ]
 
 const resourceLinks = [
