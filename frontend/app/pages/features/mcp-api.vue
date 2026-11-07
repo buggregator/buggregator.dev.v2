@@ -135,7 +135,7 @@ or URL:  http://localhost:8001/mcp`,
   → xdebug_location → xdebug_variables → xdebug_property ($cart->items)
 
 "Set a breakpoint where the order total is computed, run the checkout, and tell me why it's negative."
-  → xdebug_breakpoint_set → xdebug_wait → xdebug_variables
+  → xdebug_breakpoint_set → runs the request (curl) → xdebug_wait → xdebug_variables
 
 "Mock the payments API from ./openapi.yaml."
   → mock_import_openapi → mock_rules_list`,

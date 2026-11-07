@@ -14,14 +14,14 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'Debug PHP with Xdebug in Your Browser, IDE or AI Agent — Buggregator',
-  description: 'Pause a PHP script at a breakpoint and step through it in the browser, from your IDE, or let your AI agent drive over MCP. Breakpoints saved, local, free and open source.',
+  description: 'Pause a PHP script at a breakpoint and step through it in the browser, from your IDE, or let your AI agent drive over MCP. Local, free and open source.',
   ogTitle: 'Debug PHP with Xdebug in Your Browser, IDE or AI Agent — Buggregator',
-  ogDescription: 'Pause a PHP script at a breakpoint and step through it in the browser, from your IDE, or let your AI agent drive over MCP. Breakpoints saved, local, free and open source.',
+  ogDescription: 'Pause a PHP script at a breakpoint and step through it in the browser, from your IDE, or let your AI agent drive over MCP. Local, free and open source.',
   ogImage: 'https://buggregator.dev/buggregator.png',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Debug PHP with Xdebug in Your Browser, IDE or AI Agent — Buggregator',
-  twitterDescription: 'Pause a PHP script at a breakpoint and step through it in the browser, from your IDE, or let your AI agent drive over MCP. Breakpoints saved, local, free and open source.',
+  twitterDescription: 'Pause a PHP script at a breakpoint and step through it in the browser, from your IDE, or let your AI agent drive over MCP. Local, free and open source.',
 })
 
 const accentColor = '#f97316'
@@ -93,7 +93,7 @@ xdebug.client_port=9010`,
   },
   {
     title: 'Point Xdebug at Buggregator',
-    description: 'A typical php.ini — Xdebug keeps port 9003. Then put xdebug_break() where you want to stop, or open the Xdebug page and turn on Pause on the first line.',
+    description: 'A typical php.ini — Xdebug keeps port 9003. With start_with_request=trigger, Xdebug connects only when the request carries XDEBUG_TRIGGER=1 (cookie, GET parameter or env). Then put xdebug_break() where you want to stop, or open the Xdebug page and turn on Pause on the first line.',
     code: `xdebug.mode=debug
 xdebug.client_host=127.0.0.1
 xdebug.client_port=9003
@@ -102,7 +102,7 @@ xdebug.start_with_request=trigger`,
   },
   {
     title: 'Connect your AI assistant',
-    description: 'Add Buggregator as an MCP server, then ask: "Where did the script stop?", "Step over and show me $total." or "Set a breakpoint on OrderService.php:58 and continue."',
+    description: 'Add Buggregator as an MCP server, then ask: "Where did the script stop?", "Step over and show me $total." or "Set a breakpoint on /app/src/OrderService.php:58 and continue."',
     tabs: [
       {
         id: 'claude',
@@ -143,7 +143,7 @@ const highlights = [
   {
     icon: '\u{1F4CD}',
     title: 'Breakpoints that stay',
-    description: 'Click a line number, or type path:line or an exception class like Throwable. Breakpoints are saved and sent to every session Buggregator drives, after a restart too.',
+    description: 'Click a line number, or type path:line (the absolute path PHP sees) or an exception class like RuntimeException, or * for every exception. Breakpoints are saved and sent to every session Buggregator drives (kept across restarts when the database is a file, DATABASE_DSN).',
   },
   {
     icon: '\u{1F916}',
@@ -158,7 +158,7 @@ const highlights = [
   {
     icon: '\u23F1\uFE0F',
     title: 'A paused script doesn\'t wait forever',
-    description: 'A session nobody touches is released after 10 minutes (xdebug.idle_timeout), so a forgotten pause doesn\'t hold a PHP worker or a transaction.',
+    description: 'A paused session Buggregator drives is released after 10 minutes without a command (xdebug.idle_timeout), so a forgotten pause doesn\'t hold a PHP worker or a transaction.',
   },
   {
     icon: '\u{1F510}',
@@ -182,7 +182,7 @@ const worksWithItems = [
     <FeatureHero
       title="Step through PHP in your browser — or let your AI do it"
       subtitle="Xdebug, with or without an IDE"
-      description="Put xdebug_break() in your code or click a line number, run the request, and the script stops in Buggregator. Step over, into and out, continue or stop — from the Xdebug page, or by your AI agent over MCP. Use PhpStorm or VS Code? They keep working as before."
+      description="Put xdebug_break() in your code or set a breakpoint, run the request with XDEBUG_TRIGGER=1, and the script stops in Buggregator. Step over, into and out, continue or stop — from the Xdebug page, or by your AI agent over MCP. Use PhpStorm or VS Code? They keep working as before."
       :accent-color="accentColor"
     >
       <template #cta>
