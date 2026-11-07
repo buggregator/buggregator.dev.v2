@@ -21,7 +21,7 @@ const defaultWords = [
   'PSR-3', 'PSR-7', 'PSR-15', 'RFC 7807', 'HTTP/2', 'gRPC',
   'WebSocket', 'SSE', 'JSON', 'AMQP', 'Redis',
   // Ports & infra
-  ':8000', ':1025', ':9912', ':9913', ':9914',
+  ':8000', ':1025', ':9912', ':9913', ':8080',
   'docker run', '.env', 'docker-compose.yml',
   // Easter eggs
   'star me ★', 'buggregator is cool', 'install me!',

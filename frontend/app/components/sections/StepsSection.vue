@@ -18,11 +18,10 @@ type InstallTab = 'docker' | 'compose'
 const installTab = ref<InstallTab>('docker')
 
 const ports = [
-  { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector' },
+  { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector + XHProf' },
   { port: '1025:1025', hint: 'SMTP — email capture' },
   { port: '9912:9912', hint: 'VarDumper — dump() output' },
   { port: '9913:9913', hint: 'Monolog — application logs' },
-  { port: '9914:9914', hint: 'XHProf — performance profiling' },
   { port: '8080:8080', hint: 'HTTP Proxy — outgoing request capture' },
 ]
 
