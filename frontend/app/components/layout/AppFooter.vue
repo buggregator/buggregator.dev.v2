@@ -30,6 +30,8 @@ const featureLinks = [
   { label: 'SMS Testing', href: '/features/sms' },
   { label: 'Mock Server', href: '/features/mock-server' },
   { label: 'Xdebug Proxy', href: '/features/xdebug' },
+  { label: 'Log Viewer', href: '/features/logs' },
+  { label: 'HTTP Dumps', href: '/features/http-dumps' },
 ]
 
 const resourceLinks = [

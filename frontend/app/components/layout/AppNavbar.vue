@@ -28,6 +28,8 @@ const featureLinks = [
   { label: 'SMS Testing', to: '/features/sms', color: '#a855f7' },
   { label: 'Mock Server', to: '/features/mock-server', color: '#0ea5e9' },
   { label: 'Xdebug', to: '/features/xdebug', color: '#f97316' },
+  { label: 'Logs', to: '/features/logs', color: '#6b7280' },
+  { label: 'HTTP Dumps', to: '/features/http-dumps', color: '#22c55e' },
 ]
 
 const featuresOpen = ref(false)
