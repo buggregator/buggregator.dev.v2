@@ -74,7 +74,7 @@ async function copyCode(stepIndex: number, code: string) {
           </div>
 
           <!-- Right: content -->
-          <div class="flex-1 pb-14 lg:pb-18">
+          <div class="flex-1 min-w-0 pb-14 lg:pb-18">
             <h3 class="font-sans text-xl font-semibold text-white mb-2">{{ step.title }}</h3>
             <p class="font-sans text-base text-on-dark-secondary leading-relaxed mb-4">{{ step.description }}</p>
 

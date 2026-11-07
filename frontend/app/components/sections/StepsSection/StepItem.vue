@@ -18,7 +18,7 @@ defineProps<{
     </div>
 
     <!-- Content -->
-    <div class="flex-1 pb-16 lg:pb-20">
+    <div class="flex-1 min-w-0 pb-16 lg:pb-20">
       <div class="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-10">
         <!-- Left column: text + code -->
         <div>
