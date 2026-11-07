@@ -10,29 +10,10 @@ const { trackEvent } = useGtag()
 const track = () => trackEvent('copy_install_command', { cta_location: props.ctaLocation ?? 'framework_tabs' })
 
 const { t } = useI18n()
-const copied = ref(false)
+const { copied, copy: copyText } = useClipboardCopy()
 
 async function copy() {
-  try {
-    await navigator.clipboard.writeText(props.command)
-    track()
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  } catch {
-    // Fallback for older browsers
-    const el = document.createElement('textarea')
-    el.value = props.command
-    el.setAttribute('readonly', '')
-    el.style.position = 'absolute'
-    el.style.left = '-9999px'
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
-    track()
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  if (await copyText(props.command)) track()
 }
 </script>
 
