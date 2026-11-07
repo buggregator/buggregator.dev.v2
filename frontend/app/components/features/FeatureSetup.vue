@@ -5,7 +5,8 @@ const props = defineProps<{
     description: string
     code?: string
     language?: string
-    tabs?: Array<{ id: string; label: string; code: string }>
+    // `note` on a tab shows under the code while that tab is active.
+    tabs?: Array<{ id: string; label: string; code: string; note?: string }>
     note?: string
   }>
 }>()
@@ -15,7 +16,7 @@ const imageTag = useServerImageTag()
 // Track active tab per step
 const activeTabs = ref<Record<number, string>>({})
 
-type StepTab = { id: string; label: string; code: string }
+type StepTab = { id: string; label: string; code: string; note?: string }
 
 function getActiveTab(stepIndex: number, tabs: StepTab[]): string {
   const saved = activeTabs.value[stepIndex]
@@ -35,6 +36,12 @@ function getActiveCode(stepIndex: number, step: typeof props.steps[number]): str
   const found = tabs.find(t => t.id === activeId)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return found ? found.code : tabs[0]!.code
+}
+
+function getActiveNote(stepIndex: number, step: typeof props.steps[number]): string | undefined {
+  if (!step.tabs) return undefined
+  const activeId = getActiveTab(stepIndex, step.tabs)
+  return step.tabs.find(t => t.id === activeId)?.note
 }
 
 // Copy
@@ -98,7 +105,7 @@ async function copyCode(stepIndex: number, code: string) {
                   :key="li"
                 ><template v-if="line.startsWith('#')"><span class="text-code-comment">{{ line }}</span>
 </template><template v-else-if="line.startsWith('$ ')"><span class="text-code-prompt select-none">$ </span><span class="text-code-text">{{ line.slice(2) }}</span>
-</template><template v-else-if="line.includes('=')"><span class="text-code-keyword">{{ line.split('=')[0] }}</span><span class="text-code-text">=</span><span class="text-code-string">{{ line.split('=').slice(1).join('=') }}</span>
+</template><template v-else-if="/^[A-Za-z_][\w.]*=/.test(line)"><span class="text-code-keyword">{{ line.split('=')[0] }}</span><span class="text-code-text">=</span><span class="text-code-string">{{ line.split('=').slice(1).join('=') }}</span>
 </template><template v-else>{{ line }}
 </template></template></pre>
 
@@ -122,6 +129,7 @@ async function copyCode(stepIndex: number, code: string) {
                 </ClientOnly>
               </div>
             </div>
+            <p v-if="getActiveNote(i, step)" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ getActiveNote(i, step) }}</p>
             <p v-if="step.note" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ step.note }}</p>
           </div>
         </div>

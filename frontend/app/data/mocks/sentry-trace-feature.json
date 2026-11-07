@@ -1,0 +1,20 @@
+{
+  "tabs": [
+    { "label": "Exceptions", "count": 3 },
+    { "label": "Traces", "count": 5, "active": true },
+    { "label": "Logs", "count": 24 },
+    { "label": "Metrics", "count": 12 }
+  ],
+  "period": "Last hour",
+  "trace": {
+    "name": "GET /orders/42",
+    "totalMs": 240,
+    "spans": [
+      { "op": "http.server", "type": "server", "description": "GET /orders/42", "start": 0, "duration": 240, "depth": 0 },
+      { "op": "db.query", "type": "db", "description": "SELECT * FROM orders WHERE id = ?", "start": 12, "duration": 36, "depth": 1 },
+      { "op": "cache.get", "type": "cache", "description": "orders:42:items", "start": 50, "duration": 3, "depth": 1 },
+      { "op": "http.client", "type": "http", "description": "POST api.payments.test/charges", "start": 60, "duration": 158, "depth": 1, "error": true },
+      { "op": "db.query", "type": "db", "description": "UPDATE orders SET status = ?", "start": 222, "duration": 12, "depth": 1 }
+    ]
+  }
+}
