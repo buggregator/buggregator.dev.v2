@@ -216,7 +216,7 @@
     }
   },
   "ecosystem": {
-    "title": "El ecosistema Buggregator",
+    "title": "Hecho por nosotros y nuestros socios",
     "trap": {
       "title": "Funciones de depuración para tu código PHP",
       "description": "Un paquete Composer con trap(), tr() y td(), que sustituyen a dump() y dd(). Encadena .depth(), .once(), .if() para volcar solo lo que necesitas. Llama a tr() entre dos líneas para ver el tiempo y la memoria consumidos. Funciona solo o con el servidor completo.",
