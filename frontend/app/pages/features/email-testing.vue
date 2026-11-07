@@ -28,17 +28,17 @@ const accentColor = '#f59e0b'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'Run a single command. The SMTP server starts on port 1025 alongside the web UI on port 8000. Or download one small binary — no Docker needed.',
+    description: `Run a single command. The SMTP server starts on port 1025 alongside the web UI on port 8000. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
-      {
-        id: 'docker',
-        label: 'Docker',
-        code: '$ docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 ghcr.io/buggregator/server:{imageTag}',
-      },
       {
         id: 'binary',
         label: 'Binary',
         binary: true,
+      },
+      {
+        id: 'docker',
+        label: 'Docker',
+        code: '$ docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 ghcr.io/buggregator/server:{imageTag}',
       },
       {
         id: 'compose',

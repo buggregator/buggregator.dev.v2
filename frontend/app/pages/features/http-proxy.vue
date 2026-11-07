@@ -28,17 +28,17 @@ const accentColor = '#10b981'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'The HTTP proxy listens on port 8080. The web UI is on port 8000. Or download one small binary — no Docker needed.',
+    description: `The HTTP proxy listens on port 8080. The web UI is on port 8000. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
-      {
-        id: 'docker',
-        label: 'Docker',
-        code: '$ docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:8080:8080 ghcr.io/buggregator/server:{imageTag}',
-      },
       {
         id: 'binary',
         label: 'Binary',
         binary: true,
+      },
+      {
+        id: 'docker',
+        label: 'Docker',
+        code: '$ docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:8080:8080 ghcr.io/buggregator/server:{imageTag}',
       },
       {
         id: 'compose',

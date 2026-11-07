@@ -34,7 +34,9 @@
     "install": {
       "label": "Cómo ejecutarlo",
       "docker": "Docker",
-      "binary": "Binario"
+      "binary": "Binario",
+      "binaryNote": "Un solo archivo, de unos {size}. Se instala con un comando.",
+      "otherPlatforms": "Windows y otras formas →"
     }
   },
   "cleanApp": {
@@ -124,7 +126,7 @@
     "steps": {
       "run": {
         "title": "Ejecuta un comando",
-        "description": "Arráncalo con un solo docker run, o descarga un único binario pequeño y ejecútalo. Sin registro ni cuenta."
+        "description": "Instala un único archivo con un comando, o arráncalo con docker run. Sin registro ni cuenta."
       },
       "connect": {
         "title": "Añade una variable de entorno",
@@ -183,11 +185,14 @@
     },
     "binary": {
       "platform": "Plataforma",
-      "note": "Un solo archivo para Linux, macOS y Windows. Descárgalo y ejecútalo: todo se queda en tu ordenador.",
-      "noteSize": "Un solo archivo, de unos {size}, para Linux, macOS y Windows. Descárgalo y ejecútalo: todo se queda en tu ordenador.",
+      "note": "Un solo archivo para Linux, macOS y Windows, de unos {size}. No hace falta instalar nada más.",
+      "size": "{n} MB",
       "windowsNote": "En Windows, VarDumper (puerto 9912) no está disponible. El resto de módulos funciona."
     },
-    "platforms": "Funciona en Windows, macOS y Linux, también en Apple Silicon y Linux ARM.",
+    "platforms": "Funciona en Windows, macOS y Linux, en Intel/AMD y ARM.",
+    "localOnly": "Por defecto escucha en todas las interfaces de red. Para que solo se vea en este equipo, basta un ajuste →",
+    "localOnlyBound": "Esta línea lo deja solo en este equipo. Sin los ajustes *_ADDR escucha en todas las interfaces de red →",
+    "scriptCpu": "El script elige el archivo para tu procesador: Intel/AMD o ARM.",
     "agent": "¿Prefieres no hacerlo tú? Tu agente de IA puede configurar Buggregator por ti →",
     "trust": {
       "free": "Gratis para siempre",
@@ -197,7 +202,8 @@
     },
     "links": {
       "fullGuide": "Guía completa de instalación →",
-      "binaries": "Todas las descargas en GitHub Releases →"
+      "binaries": "Todas las descargas en GitHub Releases →",
+      "manual": "¿Prefieres no ejecutar un script? Descarga el archivo tú mismo →"
     }
   },
   "demo": {

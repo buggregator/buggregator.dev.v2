@@ -29,17 +29,17 @@ const accentColor = '#6b7280'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'Logs arrive over TCP on port 9913. The UI is on port 8000. Or download one small binary — no Docker needed.',
+    description: `Logs arrive over TCP on port 9913. The UI is on port 8000. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
-      {
-        id: 'docker',
-        label: 'Docker',
-        code: '$ docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:{imageTag}',
-      },
       {
         id: 'binary',
         label: 'Binary',
         binary: true,
+      },
+      {
+        id: 'docker',
+        label: 'Docker',
+        code: '$ docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:{imageTag}',
       },
       {
         id: 'compose',

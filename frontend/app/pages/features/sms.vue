@@ -28,17 +28,17 @@ const accentColor = '#a855f7'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'The SMS endpoint runs on port 8000 alongside the web UI. Or download one small binary — no Docker needed.',
+    description: `The SMS endpoint runs on port 8000 alongside the web UI. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
-      {
-        id: 'docker',
-        label: 'Docker',
-        code: '$ docker run -p 127.0.0.1:8000:8000 ghcr.io/buggregator/server:{imageTag}',
-      },
       {
         id: 'binary',
         label: 'Binary',
         binary: true,
+      },
+      {
+        id: 'docker',
+        label: 'Docker',
+        code: '$ docker run -p 127.0.0.1:8000:8000 ghcr.io/buggregator/server:{imageTag}',
       },
       {
         id: 'compose',

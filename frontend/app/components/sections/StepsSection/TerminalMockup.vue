@@ -19,7 +19,7 @@ const imageTag = useServerImageTag()
     <div class="bg-code-bg p-4 font-mono text-xs leading-relaxed">
       <div class="text-on-dark-muted">
         <span class="text-code-prompt">$</span>
-        <span v-if="method === 'binary'" class="text-code-text"> ./buggregator</span>
+        <span v-if="method === 'binary'" class="text-code-text"> buggregator</span>
         <span v-else-if="method === 'compose'" class="text-code-text"> docker compose up buggregator</span>
         <span v-else class="text-code-text"> docker run ghcr.io/buggregator/server:{{ imageTag }}</span>
       </div>

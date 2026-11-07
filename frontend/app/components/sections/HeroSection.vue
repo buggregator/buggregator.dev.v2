@@ -37,20 +37,21 @@ function commandLines(portsPerLine: number): string {
 const commandWide = computed(() => commandLines(2))
 const commandNarrow = computed(() => commandLines(1))
 
-// Docker or the standalone binary: two equal ways to start. Docker stays
-// the default, so the server HTML is today's command.
-type StartMethod = 'docker' | 'binary'
-const startMethods: StartMethod[] = ['docker', 'binary']
-const startMethod = ref<StartMethod>('docker')
+// The standalone binary or Docker: two ways to start. The binary comes first
+// and is the default (owner: the simple path); the hero shows only its
+// one-line install, the run line with 127.0.0.1 binds is in Get started.
+type StartMethod = 'binary' | 'docker'
+const startMethods: StartMethod[] = ['binary', 'docker']
+const startMethod = ref<StartMethod>('binary')
 const binary = useBinaryPlatform()
 
 async function copyStartCommand() {
-  const text = startMethod.value === 'binary' ? binary.copyText.value : t('hero.command')
+  const text = startMethod.value === 'binary' ? binary.installCommand.value : t('hero.command')
   if (await copy(text)) {
     trackEvent('copy_install_command', {
       cta_location: 'hero',
       install_method: startMethod.value,
-      ...(startMethod.value === 'binary' ? { platform: binary.platform.value.id } : {}),
+      ...(startMethod.value === 'binary' ? { platform: binary.os.value } : {}),
     })
   }
 }
@@ -108,10 +109,16 @@ const formattedDownloads = computed(() => {
           </div>
           <div v-if="startMethod === 'binary'" class="hero__command hero__command--binary">
             <BinaryPlatformPicker class="mb-3" />
-            <pre><template v-for="(cmd, i) in binary.commands.value" :key="i"><span class="hero__prompt" aria-hidden="true">{{ binary.prompt.value }} </span>{{ cmd }}
-</template></pre>
-            <p v-if="binary.platform.value.os === 'windows'" class="hero__binary-note">
-              {{ t('install.binary.windowsNote') }}
+            <pre><span class="hero__prompt" aria-hidden="true">{{ binary.prompt.value }} </span>{{ binary.installCommand.value }}</pre>
+            <p class="hero__binary-note">
+              {{ t('hero.install.binaryNote', { size: t('install.binary.size', { n: BINARY_SIZE_MB }) }) }}
+              <template v-if="binary.os.value === 'windows'">{{ t('install.binary.windowsNote') }}</template>
+            </p>
+            <p class="hero__binary-note">
+              <a :href="BINARY_LOCAL_ONLY_URL" target="_blank" rel="noopener" class="hero__binary-link">{{ t('install.localOnly') }}</a>
+            </p>
+            <p class="hero__binary-note">
+              <a href="https://docs.buggregator.dev/getting-started.html" target="_blank" rel="noopener" class="hero__binary-link">{{ t('hero.install.otherPlatforms') }}</a>
             </p>
           </div>
           <div
@@ -299,8 +306,10 @@ h1 {
   color: #fff;
 }
 
+/* The install line wraps: «| sh» stays in view on a phone. */
 .hero__command--binary pre {
-  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 .hero__binary-note {
@@ -309,6 +318,24 @@ h1 {
   font-size: 0.75rem;
   white-space: normal;
   color: theme('colors.on-dark.secondary');
+}
+
+.hero__binary-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: theme('colors.accent.DEFAULT');
+  text-decoration: none;
+}
+
+.hero__binary-link:hover {
+  color: theme('colors.accent.hover');
+}
+
+@media (min-width: 640px) {
+  .hero__binary-link {
+    min-height: 0;
+  }
 }
 
 .hero__platforms {

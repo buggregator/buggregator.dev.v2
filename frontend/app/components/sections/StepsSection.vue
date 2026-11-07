@@ -12,8 +12,8 @@ const imageTag = useServerImageTag()
 
 // Step 1: install method tabs
 type InstallTab = 'docker' | 'binary' | 'compose'
-const installTab = ref<InstallTab>('docker')
-const installTabs: InstallTab[] = ['docker', 'binary', 'compose']
+const installTab = ref<InstallTab>('binary')
+const installTabs: InstallTab[] = ['binary', 'docker', 'compose']
 
 const ports = [
   { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector + XHProf' },

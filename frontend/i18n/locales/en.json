@@ -34,7 +34,9 @@
     "install": {
       "label": "How to run",
       "docker": "Docker",
-      "binary": "Binary"
+      "binary": "Binary",
+      "binaryNote": "One file, about {size}. One command installs it.",
+      "otherPlatforms": "Windows and other ways →"
     }
   },
   "cleanApp": {
@@ -124,7 +126,7 @@
     "steps": {
       "run": {
         "title": "Run one command",
-        "description": "Start it with one docker run, or download one small binary and run it. No registration, no account."
+        "description": "Install one file with one command, or start it with docker run. No registration, no account."
       },
       "connect": {
         "title": "Add one env variable",
@@ -183,11 +185,14 @@
     },
     "binary": {
       "platform": "Platform",
-      "note": "One file for Linux, macOS and Windows. Download it, run it — everything stays on your computer.",
-      "noteSize": "One file, about {size}, for Linux, macOS and Windows. Download it, run it — everything stays on your computer.",
+      "note": "One file for Linux, macOS and Windows, about {size}. Nothing else to install.",
+      "size": "{n} MB",
       "windowsNote": "On Windows, VarDumper (port 9912) is not available. Every other module works."
     },
-    "platforms": "Runs on Windows, macOS and Linux — Apple Silicon and Linux ARM included.",
+    "platforms": "Runs on Windows, macOS and Linux, on Intel/AMD and ARM.",
+    "localOnly": "Listens on all network interfaces by default. To keep it on this computer only, see the one-line setting →",
+    "localOnlyBound": "This run line keeps it on this computer. Without the *_ADDR settings it listens on all network interfaces →",
+    "scriptCpu": "The script picks the file for your CPU: Intel/AMD or ARM.",
     "agent": "Prefer not to do it yourself? Your AI agent can set Buggregator up for you →",
     "trust": {
       "free": "Free forever",
@@ -197,7 +202,8 @@
     },
     "links": {
       "fullGuide": "Full installation guide →",
-      "binaries": "All downloads on GitHub Releases →"
+      "binaries": "All downloads on GitHub Releases →",
+      "manual": "Rather not run a script? Download the file yourself →"
     }
   },
   "demo": {

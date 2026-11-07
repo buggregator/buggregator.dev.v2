@@ -29,17 +29,17 @@ const accentColor = '#0ea5e9'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'Requires Buggregator v2.6.0 or later. The mock server answers on the UI port, 8000. Nothing to turn on. Or download one small binary — no Docker needed.',
+    description: `Requires Buggregator v2.6.0 or later. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
-      {
-        id: 'docker',
-        label: 'Docker',
-        code: '$ docker run -p 127.0.0.1:8000:8000 ghcr.io/buggregator/server:{imageTag}',
-      },
       {
         id: 'binary',
         label: 'Binary',
         binary: true,
+      },
+      {
+        id: 'docker',
+        label: 'Docker',
+        code: '$ docker run -p 127.0.0.1:8000:8000 ghcr.io/buggregator/server:{imageTag}',
       },
       {
         id: 'compose',

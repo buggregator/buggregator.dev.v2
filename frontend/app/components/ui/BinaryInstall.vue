@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import BinaryPlatformPicker from '~/components/ui/BinaryPlatformPicker.vue'
 
-// Download-and-run commands for the standalone binary, with a platform
-// picker. The platform is shared page-wide (useBinaryPlatform), so the hero,
-// Get started and feature pages show the same OS.
+// Install-and-run commands for the standalone binary, with an OS picker.
+// The OS is shared page-wide (useBinaryPlatform), so the hero, Get started
+// and feature pages show the same one. The run line binds 127.0.0.1.
 const props = defineProps<{
   // Where it sits, for the copy_install_command analytics event.
   ctaLocation: string
@@ -12,16 +12,18 @@ const props = defineProps<{
 }>()
 
 const { t } = useI18n()
-const { platform, commands, prompt, copyText } = useBinaryPlatform()
+const { os, commands, prompt, copyText } = useBinaryPlatform()
 const { copied, copy } = useClipboardCopy()
 const { trackEvent } = useGtag()
+
+const link = 'inline-flex items-center min-h-[44px] sm:min-h-0 text-accent hover:text-accent-hover transition-colors no-underline'
 
 async function copyCommands() {
   if (await copy(copyText.value)) {
     trackEvent('copy_install_command', {
       cta_location: props.ctaLocation,
       install_method: 'binary',
-      platform: platform.value.id,
+      platform: os.value,
     })
   }
 }
@@ -50,17 +52,22 @@ async function copyCommands() {
       </button>
     </div>
 
-    <pre class="font-mono text-xs leading-relaxed whitespace-pre overflow-x-auto"><template
+    <pre class="font-mono text-xs leading-relaxed whitespace-pre-wrap break-all"><template
       v-for="(cmd, i) in commands"
       :key="i"
     ><span class="text-code-prompt select-none">{{ prompt }} </span><span class="text-code-text">{{ cmd }}</span>
 </template></pre>
 
-    <p v-if="platform.os === 'windows'" class="mt-3 font-sans text-xs text-on-dark-secondary">
-      {{ t('install.binary.windowsNote') }}
-    </p>
-    <p class="mt-3 font-sans text-xs text-on-dark-secondary">
-      {{ platform.sizeMb ? t('install.binary.noteSize', { size: `${platform.sizeMb} MB` }) : t('install.binary.note') }}
-    </p>
+    <div class="mt-3 space-y-1.5 font-sans text-xs leading-relaxed text-on-dark-secondary">
+      <p>{{ t('install.scriptCpu') }}</p>
+      <p v-if="os === 'windows'">{{ t('install.binary.windowsNote') }}</p>
+      <p>{{ t('install.binary.note', { size: t('install.binary.size', { n: BINARY_SIZE_MB }) }) }}</p>
+      <p>
+        <a :href="BINARY_LOCAL_ONLY_URL" target="_blank" rel="noopener" :class="link">{{ t('install.localOnlyBound') }}</a>
+      </p>
+      <p>
+        <a :href="BINARY_RELEASES_URL" target="_blank" rel="noopener" :class="link">{{ t('install.links.manual') }}</a>
+      </p>
+    </div>
   </div>
 </template>
