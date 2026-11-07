@@ -11,12 +11,12 @@ const { trackEvent } = useGtag()
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
-      <span class="text-xs font-mono text-on-dark-muted bg-landing-elevated px-2 py-0.5 rounded-full border border-landing-border-subtle">
+      <span class="text-xs font-mono text-on-dark-secondary bg-landing-elevated px-2 py-0.5 rounded-full border border-landing-border-subtle">
         {{ t('ecosystem.testo.badge') }}
       </span>
     </div>
     <h3 class="text-lg font-semibold text-white mb-2 font-sans">{{ t('ecosystem.testo.title') }}</h3>
-    <i18n-t keypath="ecosystem.testo.description" tag="p" scope="global" class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">
+    <i18n-t keypath="ecosystem.testo.description" tag="p" scope="global" class="text-sm text-on-dark-secondary leading-relaxed mb-4 font-sans">
       <template #attr>
         <code class="font-mono text-xs whitespace-nowrap">#[Bench]</code>
       </template>

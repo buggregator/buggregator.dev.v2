@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useGitHubStore } from '~/stores/github'
-import HarnsyCard from './EcosystemSection/HarnsyCard.vue'
 import TestoCard from './EcosystemSection/TestoCard.vue'
 
 const { t } = useI18n()
@@ -34,10 +33,10 @@ const formatStars = (n: number) =>
             </div>
             <ClientOnly>
               <div v-if="trapRepo" class="flex items-center gap-3">
-                <span v-if="trapRepo.latest_version" class="text-xs font-mono text-on-dark-muted bg-landing-elevated px-2 py-0.5 rounded-full border border-landing-border-subtle">
+                <span v-if="trapRepo.latest_version" class="text-xs font-mono text-on-dark-secondary bg-landing-elevated px-2 py-0.5 rounded-full border border-landing-border-subtle">
                   v{{ trapRepo.latest_version }}
                 </span>
-                <span v-if="trapRepo.stars" class="inline-flex items-center gap-1 text-xs text-on-dark-muted">
+                <span v-if="trapRepo.stars" class="inline-flex items-center gap-1 text-xs text-on-dark-secondary">
                   <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
                     <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
                   </svg>
@@ -47,7 +46,7 @@ const formatStars = (n: number) =>
             </ClientOnly>
           </div>
           <h3 class="text-lg font-semibold text-white mb-2 font-sans">{{ t('ecosystem.trap.title') }}</h3>
-          <p class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.trap.description') }}</p>
+          <p class="text-sm text-on-dark-secondary leading-relaxed mb-4 font-sans">{{ t('ecosystem.trap.description') }}</p>
 
           <!-- Code examples -->
           <div class="mb-4 space-y-2">
@@ -96,10 +95,10 @@ const formatStars = (n: number) =>
             </div>
             <ClientOnly>
               <div v-if="pluginRepo" class="flex items-center gap-3">
-                <span v-if="pluginRepo.latest_version" class="text-xs font-mono text-on-dark-muted bg-landing-elevated px-2 py-0.5 rounded-full border border-landing-border-subtle">
+                <span v-if="pluginRepo.latest_version" class="text-xs font-mono text-on-dark-secondary bg-landing-elevated px-2 py-0.5 rounded-full border border-landing-border-subtle">
                   v{{ pluginRepo.latest_version }}
                 </span>
-                <span v-if="pluginRepo.stars" class="inline-flex items-center gap-1 text-xs text-on-dark-muted">
+                <span v-if="pluginRepo.stars" class="inline-flex items-center gap-1 text-xs text-on-dark-secondary">
                   <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
                     <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
                   </svg>
@@ -109,7 +108,7 @@ const formatStars = (n: number) =>
             </ClientOnly>
           </div>
           <h3 class="text-lg font-semibold text-white mb-2 font-sans">{{ t('ecosystem.jetbrains.title') }}</h3>
-          <p class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.jetbrains.description') }}</p>
+          <p class="text-sm text-on-dark-secondary leading-relaxed mb-4 font-sans">{{ t('ecosystem.jetbrains.description') }}</p>
 
           <div class="flex flex-wrap gap-x-5">
             <a
@@ -125,8 +124,6 @@ const formatStars = (n: number) =>
         </div>
         <TestoCard />
       </div>
-
-      <HarnsyCard />
     </div>
   </section>
 </template>

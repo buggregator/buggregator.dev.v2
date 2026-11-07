@@ -355,7 +355,7 @@
   },
   "harnsy": {
     "title": "An AI team builds Buggregator. We make the decisions.",
-    "description": "The server, UI, docs and this website are built in harnsy. An AI lead gives work to roles — developers, a reviewer, a release manager, a designer — running on Claude Code and Codex on our own machine. We step in only where a decision is needed.",
+    "description": "The server, UI, docs and this website are built in harnsy, the tool we use to run our AI agents. An AI lead gives work to roles — developers, a reviewer, a release manager — on Claude Code and Codex, on our own machine.",
     "cta": "Visit harnsy.dev"
   }
 }

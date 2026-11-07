@@ -355,7 +355,7 @@
   },
   "harnsy": {
     "title": "Un equipo de IA desarrolla Buggregator. Las decisiones las tomamos nosotros.",
-    "description": "El servidor, la interfaz, la documentación y este sitio web se hacen en harnsy. Un líder de IA reparte el trabajo entre roles (desarrolladores, un revisor, un responsable de releases, un diseñador) que trabajan con Claude Code y Codex en nuestra propia máquina. Solo intervenimos cuando hace falta una decisión.",
+    "description": "El servidor, la interfaz, la documentación y este sitio web se hacen en harnsy, la herramienta con la que ejecutamos nuestros agentes de IA. Un líder de IA reparte el trabajo entre roles (desarrolladores, un revisor, un responsable de releases) que trabajan con Claude Code y Codex en nuestra propia máquina.",
     "cta": "Visitar harnsy.dev"
   }
 }
