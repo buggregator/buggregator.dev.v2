@@ -36,7 +36,7 @@
       "docker": "Docker",
       "binary": "Binario",
       "binaryNote": "Un solo archivo, de unos {size}. Se instala con un comando.",
-      "otherPlatforms": "Windows y otras formas →"
+      "otherPlatforms": "Otras formas de instalar →"
     }
   },
   "cleanApp": {

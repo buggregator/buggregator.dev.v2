@@ -36,7 +36,7 @@
       "docker": "Docker",
       "binary": "Бинарник",
       "binaryNote": "Один файл, около {size}. Ставится одной командой.",
-      "otherPlatforms": "Windows и другие способы →"
+      "otherPlatforms": "Другие способы установки →"
     }
   },
   "cleanApp": {
