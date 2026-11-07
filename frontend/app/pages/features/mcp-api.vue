@@ -187,7 +187,7 @@ const highlights = [
   {
     icon: '\u{1F9EA}',
     title: 'Mock APIs, from your assistant or a script',
-    description: 'Your assistant can create, edit and delete mock rules, preview what a rule would answer, and turn a captured request into a rule. Give it an OpenAPI spec, and it makes one rule per endpoint, with example or fake data. Scripts do the same through the REST API.',
+    description: 'Your assistant can create, edit and delete mock rules, preview what a rule would answer, and turn a captured request into a rule. Give it an OpenAPI spec, and it makes one rule per endpoint, with example or fake data. Scripts can manage rules and import specs through the REST API.',
   },
 ]
 
