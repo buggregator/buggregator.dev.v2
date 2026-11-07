@@ -29,7 +29,7 @@ const accentColor = '#f97316'
 const steps = [
   {
     title: 'Turn the proxy on',
-    description: 'The Xdebug proxy is off by default; turn on MCP too, so your AI assistant can see the session. The proxy and your IDE can\'t both listen on 9003: set your IDE\'s Xdebug debug port to 9004 (PhpStorm: Settings → PHP → Debug → Xdebug → Debug port).',
+    description: 'Requires Buggregator v2.6.0 or later. The Xdebug proxy is off by default; turn on MCP too, so your AI assistant can see the session. The proxy and your IDE can\'t both listen on 9003: set your IDE\'s Xdebug debug port to 9004 (PhpStorm: Settings → PHP → Debug → Xdebug → Debug port).',
     tabs: [
       {
         id: 'yaml',
@@ -61,6 +61,7 @@ services:
       XDEBUG_PROXY_ENABLED: "true"
       XDEBUG_PROXY_ADDR: 0.0.0.0:9003
       XDEBUG_PROXY_IDE_ADDR: host.docker.internal:9003
+      MCP_ENABLED: "true"
     extra_hosts:
       - host.docker.internal:host-gateway   # needed on Linux`,
       },
@@ -106,11 +107,11 @@ xdebug.start_with_request=trigger`,
       {
         id: 'docker-http',
         label: 'Docker (HTTP)',
-        code: `// Needs MCP_TRANSPORT: http, MCP_ADDR: ":8001" and port 8001 published
+        code: `// Needs MCP_ENABLED: "true", MCP_TRANSPORT: http and port 8001 published
 {
   "mcpServers": {
     "buggregator": {
-      "type": "url",
+      "type": "http",
       "url": "http://localhost:8001/mcp"
     }
   }
@@ -139,7 +140,7 @@ const highlights = [
   {
     icon: '\u{1F4DC}',
     title: 'See what the AI asked',
-    description: 'Agent activity lists every MCP call the assistant made in the session, refused ones included.',
+    description: 'Agent activity lists the assistant's MCP calls in the session, refused ones included.',
   },
   {
     icon: '\u{1F6DF}',

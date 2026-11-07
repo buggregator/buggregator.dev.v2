@@ -138,7 +138,8 @@ function bytes(value: number) {
   return `${value} B`
 }
 
-const nameParts = computed(() => active.value?.node.name.split(/(?<=\\|::)/) ?? [])
+// No regex lookbehind: Safari before 16.4 cannot parse it.
+const nameParts = computed(() => active.value?.node.name.replace(/(\\|::)/g, '$1\n').split('\n') ?? [])
 
 const stats = computed(() => {
   const frame = active.value

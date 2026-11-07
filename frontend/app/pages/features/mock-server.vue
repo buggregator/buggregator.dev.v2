@@ -29,7 +29,7 @@ const accentColor = '#0ea5e9'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'The mock server answers on the UI port, 8000. Nothing to turn on.',
+    description: 'Requires Buggregator v2.6.0 or later. The mock server answers on the UI port, 8000. Nothing to turn on.',
     tabs: [
       {
         id: 'docker',
@@ -111,7 +111,7 @@ const highlights = [
   {
     icon: '\u{1F4E6}',
     title: 'Any response',
-    description: 'Status 100–599, any headers, a body up to 1 MB. JSON, XML or plain text — whatever the real API sends.',
+    description: 'Status 100–599, your own headers, a body up to 1 MB. JSON, XML or plain text — whatever the real API sends.',
   },
   {
     icon: '\u{1F4A5}',
@@ -131,7 +131,7 @@ const highlights = [
   {
     icon: '\u{1F50D}',
     title: 'Why didn\'t it match?',
-    description: 'An unmatched call gets 404 and is still captured, with the rules that almost matched and why: method, project or disabled. Turn that request into a rule in one click.',
+    description: 'An unmatched call gets 404 and is still captured, with the rules that almost matched and why: method, project or disabled. Start a rule from that request in one click — method and path prefilled.',
   },
   {
     icon: '\u{1F501}',
