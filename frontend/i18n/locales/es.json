@@ -163,7 +163,7 @@
       "inspector": "Monitorea el rendimiento con trazado de transacciones, seguimiento de memoria y desglose temporal. Alternativa local a APM.",
       "sms": "Intercepta SMS salientes durante el desarrollo. Auto-detecta 40+ proveedores incluyendo Twilio, Vonage, Plivo, Sinch y más.",
       "mockServer": "Simula la API de la que depende tu app. Define una regla —método, ruta, estado, cabeceras, cuerpo, retardo— y /mock responde con ella. Cada llamada se guarda, con la regla que respondió o por qué ninguna coincidió.",
-      "xdebug": "Ve una sesión de Xdebug en pausa en el navegador, solo lectura: pila, variables, watches y código. Tu IDE recibe la sesión sin cambios y tu asistente de IA puede leerla por MCP. Desactivado por defecto."
+      "xdebug": "Ve una sesión de Xdebug en pausa en el navegador: pila, variables, código y watches cuando eval está activado. La ejecución paso a paso sigue en tu IDE, que recibe la sesión sin cambios; tu asistente de IA puede leerla por MCP. Desactivado por defecto."
     },
     "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
   },

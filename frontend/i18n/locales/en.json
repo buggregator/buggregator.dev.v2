@@ -163,7 +163,7 @@
       "inspector": "Monitor application performance with transaction tracing, memory tracking, and timeline breakdowns. Local APM alternative.",
       "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more.",
       "mockServer": "Fake the API your app depends on. Set a rule — method, path, status, headers, body, delay — and /mock answers with it. Every call is captured, with the rule that answered or why none matched.",
-      "xdebug": "See a paused Xdebug session in the browser, read-only: stack, variables, watches, source. Your IDE gets the session unchanged, and your AI assistant can read it over MCP. Off by default."
+      "xdebug": "See a paused Xdebug session in the browser: stack, variables, source, and watches when eval is on. Stepping stays in your IDE, which gets the session unchanged; your AI assistant can read it over MCP. Off by default."
     },
     "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
   },
