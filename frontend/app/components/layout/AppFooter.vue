@@ -28,6 +28,8 @@ const featureLinks = [
   { label: 'Performance Profiler', href: '/features/profiler' },
   { label: 'HTTP Proxy', href: '/features/http-proxy' },
   { label: 'SMS Testing', href: '/features/sms' },
+  { label: 'Mock Server', href: '/features/mock-server' },
+  { label: 'Xdebug Proxy', href: '/features/xdebug' },
 ]
 
 const resourceLinks = [

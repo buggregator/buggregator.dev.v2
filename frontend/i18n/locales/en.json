@@ -109,7 +109,8 @@
       "requestbin": "HTTP request inspection",
       "inspector": "Application performance monitoring",
       "smsgateway": "SMS gateway testing",
-      "proxy": "Outgoing HTTP request inspection"
+      "proxy": "Outgoing HTTP request inspection",
+      "mockapi": "Mock API responses"
     }
   },
   "howItWorks": {
@@ -137,6 +138,7 @@
   "showcase": {
     "title": "Everything in one dashboard",
     "subtitle": "12 debugging tools. One interface.",
+    "guideLink": "Read the guide",
     "tabs": {
       "exceptions": "Exceptions",
       "profiler": "Profiler",

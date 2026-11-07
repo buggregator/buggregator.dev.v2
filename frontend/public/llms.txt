@@ -12,3 +12,5 @@
 - [Profiler (XHProf)](https://buggregator.dev/features/profiler)
 - [HTTP proxy](https://buggregator.dev/features/http-proxy)
 - [SMS testing](https://buggregator.dev/features/sms)
+- [Mock server](https://buggregator.dev/features/mock-server)
+- [Xdebug proxy](https://buggregator.dev/features/xdebug)

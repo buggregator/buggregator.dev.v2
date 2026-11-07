@@ -6,6 +6,9 @@ import FeatureHighlights from '~/components/features/FeatureHighlights.vue'
 import FeatureWorksWithSection from '~/components/features/FeatureWorksWithSection.vue'
 import FeatureCTA from '~/components/features/FeatureCTA.vue'
 import FeatureRelatedLink from '~/components/features/FeatureRelatedLink.vue'
+import FlameGraph from '~/components/features/FlameGraph.vue'
+import flameData from '~/data/mocks/profiler-flamechart.json'
+import type { FlameNode } from '~/composables/useFlameGraph'
 
 definePageMeta({ layout: 'landing' })
 // English only: no /ru or /es copies of this page (they would be duplicates).
@@ -24,6 +27,9 @@ useSeoMeta({
 })
 
 const accentColor = '#8b5cf6'
+
+// One request from the demo seed, as the server's flame-chart API returns it.
+const flame = flameData as FlameNode[]
 
 const steps = [
   {
@@ -191,6 +197,22 @@ const worksWithItems = [
           alt="Screenshot: Buggregator call graph showing PHP function execution times"
           caption="Call graph with function-level wall time, CPU time, and memory usage"
         />
+      </div>
+    </section>
+
+    <!-- Flame graph -->
+    <section class="pb-16 lg:pb-20 bg-section-dark" aria-labelledby="flame-graph-title">
+      <div class="px-4 sm:px-6 lg:px-8 max-w-[1000px] mx-auto">
+        <div class="text-center mb-8">
+          <h2 id="flame-graph-title" class="text-section font-bold text-white mb-3 font-sans">See where the time goes</h2>
+          <p class="text-lg text-on-dark-secondary font-sans max-w-[600px] mx-auto">
+            Width is time: the wider a bar, the longer that call took, including the calls under it.
+          </p>
+        </div>
+        <FlameGraph :data="flame" label="Flame graph of a billing ChargeController request" />
+        <p class="text-center font-sans text-sm text-on-dark-muted mt-4">
+          Example data: a billing ChargeController request, 264 ms. In Buggregator you can also switch to CPU, memory or memory peak, and search for a function by name.
+        </p>
       </div>
     </section>
 

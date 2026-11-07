@@ -37,8 +37,19 @@ const webpSrc = computed(() => (props.src?.endsWith('.png') ? props.src.replace(
         <span class="ml-4 font-mono text-xs text-on-dark-muted">127.0.0.1:8000</span>
       </div>
 
+      <!-- Built component (a picture, not a control): inert, announced by `alt` -->
+      <div
+        v-if="$slots.default"
+        class="bg-landing-deepest p-4 sm:p-5 text-left"
+        role="img"
+        :aria-label="alt"
+        inert
+      >
+        <slot />
+      </div>
+
       <!-- Screenshot or placeholder -->
-      <div class="bg-landing-surface">
+      <div v-else class="bg-landing-surface">
         <picture v-if="src">
           <source v-if="webpSrc" type="image/webp" :srcset="webpSrc" />
           <img
