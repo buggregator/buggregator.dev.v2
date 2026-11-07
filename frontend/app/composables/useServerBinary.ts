@@ -13,6 +13,7 @@ export type BinaryPlatformId =
   | 'darwin-arm64'
   | 'darwin-amd64'
   | 'windows-amd64'
+  | 'windows-arm64'
 
 export type BinaryOs = 'linux' | 'macos' | 'windows'
 
@@ -21,8 +22,8 @@ export interface BinaryPlatform {
   os: BinaryOs
   /** Full label, e.g. analytics and screen readers. */
   label: string
-  /** Second-row label in the picker; null when the OS has one build. */
-  arch: string | null
+  /** Second-row label in the picker. */
+  arch: string
   /** Release asset name under releases/latest/download/. */
   asset: string
   /** Asset size in MB from the latest release; null until measured (#4507). */
@@ -34,7 +35,8 @@ export const BINARY_PLATFORMS: readonly BinaryPlatform[] = [
   { id: 'linux-arm64', os: 'linux', label: 'Linux ARM', arch: 'ARM', asset: 'buggregator-linux-arm64', sizeMb: null },
   { id: 'darwin-arm64', os: 'macos', label: 'macOS Apple Silicon', arch: 'Apple Silicon', asset: 'buggregator-darwin-arm64', sizeMb: null },
   { id: 'darwin-amd64', os: 'macos', label: 'macOS Intel', arch: 'Intel', asset: 'buggregator-darwin-amd64', sizeMb: null },
-  { id: 'windows-amd64', os: 'windows', label: 'Windows', arch: null, asset: 'buggregator-windows-amd64.exe', sizeMb: null },
+  { id: 'windows-amd64', os: 'windows', label: 'Windows x86-64', arch: 'x86-64', asset: 'buggregator-windows-amd64.exe', sizeMb: null },
+  { id: 'windows-arm64', os: 'windows', label: 'Windows ARM', arch: 'ARM', asset: 'buggregator-windows-arm64.exe', sizeMb: null },
 ]
 
 /** First row of the picker, in order; the first build of an OS is its default. */
@@ -103,7 +105,8 @@ export function binaryPrompt(platform: BinaryPlatform): string {
 /**
  * Best guess of the visitor's platform from the browser. macOS defaults to
  * Apple Silicon: a browser on an Intel Mac reports the same user agent, and
- * Apple stopped selling Intel Macs in 2023.
+ * Apple stopped selling Intel Macs in 2023. Windows defaults to x86-64: a
+ * browser on Windows ARM reports x64 too, and x64 builds run there emulated.
  */
 export function detectBinaryPlatform(userAgent: string, platformHint = ''): BinaryPlatformId {
   const ua = `${platformHint} ${userAgent}`.toLowerCase()
@@ -136,8 +139,8 @@ export function useBinaryPlatform() {
   const prompt = computed(() => binaryPrompt(platform.value))
   const copyText = computed(() => commands.value.join('\n'))
 
-  // Builds of the selected OS that need a second choice (Linux, macOS).
-  const archOptions = computed(() => BINARY_PLATFORMS.filter(p => p.os === platform.value.os && p.arch))
+  // Builds of the selected OS: the second row of the picker.
+  const archOptions = computed(() => BINARY_PLATFORMS.filter(p => p.os === platform.value.os))
   const selectOs = (os: BinaryOs) => {
     if (platform.value.os !== os) selected.value = defaultPlatformFor(os)
   }

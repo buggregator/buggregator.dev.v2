@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// Platform picker for the binary samples: the OS first, then the build
-// (Linux and macOS only). The choice is page-wide (useBinaryPlatform):
-// picking macOS here switches every sample.
+// Platform picker for the binary samples: the OS first, then the CPU.
+// The choice is page-wide (useBinaryPlatform): picking macOS here
+// switches every sample.
 const { t } = useI18n()
 const { selected, platform, archOptions, selectOs } = useBinaryPlatform()
 
