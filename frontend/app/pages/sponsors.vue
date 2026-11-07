@@ -37,7 +37,7 @@ const companyPerks = [
     <!-- Hero -->
     <section
       class="relative text-center bg-section-dark overflow-hidden flex items-center justify-center"
-      style="min-height: 65vh; padding: 80px 0;"
+      style="padding: 96px 0 80px;"
     >
       <div class="relative z-10 max-w-2xl mx-auto px-4">
         <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4 font-sans">

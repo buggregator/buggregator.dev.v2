@@ -15,6 +15,26 @@ const format = (n: number) =>
 // in the community section.
 const { copied, copy } = useClipboardCopy()
 
+// The one-line command split into shell lines with «\», so it reads whole
+// instead of being cut by the box: two ports a line on wider screens, one
+// on phones. Copy always takes the original one-liner.
+function commandLines(portsPerLine: number): string {
+  const [head, ...rest] = t('hero.command').split(' -p ')
+  const last = rest.pop() ?? ''
+  const cut = last.indexOf(' ')
+  const ports = [...rest, last.slice(0, cut)].map(p => `-p ${p}`)
+  const image = last.slice(cut + 1)
+  const lines = [head]
+  for (let i = 0; i < ports.length; i += portsPerLine) {
+    lines.push('  ' + ports.slice(i, i + portsPerLine).join(' '))
+  }
+  lines.push('  ' + image)
+  return lines.join(' \\\n')
+}
+
+const commandWide = computed(() => commandLines(2))
+const commandNarrow = computed(() => commandLines(1))
+
 async function copyStartCommand() {
   if (await copy(t('hero.command'))) {
     trackEvent('copy_install_command', { cta_location: 'hero' })
@@ -65,7 +85,8 @@ const formattedDownloads = computed(() => {
             role="region"
             :aria-label="t('hero.cta.copy')"
           >
-            <code><span class="hero__prompt" aria-hidden="true">$ </span>{{ t('hero.command') }}</code>
+            <pre class="hidden sm:block"><span class="hero__prompt" aria-hidden="true">$ </span>{{ commandWide }}</pre>
+            <pre class="sm:hidden"><span class="hero__prompt" aria-hidden="true">$ </span>{{ commandNarrow }}</pre>
           </div>
           <button type="button" class="hero__copy" @click="copyStartCommand">
             <svg v-if="!copied" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -183,7 +204,8 @@ h1 {
 /* ── Start command ───────────────────────────────────────── */
 .hero__start {
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
   width: 100%;
   max-width: 640px;
@@ -191,11 +213,8 @@ h1 {
 }
 
 .hero__command {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
+  width: 100%;
+  padding: 14px 18px;
   overflow-x: auto;
   border-radius: 12px;
   background: theme('colors.code.bg');
@@ -204,7 +223,13 @@ h1 {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.8125rem;
   color: theme('colors.code.text');
-  white-space: nowrap;
+  line-height: 1.7;
+}
+
+.hero__command pre {
+  margin: 0;
+  font: inherit;
+  white-space: pre;
 }
 
 .hero__command:focus-visible {
@@ -331,8 +356,8 @@ h1 {
     font-size: 0.9375rem;
   }
 
-  .hero__start {
-    flex-direction: column;
+  .hero__copy {
+    width: 100%;
   }
 
   .hero__scroll {
