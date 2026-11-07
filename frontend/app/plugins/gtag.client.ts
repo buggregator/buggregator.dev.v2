@@ -29,6 +29,7 @@ export default defineNuxtPlugin(() => {
   // title (router.afterEach reported the previous page's one). The timer
   // covers a navigation that renders no head change.
   const nuxtApp = useNuxtApp()
+  const router = useRouter()
   const head = injectHead()
   let pending: ReturnType<typeof setTimeout> | null = null
 
@@ -37,7 +38,7 @@ export default defineNuxtPlugin(() => {
     clearTimeout(pending)
     pending = null
     window.gtag('event', 'page_view', {
-      page_path: useRouter().currentRoute.value.fullPath,
+      page_path: router.currentRoute.value.fullPath,
       page_title: document.title,
     })
   }
