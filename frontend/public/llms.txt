@@ -14,3 +14,5 @@
 - [SMS testing](https://buggregator.dev/features/sms)
 - [Mock server](https://buggregator.dev/features/mock-server)
 - [Xdebug proxy](https://buggregator.dev/features/xdebug)
+- [Logs (Monolog)](https://buggregator.dev/features/logs)
+- [HTTP dumps](https://buggregator.dev/features/http-dumps)

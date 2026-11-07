@@ -1,0 +1,28 @@
+{
+  "method": "POST",
+  "uri": "/webhooks/orders",
+  "query": {
+    "source": "shop"
+  },
+  "host": "127.0.0.1:8000",
+  "headers": {
+    "Content-Type": "multipart/form-data; boundary=----7d1",
+    "User-Agent": "ShopWebhooks/2.1",
+    "X-Signature": "sha256=9f2c…e41a"
+  },
+  "cookies": {
+    "session": "c0ffee42"
+  },
+  "post": {
+    "event": "order.paid",
+    "order_id": "1042",
+    "amount": "49.90"
+  },
+  "files": [
+    {
+      "name": "invoice-1042.pdf",
+      "size": "48 KB",
+      "type": "application/pdf"
+    }
+  ]
+}

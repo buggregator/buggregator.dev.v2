@@ -1,0 +1,20 @@
+{
+  "records": [
+    { "level": "INFO", "channel": "app", "message": "Order 1042 placed", "time": "14:23:01" },
+    { "level": "DEBUG", "channel": "queue", "message": "Job SendInvoice started", "time": "14:23:02" },
+    { "level": "WARNING", "channel": "payments", "message": "Payment retry", "time": "14:23:04" },
+    { "level": "ERROR", "channel": "payments", "message": "Card gateway timeout after 3 attempts", "time": "14:23:05" },
+    { "level": "NOTICE", "channel": "security", "message": "Login from a new device", "time": "14:23:09" }
+  ],
+  "selected": {
+    "level": "ERROR",
+    "channel": "payments",
+    "message": "Card gateway timeout after 3 attempts",
+    "context": "{\n  \"order\": 1042,\n  \"gateway\": \"card\",\n  \"attempts\": 3,\n  \"timeout_ms\": 5000,\n  \"customer\": { \"id\": 77, \"country\": \"DE\" }\n}",
+    "source": {
+      "file": "app/Billing/Gateway/CardGateway.php",
+      "line": "87",
+      "function": "CardGateway::charge"
+    }
+  }
+}

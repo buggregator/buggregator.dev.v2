@@ -4,6 +4,8 @@ defineProps<{
   subtitle: string
   description: string
   accentColor: string
+  /** Eyebrow text colour when the accent is too dark for 4.5:1 on the page. */
+  accentTextColor?: string
 }>()
 </script>
 
@@ -32,7 +34,7 @@ defineProps<{
       <!-- Color indicator + label -->
       <div class="feature-stagger flex items-center justify-center gap-2 mb-5" style="--i: 1">
         <span class="w-2 h-2 rounded-full" :style="{ background: accentColor }" />
-        <span class="font-mono text-xs uppercase tracking-wider" :style="{ color: accentColor }">
+        <span class="font-mono text-xs uppercase tracking-wider" :style="{ color: accentTextColor ?? accentColor }">
           {{ subtitle }}
         </span>
       </div>

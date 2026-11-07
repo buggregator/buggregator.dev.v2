@@ -10,6 +10,8 @@ export const SITEMAP_PAGES = [
   '/features/sms',
   '/features/mock-server',
   '/features/xdebug',
+  '/features/logs',
+  '/features/http-dumps',
   '/sponsors',
   '/ru',
   '/ru/sponsors',
