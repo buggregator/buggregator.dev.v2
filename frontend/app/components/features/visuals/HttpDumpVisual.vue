@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import dump from '~/data/mocks/http-dump-feature.json'
-
-const query = new URLSearchParams(dump.query).toString()
 </script>
 
 <template>
@@ -9,7 +7,8 @@ const query = new URLSearchParams(dump.query).toString()
     <!-- Request line -->
     <div class="flex items-center gap-2 flex-wrap">
       <span class="px-2 py-0.5 rounded font-bold bg-[rgba(34,197,94,0.15)] text-[#4ade80]">{{ dump.method }}</span>
-      <span class="text-sm text-on-dark-secondary [overflow-wrap:anywhere]">{{ dump.host }}{{ dump.uri }}?{{ query }}</span>
+      <span class="text-sm text-on-dark-secondary [overflow-wrap:anywhere]">{{ dump.uri }}</span>
+      <span class="text-on-dark-muted">{{ dump.host }}</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
@@ -30,7 +29,14 @@ const query = new URLSearchParams(dump.query).toString()
 
       <!-- Form data and files -->
       <section class="rounded-lg border border-landing-border-subtle overflow-hidden min-w-0">
-        <h4 class="px-3 py-2 border-b border-landing-border-subtle bg-[rgba(255,255,255,0.02)] font-sans text-xs font-semibold text-white">POST data</h4>
+        <h4 class="px-3 py-2 border-b border-landing-border-subtle bg-[rgba(255,255,255,0.02)] font-sans text-xs font-semibold text-white">Query</h4>
+        <dl class="p-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+          <template v-for="(value, key) in dump.query" :key="key">
+            <dt class="text-on-dark-muted">{{ key }}</dt>
+            <dd class="text-[var(--code-text)]">{{ value }}</dd>
+          </template>
+        </dl>
+        <h4 class="px-3 py-2 border-y border-landing-border-subtle bg-[rgba(255,255,255,0.02)] font-sans text-xs font-semibold text-white">POST data</h4>
         <dl class="p-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
           <template v-for="(value, key) in dump.post" :key="key">
             <dt class="text-on-dark-muted">{{ key }}</dt>
@@ -49,10 +55,5 @@ const query = new URLSearchParams(dump.query).toString()
       </section>
     </div>
 
-    <!-- cURL -->
-    <section class="rounded-lg border border-landing-border-subtle overflow-hidden">
-      <h4 class="px-3 py-2 border-b border-landing-border-subtle bg-[rgba(255,255,255,0.02)] font-sans text-xs font-semibold text-white">cURL</h4>
-      <pre class="p-3 bg-[var(--code-bg)] text-[var(--code-text)] whitespace-pre-wrap [overflow-wrap:anywhere] sm:whitespace-pre sm:[overflow-wrap:normal] overflow-x-auto">{{ dump.curl }}</pre>
-    </section>
   </div>
 </template>

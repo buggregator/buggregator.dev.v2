@@ -151,7 +151,7 @@ const highlights = [
   {
     icon: '\u{1F6A6}',
     title: 'All PSR-3 levels',
-    description: 'Emergency to debug, each with its own colour, so errors stand out.',
+    description: 'All 8 PSR-3 levels, colour-coded by severity, so errors stand out.',
   },
   {
     icon: '\u{1F9F5}',
@@ -161,7 +161,7 @@ const highlights = [
   {
     icon: '\u{1F433}',
     title: 'Every service, one place',
-    description: 'Point every container at the same Buggregator and read their logs side by side — next to the exceptions and dumps of the same request.',
+    description: 'Point every container at the same Buggregator and read their logs side by side — next to the exceptions and dumps from the same moment, in one feed.',
   },
 ]
 

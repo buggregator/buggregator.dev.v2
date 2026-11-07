@@ -14,7 +14,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'Inspect HTTP Requests and Webhooks Locally — Buggregator',
-  description: 'Capture any HTTP request: method, URL, headers, cookies, form data and uploaded files, with a ready cURL command to replay it. A local webhook.site for development. Free and open source.',
+  description: 'Capture any HTTP request: method, URL, headers, cookies, form data and uploaded files, and the request as a cURL command. A local webhook.site for development. Free and open source.',
   ogTitle: 'HTTP Dumps — See Every Request That Arrives — Buggregator',
   ogDescription: 'Headers, body, cookies, files and a cURL command for every captured request. No account.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -88,7 +88,7 @@ const highlights = [
   {
     icon: '\u{1F4E8}',
     title: 'The whole request',
-    description: 'Method, full URL, query parameters, headers and cookies.',
+    description: 'Method, path, host, query parameters, headers and cookies.',
   },
   {
     icon: '\u{1F4DD}',
@@ -97,8 +97,8 @@ const highlights = [
   },
   {
     icon: '\u{1F501}',
-    title: 'Replay with cURL',
-    description: 'Every request comes with a generated cURL command. Copy it and send it again from your terminal.',
+    title: 'Copy as cURL',
+    description: 'Method, headers and body as a cURL command. Add your host to send it again.',
   },
   {
     icon: '\u{1FA9D}',
@@ -120,7 +120,7 @@ const highlights = [
 const worksWithItems = [
   { name: 'curl', detail: '— http://http-dump@127.0.0.1:8000/...' },
   { name: 'PHP', detail: '— Guzzle, Laravel HTTP, Symfony HttpClient' },
-  { name: 'JavaScript', detail: '— fetch, axios' },
+  { name: 'JavaScript', detail: '— fetch, axios (X-Buggregator-Event header)' },
   { name: 'Webhook senders', detail: '— set the webhook URL to Buggregator' },
   { name: 'Any language', detail: '— any HTTP client that can set a URL or a header' },
 ]
@@ -131,7 +131,7 @@ const worksWithItems = [
     <FeatureHero
       title="See exactly what the request contained"
       subtitle="HTTP Dumps"
-      description="You're building a webhook, a callback or an API client, and you need to see what actually goes over the wire. Send the request to Buggregator: you get the method, URL, headers, cookies, form data and uploaded files — and a cURL command to send it again. No separate service like webhook.site."
+      description="You're building a webhook, a callback or an API client, and you need to see what actually goes over the wire. Send the request to Buggregator: you get the method, URL, headers, cookies, form data and uploaded files — and the request as a cURL command. No separate service like webhook.site."
       :accent-color="accentColor"
     >
       <template #cta>
@@ -154,8 +154,8 @@ const worksWithItems = [
     <section class="pb-16 lg:pb-20 bg-section-dark">
       <div class="px-4 sm:px-6 lg:px-8">
         <FeatureScreenshot
-          alt="Buggregator HTTP dump: method, URL, headers, form data and the generated cURL command"
-          caption="A captured request with its headers, body, files and a ready cURL command. Example data."
+          alt="Buggregator HTTP dump: method, path, headers, query, form data and files"
+          caption="A captured request with its headers, query, form data and files. Example data."
         >
           <HttpDumpVisual />
         </FeatureScreenshot>
