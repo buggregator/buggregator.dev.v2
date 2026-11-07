@@ -157,7 +157,7 @@
       "vardump": "Inspecciona variables con dump(). Propiedades de objetos, contenido de arrays y tipos — directo en el navegador.",
       "ray": "Depura con ray() — tablas, consultas, modelos, jobs, mail, contadores y 18 tipos más. Funciona con SDKs de PHP, JS, Ruby, Go.",
       "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — ningún email se envía realmente.",
-      "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Filtra por nivel, busca por mensaje.",
+      "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Busca por mensaje, canal o nivel.",
       "http": "Captura e inspecciona peticiones HTTP entrantes. Headers, body y parámetros de consulta de un vistazo.",
       "httpProxy": "Ve cada petición HTTP que tu app hace a APIs externas — con respuesta completa. Configura HTTP_PROXY y captura llamadas de Guzzle, cURL y SDKs. Reemplaza Charles, Fiddler y mitmproxy.",
       "inspector": "Monitorea el rendimiento con trazado de transacciones, seguimiento de memoria y desglose temporal. Alternativa local a APM.",
