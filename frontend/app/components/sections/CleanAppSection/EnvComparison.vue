@@ -65,7 +65,7 @@ const active = computed(() => snippets[activeTab.value])
         class="px-4 py-2 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
         :class="activeTab === tab.id
           ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
-          : 'text-[#6e7681] border-transparent hover:text-code-text'"
+          : 'text-[#8b949e] border-transparent hover:text-code-text'"
         @click="activeTab = tab.id"
       >
         {{ t(tab.labelKey) }}
