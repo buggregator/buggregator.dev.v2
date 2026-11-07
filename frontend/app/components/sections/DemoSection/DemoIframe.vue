@@ -1,10 +1,13 @@
 <script setup lang="ts">
 const { buggregatorUrl } = useRuntimeConfig().public
+// The demo is a whole app: never load it on phones and tablets.
+const isDesktop = useIsDesktop()
 </script>
 
 <template>
   <div class="demo-iframe-wrapper">
     <iframe
+      v-if="isDesktop"
       :src="buggregatorUrl as string"
       frameborder="0"
       class="w-full h-full"

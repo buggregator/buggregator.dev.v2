@@ -4,6 +4,8 @@ const { heroVideoUrl, heroPosterUrl } = useRuntimeConfig().public
 const videoSupported = ref(true)
 const video = ref<HTMLVideoElement | null>(null)
 const prefersReducedMotion = ref(false)
+// Phones and tablets keep the poster: the video is several MB.
+const isDesktop = useIsDesktop()
 const offsetX = ref(0)
 const offsetY = ref(0)
 
@@ -48,12 +50,19 @@ onMounted(() => {
   if (!prefersReducedMotion.value) {
     window.addEventListener('mousemove', onMouseMove, { passive: true })
     startDrift()
-    // The poster is the first frame; the video (several MB) loads only once
-    // the page is idle, so it does not compete with the hero text.
-    const play = () => video.value?.play().catch(() => { /* autoplay refused: the poster stays */ })
-    if ('requestIdleCallback' in window) window.requestIdleCallback(play, { timeout: 3000 })
-    else setTimeout(play, 1500)
   }
+})
+
+watch(isDesktop, (desktop) => {
+  if (!desktop || prefersReducedMotion.value) {
+    video.value?.pause()
+    return
+  }
+  // The poster is the first frame; the video (several MB) loads only once
+  // the page is idle, so it does not compete with the hero text.
+  const play = () => video.value?.play().catch(() => { /* autoplay refused: the poster stays */ })
+  if ('requestIdleCallback' in window) window.requestIdleCallback(play, { timeout: 3000 })
+  else setTimeout(play, 1500)
 })
 
 onUnmounted(() => {

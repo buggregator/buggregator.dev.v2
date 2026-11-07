@@ -9,29 +9,6 @@ const { t } = useI18n()
 const { trackEvent } = useGtag()
 const { patreonUrl, sponsorEmail } = useRuntimeConfig().public
 
-const mascotRef = ref<HTMLElement | null>(null)
-const mascotTransform = ref('translate(-50%, -50%)')
-
-function onMouseMove(e: MouseEvent) {
-  if (!mascotRef.value) return
-  const rect = mascotRef.value.closest('section')?.getBoundingClientRect()
-  if (!rect) return
-
-  const x = (e.clientX - rect.left) / rect.width - 0.5
-  const y = (e.clientY - rect.top) / rect.height - 0.5
-
-  const rotateY = x * 8
-  const rotateX = -y * 6
-  const translateX = x * 15
-  const translateY = y * 10
-
-  mascotTransform.value = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
-}
-
-function onMouseLeave() {
-  mascotTransform.value = 'translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1)'
-}
-
 useSeoMeta({
   title: () => t('seo.sponsors.title'),
   description: () => t('seo.sponsors.description'),
@@ -60,25 +37,8 @@ const companyPerks = [
     <!-- Hero -->
     <section
       class="relative text-center bg-section-dark overflow-hidden flex items-center justify-center"
-      style="min-height: 65vh; padding: 80px 0; perspective: 800px;"
-      @mousemove="onMouseMove"
-      @mouseleave="onMouseLeave"
+      style="min-height: 65vh; padding: 80px 0;"
     >
-      <!-- Mascot background with parallax -->
-      <div
-        ref="mascotRef"
-        class="sponsors-mascot"
-        aria-hidden="true"
-        :style="{ transform: mascotTransform }"
-      >
-        <img
-          src="/sponsors.png"
-          alt=""
-          class="w-full h-full object-contain"
-          loading="lazy"
-        />
-      </div>
-
       <div class="relative z-10 max-w-2xl mx-auto px-4">
         <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4 font-sans">
           {{ t('sponsors.page.title') }}
@@ -223,27 +183,3 @@ const companyPerks = [
   </div>
 </template>
 
-<style scoped>
-.sponsors-mascot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform 300ms ease-out;
-  will-change: transform;
-  width: 1400px;
-  height: 1400px;
-  opacity: 0.1;
-  pointer-events: none;
-  mix-blend-mode: lighten;
-  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 15%, transparent 65%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 15%, transparent 65%);
-}
-
-@media (min-width: 1024px) {
-  .sponsors-mascot {
-    width: 2000px;
-    height: 2000px;
-  }
-}
-</style>
