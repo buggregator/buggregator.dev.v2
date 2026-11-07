@@ -80,6 +80,8 @@ export function binaryCommands(platform: BinaryPlatform): string[] {
   const url = binaryDownloadUrl(platform)
   if (platform.os === 'windows') {
     return [
+      // Windows PowerShell 5.1 draws a progress bar that slows the download to minutes.
+      "$ProgressPreference = 'SilentlyContinue'",
       `Invoke-WebRequest ${url} -OutFile buggregator.exe`,
       ...LOCAL_BINDS.filter(b => b.windows).map(b => `$env:${b.env} = "127.0.0.1:${b.port}"`),
       '.\\buggregator.exe',
