@@ -325,7 +325,7 @@
       },
       "ai": {
         "title": "Deja que tu asistente de IA vea la ejecución",
-        "desc": "Tu asistente de IA puede leer tu código, pero no lo que pasó al ejecutarlo. El servidor MCP de Buggregator permite a Claude Code, Cursor y otros clientes MCP leer tus errores, dumps y perfiles. Con el nuevo proxy de Xdebug también pueden leer una sesión en pausa — pila y variables — mientras tu IDE mantiene el control. Desactivado por defecto; solo lectura.",
+        "desc": "Tu asistente de IA puede leer tu código, pero no lo que pasó al ejecutarlo. El servidor MCP de Buggregator permite a Claude Code, Cursor y otros clientes MCP leer tus errores, dumps y perfiles. Con el nuevo proxy de Xdebug también pueden leer una sesión en pausa — pila y variables — mientras tu IDE mantiene el control. Desactivado por defecto. Las herramientas de Xdebug leen la sesión en pausa; los pasos se dan en tu IDE.",
         "cta": "Conecta tu asistente de IA",
         "links": {
           "xdebug": "Proxy de Xdebug"

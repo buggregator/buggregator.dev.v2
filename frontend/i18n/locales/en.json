@@ -325,7 +325,7 @@
       },
       "ai": {
         "title": "Let your AI assistant see the runtime",
-        "desc": "Your AI assistant can read your code but not what happened when it ran. Buggregator's MCP server lets Claude Code, Cursor and other MCP clients read your errors, dumps and profiles. With the new Xdebug proxy, they can also read a paused session — stack and variables — while your IDE stays in control. Off by default; read-only.",
+        "desc": "Your AI assistant can read your code but not what happened when it ran. Buggregator's MCP server lets Claude Code, Cursor and other MCP clients read your errors, dumps and profiles. With the new Xdebug proxy, they can also read a paused session — stack and variables — while your IDE stays in control. Off by default. The Xdebug tools read the paused session; stepping stays in your IDE.",
         "cta": "Connect your AI assistant",
         "links": {
           "xdebug": "Xdebug proxy"
