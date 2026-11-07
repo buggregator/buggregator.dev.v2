@@ -60,6 +60,7 @@ const steps = [
       {
         id: 'yaml',
         label: 'buggregator.yaml',
+        shortLabel: 'YAML',
         code: `mocks:
   - name: user
     method: GET
@@ -76,8 +77,11 @@ const steps = [
   - method: GET
     path: /users/{id}
     template: true
-    headers: { Content-Type: application/json }
-    body: '{"id": {{ path "id" }}, "name": {{ fake "name" | json }}}'`,
+    headers:
+      Content-Type: application/json
+    body: |
+      {"id": {{ path "id" }},
+       "name": "{{ fake "name" }}"}`,
         note: 'GET /mock/users/42 → {"id": 42, "name": "Lavina Kuhn"} — the name is fake data, new on every call unless you set a seed.',
         link: { href: TEMPLATE_DOCS, label: 'Template reference →' },
       },

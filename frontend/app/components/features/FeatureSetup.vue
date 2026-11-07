@@ -4,8 +4,9 @@ import InstallPlatformsNote from '~/components/ui/InstallPlatformsNote.vue'
 
 // A tab with `binary: true` shows the per-platform binary commands
 // (BinaryInstall) instead of `code`. `note` on a tab shows under the code
-// while that tab is active; `link` on a tab shows after its note.
-type StepTab = { id: string; label: string; code?: string; binary?: boolean; note?: string; link?: { href: string; label: string } }
+// while that tab is active; `link` on a tab shows after its note;
+// `shortLabel` replaces the label on phones.
+type StepTab = { id: string; label: string; shortLabel?: string; code?: string; binary?: boolean; note?: string; link?: { href: string; label: string } }
 
 const props = defineProps<{
   steps: Array<{
@@ -115,7 +116,11 @@ async function copyCode(stepIndex: number, code: string) {
                   :aria-pressed="getActiveTab(i, step.tabs!) === tab.id"
                   @click="setActiveTab(i, tab.id)"
                 >
-                  {{ tab.label }}
+                  <template v-if="tab.shortLabel">
+                    <span class="sm:hidden">{{ tab.shortLabel }}</span>
+                    <span class="hidden sm:inline">{{ tab.label }}</span>
+                  </template>
+                  <template v-else>{{ tab.label }}</template>
                 </button>
               </div>
 
