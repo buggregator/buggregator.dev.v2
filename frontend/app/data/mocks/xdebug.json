@@ -6,10 +6,6 @@
     "id": 1,
     "started": "11:06:15"
   },
-  "proxy": {
-    "addr": "9003",
-    "ide": "9004"
-  },
   "file": "/app/t.php",
   "currentLine": 36,
   "variables": [
@@ -130,5 +126,7 @@
       "text": "    }"
     }
   ],
-  "breakpointLine": 36
+  "breakpointLine": 36,
+  "mode": "Auto",
+  "lastStep": "agent claude-code"
 }

@@ -30,7 +30,7 @@ const TEMPLATE_DOCS = 'https://docs.buggregator.dev/config/mock-templates.html'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: `Requires Buggregator v2.6.0 or later. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
+    description: `Requires Buggregator v2.6.0 or later; the template editor and OpenAPI import in the UI need v2.7.0. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
       {
         id: 'binary',
@@ -55,7 +55,7 @@ const steps = [
   },
   {
     title: 'Add a rule',
-    description: 'Open Mock server in the sidebar and add a rule, or define it in code. Rules are checked in order; the first enabled rule that matches answers.',
+    description: 'Open Mock server in the sidebar and add a rule, or define it in code. Rules are checked in order; the first enabled rule that matches answers. Paths: exact paths, {id} for one segment, * for the rest: /users/me, /users/{id}, /files/*.',
     tabs: [
       {
         id: 'yaml',
@@ -125,7 +125,7 @@ const highlights = [
   {
     icon: '\u{1F9EC}',
     title: 'Responses that follow the request',
-    description: 'Turn on template for a rule, and its body and headers can use the request: the path {id}, query, headers, JSON body fields. Add fake names, emails and dates, loops and if/else. Body up to 1 MB.',
+    description: 'Turn on template for a rule, and its body and headers can use the request: the path {id}, query, headers, JSON body fields. Add fake names, emails and dates, loops and if/else. Body up to 1 MB. Write it in the rule form, with the helpers and fake data one click away, and run a preview before you save.',
     link: { href: TEMPLATE_DOCS, label: 'Template reference →' },
   },
   {
@@ -140,8 +140,8 @@ const highlights = [
   },
   {
     icon: '\u{1F9ED}',
-    title: 'Path patterns',
-    description: 'Exact paths, {id} for one segment, * for the rest: /users/me, /users/{id}, /files/*.',
+    title: 'Start from your OpenAPI spec',
+    description: 'Paste a spec, load a file or give a URL: one rule per operation, with bodies from the spec\'s examples or fake data from its schemas. Import again and the group\'s rules are replaced.',
   },
   {
     icon: '\u{1F50D}',
@@ -183,7 +183,7 @@ const worksWithItems = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </a>
-          <span class="font-mono text-xs text-on-dark-muted">Rules in the UI, the API or YAML</span>
+          <span class="font-mono text-xs text-on-dark-muted">Rules in the UI, the API, YAML or from an OpenAPI spec</span>
         </div>
       </template>
     </FeatureHero>

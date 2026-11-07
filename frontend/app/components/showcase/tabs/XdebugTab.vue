@@ -1,6 +1,22 @@
 <script setup lang="ts">
 import EventCard from '~/components/showcase/shared/EventCard.vue'
 import xdebug from '~/data/mocks/xdebug.json'
+
+// Glyphs of the Xdebug page's control bar (frontend entities/xdebug, 24×24).
+const ICON = {
+  play: 'M8 5v14l11-7z',
+  stepover: 'M12 6a7 7 0 0 1 6.7 5H21l-3.5 4-3.5-4h2.6A5 5 0 0 0 7 11H5a7 7 0 0 1 7-5zm-2 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0z',
+  stepinto: 'M11 3h2v9.2l3-3 1.4 1.4L12 16l-5.4-5.4L8 9.2l3 3zm-1 17a2 2 0 1 1 4 0 2 2 0 0 1-4 0z',
+  stepout: 'M11 16V6.8l-3 3L6.6 8.4 12 3l5.4 5.4L16 9.8l-3-3V16zm-1 4a2 2 0 1 1 4 0 2 2 0 0 1-4 0z',
+  ext: 'M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z',
+  stop: 'M6 6h12v12H6z',
+  agent: 'M12 2a2 2 0 0 1 1 3.7V7h4a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h4V5.7A2 2 0 0 1 12 2zM7 9a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1zm2 3h2v2H9zm4 0h2v2h-2zm-4 4h6v1H9zM1 12h2v4H1zm20 0h2v4h-2z',
+}
+const steps = [
+  { icon: ICON.stepover, label: 'Step over' },
+  { icon: ICON.stepinto, label: 'Step into' },
+  { icon: ICON.stepout, label: 'Step out' },
+]
 </script>
 
 <template>
@@ -14,7 +30,7 @@ import xdebug from '~/data/mocks/xdebug.json'
         <span class="font-mono text-white truncate">{{ xdebug.session.title }}</span>
         <span class="font-mono text-on-dark-muted">{{ xdebug.session.where }} · #{{ xdebug.session.id }} · {{ xdebug.session.started }}</span>
         <span class="sm:ml-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-landing-border-subtle font-mono text-[11px] text-on-dark-secondary">
-          proxy :{{ xdebug.proxy.addr }} → IDE :{{ xdebug.proxy.ide }}
+          Mode: {{ xdebug.mode }}
         </span>
       </div>
 
@@ -65,12 +81,36 @@ import xdebug from '~/data/mocks/xdebug.json'
 
         <!-- Source at the paused line -->
         <section class="rounded-lg border border-code-border overflow-hidden bg-code-bg min-w-0" aria-label="Source">
-          <div class="flex items-center gap-2 px-3 py-2 border-b border-code-border text-xs">
-            <span class="font-mono text-on-dark-secondary truncate">{{ xdebug.file }}:{{ xdebug.currentLine }}</span>
-            <span class="ml-auto shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-code-border text-[11px] text-on-dark-secondary">
-              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
-              Stepping: in your IDE
+          <!-- Control bar as on the Xdebug page; a picture, not controls: nothing here is focusable. -->
+          <div
+            class="flex flex-wrap items-center gap-1 px-2 py-1.5 border-b border-code-border text-xs"
+            role="img"
+            :aria-label="`Debugger controls: Continue, Step over, Step into, Step out, Release, Stop. Last step: ${xdebug.lastStep}`"
+          >
+            <span class="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-md bg-accent-strong text-white font-medium">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path :d="ICON.play" /></svg>Continue
             </span>
+            <span
+              v-for="s in steps"
+              :key="s.label"
+              class="inline-grid place-items-center w-7 h-7 rounded-md text-on-dark-secondary"
+              :title="s.label"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path :d="s.icon" /></svg>
+            </span>
+            <span class="w-px h-4 mx-1 bg-code-border" aria-hidden="true" />
+            <span class="inline-flex items-center gap-1.5 h-7 px-2 rounded-md text-on-dark-secondary">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path :d="ICON.ext" /></svg>Release
+            </span>
+            <span class="inline-flex items-center gap-1.5 h-7 px-2 rounded-md text-[#fb7185]">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path :d="ICON.stop" /></svg>Stop
+            </span>
+            <span class="ml-auto inline-flex items-center gap-1.5 px-1 text-[11px] font-semibold text-on-dark-secondary whitespace-nowrap">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path :d="ICON.agent" /></svg>Last step: {{ xdebug.lastStep }}
+            </span>
+          </div>
+          <div class="px-3 py-1.5 border-b border-code-border text-xs">
+            <span class="font-mono text-on-dark-secondary truncate">{{ xdebug.file }}:{{ xdebug.currentLine }}</span>
           </div>
           <div class="py-2 overflow-x-auto font-mono text-xs leading-6">
             <div
