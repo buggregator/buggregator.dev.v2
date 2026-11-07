@@ -172,7 +172,7 @@ const worksWithItems = [
   { name: 'VS Code', detail: '— any Xdebug client' },
   { name: 'Claude Code', detail: '— MCP over stdio or HTTP' },
   { name: 'Cursor', detail: '— ./buggregator mcp or the HTTP URL' },
-  { name: 'Any MCP client', detail: '— xdebug_location, xdebug_stack, xdebug_variables, xdebug_property' },
+  { name: 'Any MCP client', detail: '— reads the paused session; steps and sets breakpoints when no IDE is attached' },
   { name: 'Docker', detail: '— PHP, Buggregator and the IDE on different hosts' },
 ]
 </script>
