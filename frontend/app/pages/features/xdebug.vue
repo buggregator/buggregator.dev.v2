@@ -140,7 +140,7 @@ const highlights = [
   {
     icon: '\u{1F4DC}',
     title: 'See what the AI asked',
-    description: 'Agent activity lists the assistant's MCP calls in the session, refused ones included.',
+    description: 'Agent activity lists the assistant’s MCP calls in the session, refused ones included.',
   },
   {
     icon: '\u{1F6DF}',
