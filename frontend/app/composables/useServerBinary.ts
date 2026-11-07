@@ -19,8 +19,10 @@ export type BinaryOs = 'linux' | 'macos' | 'windows'
 export interface BinaryPlatform {
   id: BinaryPlatformId
   os: BinaryOs
-  /** Short label for the platform picker. */
+  /** Full label, e.g. analytics and screen readers. */
   label: string
+  /** Second-row label in the picker; null when the OS has one build. */
+  arch: string | null
   /** Release asset name under releases/latest/download/. */
   asset: string
   /** Asset size in MB from the latest release; null until measured (#4507). */
@@ -28,12 +30,24 @@ export interface BinaryPlatform {
 }
 
 export const BINARY_PLATFORMS: readonly BinaryPlatform[] = [
-  { id: 'linux-amd64', os: 'linux', label: 'Linux x86-64', asset: 'buggregator-linux-amd64', sizeMb: null },
-  { id: 'linux-arm64', os: 'linux', label: 'Linux ARM', asset: 'buggregator-linux-arm64', sizeMb: null },
-  { id: 'darwin-arm64', os: 'macos', label: 'macOS Apple Silicon', asset: 'buggregator-darwin-arm64', sizeMb: null },
-  { id: 'darwin-amd64', os: 'macos', label: 'macOS Intel', asset: 'buggregator-darwin-amd64', sizeMb: null },
-  { id: 'windows-amd64', os: 'windows', label: 'Windows', asset: 'buggregator-windows-amd64.exe', sizeMb: null },
+  { id: 'linux-amd64', os: 'linux', label: 'Linux x86-64', arch: 'x86-64', asset: 'buggregator-linux-amd64', sizeMb: null },
+  { id: 'linux-arm64', os: 'linux', label: 'Linux ARM', arch: 'ARM', asset: 'buggregator-linux-arm64', sizeMb: null },
+  { id: 'darwin-arm64', os: 'macos', label: 'macOS Apple Silicon', arch: 'Apple Silicon', asset: 'buggregator-darwin-arm64', sizeMb: null },
+  { id: 'darwin-amd64', os: 'macos', label: 'macOS Intel', arch: 'Intel', asset: 'buggregator-darwin-amd64', sizeMb: null },
+  { id: 'windows-amd64', os: 'windows', label: 'Windows', arch: null, asset: 'buggregator-windows-amd64.exe', sizeMb: null },
 ]
+
+/** First row of the picker, in order; the first build of an OS is its default. */
+export const BINARY_OSES: ReadonlyArray<{ id: BinaryOs; label: string }> = [
+  { id: 'linux', label: 'Linux' },
+  { id: 'macos', label: 'macOS' },
+  { id: 'windows', label: 'Windows' },
+]
+
+export function defaultPlatformFor(os: BinaryOs): BinaryPlatformId {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return BINARY_PLATFORMS.find(p => p.os === os)!.id
+}
 
 export const DEFAULT_BINARY_PLATFORM: BinaryPlatformId = 'linux-amd64'
 
@@ -120,5 +134,11 @@ export function useBinaryPlatform() {
   const prompt = computed(() => binaryPrompt(platform.value))
   const copyText = computed(() => commands.value.join('\n'))
 
-  return { selected, platform, commands, prompt, copyText, platforms: BINARY_PLATFORMS }
+  // Builds of the selected OS that need a second choice (Linux, macOS).
+  const archOptions = computed(() => BINARY_PLATFORMS.filter(p => p.os === platform.value.os && p.arch))
+  const selectOs = (os: BinaryOs) => {
+    if (platform.value.os !== os) selected.value = defaultPlatformFor(os)
+  }
+
+  return { selected, platform, commands, prompt, copyText, archOptions, selectOs }
 }

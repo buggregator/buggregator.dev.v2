@@ -29,18 +29,12 @@ async function copyCommands() {
 
 <template>
   <div :class="bare ? '' : 'rounded-xl border border-code-border bg-code-bg p-4'">
-    <BinaryPlatformPicker class="mb-3" />
-
-    <div class="relative font-mono text-xs leading-relaxed">
-      <pre class="whitespace-pre overflow-x-auto pr-10"><template
-        v-for="(cmd, i) in commands"
-        :key="i"
-      ><span class="text-code-prompt select-none">{{ prompt }} </span><span class="text-code-text">{{ cmd }}</span>
-</template></pre>
-
+    <!-- The copy button sits beside the picker, so it never covers a command. -->
+    <div class="flex items-start justify-between gap-3 mb-3">
+      <BinaryPlatformPicker />
       <button
         type="button"
-        class="hit-area absolute top-0 right-0 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
+        class="hit-area relative shrink-0 w-8 h-8 flex items-center justify-center rounded-md transition-colors duration-150"
         :class="copied
           ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]'
           : 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] text-on-dark-muted hover:bg-[rgba(255,255,255,0.12)] hover:text-white'"
@@ -55,6 +49,12 @@ async function copyCommands() {
         </svg>
       </button>
     </div>
+
+    <pre class="font-mono text-xs leading-relaxed whitespace-pre overflow-x-auto"><template
+      v-for="(cmd, i) in commands"
+      :key="i"
+    ><span class="text-code-prompt select-none">{{ prompt }} </span><span class="text-code-text">{{ cmd }}</span>
+</template></pre>
 
     <p v-if="platform.os === 'windows'" class="mt-3 font-sans text-xs text-on-dark-secondary">
       {{ t('install.binary.windowsNote') }}

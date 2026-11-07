@@ -444,6 +444,11 @@ h1 {
     width: 100%;
   }
 
+  /* Touch: 44 px targets on phones. */
+  .hero__method {
+    min-height: 44px;
+  }
+
   .hero__scroll {
     bottom: 20px;
   }
