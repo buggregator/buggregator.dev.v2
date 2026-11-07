@@ -188,8 +188,8 @@ const worksWithItems = [
       <div class="px-4 sm:px-6 lg:px-8">
         <FeatureScreenshot
           src="/features/profiler.png"
-          alt="Screenshot: Buggregator flame graph showing PHP function execution times"
-          caption="Interactive flame graph with function-level wall time, CPU time, and memory usage"
+          alt="Screenshot: Buggregator call graph showing PHP function execution times"
+          caption="Call graph with function-level wall time, CPU time, and memory usage"
         />
       </div>
     </section>
