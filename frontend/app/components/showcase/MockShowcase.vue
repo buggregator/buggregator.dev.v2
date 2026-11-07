@@ -19,18 +19,18 @@ const MockServerTab = defineAsyncComponent(() => import('~/components/showcase/t
 const XdebugTab = defineAsyncComponent(() => import('~/components/showcase/tabs/XdebugTab.vue'))
 
 const tabs = [
-  { id: 'exceptions', color: '#f43f5e', component: ExceptionsTab },
-  { id: 'emails', color: '#f59e0b', component: EmailsTab },
-  { id: 'profiler', color: '#8b5cf6', component: ProfilerTab },
+  { id: 'exceptions', color: '#f43f5e', component: ExceptionsTab, guide: '/features/sentry' },
+  { id: 'emails', color: '#f59e0b', component: EmailsTab, guide: '/features/email-testing' },
+  { id: 'profiler', color: '#8b5cf6', component: ProfilerTab, guide: '/features/profiler' },
   { id: 'vardump', color: '#ef4444', component: VarDumpTab },
   { id: 'ray', color: '#06b6d4', component: RayTab },
   { id: 'logs', color: '#6b7280', component: LogsTab },
   { id: 'http', color: '#22c55e', component: HttpTab },
-  { id: 'httpProxy', color: '#10b981', component: HttpProxyTab },
+  { id: 'httpProxy', color: '#10b981', component: HttpProxyTab, guide: '/features/http-proxy' },
   { id: 'inspector', color: '#eab308', component: InspectorTab },
-  { id: 'sms', color: '#a855f7', component: SmsTab },
-  { id: 'mockServer', color: '#0ea5e9', component: MockServerTab },
-  { id: 'xdebug', color: '#f97316', component: XdebugTab },
+  { id: 'sms', color: '#a855f7', component: SmsTab, guide: '/features/sms' },
+  { id: 'mockServer', color: '#0ea5e9', component: MockServerTab, guide: '/features/mock-server' },
+  { id: 'xdebug', color: '#f97316', component: XdebugTab, guide: '/features/xdebug' },
 ] as const
 
 type TabId = (typeof tabs)[number]['id']
@@ -43,6 +43,12 @@ const { canScrollLeft, canScrollRight } = useScrollEdges(tabBar)
 const activeComponent = computed(() =>
   tabs.find((tab) => tab.id === activeTab.value)?.component,
 )
+
+// Feature page of the active tab, when it has one (pages are English only).
+const activeGuide = computed(() => {
+  const tab = tabs.find((item) => item.id === activeTab.value)
+  return tab && 'guide' in tab ? tab.guide : undefined
+})
 
 const activeDescription = computed(() =>
   t(`showcase.descriptions.${activeTab.value}`),
@@ -115,8 +121,17 @@ const activeDescription = computed(() =>
         </div>
 
         <!-- Tab description -->
-        <div class="px-5 py-3 bg-landing-surface border-b border-landing-border-subtle">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-x-4 gap-y-1 px-5 py-3 bg-landing-surface border-b border-landing-border-subtle">
           <p class="text-sm text-on-dark-muted">{{ activeDescription }}</p>
+          <NuxtLink
+            v-if="activeGuide"
+            :to="activeGuide"
+            class="sm:ml-auto shrink-0 inline-flex items-center gap-1 min-h-11 sm:min-h-0 text-sm font-medium text-on-dark-secondary hover:text-white no-underline whitespace-nowrap"
+          >
+            {{ t('showcase.guideLink') }}
+            <span class="sr-only">: {{ t(`showcase.tabs.${activeTab}`) }}</span>
+            <span aria-hidden="true">&rarr;</span>
+          </NuxtLink>
         </div>
 
         <!-- Tab panel -->

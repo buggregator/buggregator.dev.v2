@@ -109,7 +109,8 @@
       "requestbin": "Inspección de peticiones HTTP",
       "inspector": "Monitoreo de rendimiento",
       "smsgateway": "Pruebas de pasarelas SMS",
-      "proxy": "Inspección de peticiones HTTP salientes"
+      "proxy": "Inspección de peticiones HTTP salientes",
+      "mockapi": "Respuestas de API simuladas"
     }
   },
   "howItWorks": {
@@ -137,6 +138,7 @@
   "showcase": {
     "title": "Todo en un dashboard",
     "subtitle": "12 herramientas de depuración. Una interfaz.",
+    "guideLink": "Leer la guía",
     "tabs": {
       "exceptions": "Excepciones",
       "profiler": "Profiler",

@@ -8,6 +8,8 @@ export const SITEMAP_PAGES = [
   '/features/profiler',
   '/features/http-proxy',
   '/features/sms',
+  '/features/mock-server',
+  '/features/xdebug',
   '/sponsors',
   '/ru',
   '/ru/sponsors',

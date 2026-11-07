@@ -1,0 +1,482 @@
+[
+  {
+    "name": "main()",
+    "start": 0,
+    "duration": 264.011,
+    "color": "#FF5F5F",
+    "cost": {
+      "wt": 264011,
+      "cpu": 53147,
+      "mu": 4612432,
+      "pmu": 5765540,
+      "ct": 1
+    },
+    "children": [
+      {
+        "name": "Illuminate\\Foundation\\Application::bootstrapWith",
+        "start": 0,
+        "duration": 14.51,
+        "color": "#B3E5FC",
+        "cost": {
+          "wt": 14510,
+          "cpu": 12330,
+          "mu": 360000,
+          "pmu": 450000,
+          "ct": 1
+        },
+        "children": [
+          {
+            "name": "Illuminate\\Foundation\\Bootstrap\\RegisterProviders::bootstrap",
+            "start": 0,
+            "duration": 6.837,
+            "color": "#B3E5FC",
+            "cost": {
+              "wt": 6837,
+              "cpu": 5811,
+              "mu": 165600,
+              "pmu": 207000,
+              "ct": 1
+            },
+            "children": [
+              {
+                "name": "Illuminate\\Foundation\\Application::register",
+                "start": 0,
+                "duration": 4.464,
+                "color": "#B3E5FC",
+                "cost": {
+                  "wt": 4464,
+                  "cpu": 3794,
+                  "mu": 115200,
+                  "pmu": 144000,
+                  "ct": 38
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Illuminate\\Foundation\\Bootstrap\\LoadConfiguration::bootstrap",
+            "start": 6.837,
+            "duration": 3.196,
+            "color": "#B3E5FC",
+            "cost": {
+              "wt": 3196,
+              "cpu": 2716,
+              "mu": 81600,
+              "pmu": 102000,
+              "ct": 1
+            },
+            "children": []
+          },
+          {
+            "name": "Illuminate\\Foundation\\Bootstrap\\BootProviders::bootstrap",
+            "start": 10.033,
+            "duration": 2.928,
+            "color": "#B3E5FC",
+            "cost": {
+              "wt": 2928,
+              "cpu": 2487,
+              "mu": 67200,
+              "pmu": 84000,
+              "ct": 1
+            },
+            "children": [
+              {
+                "name": "App\\Providers\\AppServiceProvider::boot",
+                "start": 10.033,
+                "duration": 0.588,
+                "color": "#B3E5FC",
+                "cost": {
+                  "wt": 588,
+                  "cpu": 499,
+                  "mu": 14400,
+                  "pmu": 18000,
+                  "ct": 1
+                },
+                "children": []
+              },
+              {
+                "name": "App\\Providers\\RouteServiceProvider::boot",
+                "start": 10.620999999999999,
+                "duration": 1.521,
+                "color": "#B3E5FC",
+                "cost": {
+                  "wt": 1521,
+                  "cpu": 1292,
+                  "mu": 31200,
+                  "pmu": 39000,
+                  "ct": 1
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Illuminate\\Foundation\\Bootstrap\\LoadEnvironmentVariables::bootstrap",
+            "start": 12.960999999999999,
+            "duration": 0.553,
+            "color": "#B3E5FC",
+            "cost": {
+              "wt": 553,
+              "cpu": 470,
+              "mu": 16800,
+              "pmu": 21000,
+              "ct": 1
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Illuminate\\Foundation\\Http\\Kernel::handle",
+        "start": 14.51,
+        "duration": 241.61,
+        "color": "#FF5F5F",
+        "cost": {
+          "wt": 241610,
+          "cpu": 34110,
+          "mu": 1083904,
+          "pmu": 1354880,
+          "ct": 1
+        },
+        "children": [
+          {
+            "name": "Illuminate\\Routing\\Router::dispatch",
+            "start": 14.51,
+            "duration": 241.202,
+            "color": "#FF5F5F",
+            "cost": {
+              "wt": 241202,
+              "cpu": 33764,
+              "mu": 1074304,
+              "pmu": 1342880,
+              "ct": 1
+            },
+            "children": [
+              {
+                "name": "Illuminate\\Pipeline\\Pipeline::then",
+                "start": 14.51,
+                "duration": 240.896,
+                "color": "#FF5F5F",
+                "cost": {
+                  "wt": 240896,
+                  "cpu": 33504,
+                  "mu": 1067104,
+                  "pmu": 1333880,
+                  "ct": 1
+                },
+                "children": [
+                  {
+                    "name": "App\\Http\\Controllers\\Api\\ChargeController::store",
+                    "start": 14.51,
+                    "duration": 237.707,
+                    "color": "#FF5F5F",
+                    "cost": {
+                      "wt": 237707,
+                      "cpu": 32147,
+                      "mu": 1029408,
+                      "pmu": 1286760,
+                      "ct": 1
+                    },
+                    "children": [
+                      {
+                        "name": "App\\Billing\\ChargeService::chargeInvoice",
+                        "start": 14.51,
+                        "duration": 235.745,
+                        "color": "#FF7474",
+                        "cost": {
+                          "wt": 235745,
+                          "cpu": 30481,
+                          "mu": 979008,
+                          "pmu": 1223760,
+                          "ct": 1
+                        },
+                        "children": [
+                          {
+                            "name": "Illuminate\\Database\\Connection::select",
+                            "start": 14.51,
+                            "duration": 8.098,
+                            "color": "#B3E5FC",
+                            "cost": {
+                              "wt": 8098,
+                              "cpu": 1185,
+                              "mu": 26688,
+                              "pmu": 33360,
+                              "ct": 2
+                            },
+                            "children": []
+                          },
+                          {
+                            "name": "Illuminate\\Database\\Connection::update",
+                            "start": 22.608,
+                            "duration": 3.904,
+                            "color": "#B3E5FC",
+                            "cost": {
+                              "wt": 3904,
+                              "cpu": 687,
+                              "mu": 13696,
+                              "pmu": 17120,
+                              "ct": 1
+                            },
+                            "children": [
+                              {
+                                "name": "PDOStatement::execute",
+                                "start": 22.608,
+                                "duration": 3.432,
+                                "color": "#B3E5FC",
+                                "cost": {
+                                  "wt": 3432,
+                                  "cpu": 286,
+                                  "mu": 4096,
+                                  "pmu": 5120,
+                                  "ct": 1
+                                },
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Illuminate\\Events\\Dispatcher::dispatch",
+                            "start": 26.512,
+                            "duration": 56.474,
+                            "color": "#4FC3F7",
+                            "cost": {
+                              "wt": 56474,
+                              "cpu": 11584,
+                              "mu": 848128,
+                              "pmu": 1060160,
+                              "ct": 1
+                            },
+                            "children": [
+                              {
+                                "name": "App\\Listeners\\SendReceiptEmail::handle",
+                                "start": 26.512,
+                                "duration": 56.079,
+                                "color": "#4FC3F7",
+                                "cost": {
+                                  "wt": 56079,
+                                  "cpu": 11249,
+                                  "mu": 836128,
+                                  "pmu": 1045160,
+                                  "ct": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "Illuminate\\Mail\\Mailer::send",
+                                    "start": 26.512,
+                                    "duration": 55.54,
+                                    "color": "#4FC3F7",
+                                    "cost": {
+                                      "wt": 55540,
+                                      "cpu": 10791,
+                                      "mu": 819328,
+                                      "pmu": 1024160,
+                                      "ct": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "Symfony\\Component\\Mailer\\Transport\\Smtp\\SmtpTransport::send",
+                                        "start": 26.512,
+                                        "duration": 47.5,
+                                        "color": "#81D4FA",
+                                        "cost": {
+                                          "wt": 47500,
+                                          "cpu": 3958,
+                                          "mu": 4096,
+                                          "pmu": 5120,
+                                          "ct": 1
+                                        },
+                                        "children": []
+                                      },
+                                      {
+                                        "name": "Illuminate\\View\\Engines\\PhpEngine::evaluatePath",
+                                        "start": 74.012,
+                                        "duration": 7.104,
+                                        "color": "#B3E5FC",
+                                        "cost": {
+                                          "wt": 7104,
+                                          "cpu": 6038,
+                                          "mu": 786432,
+                                          "pmu": 983040,
+                                          "ct": 3
+                                        },
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "App\\Billing\\Gateway\\CardGateway::charge",
+                            "start": 82.98599999999999,
+                            "duration": 166.279,
+                            "color": "#FF9E9E",
+                            "cost": {
+                              "wt": 166279,
+                              "cpu": 16184,
+                              "mu": 68896,
+                              "pmu": 86120,
+                              "ct": 1
+                            },
+                            "children": [
+                              {
+                                "name": "GuzzleHttp\\Client::request",
+                                "start": 82.98599999999999,
+                                "duration": 164.995,
+                                "color": "#FF9E9E",
+                                "cost": {
+                                  "wt": 164995,
+                                  "cpu": 15094,
+                                  "mu": 40096,
+                                  "pmu": 50120,
+                                  "ct": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "curl_exec",
+                                    "start": 82.98599999999999,
+                                    "duration": 163.24,
+                                    "color": "#FF9E9E",
+                                    "cost": {
+                                      "wt": 163240,
+                                      "cpu": 13603,
+                                      "mu": 4096,
+                                      "pmu": 5120,
+                                      "ct": 1
+                                    },
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "json_decode",
+                                "start": 247.981,
+                                "duration": 0.436,
+                                "color": "#B3E5FC",
+                                "cost": {
+                                  "wt": 436,
+                                  "cpu": 370,
+                                  "mu": 9600,
+                                  "pmu": 12000,
+                                  "ct": 1
+                                },
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Illuminate\\Http\\JsonResponse::setData",
+                        "start": 250.255,
+                        "duration": 1.488,
+                        "color": "#B3E5FC",
+                        "cost": {
+                          "wt": 1488,
+                          "cpu": 1264,
+                          "mu": 36000,
+                          "pmu": 45000,
+                          "ct": 1
+                        },
+                        "children": [
+                          {
+                            "name": "json_encode",
+                            "start": 250.255,
+                            "duration": 0.624,
+                            "color": "#B3E5FC",
+                            "cost": {
+                              "wt": 624,
+                              "cpu": 530,
+                              "mu": 14400,
+                              "pmu": 18000,
+                              "ct": 1
+                            },
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "App\\Http\\Middleware\\VerifyApiToken::handle",
+                    "start": 252.21699999999998,
+                    "duration": 2.524,
+                    "color": "#B3E5FC",
+                    "cost": {
+                      "wt": 2524,
+                      "cpu": 792,
+                      "mu": 20896,
+                      "pmu": 26120,
+                      "ct": 1
+                    },
+                    "children": [
+                      {
+                        "name": "Illuminate\\Database\\Connection::select",
+                        "start": 252.21699999999998,
+                        "duration": 2.136,
+                        "color": "#B3E5FC",
+                        "cost": {
+                          "wt": 2136,
+                          "cpu": 463,
+                          "mu": 11296,
+                          "pmu": 14120,
+                          "ct": 1
+                        },
+                        "children": [
+                          {
+                            "name": "PDOStatement::execute",
+                            "start": 252.21699999999998,
+                            "duration": 7.432,
+                            "color": "#B3E5FC",
+                            "cost": {
+                              "wt": 7432,
+                              "cpu": 619,
+                              "mu": 12288,
+                              "pmu": 15360,
+                              "ct": 3
+                            },
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Symfony\\Component\\HttpFoundation\\Response::send",
+        "start": 256.12,
+        "duration": 0.651,
+        "color": "#B3E5FC",
+        "cost": {
+          "wt": 651,
+          "cpu": 553,
+          "mu": 16800,
+          "pmu": 21000,
+          "ct": 1
+        },
+        "children": []
+      },
+      {
+        "name": "Composer\\Autoload\\ClassLoader::loadClass",
+        "start": 256.771,
+        "duration": 7.02,
+        "color": "#B3E5FC",
+        "cost": {
+          "wt": 7020,
+          "cpu": 5967,
+          "mu": 3145728,
+          "pmu": 3932160,
+          "ct": 412
+        },
+        "children": []
+      }
+    ]
+  }
+]

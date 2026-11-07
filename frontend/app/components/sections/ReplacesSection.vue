@@ -14,6 +14,7 @@ const tools = [
   { key: 'inspector', tool: 'Inspector.dev (local)', color: '#eab308' },
   { key: 'smsgateway', tool: 'SMS gateways (dev)', color: '#a855f7', link: '/features/sms' },
   { key: 'proxy', tool: 'Charles / Fiddler / mitmproxy', color: '#10b981', link: '/features/http-proxy' },
+  { key: 'mockapi', tool: 'Mockoon / Beeceptor (dev)', color: '#0ea5e9', link: '/features/mock-server' },
 ]
 </script>
 

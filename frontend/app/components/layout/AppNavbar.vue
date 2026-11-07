@@ -26,6 +26,8 @@ const featureLinks = [
   { label: 'Profiler', to: '/features/profiler', color: '#8b5cf6' },
   { label: 'HTTP Proxy', to: '/features/http-proxy', color: '#10b981' },
   { label: 'SMS Testing', to: '/features/sms', color: '#a855f7' },
+  { label: 'Mock Server', to: '/features/mock-server', color: '#0ea5e9' },
+  { label: 'Xdebug', to: '/features/xdebug', color: '#f97316' },
 ]
 
 const featuresOpen = ref(false)
