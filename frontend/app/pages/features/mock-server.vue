@@ -55,7 +55,7 @@ const steps = [
   },
   {
     title: 'Add a rule',
-    description: 'Open Mock server in the sidebar and add a rule, or define it in code. Rules are checked in order; the first enabled rule that matches answers.',
+    description: 'Open Mock server in the sidebar and add a rule, or define it in code. Rules are checked in order; the first enabled rule that matches answers. Paths: exact paths, {id} for one segment, * for the rest: /users/me, /users/{id}, /files/*.',
     tabs: [
       {
         id: 'yaml',
