@@ -197,8 +197,8 @@
     "guides": "See integration guides →"
   },
   "advanced": {
-    "title": "Ready for production teams",
-    "subtitle": "Enterprise features when you need them.",
+    "title": "Share one instance with your team",
+    "subtitle": "Run one Buggregator for the whole team when you need it.",
     "viewAll": "View all configuration options →",
     "features": {
       "sso": { "title": "SSO Authentication", "desc": "Sign in with Auth0, Google, GitHub, Keycloak, GitLab or any OIDC provider" },
@@ -312,6 +312,31 @@
       "description": "Buggregator is a free, open-source debugging server for PHP developers. Support its development via Patreon or company sponsorship.",
       "ogTitle": "Sponsor Buggregator",
       "ogDescription": "Keep Buggregator free forever. Support via Patreon or become a company sponsor."
+    }
+  },
+  "whatsNew": {
+    "eyebrow": "New in v2.6",
+    "title": "Mock APIs and AI-assisted debugging",
+    "cards": {
+      "mock": {
+        "title": "Fake the API you're waiting for",
+        "desc": "The API isn't ready, or its sandbox is slow? Write a rule — method, path, status, body, delay — and Buggregator answers /mock/... with it. Every call is recorded, with what was sent back or why no rule matched. Rules can live in buggregator.yaml, so CI gets the same answers.",
+        "cta": "Set up a mock"
+      },
+      "ai": {
+        "title": "Let your AI assistant see the runtime",
+        "desc": "Your AI assistant can read your code but not what happened when it ran. Buggregator's MCP server lets Claude Code, Cursor and other MCP clients read your errors, dumps and profiles. With the new Xdebug proxy, they can also read a paused session — stack and variables — while your IDE stays in control. Off by default. The Xdebug tools read the paused session; stepping stays in your IDE.",
+        "cta": "Connect your AI assistant",
+        "links": {
+          "xdebug": "Xdebug proxy"
+        }
+      }
+    },
+    "also": {
+      "lead": "Also new:",
+      "pwa": "install the UI as an app with a badge for new events",
+      "and": ", and",
+      "sentry": "filter Sentry errors, traces, logs and metrics by project and time period"
     }
   }
 }

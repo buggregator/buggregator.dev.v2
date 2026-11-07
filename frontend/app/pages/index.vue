@@ -8,6 +8,7 @@ import DemoSection from '~/components/sections/DemoSection.vue'
 import FrameworksSection from '~/components/sections/FrameworksSection.vue'
 import EcosystemSection from '~/components/sections/EcosystemSection.vue'
 import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSection.vue'
+import WhatsNewSection from '~/components/sections/WhatsNewSection.vue'
 import CommunitySection from '~/components/sections/CommunitySection.vue'
 import StatsSection from '~/components/sections/StatsSection.vue'
 import SponsorsSection from '~/components/sections/SponsorsSection.vue'
@@ -63,6 +64,7 @@ useHead({
     <StepsSection />
     <FrameworksSection />
     <AdvancedFeaturesSection />
+    <WhatsNewSection />
     <DemoSection />
     <EcosystemSection />
     <CommunitySection />
