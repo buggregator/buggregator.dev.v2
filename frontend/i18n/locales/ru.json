@@ -16,7 +16,7 @@
     "headlineSub": "Не устанавливая лишнего.",
     "starCta": "Star на GitHub",
     "subheadline": "Exceptions. Дампы. Emails. XHProf. Логи. Всё в одном интерфейсе, запускается одной командой. Работает с SDK, которые у вас уже есть. Без облака.",
-    "command": "docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 ghcr.io/buggregator/server:latest",
+    "command": "docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Скопировать",
       "copied": "Скопировано!"
@@ -168,8 +168,7 @@
     "title": "Начните за 60 секунд",
     "tabs": {
       "docker": "Docker",
-      "compose": "Docker Compose",
-      "trap": "Composer-пакет"
+      "compose": "Docker Compose"
     },
     "trust": {
       "free": "Бесплатно навсегда",
@@ -177,7 +176,6 @@
       "noCard": "Без банковской карты",
       "oss": "Открытый исходный код (MIT)"
     },
-    "trapNote": "Предпочитаете Composer? Trap даёт вам trap(), tr(), td() и встроенный debug-сервер.",
     "links": {
       "fullGuide": "Полное руководство по установке →"
     }
@@ -203,8 +201,8 @@
     "subtitle": "Enterprise-возможности, когда они нужны.",
     "viewAll": "Все параметры конфигурации →",
     "features": {
-      "sso": { "title": "SSO-аутентификация", "desc": "Поддержка Auth0 и Kinde для командных сред" },
-      "db": { "title": "Внешняя база данных", "desc": "PostgreSQL/MySQL для постоянного хранения событий" },
+      "sso": { "title": "SSO-аутентификация", "desc": "Вход через Auth0, Google, GitHub, Keycloak, GitLab или любой OIDC-провайдер" },
+      "db": { "title": "Постоянное хранение", "desc": "События сохраняются между перезапусками в файле SQLite — отдельный сервер БД не нужен" },
       "k8s": { "title": "Готов для Kubernetes", "desc": "Деплой как Deployment + Service в вашем кластере" },
       "webhooks": { "title": "Вебхуки", "desc": "Вызов внешних действий при поступлении событий" },
       "prometheus": { "title": "Метрики Prometheus", "desc": "Мониторинг количества событий через Grafana" },

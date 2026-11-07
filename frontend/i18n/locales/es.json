@@ -16,7 +16,7 @@
     "headlineSub": "Sin instalar nada.",
     "starCta": "Star en GitHub",
     "subheadline": "Excepciones. Dumps. Emails. Profiling. Logs. Todo en una interfaz, lanzado con un comando. Funciona con los SDKs que ya tienes. Sin cuenta en la nube.",
-    "command": "docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 ghcr.io/buggregator/server:latest",
+    "command": "docker run -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copiar comando",
       "copied": "¡Copiado!"
@@ -168,8 +168,7 @@
     "title": "Empieza en 60 segundos",
     "tabs": {
       "docker": "Docker",
-      "compose": "Docker Compose",
-      "trap": "Paquete Composer"
+      "compose": "Docker Compose"
     },
     "trust": {
       "free": "Gratis para siempre",
@@ -177,7 +176,6 @@
       "noCard": "Sin tarjeta de crédito",
       "oss": "Código abierto (MIT)"
     },
-    "trapNote": "¿Prefieres Composer? Trap te da trap(), tr(), td() y un servidor de depuración integrado.",
     "links": {
       "fullGuide": "Guía completa de instalación →"
     }
@@ -203,8 +201,8 @@
     "subtitle": "Funcionalidades enterprise cuando las necesites.",
     "viewAll": "Ver todas las opciones de configuración →",
     "features": {
-      "sso": { "title": "Autenticación SSO", "desc": "Soporte para Auth0 y Kinde en entornos de equipo" },
-      "db": { "title": "Base de datos externa", "desc": "PostgreSQL/MySQL para almacenamiento persistente de eventos" },
+      "sso": { "title": "Autenticación SSO", "desc": "Inicio de sesión con Auth0, Google, GitHub, Keycloak, GitLab o cualquier proveedor OIDC" },
+      "db": { "title": "Almacenamiento persistente", "desc": "Conserva los eventos entre reinicios en un archivo SQLite, sin servidor de base de datos" },
       "k8s": { "title": "Listo para Kubernetes", "desc": "Despliega como Deployment + Service en tu clúster" },
       "webhooks": { "title": "Webhooks", "desc": "Ejecuta acciones externas en eventos entrantes" },
       "prometheus": { "title": "Métricas Prometheus", "desc": "Monitorea conteos de eventos con Grafana" },

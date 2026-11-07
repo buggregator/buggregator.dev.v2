@@ -41,7 +41,7 @@ const features = [
     <ClientOnly>
       <RevealWords
         ref="revealRef"
-        :words="['SSO', 'Auth0', 'Kinde', 'K8s', 'PostgreSQL', 'Prometheus', 'Grafana', 'Webhooks', 'OAuth', 'RBAC', 'Helm', 'Docker', 'MySQL', 'Redis', 'AMQP', 'CI/CD', 'GitHub Actions', 'deploy', 'kubectl apply', 'enterprise ready', 'production grade', 'zero downtime', 'MIT License', 'git blame', '// FIXME', 'catch (\\Throwable $e)']"
+        :words="['SSO', 'Auth0', 'Keycloak', 'K8s', 'SQLite', 'Prometheus', 'Grafana', 'Webhooks', 'OAuth', 'Helm', 'Docker', 'OIDC', 'GitLab', 'CI/CD', 'GitHub Actions', 'deploy', 'kubectl apply', 'enterprise ready', 'production grade', 'zero downtime', 'MIT License', 'git blame', '// FIXME', 'catch (\\Throwable $e)']"
         color="#06b6d4"
         :radius="200"
         :density="28"

@@ -16,7 +16,7 @@
     "headlineSub": "Install nothing.",
     "starCta": "Star on GitHub",
     "subheadline": "Exceptions. Dumps. Emails. Profiling. Logs. All in one UI, launched with one command. Works with the SDKs you already have. No cloud account.",
-    "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 ghcr.io/buggregator/server:latest",
+    "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
       "copied": "Copied!"
@@ -168,8 +168,7 @@
     "title": "Get started in 60 seconds",
     "tabs": {
       "docker": "Docker",
-      "compose": "Docker Compose",
-      "trap": "Composer Package"
+      "compose": "Docker Compose"
     },
     "trust": {
       "free": "Free forever",
@@ -177,7 +176,6 @@
       "noCard": "No credit card",
       "oss": "Open source (MIT)"
     },
-    "trapNote": "Prefer a Composer package? Trap gives you trap(), tr(), td() and a built-in debug server.",
     "links": {
       "fullGuide": "Full installation guide →"
     }
@@ -203,8 +201,8 @@
     "subtitle": "Enterprise features when you need them.",
     "viewAll": "View all configuration options →",
     "features": {
-      "sso": { "title": "SSO Authentication", "desc": "Auth0 & Kinde support for team environments" },
-      "db": { "title": "External Database", "desc": "PostgreSQL/MySQL for persistent event storage" },
+      "sso": { "title": "SSO Authentication", "desc": "Sign in with Auth0, Google, GitHub, Keycloak, GitLab or any OIDC provider" },
+      "db": { "title": "Persistent Storage", "desc": "Keep events across restarts in a SQLite file — no database server to run" },
       "k8s": { "title": "Kubernetes Ready", "desc": "Deploy as Deployment + Service in your cluster" },
       "webhooks": { "title": "Webhooks", "desc": "Trigger external actions on incoming events" },
       "prometheus": { "title": "Prometheus Metrics", "desc": "Monitor event counts with Grafana" },
