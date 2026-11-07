@@ -5,6 +5,11 @@ const { trackEvent } = useGtag()
 const utm = 'utm_source=buggregator.dev&utm_medium=referral&utm_campaign=built-with-harnsy'
 const ctaUrl = `https://harnsy.dev/?${utm}&utm_content=section-cta`
 const badgeUrl = `https://harnsy.dev/?${utm}&utm_content=section-badge`
+const operatorUrl = `https://hr.harnsy.dev/harnsy/buggregator-operator?${utm}&utm_content=hire-operator`
+
+// Hiring the operator needs harnsy 0.11 (out 2026-11-10): drop this line and
+// the `harnsy.operator.needs` strings once it is out.
+const showNeeds = true
 </script>
 
 <template>
@@ -38,6 +43,19 @@ const badgeUrl = `https://harnsy.dev/?${utm}&utm_content=section-badge`
       >
         {{ t('harnsy.cta') }} ↗
       </a>
+      <div class="mt-6 max-w-[60ch] mx-auto text-sm leading-relaxed font-sans">
+        <p class="text-on-dark-secondary">{{ t('harnsy.operator.text') }}</p>
+        <a
+          :href="operatorUrl"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center min-h-[44px] text-accent hover:text-accent-hover transition-colors no-underline"
+          @click="trackEvent('cta_click', { cta_location: 'harnsy', cta_text: 'hire_operator' })"
+        >
+          {{ t('harnsy.operator.cta') }}
+        </a>
+        <p v-if="showNeeds" class="text-xs text-on-dark-muted">{{ t('harnsy.operator.needs') }}</p>
+      </div>
     </div>
   </section>
 </template>
