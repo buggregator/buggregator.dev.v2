@@ -139,12 +139,12 @@ const highlights = [
   {
     icon: '\u{1F30A}',
     title: 'Traces as a waterfall',
-    description: 'Every span of a request on a timeline: database queries, cache, HTTP calls, queues \u2014 each marked by type, the slow and the failed ones easy to spot.',
+    description: 'Every span of a request on a timeline: database queries, cache, HTTP calls, queues \u2014 each marked by type. The bar shows how long it took; failed spans are tagged.',
   },
   {
     icon: '\u{1F5FA}\uFE0F',
     title: 'Service map',
-    description: 'Which service calls which database, cache or API, with request counts, average time and error rate. Built from the last hour of traces.',
+    description: 'Which service calls which database, cache or API, with request counts and average time. Links turn amber or red when calls fail. Built from the last hour of traces.',
   },
   {
     icon: '\u{1F4DC}',
@@ -215,7 +215,7 @@ const worksWith = {
     <!-- Highlights -->
     <FeatureHighlights
       title="Four kinds of data, one place"
-      subtitle="Each kind has its own tab, filtered by project and period. New data shows up without a reload."
+      subtitle="Each kind has its own tab for the project and period you pick. New data shows up without a reload."
       :items="highlights"
       :accent-color="accentColor"
     />
@@ -248,7 +248,7 @@ const worksWith = {
         <div class="rounded-xl border border-landing-border-subtle p-5">
           <h2 class="text-lg font-semibold text-white mb-2">What it leaves out</h2>
           <p class="text-sm leading-relaxed text-on-dark-secondary">
-            Session replays, profiles, cron check-ins, release health sessions, user feedback and attachments are not kept.
+            Session replays, profiles, cron check-ins, release health sessions and attachments are not kept.
             For PHP profiling, use the
             <NuxtLink to="/features/profiler" class="text-accent hover:text-accent-hover no-underline">Profiler (XHProf) page</NuxtLink>.
           </p>
