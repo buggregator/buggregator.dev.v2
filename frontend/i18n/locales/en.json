@@ -30,6 +30,13 @@
     },
     "liveFeed": {
       "live": "Live"
+    },
+    "install": {
+      "label": "How to run",
+      "docker": "Docker",
+      "binary": "Binary",
+      "binaryNote": "One file, about {size}. One command installs it.",
+      "otherPlatforms": "Other ways to install →"
     }
   },
   "cleanApp": {
@@ -39,7 +46,7 @@
       "quote": "Telescope works inside your app. Buggregator works beside it.",
       "body": "Zero performance overhead. Works with RoadRunner, FrankenPHP, Swoole, and Octane. Catches emails, SMS, and external HTTP — things Telescope never sees. Works across every service in your stack."
     },
-    "body": "Buggregator runs beside your application as a standalone Docker container. Your codebase doesn't change. Your dependencies don't change. You already have the SDKs installed — they just need a different address.",
+    "body": "Buggregator runs beside your application — as one binary or one Docker container. Your codebase doesn't change. Your dependencies don't change. You already have the SDKs installed — they just need a different address.",
     "pillars": {
       "noDeps": {
         "title": "No new dependencies",
@@ -51,7 +58,7 @@
       },
       "crossProject": {
         "title": "One instance, all your apps",
-        "body": "Run one Buggregator container. Point all your projects at it. Microservices, monorepos, multiple teams — one dashboard."
+        "body": "Run one Buggregator — binary or container. Point all your projects at it. Microservices, monorepos, multiple teams — one dashboard."
       }
     },
     "devEnv": {
@@ -119,7 +126,7 @@
     "steps": {
       "run": {
         "title": "Run one command",
-        "description": "Start Buggregator with a single docker run. No installation, no registration, no configuration files."
+        "description": "Install one file with one command, or start it with docker run. No registration, no account."
       },
       "connect": {
         "title": "Add one env variable",
@@ -173,8 +180,20 @@
     "title": "Get started in 60 seconds",
     "tabs": {
       "docker": "Docker",
-      "compose": "Docker Compose"
+      "compose": "Docker Compose",
+      "binary": "Binary"
     },
+    "binary": {
+      "platform": "Platform",
+      "note": "One file for Linux, macOS and Windows, about {size}. Nothing else to install.",
+      "size": "{n} MB",
+      "windowsNote": "On Windows, VarDumper (port 9912) is not available. Every other module works."
+    },
+    "platforms": "Runs on Windows, macOS and Linux, on Intel/AMD and ARM.",
+    "localOnly": "Listens on all network interfaces by default. To keep it on this computer only, see the one-line setting →",
+    "localOnlyBound": "This run line keeps it on this computer. Without the *_ADDR settings it listens on all network interfaces →",
+    "scriptCpu": "The script picks the file for your CPU: Intel/AMD or ARM.",
+    "agent": "Prefer not to do it yourself? Your AI agent can set Buggregator up for you →",
     "trust": {
       "free": "Free forever",
       "noReg": "No registration",
@@ -183,7 +202,8 @@
     },
     "links": {
       "fullGuide": "Full installation guide →",
-      "binaries": "No Docker? One binary for Linux, macOS and Windows →"
+      "binaries": "All downloads on GitHub Releases →",
+      "manual": "Rather not run a script? Download the file yourself →"
     }
   },
   "demo": {
@@ -316,10 +336,10 @@
   "seo": {
     "home": {
       "title": "Buggregator — Free Debugging Server for PHP",
-      "description": "Debug everything in your PHP app. Exceptions, dumps, emails, profiling, logs — all in one UI. One docker run. Works with Sentry, VarDumper, Monolog, XHProf. Free & open source.",
+      "description": "Debug everything in your PHP app. Exceptions, dumps, emails, profiling, logs — all in one UI. One command, Docker or a single binary. Works with Sentry, VarDumper, Monolog, XHProf. Free & open source.",
       "ogTitle": "Buggregator — Debug Everything in Your PHP App",
-      "ogDescription": "Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. No cloud account. Free forever.",
-      "twitterDescription": "Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. Free forever."
+      "ogDescription": "Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One command. No cloud account. Free forever.",
+      "twitterDescription": "Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One command. Free forever."
     },
     "sponsors": {
       "title": "Sponsor Buggregator — Support Free Open Source PHP Debugging",

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import VersionBadge from '~/components/ui/VersionBadge.vue'
 import VideoBackground from '~/components/sections/HeroSection/VideoBackground.vue'
+import BinaryPlatformPicker from '~/components/ui/BinaryPlatformPicker.vue'
+import InstallPlatformsNote from '~/components/ui/InstallPlatformsNote.vue'
 import { useGitHubStore } from '~/stores/github'
 
 const { t } = useI18n()
@@ -35,9 +37,22 @@ function commandLines(portsPerLine: number): string {
 const commandWide = computed(() => commandLines(2))
 const commandNarrow = computed(() => commandLines(1))
 
+// The standalone binary or Docker: two ways to start. The binary comes first
+// and is the default (owner: the simple path); the hero shows only its
+// one-line install, the run line with 127.0.0.1 binds is in Get started.
+type StartMethod = 'binary' | 'docker'
+const startMethods: StartMethod[] = ['binary', 'docker']
+const startMethod = ref<StartMethod>('binary')
+const binary = useBinaryPlatform()
+
 async function copyStartCommand() {
-  if (await copy(t('hero.command'))) {
-    trackEvent('copy_install_command', { cta_location: 'hero' })
+  const text = startMethod.value === 'binary' ? binary.installCommand.value : t('hero.command')
+  if (await copy(text)) {
+    trackEvent('copy_install_command', {
+      cta_location: 'hero',
+      install_method: startMethod.value,
+      ...(startMethod.value === 'binary' ? { platform: binary.os.value } : {}),
+    })
   }
 }
 
@@ -79,7 +94,35 @@ const formattedDownloads = computed(() => {
 
         <!-- Start command -->
         <div class="hero__start hero-stagger" style="--i: 3">
+          <div class="hero__methods" role="group" :aria-label="t('hero.install.label')">
+            <button
+              v-for="m in startMethods"
+              :key="m"
+              type="button"
+              class="hero__method"
+              :class="{ 'hero__method--active': startMethod === m }"
+              :aria-pressed="startMethod === m"
+              @click="startMethod = m"
+            >
+              {{ t(`hero.install.${m}`) }}
+            </button>
+          </div>
+          <div v-if="startMethod === 'binary'" class="hero__command hero__command--binary">
+            <BinaryPlatformPicker class="mb-3" />
+            <pre><span class="hero__prompt" aria-hidden="true">{{ binary.prompt.value }} </span>{{ binary.installCommand.value }}</pre>
+            <p class="hero__binary-note">
+              {{ t('hero.install.binaryNote', { size: t('install.binary.size', { n: BINARY_SIZE_MB }) }) }}
+              <template v-if="binary.os.value === 'windows'">{{ t('install.binary.windowsNote') }}</template>
+            </p>
+            <p class="hero__binary-note">
+              <a :href="BINARY_LOCAL_ONLY_URL" target="_blank" rel="noopener" class="hero__binary-link">{{ t('install.localOnly') }}</a>
+            </p>
+            <p class="hero__binary-note">
+              <a href="https://docs.buggregator.dev/getting-started.html" target="_blank" rel="noopener" class="hero__binary-link">{{ t('hero.install.otherPlatforms') }}</a>
+            </p>
+          </div>
           <div
+            v-else
             class="hero__command"
             tabindex="0"
             role="region"
@@ -97,6 +140,7 @@ const formattedDownloads = computed(() => {
             </svg>
             <span aria-live="polite">{{ copied ? t('hero.cta.copied') : t('hero.cta.copy') }}</span>
           </button>
+          <InstallPlatformsNote class="hero__platforms" />
         </div>
 
         <!-- Trust row -->
@@ -232,6 +276,73 @@ h1 {
   white-space: pre;
 }
 
+.hero__methods {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid theme('colors.code.border');
+}
+
+.hero__method {
+  min-height: 36px;
+  min-width: 96px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: theme('colors.on-dark.secondary');
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.hero__method:hover {
+  color: #fff;
+}
+
+.hero__method--active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* The install line wraps: «| sh» stays in view on a phone. */
+.hero__command--binary pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.hero__binary-note {
+  margin-top: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.75rem;
+  white-space: normal;
+  color: theme('colors.on-dark.secondary');
+}
+
+.hero__binary-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: theme('colors.accent.DEFAULT');
+  text-decoration: none;
+}
+
+.hero__binary-link:hover {
+  color: theme('colors.accent.hover');
+}
+
+@media (min-width: 640px) {
+  .hero__binary-link {
+    min-height: 0;
+  }
+}
+
+.hero__platforms {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+}
+
 .hero__command:focus-visible {
   outline-offset: -2px;
 }
@@ -358,6 +469,11 @@ h1 {
 
   .hero__copy {
     width: 100%;
+  }
+
+  /* Touch: 44 px targets on phones. */
+  .hero__method {
+    min-height: 44px;
   }
 
   .hero__scroll {

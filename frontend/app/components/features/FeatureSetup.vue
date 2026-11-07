@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import BinaryInstall from '~/components/ui/BinaryInstall.vue'
+import InstallPlatformsNote from '~/components/ui/InstallPlatformsNote.vue'
+
+// A tab with `binary: true` shows the per-platform binary commands
+// (BinaryInstall) instead of `code`. `note` on a tab shows under the code
+// while that tab is active.
+type StepTab = { id: string; label: string; code?: string; binary?: boolean; note?: string }
+
 const props = defineProps<{
   steps: Array<{
     title: string
     description: string
     code?: string
     language?: string
-    // `note` on a tab shows under the code while that tab is active.
-    tabs?: Array<{ id: string; label: string; code: string; note?: string }>
+    tabs?: StepTab[]
     note?: string
   }>
 }>()
@@ -15,8 +22,6 @@ const imageTag = useServerImageTag()
 
 // Track active tab per step
 const activeTabs = ref<Record<number, string>>({})
-
-type StepTab = { id: string; label: string; code: string; note?: string }
 
 function getActiveTab(stepIndex: number, tabs: StepTab[]): string {
   const saved = activeTabs.value[stepIndex]
@@ -35,7 +40,7 @@ function getActiveCode(stepIndex: number, step: typeof props.steps[number]): str
   const activeId = getActiveTab(stepIndex, tabs)
   const found = tabs.find(t => t.id === activeId)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return found ? found.code : tabs[0]!.code
+  return (found ? found.code : tabs[0]!.code) ?? ''
 }
 
 function getActiveNote(stepIndex: number, step: typeof props.steps[number]): string | undefined {
@@ -43,6 +48,14 @@ function getActiveNote(stepIndex: number, step: typeof props.steps[number]): str
   const activeId = getActiveTab(stepIndex, step.tabs)
   return step.tabs.find(t => t.id === activeId)?.note
 }
+
+function isBinaryTabActive(stepIndex: number, step: typeof props.steps[number]): boolean {
+  if (!step.tabs) return false
+  const activeId = getActiveTab(stepIndex, step.tabs)
+  return step.tabs.some(t => t.id === activeId && t.binary)
+}
+
+const hasBinaryTab = (step: typeof props.steps[number]) => step.tabs?.some(t => t.binary) ?? false
 
 // Copy
 const copiedStep = ref<number | null>(null)
@@ -93,13 +106,17 @@ async function copyCode(stepIndex: number, code: string) {
                   :class="getActiveTab(i, step.tabs!) === tab.id
                     ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
                     : 'text-[#8b949e] border-transparent hover:text-code-text'"
+                  :aria-pressed="getActiveTab(i, step.tabs!) === tab.id"
                   @click="setActiveTab(i, tab.id)"
                 >
                   {{ tab.label }}
                 </button>
               </div>
 
-              <div class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative overflow-x-auto">
+              <div v-if="isBinaryTabActive(i, step)" class="bg-code-bg p-4">
+                <BinaryInstall bare cta-location="feature_setup" />
+              </div>
+              <div v-else class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative overflow-x-auto">
                 <pre class="text-code-text whitespace-pre"><template
                   v-for="(line, li) in getActiveCode(i, step).replace(/{imageTag}/g, imageTag).split('\n')"
                   :key="li"
@@ -131,6 +148,7 @@ async function copyCode(stepIndex: number, code: string) {
             </div>
             <p v-if="getActiveNote(i, step)" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ getActiveNote(i, step) }}</p>
             <p v-if="step.note" class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">{{ step.note }}</p>
+            <InstallPlatformsNote v-if="hasBinaryTab(step)" class="mt-4" />
           </div>
         </div>
       </div>

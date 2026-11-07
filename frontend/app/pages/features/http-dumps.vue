@@ -14,7 +14,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'Inspect HTTP Requests and Webhooks Locally — Buggregator',
-  description: 'Capture any HTTP request: method, URL, headers, cookies, form data and uploaded files, and the request as a cURL command. A local webhook.site for development. Free and open source.',
+  description: 'Capture any HTTP request: method, URL, headers, cookies, form data and uploaded files, and a cURL command to send it again. A local webhook.site for development. Free and open source.',
   ogTitle: 'HTTP Dumps — See Every Request That Arrives — Buggregator',
   ogDescription: 'Headers, body, cookies, files and a cURL command for every captured request. No account.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -29,8 +29,13 @@ const accentColor = '#22c55e'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: 'HTTP dumps arrive on port 8000, the same port as the UI.',
+    description: `HTTP dumps arrive on port 8000, the same port as the UI. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
+      {
+        id: 'binary',
+        label: 'Binary',
+        binary: true,
+      },
       {
         id: 'docker',
         label: 'Docker',
@@ -44,14 +49,6 @@ const steps = [
     image: ghcr.io/buggregator/server:{imageTag}
     ports:
       - 127.0.0.1:8000:8000`,
-      },
-      {
-        id: 'binary',
-        label: 'Binary',
-        code: `# Download the binary for your platform
-$ curl -L https://github.com/buggregator/server/releases/latest/download/buggregator-linux-amd64 -o buggregator
-$ chmod +x buggregator
-$ ./buggregator`,
       },
     ],
   },
@@ -97,8 +94,8 @@ const highlights = [
   },
   {
     icon: '\u{1F501}',
-    title: 'Copy as cURL',
-    description: 'Method, headers and body as a cURL command. Add your host to send it again.',
+    title: 'Replay with cURL',
+    description: 'Every request as a ready cURL command: URL, headers and body. Paste it in a terminal and the same request arrives again. Uploaded files are named, not attached.',
   },
   {
     icon: '\u{1FA9D}',
@@ -131,7 +128,7 @@ const worksWithItems = [
     <FeatureHero
       title="See exactly what the request contained"
       subtitle="HTTP Dumps"
-      description="You're building a webhook, a callback or an API client, and you need to see what actually goes over the wire. Send the request to Buggregator: you get the method, URL, headers, cookies, form data and uploaded files — and the request as a cURL command. No separate service like webhook.site."
+      description="You're building a webhook, a callback or an API client, and you need to see what actually goes over the wire. Send the request to Buggregator: you get the method, URL, headers, cookies, form data and uploaded files — and a cURL command to send it again. No separate service like webhook.site."
       :accent-color="accentColor"
     >
       <template #cta>

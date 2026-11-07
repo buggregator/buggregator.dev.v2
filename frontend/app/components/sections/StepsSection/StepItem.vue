@@ -19,7 +19,7 @@ defineProps<{
 
     <!-- Content -->
     <div class="flex-1 min-w-0 pb-16 lg:pb-20">
-      <div class="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-10">
+      <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
         <!-- Left column: text + code -->
         <div>
           <h3 class="font-sans text-xl font-semibold text-white mb-2">{{ title }}</h3>

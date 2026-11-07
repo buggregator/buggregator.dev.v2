@@ -3,14 +3,17 @@ import StepItem from '~/components/sections/StepsSection/StepItem.vue'
 import TerminalMockup from '~/components/sections/StepsSection/TerminalMockup.vue'
 import FrameworkTabs from '~/components/sections/StepsSection/FrameworkTabs.vue'
 import BrowserMockup from '~/components/sections/StepsSection/BrowserMockup.vue'
+import BinaryInstall from '~/components/ui/BinaryInstall.vue'
+import InstallPlatformsNote from '~/components/ui/InstallPlatformsNote.vue'
 
 const { t } = useI18n()
 
 const imageTag = useServerImageTag()
 
 // Step 1: install method tabs
-type InstallTab = 'docker' | 'compose'
-const installTab = ref<InstallTab>('docker')
+type InstallTab = 'docker' | 'binary' | 'compose'
+const installTab = ref<InstallTab>('binary')
+const installTabs: InstallTab[] = ['binary', 'docker', 'compose']
 
 const ports = [
   { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector + XHProf' },
@@ -30,6 +33,7 @@ const composeCommand = computed(() => {
   return `services:\n  buggregator:\n    image: ghcr.io/buggregator/server:${imageTag.value}\n    ports:\n${portLines}`
 })
 
+// The binary tab has its own copy button (BinaryInstall).
 const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand.value : composeCommand.value)
 
 const { copied, copy } = useClipboardCopy()
@@ -86,27 +90,25 @@ const trustBadges = computed(() => [
           <template #code>
             <!-- Docker / Docker Compose tabs -->
             <div class="rounded-xl border border-code-border overflow-hidden">
-              <div class="flex gap-1 bg-code-bg px-2 pt-2 border-b border-code-border">
+              <div class="flex gap-1 bg-code-bg px-2 pt-2 border-b border-code-border overflow-x-auto">
                 <button
-                  class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
-                  :class="installTab === 'docker'
+                  v-for="tab in installTabs"
+                  :key="tab"
+                  type="button"
+                  class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
+                  :class="installTab === tab
                     ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
                     : 'text-[#8b949e] border-transparent hover:text-code-text'"
-                  @click="installTab = 'docker'"
+                  :aria-pressed="installTab === tab"
+                  @click="installTab = tab"
                 >
-                  {{ t('install.tabs.docker') }}
-                </button>
-                <button
-                  class="min-h-[44px] px-3 py-1.5 font-mono text-xs transition-colors duration-150 border-b-2 rounded-t-md"
-                  :class="installTab === 'compose'
-                    ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
-                    : 'text-[#8b949e] border-transparent hover:text-code-text'"
-                  @click="installTab = 'compose'"
-                >
-                  {{ t('install.tabs.compose') }}
+                  {{ t(`install.tabs.${tab}`) }}
                 </button>
               </div>
-              <div class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative">
+              <div v-if="installTab === 'binary'" class="bg-code-bg p-4">
+                <BinaryInstall bare cta-location="steps" />
+              </div>
+              <div v-else class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative">
                 <!-- Docker run -->
                 <div v-if="installTab === 'docker'">
                   <div>
@@ -160,9 +162,10 @@ const trustBadges = computed(() => [
                 <dd class="text-on-dark-secondary">{{ p.hint }}</dd>
               </template>
             </dl>
+            <InstallPlatformsNote class="mt-4" />
           </template>
           <template #preview>
-            <TerminalMockup />
+            <TerminalMockup :method="installTab" />
           </template>
         </StepItem>
 
