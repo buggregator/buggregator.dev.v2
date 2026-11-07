@@ -30,7 +30,7 @@ const steps = [
   {
     title: 'Turn MCP on',
     description: 'Requires Buggregator v2.6.0 or later. MCP is off by default. Turn it on with one setting. Locally it listens on a Unix socket; in Docker, use HTTP on port 8001.',
-    note: 'MCP has its own access rules, separate from SSO. Over HTTP it has no token unless you set MCP_AUTH_TOKEN — keep the port on 127.0.0.1, as above.',
+    note: 'MCP has its own access rules, separate from SSO. Over HTTP it has no token unless you set MCP_AUTH_TOKEN — keep the port on 127.0.0.1, as above. Six of the mock tools change your mock rules, and they are on by default. Turn them off with mcp.mock_write: false (or MCP_MOCK_WRITE=false).',
     tabs: [
       {
         id: 'env',
@@ -132,7 +132,10 @@ or URL:  http://localhost:8001/mcp`,
   → events_list (type: profiler) → profiler_summary → profiler_top (metric: excl_wt) → profiler_call_graph
 
 "Why is $total zero here?"   (stopped at a breakpoint)
-  → xdebug_location → xdebug_variables → xdebug_property ($cart->items)`,
+  → xdebug_location → xdebug_variables → xdebug_property ($cart->items)
+
+"Mock the payments API from ./openapi.yaml."
+  → mock_import_openapi → mock_rules_list`,
       },
       {
         id: 'email',
@@ -174,7 +177,7 @@ const highlights = [
   {
     icon: '\u{1F3AF}',
     title: 'At your breakpoint',
-    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Each read it makes on the paused session shows up live in Buggregator.',
+    description: 'With the Xdebug proxy on, the assistant reads the paused session — line, stack, variables — while you keep stepping in your IDE. Each read it makes on the paused session shows up live in Buggregator. These are five tools; evaluating PHP (xdebug_eval) also needs xdebug.allow_eval: true.',
   },
   {
     icon: '\u{2709}️',
@@ -183,8 +186,8 @@ const highlights = [
   },
   {
     icon: '\u{1F9EA}',
-    title: 'Mock rules from scripts',
-    description: 'REST API: create, edit and reorder mock rules, and list the calls your app made to /mock/ \u2014 with the rule that almost matched and why.',
+    title: 'Mock APIs, from your assistant or a script',
+    description: 'Your assistant can create, edit and delete mock rules, preview what a rule would answer, and turn a captured request into a rule. Give it an OpenAPI spec, and it makes one rule per endpoint, with example or fake data. Scripts do the same through the REST API.',
   },
 ]
 
@@ -237,7 +240,7 @@ const worksWithItems = [
     <!-- Highlights -->
     <FeatureHighlights
       title="What your assistant and your scripts can do"
-      subtitle="8 MCP tools, up to 14 with the Xdebug proxy — all but event_delete and xdebug_eval only read. The REST API covers the rest."
+      subtitle="19 MCP tools, 24 with the Xdebug proxy. The REST API covers the rest."
       :items="highlights"
       :accent-color="accentColor"
     />
