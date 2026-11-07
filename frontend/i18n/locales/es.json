@@ -197,8 +197,8 @@
     "guides": "Ver guías de integración →"
   },
   "advanced": {
-    "title": "Listo para equipos en producción",
-    "subtitle": "Funcionalidades enterprise cuando las necesites.",
+    "title": "Una instancia para todo tu equipo",
+    "subtitle": "Ejecuta un solo Buggregator para todo el equipo cuando lo necesites.",
     "viewAll": "Ver todas las opciones de configuración →",
     "features": {
       "sso": { "title": "Autenticación SSO", "desc": "Inicio de sesión con Auth0, Google, GitHub, Keycloak, GitLab o cualquier proveedor OIDC" },
@@ -312,6 +312,31 @@
       "description": "Buggregator es un servidor de depuración gratuito y de código abierto para desarrolladores PHP. Apoya su desarrollo con Patreon o con un patrocinio de empresa.",
       "ogTitle": "Patrocina Buggregator",
       "ogDescription": "Mantén Buggregator gratis para siempre. Apóyalo con Patreon o hazte patrocinador como empresa."
+    }
+  },
+  "whatsNew": {
+    "eyebrow": "Novedades en v2.6",
+    "title": "APIs simuladas y depuración asistida por IA",
+    "cards": {
+      "mock": {
+        "title": "Simula la API que estás esperando",
+        "desc": "¿La API no está lista o su sandbox es lento? Escribe una regla — método, ruta, estado, cuerpo, retraso — y Buggregator responde con ella en /mock/... Cada llamada queda registrada, con lo que se devolvió o por qué ninguna regla coincidió. Las reglas pueden vivir en buggregator.yaml, así CI recibe las mismas respuestas.",
+        "cta": "Configurar un mock"
+      },
+      "ai": {
+        "title": "Deja que tu asistente de IA vea la ejecución",
+        "desc": "Tu asistente de IA puede leer tu código, pero no lo que pasó al ejecutarlo. El servidor MCP de Buggregator permite a Claude Code, Cursor y otros clientes MCP leer tus errores, dumps y perfiles. Con el nuevo proxy de Xdebug también pueden leer una sesión en pausa — pila y variables — mientras tu IDE mantiene el control. Desactivado por defecto; solo lectura.",
+        "cta": "Conecta tu asistente de IA",
+        "links": {
+          "xdebug": "Proxy de Xdebug"
+        }
+      }
+    },
+    "also": {
+      "lead": "También nuevo:",
+      "pwa": "instala la interfaz como app con un contador de eventos nuevos",
+      "and": " y",
+      "sentry": "filtra errores, trazas, logs y métricas de Sentry por proyecto y periodo"
     }
   }
 }
