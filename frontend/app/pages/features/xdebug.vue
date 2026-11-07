@@ -143,7 +143,7 @@ const highlights = [
   {
     icon: '\u{1F4CD}',
     title: 'Breakpoints that stay',
-    description: 'Click a line number, or type path:line (the absolute path PHP sees) or an exception class like RuntimeException, or * for every exception. Breakpoints are saved and sent to every session Buggregator drives (kept across restarts when the database is a file, DATABASE_DSN).',
+    description: 'Click a line number, or type path:line — the absolute path PHP sees — or an exception class like RuntimeException (* for every exception). Breakpoints are saved and sent to every session Buggregator drives. With the database in a file (DATABASE_DSN), they survive a restart.',
   },
   {
     icon: '\u{1F916}',
