@@ -138,6 +138,8 @@ function bytes(value: number) {
   return `${value} B`
 }
 
+const nameParts = computed(() => active.value?.node.name.split(/(?<=\\|::)/) ?? [])
+
 const stats = computed(() => {
   const frame = active.value
   if (!frame) return []
@@ -211,7 +213,7 @@ const stats = computed(() => {
               :aria-label="`${frame.node.name}, ${ms(frame.end - frame.start)}`"
               :aria-pressed="!canHover ? activeId === frame.id : undefined"
               class="flame-bar absolute block overflow-hidden whitespace-nowrap text-ellipsis rounded-[2px] px-1 text-left font-mono text-[11px] leading-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:-outline-offset-2"
-              :class="activeId === frame.id ? 'brightness-110' : ''"
+              :class="activeId === frame.id ? (canHover ? 'brightness-110' : 'outline outline-2 outline-white -outline-offset-2') : ''"
               :style="{
                 left: `${box.left}%`,
                 width: `max(${box.width}%, 1px)`,
@@ -254,7 +256,10 @@ const stats = computed(() => {
       :style="canHover ? { left: `${cardAt.x}px`, top: `${cardAt.y}px`, width: `${CARD_WIDTH}px` } : {}"
       aria-live="polite"
     >
-      <p class="font-mono text-xs text-white break-all mb-2">{{ active.node.name }}</p>
+      <!-- Breaks only after «\\» and «::», anywhere as a last resort -->
+      <p class="font-mono text-xs text-white [overflow-wrap:anywhere] mb-2">
+        <template v-for="(part, i) in nameParts" :key="i">{{ part }}<wbr></template>
+      </p>
       <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 font-mono text-xs">
         <template v-for="row in stats" :key="row.label">
           <dt class="text-on-dark-muted">{{ row.label }}</dt>
@@ -262,7 +267,7 @@ const stats = computed(() => {
         </template>
       </dl>
       <button
-        v-if="!canHover && active.childIds.length"
+        v-if="!canHover"
         type="button"
         class="mt-3 w-full min-h-11 rounded-lg border border-landing-border-subtle font-sans text-sm text-white hover:bg-white/5"
         @click="zoomActive"
