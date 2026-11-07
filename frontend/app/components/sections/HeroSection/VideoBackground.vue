@@ -2,6 +2,7 @@
 const { heroVideoUrl, heroPosterUrl } = useRuntimeConfig().public
 
 const videoSupported = ref(true)
+const video = ref<HTMLVideoElement | null>(null)
 const prefersReducedMotion = ref(false)
 const offsetX = ref(0)
 const offsetY = ref(0)
@@ -47,6 +48,11 @@ onMounted(() => {
   if (!prefersReducedMotion.value) {
     window.addEventListener('mousemove', onMouseMove, { passive: true })
     startDrift()
+    // The poster is the first frame; the video (several MB) loads only once
+    // the page is idle, so it does not compete with the hero text.
+    const play = () => video.value?.play().catch(() => { /* autoplay refused: the poster stays */ })
+    if ('requestIdleCallback' in window) window.requestIdleCallback(play, { timeout: 3000 })
+    else setTimeout(play, 1500)
   }
 })
 
@@ -62,7 +68,8 @@ onUnmounted(() => {
     <div class="video-bg__inner" :style="parallaxStyle">
       <video
         v-if="!prefersReducedMotion && videoSupported"
-        autoplay
+        ref="video"
+        preload="none"
         loop
         muted
         playsinline

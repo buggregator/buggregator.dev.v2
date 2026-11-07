@@ -14,19 +14,43 @@ import SponsorsSection from '~/components/sections/SponsorsSection.vue'
 
 definePageMeta({ layout: 'landing' })
 
+const { t } = useI18n()
+const { siteUrl } = useRuntimeConfig().public
+
 useSeoMeta({
-  title: 'Buggregator — Free Debugging Server for PHP',
-  description: 'Debug everything in your PHP app. Exceptions, dumps, emails, profiling, logs — all in one UI. One docker run. Works with Sentry, VarDumper, Monolog, XHProf. Free & open source.',
-  ogTitle: 'Buggregator — Debug Everything in Your PHP App',
-  ogDescription: 'Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. No cloud account. Free forever.',
+  title: () => t('seo.home.title'),
+  description: () => t('seo.home.description'),
+  ogTitle: () => t('seo.home.ogTitle'),
+  ogDescription: () => t('seo.home.ogDescription'),
   ogImage: 'https://buggregator.dev/buggregator.png',
-  ogUrl: 'https://buggregator.dev',
   ogType: 'website',
   ogSiteName: 'Buggregator',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Buggregator — Free Debugging Server for PHP',
-  twitterDescription: 'Exceptions, dumps, emails, profiling, logs — all in one real-time UI. One docker run. Free forever.',
+  twitterTitle: () => t('seo.home.title'),
+  twitterDescription: () => t('seo.home.twitterDescription'),
   twitterImage: 'https://buggregator.dev/buggregator.png',
+})
+
+// What the page shows, for search engines: no ratings or reviews (there are none).
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify([
+      { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Buggregator', url: `${siteUrl}/` },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'Buggregator',
+        url: `${siteUrl}/`,
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'Linux, macOS, Windows, Docker',
+        description: t('hero.subheadline'),
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        softwareHelp: { '@type': 'CreativeWork', url: 'https://docs.buggregator.dev/' },
+        sameAs: ['https://github.com/buggregator/server'],
+      },
+    ]),
+  }],
 })
 </script>
 

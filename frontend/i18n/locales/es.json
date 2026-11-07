@@ -298,5 +298,20 @@
       "releases": "Releases",
       "sponsors": "Sponsors"
     }
+  },
+  "seo": {
+    "home": {
+      "title": "Buggregator — servidor de depuración gratuito para PHP",
+      "description": "Depura todo en tu app PHP. Excepciones, dumps, emails, profiling, logs — todo en una sola interfaz. Un docker run. Funciona con Sentry, VarDumper, Monolog, XHProf. Gratis y de código abierto.",
+      "ogTitle": "Buggregator — depura todo en tu app PHP",
+      "ogDescription": "Excepciones, dumps, emails, profiling, logs — todo en una interfaz en tiempo real. Un docker run. Sin cuenta en la nube. Gratis para siempre.",
+      "twitterDescription": "Excepciones, dumps, emails, profiling, logs — todo en una interfaz en tiempo real. Un docker run. Gratis para siempre."
+    },
+    "sponsors": {
+      "title": "Patrocina Buggregator — apoya la depuración PHP gratuita y abierta",
+      "description": "Buggregator es un servidor de depuración gratuito y de código abierto para desarrolladores PHP. Apoya su desarrollo con Patreon o con un patrocinio de empresa.",
+      "ogTitle": "Patrocina Buggregator",
+      "ogDescription": "Mantén Buggregator gratis para siempre. Apóyalo con Patreon o hazte patrocinador como empresa."
+    }
   }
 }

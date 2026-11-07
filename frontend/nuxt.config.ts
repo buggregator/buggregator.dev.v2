@@ -8,14 +8,16 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', file: 'en.json', name: 'English' },
-      { code: 'ru', file: 'ru.json', name: 'Русский' },
-      { code: 'es', file: 'es.json', name: 'Español' },
+      { code: 'en', language: 'en', file: 'en.json', name: 'English' },
+      { code: 'ru', language: 'ru', file: 'ru.json', name: 'Русский' },
+      { code: 'es', language: 'es', file: 'es.json', name: 'Español' },
     ],
     defaultLocale: 'en',
     lazy: false,
     langDir: 'locales/',
     strategy: 'prefix_except_default',
+    // Absolute hreflang/og:locale links need the site's address.
+    baseUrl: process.env.SITE_URL || 'https://buggregator.dev',
   },
 
   runtimeConfig: {
@@ -36,7 +38,7 @@ export default defineNuxtConfig({
       patreonUrl: process.env.PATREON_URL || 'https://www.patreon.com/butschster',
       sponsorEmail: process.env.SPONSOR_EMAIL || 'butschster@gmail.com',
       heroVideoUrl: process.env.HERO_VIDEO_URL || '/video.webm',
-      heroPosterUrl: process.env.HERO_POSTER_URL || '/img.png',
+      heroPosterUrl: process.env.HERO_POSTER_URL || '/img.webp',
       typesenseHost: process.env.TYPESENSE_HOST || 'localhost',
       typesensePort: process.env.TYPESENSE_PORT || '8108',
       typesenseProtocol: process.env.TYPESENSE_PROTOCOL || 'http',
@@ -48,16 +50,16 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/',
     head: {
-      title: 'App Template',
+      // lang comes from i18n (useLocaleHead in the landing layout).
       htmlAttrs: {
-        lang: 'en',
         class: 'dark',
       },
       bodyAttrs: {
         class: 'theme-dark',
       },
       title: 'Buggregator — Free Debugging Server for PHP',
-      titleTemplate: '%s | Buggregator',
+      // Page titles that already name the product get no second «| Buggregator».
+      titleTemplate: (t?: string) => !t ? 'Buggregator' : t.includes('Buggregator') ? t : `${t} | Buggregator`,
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -73,11 +75,6 @@ export default defineNuxtConfig({
         {
           innerHTML: `
             html.dark body { background-color: #0c0e14; color: #f8fafc; }
-            #app-loader { position:fixed; inset:0; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; background-color:#0c0e14; }
-            #app-loader svg { width:200px; height:auto; opacity:0.4; animation:loader-pulse 2s ease-in-out infinite; }
-            #app-loader .loader-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#3b82f6; margin-top:16px; animation:loader-pulse 2s ease-in-out infinite 0.3s; }
-            @keyframes loader-pulse { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
-            #app-loader.fade-out { opacity:0; transition:opacity 0.3s ease; pointer-events:none; }
           `.replace(/\n\s+/g, ' '),
         },
       ],

@@ -36,6 +36,7 @@ services:
       NUXT_PUBLIC_TYPESENSE_SEARCH_KEY: ${TYPESENSE_SEARCH_KEY:-buggregator-search-key}
       NUXT_PUBLIC_TYPESENSE_COLLECTION: ${TYPESENSE_COLLECTION:-buggregator_docs}
       NUXT_PUBLIC_CRT_BADGE_ID: ${PUBLIC_CRT_BADGE_ID:-}
+      NUXT_PUBLIC_GA_MEASUREMENT_ID: ${PUBLIC_GA_MEASUREMENT_ID:-G-T3KSNEP67B}
       NUXT_EXAMPLES_URL: http://buggregator-examples:8000
     labels:
       - "traefik.enable=true"

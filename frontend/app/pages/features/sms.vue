@@ -8,6 +8,8 @@ import FeatureCTA from '~/components/features/FeatureCTA.vue'
 import FeatureRelatedLink from '~/components/features/FeatureRelatedLink.vue'
 
 definePageMeta({ layout: 'landing' })
+// English only: no /ru or /es copies of this page (they would be duplicates).
+defineI18nRoute(false)
 
 useSeoMeta({
   title: 'Local SMS Gateway for Testing \u2014 Buggregator',

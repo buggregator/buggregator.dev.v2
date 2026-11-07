@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { locale, locales, setLocale } = useI18n()
+const { locale, locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+const localePath = useLocalePath()
 
 const open = ref(false)
 
@@ -7,9 +9,10 @@ const allLocales = computed(() =>
   locales.value as Array<{ code: string; name: string }>,
 )
 
-function select(code: string) {
-  setLocale(code)
-  open.value = false
+// Real links, so each language version is a findable address. A page that
+// exists only in English (features/*) links to that language's home page.
+function hrefFor(code: string) {
+  return switchLocalePath(code) || localePath('/', code)
 }
 
 function onClickOutside() {
@@ -46,21 +49,25 @@ onUnmounted(() => {
         v-if="open"
         class="absolute right-0 top-full mt-1.5 min-w-[140px] rounded-lg border border-landing-border-subtle bg-landing-elevated shadow-lg overflow-hidden z-50"
       >
-        <button
+        <NuxtLink
           v-for="loc in allLocales"
           :key="loc.code"
+          :to="hrefFor(loc.code)"
+          :hreflang="loc.code"
+          :lang="loc.code"
+          :aria-current="loc.code === locale ? 'true' : undefined"
           class="flex items-center gap-2.5 w-full px-3.5 py-2.5 text-left text-sm font-sans transition-colors duration-100"
           :class="loc.code === locale
             ? 'text-white bg-white/5'
             : 'text-on-dark-muted hover:text-on-dark-primary hover:bg-white/5'"
-          @click="select(loc.code)"
+          @click="open = false"
         >
           <span class="font-mono text-xs w-5 text-center opacity-50">{{ loc.code.toUpperCase() }}</span>
           <span>{{ loc.name }}</span>
           <svg v-if="loc.code === locale" class="w-3.5 h-3.5 ml-auto text-accent" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
           </svg>
-        </button>
+        </NuxtLink>
       </div>
     </Transition>
   </div>
