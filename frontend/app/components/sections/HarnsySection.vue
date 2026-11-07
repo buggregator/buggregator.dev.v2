@@ -6,10 +6,6 @@ const utm = 'utm_source=buggregator.dev&utm_medium=referral&utm_campaign=built-w
 const ctaUrl = `https://harnsy.dev/?${utm}&utm_content=section-cta`
 const badgeUrl = `https://harnsy.dev/?${utm}&utm_content=section-badge`
 const operatorUrl = `https://hr.harnsy.dev/harnsy/buggregator-operator?${utm}&utm_content=hire-operator`
-
-// Hiring the operator needs harnsy 0.11 (out 2026-11-10): drop this line and
-// the `harnsy.operator.needs` strings once it is out.
-const showNeeds = true
 </script>
 
 <template>
@@ -54,7 +50,6 @@ const showNeeds = true
         >
           {{ t('harnsy.operator.cta') }}
         </a>
-        <p v-if="showNeeds" class="text-xs text-on-dark-muted">{{ t('harnsy.operator.needs') }}</p>
       </div>
     </div>
   </section>

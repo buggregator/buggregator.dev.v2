@@ -379,8 +379,7 @@
     "cta": "Visitar harnsy.dev",
     "operator": {
       "text": "Un empleado de IA para tu equipo en harnsy: instala Buggregator, conecta tu aplicación y depura con Xdebug.",
-      "cta": "Contrata al operador de Buggregator para tu proyecto →",
-      "needs": "Requiere harnsy 0.11, que sale el 10 de noviembre."
+      "cta": "Contrata al operador de Buggregator para tu proyecto →"
     }
   }
 }
