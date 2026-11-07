@@ -226,7 +226,7 @@
     "testo": {
       "badge": "Partner project",
       "title": "Tests without the boilerplate",
-      "description": "Testo is a PHP testing framework. Write tests as classes, plain functions or attributes right on your code — no TestCase to extend. Assertions grouped by type, benchmarks with one #[Bench] attribute, and a PhpStorm plugin. PHP 8.2+, now in open beta.",
+      "description": "Testo is a PHP testing framework. Write tests as classes, plain functions or attributes right on your code — no TestCase to extend. Assertions grouped by type, benchmarks with one {attr} attribute, and a PhpStorm plugin. PHP 8.2+, now in open beta.",
       "code": "composer require --dev testo/testo",
       "cta": "Visit Testo",
       "github": "View on GitHub"
@@ -348,9 +348,8 @@
     }
   },
   "harnsy": {
-    "eyebrow": "How we build Buggregator",
     "title": "An AI team builds Buggregator. We make the decisions.",
-    "description": "The server, the UI, the docs and this website are developed in harnsy. An AI lead plans the work and hands it to roles: Go and Vue developers, a reviewer, a release manager, a designer, a docs writer. They run on the coding CLIs we already use — Claude Code and Codex — on our own machine. We review and accept the results on each task card, and step in only where a decision is needed.",
-    "cta": "Development runs in harnsy"
+    "description": "The server, UI, docs and this website are built in harnsy. An AI lead gives work to roles — developers, a reviewer, a release manager, a designer — running on Claude Code and Codex on our own machine. We step in only where a decision is needed.",
+    "cta": "Visit harnsy.dev"
   }
 }

@@ -16,10 +16,14 @@ const { trackEvent } = useGtag()
       </span>
     </div>
     <h3 class="text-lg font-semibold text-white mb-2 font-sans">{{ t('ecosystem.testo.title') }}</h3>
-    <p class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">{{ t('ecosystem.testo.description') }}</p>
+    <i18n-t keypath="ecosystem.testo.description" tag="p" scope="global" class="text-sm text-on-dark-muted leading-relaxed mb-4 font-sans">
+      <template #attr>
+        <code class="font-mono text-xs whitespace-nowrap">#[Bench]</code>
+      </template>
+    </i18n-t>
 
     <div class="mb-2 bg-landing-elevated rounded-xl border border-landing-border-subtle p-3 overflow-x-auto">
-      <code class="font-mono text-xs text-on-dark-secondary whitespace-nowrap">{{ t('ecosystem.testo.code') }}</code>
+      <code class="font-mono text-xs text-on-dark-secondary whitespace-pre">{{ t('ecosystem.testo.code') }}</code>
     </div>
 
     <div class="flex flex-wrap gap-x-5">

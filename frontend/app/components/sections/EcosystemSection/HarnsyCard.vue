@@ -19,9 +19,6 @@ const badgeUrl = `https://harnsy.dev/?${utm}&utm_content=ecosystem-badge`
       >
         <img src="/brand/built-with-harnsy-dark.svg" alt="Built with harnsy" width="142" height="28" loading="lazy" class="block h-7 w-auto">
       </a>
-      <p class="text-xs font-mono text-on-dark-muted uppercase tracking-wide mb-2">
-        {{ t('harnsy.eyebrow') }}
-      </p>
       <h3 class="text-xl font-semibold text-white mb-2 font-sans">{{ t('harnsy.title') }}</h3>
       <p class="text-sm text-on-dark-muted leading-relaxed font-sans">{{ t('harnsy.description') }}</p>
     </div>

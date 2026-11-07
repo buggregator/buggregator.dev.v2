@@ -226,7 +226,7 @@
     "testo": {
       "badge": "Proyecto asociado",
       "title": "Tests sin código de relleno",
-      "description": "Testo es un framework de testing para PHP. Escribe tests como clases, funciones simples o atributos sobre tu propio código, sin heredar de TestCase. Aserciones agrupadas por tipo, benchmarks con un solo atributo #[Bench] y un plugin para PhpStorm. PHP 8.2+, en beta abierta.",
+      "description": "Testo es un framework de testing para PHP. Escribe tests como clases, funciones simples o atributos sobre tu propio código, sin heredar de TestCase. Aserciones agrupadas por tipo, benchmarks con un solo atributo {attr} y un plugin para PhpStorm. PHP 8.2+, en beta abierta.",
       "code": "composer require --dev testo/testo",
       "cta": "Ver Testo",
       "github": "Ver en GitHub"
@@ -348,9 +348,8 @@
     }
   },
   "harnsy": {
-    "eyebrow": "Cómo hacemos Buggregator",
     "title": "Un equipo de IA desarrolla Buggregator. Las decisiones las tomamos nosotros.",
-    "description": "El servidor, la interfaz, la documentación y este sitio web se desarrollan en harnsy. Un líder de IA planifica el trabajo y lo reparte entre roles: desarrolladores Go y Vue, un revisor, un responsable de releases, un diseñador y un redactor técnico. Trabajan con las CLI de programación que ya usamos, Claude Code y Codex, en nuestra propia máquina. Revisamos y aceptamos los resultados en la tarjeta de cada tarea, e intervenimos solo cuando hace falta una decisión.",
-    "cta": "El desarrollo se hace en harnsy"
+    "description": "El servidor, la interfaz, la documentación y este sitio web se hacen en harnsy. Un líder de IA reparte el trabajo entre roles (desarrolladores, un revisor, un responsable de releases, un diseñador) que trabajan con Claude Code y Codex en nuestra propia máquina. Solo intervenimos cuando hace falta una decisión.",
+    "cta": "Visitar harnsy.dev"
   }
 }

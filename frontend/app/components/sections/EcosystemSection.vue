@@ -25,7 +25,7 @@ const formatStars = (n: number) =>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Trap card -->
-        <div class="rounded-2xl border border-landing-border-subtle bg-landing-surface p-6 lg:row-span-2 hover:-translate-y-0.5 hover:border-accent/45 transition-all duration-200">
+        <div class="rounded-2xl border border-landing-border-subtle bg-landing-surface p-6 lg:row-span-2 flex flex-col hover:-translate-y-0.5 hover:border-accent/45 transition-all duration-200">
           <div class="flex items-start justify-between mb-4">
             <div class="w-10 h-10 rounded-xl bg-[rgba(6,182,212,0.12)] flex items-center justify-center">
               <svg class="w-5 h-5 text-ray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,12 +59,12 @@ const formatStars = (n: number) =>
               <div class="mt-1.5"><span class="text-code-comment">// Dump and die</span></div>
               <div><span class="text-[#06b6d4]">td</span><span class="text-code-text">(</span><span class="text-code-string">$error</span><span class="text-code-text">);</span></div>
             </div>
-            <div class="bg-landing-elevated rounded-xl border border-landing-border-subtle p-3">
-              <code class="font-mono text-xs text-on-dark-secondary">composer require --dev buggregator/trap -W</code>
+            <div class="bg-landing-elevated rounded-xl border border-landing-border-subtle p-3 overflow-x-auto">
+              <code class="font-mono text-xs text-on-dark-secondary whitespace-pre">composer require --dev buggregator/trap -W</code>
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-x-5">
+          <div class="flex flex-wrap gap-x-5 mt-auto">
             <a
               href="https://github.com/buggregator/trap"
               target="_blank"
