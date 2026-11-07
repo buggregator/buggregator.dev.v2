@@ -24,7 +24,7 @@ const communityLinks = computed(() => [
 
 const featureLinks = [
   { label: 'Email Testing', href: '/features/email-testing' },
-  { label: 'Sentry, locally', href: '/features/sentry' },
+  { label: 'Sentry', href: '/features/sentry' },
   { label: 'Performance Profiler', href: '/features/profiler' },
   { label: 'HTTP Proxy', href: '/features/http-proxy' },
   { label: 'SMS Testing', href: '/features/sms' },

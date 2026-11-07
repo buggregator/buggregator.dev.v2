@@ -227,7 +227,7 @@ const worksWithItems = [
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/smtp.html">
       <template #related>
-        <FeatureRelatedLink to="/features/sentry" label="Sentry, locally" color="#f43f5e" />
+        <FeatureRelatedLink to="/features/sentry" label="Sentry" color="#f43f5e" />
         <FeatureRelatedLink to="/features/profiler" label="Performance Profiler" color="#8b5cf6" />
         <FeatureRelatedLink to="/features/http-proxy" label="HTTP Proxy" color="#10b981" />
         <FeatureRelatedLink to="/features/sms" label="SMS Testing" color="#a855f7" />

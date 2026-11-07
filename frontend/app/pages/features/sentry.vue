@@ -59,19 +59,19 @@ $ ./buggregator`,
   },
   {
     title: 'Point your SDK at Buggregator',
-    description: 'One line in your config. Put a project name in the http://sentry@127.0.0.1:8000/my-app to keep each app\u2019s data apart.',
+    description: 'One line in your config. Put a project name in the DSN to keep each app\u2019s data apart.',
     tabs: [
       {
         id: 'laravel',
         label: 'Laravel',
         code: `# .env
-SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:8000/my-app=http://sentry@127.0.0.1:8000/my-app`,
+SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:8000/my-app`,
       },
       {
         id: 'symfony',
         label: 'Symfony',
         code: `# .env
-SENTRY_http://sentry@127.0.0.1:8000/my-app=http://sentry@127.0.0.1:8000/my-app`,
+SENTRY_DSN=http://sentry@127.0.0.1:8000/my-app`,
       },
       {
         id: 'php',
@@ -91,13 +91,13 @@ SENTRY_http://sentry@127.0.0.1:8000/my-app=http://sentry@127.0.0.1:8000/my-app`,
       {
         id: 'any',
         label: 'Any SDK',
-        code: `SENTRY_http://sentry@127.0.0.1:8000/my-app=http://sentry@127.0.0.1:8000/my-app`,
+        code: `SENTRY_DSN=http://sentry@127.0.0.1:8000/my-app`,
       },
     ],
   },
   {
     title: 'Turn on what you want to see',
-    description: 'Errors arrive as soon as the http://sentry@127.0.0.1:8000/my-app is set. Traces, logs and metrics are SDK features: switch them on in your app.',
+    description: 'Errors arrive as soon as the DSN is set. Traces, logs and metrics are SDK features: switch them on in your app.',
     tabs: [
       {
         id: 'traces',
@@ -163,7 +163,7 @@ const highlights = [
   },
 ]
 
-// \u00ABWorks with\u00BB, option A of the copy (#4527). Option B (eight platform
+// «Works with», option A of the copy (#4527). Option B (eight platform
 // rows) is a swap of this object only.
 const worksWith = {
   title: 'Built on the Sentry SDK format',
@@ -171,7 +171,7 @@ const worksWith = {
   reportUrl: 'https://github.com/buggregator/server/issues',
   items: [
     { name: 'PHP', detail: '\u2014 sentry/sentry, Laravel, Symfony' },
-    { name: 'Any Sentry SDK', detail: '\u2014 set the http://sentry@127.0.0.1:8000/my-app and try it' },
+    { name: 'Any Sentry SDK', detail: '\u2014 set the DSN and try it' },
   ],
 }
 </script>
@@ -181,7 +181,7 @@ const worksWith = {
     <FeatureHero
       title="Everything your Sentry SDK sends, on your machine"
       subtitle="Sentry, locally"
-      description="Your app already has the Sentry SDK. Change the DSN, and Buggregator shows its errors, traces, logs and metrics on your computer \u2014 each in its own tab, linked by trace. No Sentry account, no data leaving your machine."
+      description="Your app already has the Sentry SDK. Change the DSN, and Buggregator shows its errors, traces, logs and metrics on your computer — each in its own tab, linked by trace. No Sentry account, no data leaving your machine."
       :accent-color="accentColor"
     >
       <template #cta>
@@ -240,7 +240,7 @@ const worksWith = {
             rel="noopener"
             class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
           >
-            Your SDK doesn\u2019t show up? Tell us on GitHub \u2192
+            Your SDK doesn’t show up? Tell us on GitHub →
           </a>
         </p>
 
