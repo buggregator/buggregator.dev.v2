@@ -46,9 +46,12 @@ function getActiveCode(stepIndex: number, step: typeof props.steps[number]): str
 // Copy
 const copiedStep = ref<number | null>(null)
 
+const { trackEvent } = useGtag()
+
 async function copyCode(stepIndex: number, code: string) {
   try {
     await navigator.clipboard.writeText(code)
+    trackEvent('copy_install_command', { cta_location: 'feature_setup', step: stepIndex + 1 })
     copiedStep.value = stepIndex
     setTimeout(() => { copiedStep.value = null }, 2000)
   } catch { /* ignore */ }

@@ -2,7 +2,12 @@
 const props = defineProps<{
   command: string
   noBg?: boolean
+  // Where the command sits, for the copy_install_command analytics event.
+  ctaLocation?: string
 }>()
+
+const { trackEvent } = useGtag()
+const track = () => trackEvent('copy_install_command', { cta_location: props.ctaLocation ?? 'framework_tabs' })
 
 const { t } = useI18n()
 const copied = ref(false)
@@ -10,6 +15,7 @@ const copied = ref(false)
 async function copy() {
   try {
     await navigator.clipboard.writeText(props.command)
+    track()
     copied.value = true
     setTimeout(() => { copied.value = false }, 2000)
   } catch {
@@ -23,6 +29,7 @@ async function copy() {
     el.select()
     document.execCommand('copy')
     document.body.removeChild(el)
+    track()
     copied.value = true
     setTimeout(() => { copied.value = false }, 2000)
   }

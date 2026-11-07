@@ -1,0 +1,14 @@
+# Buggregator
+
+> Free, open-source debugging server: exceptions, dumps, emails, profiling and logs from your app in one real-time UI. One docker run, nothing to install in your app.
+
+## Docs
+- [Documentation index for LLMs](https://docs.buggregator.dev/llms.txt): every docs page with a short description
+- [Getting started](https://docs.buggregator.dev/getting-started.md)
+
+## Features
+- [Sentry-compatible exceptions](https://buggregator.dev/features/sentry)
+- [Email testing (SMTP)](https://buggregator.dev/features/email-testing)
+- [Profiler (XHProf)](https://buggregator.dev/features/profiler)
+- [HTTP proxy](https://buggregator.dev/features/http-proxy)
+- [SMS testing](https://buggregator.dev/features/sms)

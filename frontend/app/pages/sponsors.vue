@@ -33,10 +33,10 @@ function onMouseLeave() {
 }
 
 useSeoMeta({
-  title: 'Sponsor Buggregator — Support Free Open Source PHP Debugging',
-  description: 'Buggregator is a free, open-source debugging server for PHP developers. Support its development via Patreon or company sponsorship.',
-  ogTitle: 'Sponsor Buggregator',
-  ogDescription: 'Keep Buggregator free forever. Support via Patreon or become a company sponsor.',
+  title: () => t('seo.sponsors.title'),
+  description: () => t('seo.sponsors.description'),
+  ogTitle: () => t('seo.sponsors.ogTitle'),
+  ogDescription: () => t('seo.sponsors.ogDescription'),
 })
 
 const hasSponsors = computed(() => sponsors.length > 0)

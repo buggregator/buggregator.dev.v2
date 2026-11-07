@@ -3,6 +3,9 @@ import AppNavbar from '~/components/layout/AppNavbar.vue'
 import AppFooter from '~/components/layout/AppFooter.vue'
 import { useGitHubStore } from '~/stores/github'
 import { useRealtimeUpdates } from '~/composables/useRealtimeUpdates'
+import { useSiteHead } from '~/composables/useSiteHead'
+
+useSiteHead()
 
 const github = useGitHubStore()
 await Promise.all([github.load(), github.loadStats()])

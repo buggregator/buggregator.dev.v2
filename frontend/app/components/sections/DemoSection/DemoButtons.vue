@@ -11,8 +11,16 @@ const buildCall = (section: string, group: string, action: string) => {
   return `${prefix}:${camelToSnakeCase(action)}`
 }
 
+const { trackEvent } = useGtag()
+let demoTouched = false
+
 const callAction = async (section: string, group: string, action: string) => {
   const call = buildCall(section, group, action)
+  if (!demoTouched) {
+    // Once per page view: did the visitor try the demo at all.
+    demoTouched = true
+    trackEvent('demo_interaction', { demo_action: call })
+  }
   activeAction.value = call
   setTimeout(() => { activeAction.value = null }, 600)
 

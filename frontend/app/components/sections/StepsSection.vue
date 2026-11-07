@@ -38,10 +38,12 @@ const composeCommand = computed(() => {
 const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand.value : composeCommand.value)
 
 const copied = ref(false)
+const { trackEvent } = useGtag()
 
 async function copyCmd() {
   try {
     await navigator.clipboard.writeText(activeCommand.value)
+    trackEvent('copy_install_command', { cta_location: 'steps', install_method: installTab.value })
     copied.value = true
     setTimeout(() => { copied.value = false }, 2000)
   } catch {

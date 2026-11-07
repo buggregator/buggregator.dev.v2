@@ -9,6 +9,7 @@ const { buggregatorUrl } = useRuntimeConfig().public
       frameborder="0"
       class="w-full h-full"
       title="Buggregator live demo"
+      loading="lazy"
       allow="clipboard-write"
     />
   </div>
