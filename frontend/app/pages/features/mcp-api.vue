@@ -237,7 +237,7 @@ const worksWithItems = [
     <!-- Highlights -->
     <FeatureHighlights
       title="What your assistant and your scripts can do"
-      subtitle="8 MCP tools, 14 with the Xdebug proxy — all but event_delete and xdebug_eval only read. The REST API covers the rest."
+      subtitle="8 MCP tools, up to 14 with the Xdebug proxy — all but event_delete and xdebug_eval only read. The REST API covers the rest."
       :items="highlights"
       :accent-color="accentColor"
     />
