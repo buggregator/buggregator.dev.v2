@@ -12,8 +12,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Bricolage Grotesque', 'system-ui', 'sans-serif'],
-        'mono-display': ['IBM Plex Mono', 'ui-monospace', 'monospace'],
+        display: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        'mono-display': ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
         // Landing fonts
         sans: ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'Menlo', 'monospace'],

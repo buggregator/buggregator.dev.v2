@@ -41,9 +41,7 @@ onScopeDispose(() => {
       Skip to main content
     </a>
 
-    <ClientOnly>
-      <AppNavbar />
-    </ClientOnly>
+    <AppNavbar />
 
     <main id="main-content">
       <slot />
