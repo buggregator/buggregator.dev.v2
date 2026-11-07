@@ -29,7 +29,7 @@ const accentColor = '#14b8a6'
 const steps = [
   {
     title: 'Turn MCP on',
-    description: 'Requires Buggregator v2.6.0 or later. MCP is off by default. Turn it on with one setting. Locally it listens on a Unix socket; in Docker, use HTTP on port 8001.',
+    description: 'Requires Buggregator v2.6.0 or later; the Xdebug step and breakpoint tools need v2.7.0. MCP is off by default. Turn it on with one setting. Locally it listens on a Unix socket; in Docker, use HTTP on port 8001.',
     note: 'MCP has its own access rules, separate from SSO. Over HTTP it has no token unless you set MCP_AUTH_TOKEN — keep the port on 127.0.0.1, as above. Six of the mock tools change your mock rules, and they are on by default. Turn them off with mcp.mock_write: false (or MCP_MOCK_WRITE=false).',
     tabs: [
       {

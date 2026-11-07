@@ -30,7 +30,7 @@ const TEMPLATE_DOCS = 'https://docs.buggregator.dev/config/mock-templates.html'
 const steps = [
   {
     title: 'Start Buggregator',
-    description: `Requires Buggregator v2.6.0 or later. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
+    description: `Requires Buggregator v2.6.0 or later; the template editor and OpenAPI import in the UI need v2.7.0. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
       {
         id: 'binary',
