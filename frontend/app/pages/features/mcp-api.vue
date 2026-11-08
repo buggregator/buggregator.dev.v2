@@ -131,6 +131,9 @@ or URL:  http://localhost:8001/mcp`,
 "I profiled this endpoint. Why is it slow?"
   → events_list (type: profiler) → profiler_summary → profiler_top (metric: excl_wt) → profiler_call_graph
 
+"Here's a trace of the slow checkout. Which call takes the time?"
+  → xdebug_traces → xdebug_trace_summary → xdebug_trace_call
+
 "Why is $total zero here?"   (stopped at a breakpoint)
   → xdebug_location → xdebug_variables → xdebug_property ($cart->items)
 
@@ -171,6 +174,11 @@ const highlights = [
     icon: '\u{1F525}',
     title: 'Find what’s slow',
     description: 'From an XHProf profile it gets the summary, the top functions by time or memory, and the call graph — and names the hot function and its callers.',
+  },
+  {
+    icon: '\u{1F9F5}',
+    title: 'Read a whole request, call by call',
+    description: 'From an uploaded Xdebug trace the assistant gets the slowest calls and the functions with the most self time, walks the call tree level by level and searches it — with arguments, return values and memory.',
   },
   {
     icon: '\u{1F4E6}',
@@ -243,7 +251,7 @@ const worksWithItems = [
     <!-- Highlights -->
     <FeatureHighlights
       title="What your assistant and your scripts can do"
-      subtitle="19 MCP tools, 31 with the Xdebug proxy. The REST API covers the rest."
+      subtitle="23 MCP tools, 35 with the Xdebug proxy. The REST API covers the rest."
       :items="highlights"
       :accent-color="accentColor"
     />
