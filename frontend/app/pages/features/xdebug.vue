@@ -172,7 +172,9 @@ const traceIni = `; php.ini
 xdebug.mode=trace
 xdebug.trace_format=1
 xdebug.start_with_request=trigger
-xdebug.output_dir=/tmp`
+xdebug.collect_return=1
+xdebug.output_dir=/tmp
+xdebug.trace_output_name=trace`
 
 const traceUpload = `curl -H 'X-Buggregator-Event: xdebug-trace' --data-binary @/tmp/trace.xt.gz http://127.0.0.1:8000/`
 
@@ -259,7 +261,7 @@ const worksWithItems = [
           </div>
         </div>
         <p class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">
-          You send the file yourself — from the shell or your own script. .xt and .xt.gz both work; Buggregator keeps the last 20 traces.
+          Start the request with <code class="font-mono text-xs">XDEBUG_TRIGGER=1</code> (cookie, query parameter or environment variable) — without it Xdebug records nothing. The file is <code class="font-mono text-xs">/tmp/trace.xt.gz</code>, or <code class="font-mono text-xs">trace.xt</code> when compression is off. You send it yourself — from the shell or your own script; Buggregator keeps the last 20 traces. Needs Buggregator v2.8.0 or later.
         </p>
       </div>
     </section>
