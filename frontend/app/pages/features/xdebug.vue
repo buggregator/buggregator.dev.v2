@@ -261,7 +261,7 @@ const worksWithItems = [
           </div>
         </div>
         <p class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">
-          Start the request with <code class="font-mono text-xs">XDEBUG_TRIGGER=1</code> (cookie, query parameter or environment variable) — without it Xdebug records nothing. The file is <code class="font-mono text-xs">/tmp/trace.xt.gz</code>, or <code class="font-mono text-xs">trace.xt</code> when compression is off. You send it yourself — from the shell or your own script; Buggregator keeps the last 20 traces. Needs Buggregator v2.8.0 or later.
+          Start the request with <code class="font-mono text-xs">XDEBUG_TRIGGER=1</code> (cookie, query parameter or environment variable) — without it nothing is recorded. The file is <code class="font-mono text-xs">/tmp/trace.xt.gz</code>, or <code class="font-mono text-xs">trace.xt</code> without compression; send it yourself, from the shell or a script. Buggregator keeps the last 20 traces. Needs Buggregator v2.8.0 or later.
         </p>
       </div>
     </section>
