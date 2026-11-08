@@ -167,6 +167,15 @@ const highlights = [
   },
 ]
 
+// Xdebug Trace: a different Xdebug mode (trace), sent to Buggregator by hand.
+const traceIni = `; php.ini
+xdebug.mode=trace
+xdebug.trace_format=1
+xdebug.start_with_request=trigger
+xdebug.output_dir=/tmp`
+
+const traceUpload = `curl -H 'X-Buggregator-Event: xdebug-trace' --data-binary @/tmp/trace.xt.gz http://127.0.0.1:8000/`
+
 const worksWithItems = [
   { name: 'PhpStorm', detail: '— optional; move its Xdebug port to 9004' },
   { name: 'VS Code', detail: '— any Xdebug client' },
@@ -220,6 +229,40 @@ const worksWithItems = [
       :items="highlights"
       :accent-color="accentColor"
     />
+
+    <!-- Xdebug Trace -->
+    <section
+      class="py-16 lg:py-20 bg-section-dark"
+      aria-labelledby="xdebug-trace-title"
+    >
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
+        <h2
+          id="xdebug-trace-title"
+          class="text-2xl lg:text-3xl font-bold text-white mb-3 font-sans"
+        >
+          Record the whole request: Xdebug Trace
+        </h2>
+        <p class="font-sans text-base text-on-dark-secondary leading-relaxed mb-6">
+          Not sure where to put a breakpoint? Record a function trace instead: every call the request made, with time, memory, arguments and return values. Send the file to Buggregator and open it as a call tree you can expand and search, with the slowest calls and top functions on their own tab — or let your AI assistant read it over MCP.
+        </p>
+        <div class="space-y-3">
+          <div class="rounded-xl border border-code-border bg-code-bg p-4 font-mono text-xs leading-relaxed overflow-x-auto">
+            <pre class="text-code-text whitespace-pre"><template
+              v-for="(line, li) in traceIni.split('\n')"
+              :key="li"
+            ><template v-if="line.startsWith(';')"><span class="text-code-comment">{{ line }}</span>
+</template><template v-else><span class="text-code-keyword">{{ line.split('=')[0] }}</span>=<span class="text-code-string">{{ line.split('=').slice(1).join('=') }}</span>
+</template></template></pre>
+          </div>
+          <div class="rounded-xl border border-code-border bg-code-bg p-4 font-mono text-xs leading-relaxed overflow-x-auto">
+            <pre class="text-code-text whitespace-pre-wrap break-all"><span class="text-code-prompt select-none">$ </span>{{ traceUpload }}</pre>
+          </div>
+        </div>
+        <p class="mt-3 font-sans text-sm text-on-dark-secondary leading-relaxed">
+          You send the file yourself — from the shell or your own script. .xt and .xt.gz both work; Buggregator keeps the last 20 traces.
+        </p>
+      </div>
+    </section>
 
     <!-- Setup -->
     <section id="setup">
