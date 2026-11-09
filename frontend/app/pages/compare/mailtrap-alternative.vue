@@ -49,7 +49,7 @@ const table = {
     { label: 'Price', cells: ['free', 'free', 'free', 'free (50/mo) to $498/mo'] },
     { label: 'Monthly limit', cells: ['none', 'none', 'none', '50 on Free'] },
     { label: 'Licence', cells: ['MIT', 'MIT', 'MIT', 'proprietary'] },
-    { label: 'Windows', cells: ['yes', 'not yet', '—', 'any (cloud)'] },
+    { label: 'Windows', cells: ['yes', 'not yet', 'yes', 'any (cloud)'] },
     { label: 'HTML client check', cells: ['—', 'yes', 'yes', 'yes'] },
     { label: 'Spam / blacklist report', cells: ['—', '—', 'spam score', 'yes'] },
     { label: 'Forwarding to real inboxes', cells: ['—', '—', '—', 'paid plans (Basic+)'] },
@@ -97,7 +97,8 @@ MAIL_PASSWORD=your-sandbox-password
 # after — Buggregator
 MAIL_HOST=127.0.0.1
 MAIL_PORT=1025
-MAIL_USERNAME=my-app   # optional: picks the project
+# optional: the username picks the project
+MAIL_USERNAME=my-app
 MAIL_PASSWORD=`,
     note: 'Buggregator accepts any username and password. The username, if you set one, picks the project the email goes to.',
   },

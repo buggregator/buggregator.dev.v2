@@ -44,7 +44,7 @@ const table = {
     { label: 'Logs', cells: ['yes', 'yes', 'yes', 'no', 'yes'] },
     { label: 'Metrics', cells: ['yes', '—', '—', 'no', 'yes'] },
     { label: 'Profiles, replays, crons, user feedback', cells: ['no', '—', '—', 'no', 'yes'] },
-    { label: 'Alerts and issue workflow', cells: ['no (webhooks only)', 'no', 'yes', 'yes', 'yes'] },
+    { label: 'Alerts and issue workflow', cells: ['no (webhooks only)', '—', 'yes', 'yes', 'yes'] },
     { label: 'Storage', cells: ['memory by default; SQLite file with `-db`', 'memory', 'PostgreSQL', 'SQLite / MySQL / PostgreSQL', 'its own databases'] },
     { label: 'Also catches mail, dumps, logs, profiles, HTTP', cells: ['yes', '—', '—', '—', '—'] },
     { label: 'Several projects in one UI', cells: ['yes', '—', 'yes', 'yes', 'yes'] },
@@ -144,7 +144,7 @@ SENTRY_DSN=http://sentry@127.0.0.1:8000/my-app`,
       <ul class="space-y-3 list-disc pl-5">
         <li><strong>Only want Sentry events in a local UI, and your SDK has a <code>spotlight</code> option?</strong> <strong>Sentry Spotlight</strong> is free, Apache-2.0, made by Sentry, with a desktop app and an MCP server.</li>
         <li><strong>Want Sentry errors next to your mail, dumps, logs and profiles, for several apps at once?</strong> <strong>Buggregator</strong>. Change the DSN; nothing else in your app changes.</li>
-        <li><strong>Need production: alerts, issue workflow, retention, a team?</strong> <strong>GlitchTip</strong> (MIT, PostgreSQL, from 256–512 MB RAM) or <strong>Bugsink</strong> (one container, errors only) — or <strong>self-hosted Sentry</strong> if you want the full product and have the hardware.</li>
+        <li><strong>Need production: alerts, issue workflow, retention, a team?</strong> <strong>GlitchTip</strong> (MIT, PostgreSQL, from 256 MB RAM) or <strong>Bugsink</strong> (one container, errors only) — or <strong>self-hosted Sentry</strong> if you want the full product and have the hardware.</li>
       </ul>
     </CompareSection>
 
@@ -161,7 +161,7 @@ SENTRY_DSN=http://sentry@127.0.0.1:8000/my-app`,
       <div class="space-y-6">
         <p><strong>Sentry Spotlight</strong> — «Sentry for Development», by Sentry. Run <code>npx @spotlightjs/spotlight</code> and open <code>localhost:8969</code>, or use the desktop app (macOS, Linux, Windows) or the container. No Sentry account needed. It shows errors, traces and logs, and has an MCP server for coding agents. Your SDK turns it on with a <code>spotlight</code> option (documented for JavaScript, Python, Java, React Native), so your production DSN can stay set. Events stay in memory. <em>Choose it if:</em> Sentry is all you want to see and your SDK supports Spotlight. <em>Where Buggregator differs:</em> it takes the plain DSN (no SDK option needed), can keep events in a SQLite file, stores Sentry metrics (Spotlight's docs don't mention them), and shows mail, dumps, logs and profiles in the same window.</p>
         <p><strong>Buggregator</strong> — A local debugging server that speaks the Sentry protocol. Point the DSN at <code>http://sentry@127.0.0.1:8000/1</code> and see exceptions with stack traces and breadcrumbs, traces as a waterfall, logs and metrics — linked by trace. Put a project name in the DSN to keep apps apart. We test it with the Sentry PHP SDK (2.5, 3.22, 4.x), and the browser JavaScript SDK was checked on 9 November 2026 with the default settings. Other SDKs send the same format; Python, Node and Go are next on our test list. It does not keep session replays, profiles, cron check-ins, user feedback or attachments, and it has no alerts. <em>Choose it if:</em> you develop locally and also want your mail, dumps and logs in one place. More on the <NuxtLink to="/features/sentry">Sentry feature page</NuxtLink>.</p>
-        <p><strong>GlitchTip</strong> — Open-source (MIT) error tracker that works with Sentry SDKs, self-hosted or as a service. Needs PostgreSQL; light (256–512 MB RAM). Errors, performance aggregates, logs, uptime checks, alerts, MCP server. <em>Choose it for:</em> production on a small budget.</p>
+        <p><strong>GlitchTip</strong> — Open-source (MIT) error tracker that works with Sentry SDKs, self-hosted or as a service. Needs PostgreSQL; light (256 MB minimum, 512 MB recommended). Errors, performance aggregates, logs, uptime checks, alerts, MCP server. <em>Choose it for:</em> production on a small budget.</p>
         <p><strong>Bugsink</strong> — Self-hosted error tracker, one container, compatible with Sentry SDKs. Errors only: its ingest tells SDKs to stop sending transactions. Source-available (PolyForm Shield), free to self-host. <em>Choose it for:</em> simple production error tracking.</p>
         <p><strong>Sentry self-hosted</strong> — The full Sentry: alerts, issues, releases, replays, profiles, crons. Free to self-host under FSL. Needs at least 4 CPU cores, 16 GB RAM plus 16 GB swap and 20 GB disk. <em>Choose it for:</em> production when you want everything Sentry has and can run it. Too heavy for a laptop.</p>
       </div>
