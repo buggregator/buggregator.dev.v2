@@ -164,7 +164,7 @@ MAIL_PASSWORD=`,
           <h3 class="text-lg font-semibold text-white mb-3">Pick Buggregator if:</h3>
           <ul class="space-y-2 list-disc pl-5">
             <li>you test email on your own machine or in CI and don't want a quota;</li>
-            <li>your tests wait for a confirmation email or a one-time code (<code>/api/smtp/messages/wait</code>, <code>/codes</code>, <code>/links</code>);</li>
+            <li>your tests wait for a confirmation email or a one-time code (<code>GET /api/smtp/messages/wait</code>, then <code>GET /api/smtp/message/{uuid}/codes</code> or <code>/links</code>);</li>
             <li>you run several apps and want one inbox per app (set the SMTP username to the project name);</li>
             <li>you also want Sentry errors, dumps and logs from the same app in the same window.</li>
           </ul>
