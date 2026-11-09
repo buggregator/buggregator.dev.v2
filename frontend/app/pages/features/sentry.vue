@@ -249,6 +249,9 @@ const worksWith = {
             For PHP profiling, use the
             <NuxtLink to="/features/profiler" class="text-accent hover:text-accent-hover no-underline">Profiler (XHProf) page</NuxtLink>.
           </p>
+          <p class="mt-3 text-sm">
+            <NuxtLink to="/compare/sentry-for-local-development" class="text-accent hover:text-accent-hover no-underline">Comparing Spotlight, GlitchTip, Bugsink? →</NuxtLink>
+          </p>
         </div>
       </div>
     </section>
