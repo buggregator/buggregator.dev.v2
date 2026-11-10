@@ -7,8 +7,8 @@ definePageMeta({ layout: 'landing' })
 // English only, like the feature pages.
 defineI18nRoute(false)
 
-// TODO(#4758): index title, description and intro from the copywriter.
-const seoTitle = 'Buggregator Tips: short how-tos for local debugging'
+// Copy: server-copywriter, #4759 (2026-11-10).
+const seoTitle = 'Local debugging tips: mail, errors, logs — Buggregator'
 const seoDescription = 'One task per page: catch mail, errors, dumps, logs and HTTP calls on your machine. Each tip is a short answer, the steps with code, and a docs link.'
 
 useSeoMeta({
@@ -32,9 +32,9 @@ const { active, features, visible } = useTipFilter(tips)
     <section class="pt-24 lg:pt-32 pb-8 lg:pb-10">
       <div class="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
         <p class="font-mono text-xs uppercase tracking-wider text-accent mb-4">Tips</p>
-        <h1 class="text-hero-sm lg:text-hero font-bold text-white mb-4 max-w-[800px]">Buggregator tips</h1>
+        <h1 class="text-hero-sm lg:text-hero font-bold text-white mb-4 max-w-[800px]">Local debugging tips</h1>
         <p class="text-lg text-on-dark-secondary leading-relaxed max-w-[700px]">
-          Short how-tos, one task each: an answer, the steps with code you can copy, and a link to the docs.
+          Short how-tos, one task each: the answer first, then the steps with code you can copy, then a link to the docs.
         </p>
       </div>
     </section>

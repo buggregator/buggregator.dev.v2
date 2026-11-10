@@ -57,7 +57,7 @@ function escapeHtml(s: string): string {
 }
 
 // Same light colouring as FeatureSetup: comments, `$ ` prompts, KEY=value.
-function colourLine(line: string): string {
+export function colourLine(line: string): string {
   if (/^\s*(#|\/\/)/.test(line)) return `<span class="tip-c-comment">${escapeHtml(line)}</span>`
   if (line.startsWith('$ ')) return `<span class="tip-c-prompt" aria-hidden="true">$ </span>${escapeHtml(line.slice(2))}`
   const kv = /^([A-Za-z_][\w.]*)=(.*)$/.exec(line)

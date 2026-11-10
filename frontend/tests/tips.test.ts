@@ -113,3 +113,12 @@ test(`content/tips: ${files.length} file(s) parse and link correctly`, () => {
   errors.push(...checkRelated(tips))
   assert.deepEqual(errors, [])
 })
+
+test('every tip has its og:image card (npm run tips:og)', () => {
+  const missing = files.map(f => f.replace(/\.md$/, '')).filter(s => !existsSync(join(here, `../public/og/tips/${s}.png`)))
+  assert.deepEqual(missing, [])
+})
+
+test('public/ has no tips/ folder: it would turn /tips into a redirect to /tips/', () => {
+  assert.equal(existsSync(join(here, '../public/tips')), false)
+})

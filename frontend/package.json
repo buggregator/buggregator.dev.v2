@@ -6,7 +6,8 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
-    "test:tips": "node --test tests/tips.test.ts"
+    "test:tips": "node --test tests/tips.test.ts",
+    "tips:og": "node scripts/tip-og-images.ts"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.8",
@@ -29,6 +30,7 @@
     "@types/node": "^22.0.0",
     "autoprefixer": "^10.4.0",
     "nuxt-gtag": "^2.1.0",
+    "playwright-core": "^1.58.2",
     "postcss": "^8.4.0",
     "sass": "^1.98.0",
     "tailwindcss": "3",

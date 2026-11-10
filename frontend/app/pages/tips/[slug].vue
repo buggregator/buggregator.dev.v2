@@ -19,8 +19,8 @@ if (error.value || !tip.value) {
 
 const { siteUrl } = useRuntimeConfig().public
 const pageTitle = computed(() => `${tip.value!.title} — Buggregator Tips`)
-// TODO(#4759): per-tip code card image; the site image until then.
-const ogImage = 'https://buggregator.dev/buggregator.png'
+// Code card drawn by `npm run tips:og` (public/og/tips/<slug>.png).
+const ogImage = computed(() => `${siteUrl}/og/tips/${tip.value!.slug}.png`)
 
 useSeoMeta({
   title: pageTitle,
@@ -28,6 +28,9 @@ useSeoMeta({
   ogTitle: pageTitle,
   ogDescription: () => tip.value!.description,
   ogImage,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: pageTitle,
   ogType: 'article',
   articlePublishedTime: () => tip.value!.published,
   articleModifiedTime: () => tip.value!.modified,
@@ -50,7 +53,7 @@ useHead({
       dateModified: tip.value!.modified,
       wordCount: tip.value!.wordCount,
       inLanguage: 'en',
-      image: ogImage,
+      image: ogImage.value,
       url: `${siteUrl}/tips/${tip.value!.slug}`,
       mainEntityOfPage: `${siteUrl}/tips/${tip.value!.slug}`,
       author: { '@type': 'Organization', name: 'Buggregator', url: `${siteUrl}/` },
