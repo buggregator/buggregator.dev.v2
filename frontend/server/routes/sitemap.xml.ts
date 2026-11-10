@@ -16,6 +16,7 @@ export const SITEMAP_PAGES = [
   '/compare/mailhog-alternatives',
   '/compare/sentry-for-local-development',
   '/compare/mailtrap-alternative',
+  '/tips',
   '/sponsors',
   '/ru',
   '/ru/sponsors',
@@ -23,9 +24,11 @@ export const SITEMAP_PAGES = [
   '/es/sponsors',
 ]
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const base = useRuntimeConfig().public.siteUrl
   setHeader(event, 'content-type', 'application/xml; charset=utf-8')
-  const urls = SITEMAP_PAGES.map(p => `<url><loc>${base}${p}</loc></url>`).join('')
+  // Every tip page (/tips/<slug>) comes from its content file.
+  const tipPages = (await loadTips()).map(t => `/tips/${t.slug}`)
+  const urls = [...SITEMAP_PAGES, ...tipPages].map(p => `<url><loc>${base}${p}</loc></url>`).join('')
   return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`
 })

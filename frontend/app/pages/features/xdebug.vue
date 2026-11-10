@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureTips from '~/components/tips/FeatureTips.vue'
 import FeatureHero from '~/components/features/FeatureHero.vue'
 import FeatureSetup from '~/components/features/FeatureSetup.vue'
 import FeatureScreenshot from '~/components/features/FeatureScreenshot.vue'
@@ -282,6 +283,8 @@ const worksWithItems = [
       description="Buggregator speaks Xdebug's own protocol (DBGp), so an IDE works as before — and you don't need one."
       :items="worksWithItems"
     />
+
+    <FeatureTips label="Xdebug" />
 
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/xdebug.html">

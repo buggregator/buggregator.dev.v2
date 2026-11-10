@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureTips from '~/components/tips/FeatureTips.vue'
 import FeatureHero from '~/components/features/FeatureHero.vue'
 import FeatureSetup from '~/components/features/FeatureSetup.vue'
 import FeatureScreenshot from '~/components/features/FeatureScreenshot.vue'
@@ -219,6 +220,8 @@ const worksWithItems = [
       description="It's plain HTTP. Anything that can call a URL can call a mock."
       :items="worksWithItems"
     />
+
+    <FeatureTips label="the mock server" />
 
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/mock-server.html">

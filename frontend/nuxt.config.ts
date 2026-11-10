@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url'
+
 export default defineNuxtConfig({
   ssr: true,
 
@@ -105,6 +107,10 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'node-server',
+    // Tip pages (/tips): Markdown files read by server/utils/tips.ts.
+    serverAssets: [
+      { baseName: 'tips', dir: fileURLToPath(new URL('./content/tips', import.meta.url)) },
+    ],
     experimental: {
       websocket: true,
     },

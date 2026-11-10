@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureTips from '~/components/tips/FeatureTips.vue'
 import FeatureHero from '~/components/features/FeatureHero.vue'
 import FeatureSetup from '~/components/features/FeatureSetup.vue'
 import FeatureScreenshot from '~/components/features/FeatureScreenshot.vue'
@@ -232,6 +233,8 @@ const worksWithItems = [
       description="XHProf is a PHP extension. Buggregator provides profiler packages for popular frameworks."
       :items="worksWithItems"
     />
+
+    <FeatureTips label="the profiler" />
 
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/xhprof.html">

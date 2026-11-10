@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureTips from '~/components/tips/FeatureTips.vue'
 import FeatureHero from '~/components/features/FeatureHero.vue'
 import FeatureSetup from '~/components/features/FeatureSetup.vue'
 import FeatureScreenshot from '~/components/features/FeatureScreenshot.vue'
@@ -227,6 +228,8 @@ const worksWithItems = [
       description="Anything that logs through Monolog can send to Buggregator. One handler, no new package in your app."
       :items="worksWithItems"
     />
+
+    <FeatureTips label="logs" />
 
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/monolog.html">
