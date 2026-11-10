@@ -38,7 +38,7 @@ curl -X POST http://127.0.0.1:8000/mock/v1/orders
 Import into the same group again, and the group's old rules are replaced. The rules are ordinary rules, so you can also edit them one by one.
 
 ### 5. Or load the spec at startup
-For CI, list the spec in `buggregator.yaml`. These rules are read-only.
+For CI, list the spec in `buggregator.yaml`. These rules are read-only. With `project: shop` and no `group`, the group is named `openapi:shop:<info.title>`.
 ```yaml
 mocks_openapi:
   - file: ./shop.yaml

@@ -1,51 +1,50 @@
 ---
 slug: twilio-sms-without-sending
-title: Test SMS codes without sending a single SMS
-description: Point Symfony Notifier's Twilio DSN at Buggregator. Every SMS shows up in the UI with sender, recipient and text, and nothing reaches a phone.
+title: Test SMS codes with a fake Twilio-format gateway
+description: POST your SMS in Twilio's field format to Buggregator's /sms/twilio. You read sender, recipient and text in the UI, and nothing reaches a phone.
 query: twilio test sms
 feature: SMS
 feature_page: /features/sms
-docs: https://docs.buggregator.dev/config/sms.html#symfony-notifier
+docs: https://docs.buggregator.dev/config/sms.html#any-language-any-framework
 requires: null
 related: [grab-otp-code-from-test-email, mock-api-with-fake-data, webhook-payload-before-the-handler]
 checked: { date: 2026-11-10, version: v2.8.0 }
 ---
-For a Twilio test SMS that never leaves your laptop, change the host in your `TWILIO_DSN` to `127.0.0.1:8000/sms/twilio`. Symfony Notifier then sends to Buggregator, which acts as a fake SMS gateway: you read the code in the UI with the sender, recipient and message text.
+For a Twilio test SMS that never reaches a phone, send the message from your own code as an HTTP POST in Twilio's field format to `http://127.0.0.1:8000/sms/twilio`. Buggregator acts as a fake SMS gateway: you read the code in the UI with the sender, recipient and text. This is a plain HTTP call you write yourself. Symfony Notifier's Twilio transport posts to Twilio's own API path, not to `/sms`, so pointing its DSN here does not work.
 
 ## Steps
 
-### 1. Change the host in the DSN
-Keep `SID`, `TOKEN` and the `from` number. Only the host changes. The `/sms/twilio` path also checks that the payload has every field Twilio requires.
-```dotenv
-# Default (sends to real Twilio):
-TWILIO_DSN=twilio://SID:TOKEN@default?from=+1234567890
+### 1. Send one SMS from the terminal
+Check that Buggregator receives it before you touch your app. The payload uses Twilio's names: `MessageSid`, `From`, `To` and `Body`.
+```bash
+curl -X POST http://127.0.0.1:8000/sms/twilio \
+  -H "Content-Type: application/json" \
+  -d '{"MessageSid":"SM123","From":"+1234","To":"+5678","Body":"Hello!"}'
+```
+Open `http://127.0.0.1:8000`: the message shows with a Twilio badge.
 
-# Point to Buggregator (explicit provider URL for validation):
-TWILIO_DSN=twilio://SID:TOKEN@127.0.0.1:8000/sms/twilio?from=+1234567890
-
-# Or use auto-detect:
-TWILIO_DSN=twilio://SID:TOKEN@127.0.0.1:8000/sms?from=+1234567890
+### 2. Send the code from your app
+In development, send the SMS with your HTTP client instead of the provider's SDK. In Laravel it looks like this:
+```php
+Http::post('http://127.0.0.1:8000/sms/twilio', [
+    'MessageSid' => Str::uuid(),
+    'From' => '+1234567890',
+    'To' => $user->phone,
+    'Body' => "Your code is {$code}",
+]);
 ```
 In Docker Compose, replace 127.0.0.1:8000 with the Buggregator service name, for example `buggregator:8000`.
 
-### 2. Send an SMS from your app
-Trigger the flow that sends the code, for example a login or a phone check. Open `http://127.0.0.1:8000`: the message shows sender, recipient, text and a colored Twilio badge.
-
-### 3. Check what a broken payload does
-With the explicit provider URL, a missing required field gets a 422 response with the list of missing fields, like a real provider would send. The event is still captured, with the problems highlighted in red.
+### 3. Spot a missing field
+With the provider in the URL, Buggregator checks that every field Twilio needs is present. A payload without `MessageSid` and `Body` is still stored, and the card lists each missing field in red. The HTTP response is a normal 200, so your code will not fail on it: look at the card.
 ```bash
 curl -X POST http://127.0.0.1:8000/sms/twilio \
   -H "Content-Type: application/json" \
   -d '{"From":"+1234","To":"+5678"}'
-# Returns 422: {"error":"validation_failed","gateway":"twilio","missing_fields":["MessageSid","Body"]}
 ```
 
-### 4. Use the same pattern for other bridges
-Vonage, Plivo and Sinch DSNs work the same way: change the host and add the provider path.
-```dotenv
-# Vonage
-VONAGE_DSN=vonage://KEY:SECRET@127.0.0.1:8000/sms/vonage?from=MyApp
-```
+### 4. Send to a project
+Add a project name as one more path segment, for example `/sms/twilio/myproject`, to keep each app's messages apart.
 
 ## Why it works
-Every Symfony SMS bridge has a configurable host. Buggregator answers on the `/sms` endpoint, reads `from`, `to` and the message from the provider's own field names, and shows the result. Over 40 providers are detected.
+Any POST whose path starts with `/sms` goes to the SMS module. With `/sms/twilio` it reads `From`, `To` and `Body` by Twilio's field names and flags what is missing. Without a provider in the path, it guesses the provider from the body fields; over 40 providers are known.

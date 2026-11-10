@@ -46,7 +46,7 @@ MAIL_PORT=1025
 ```
 
 ### 4. Send an email and open it
-Trigger any email: a registration confirmation, a password reset, a notification. Open http://127.0.0.1:8000. You see the rendered HTML with a desktop/mobile switcher, the plain text version, the addresses, the attachments and the raw MIME source.
+Trigger any email: a registration confirmation, a password reset, a notification. Open http://127.0.0.1:8000. You see the rendered HTML with a Desktop / Tablet / Mobile width switcher, the plain text version, the addresses, the attachments and the raw MIME source.
 
 ## Why it works
 Buggregator includes a fake SMTP server on port 1025. Laravel's SMTP mailer delivers to it like to any mail server, and Buggregator stores the email and shows it in the UI instead of sending it on. Your mail code does not change, only the address in `.env`.

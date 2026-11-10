@@ -34,12 +34,24 @@ xdebug.client_port=9003
 xdebug.start_with_request=trigger
 ```
 
-In Docker, set `xdebug.client_host` to the Buggregator service name, for example `buggregator`.
+### 3. In Docker, open the proxy to the network
+By default the proxy listens on `127.0.0.1:9003` inside its container, so PHP in another container cannot reach it. When PHP and Buggregator both run in Compose, make the proxy listen on all interfaces and dial the IDE on your machine:
 
-### 3. Send the trigger
+```yaml
+    environment:
+      XDEBUG_PROXY_ENABLED: "true"
+      XDEBUG_PROXY_ADDR: 0.0.0.0:9003
+      XDEBUG_PROXY_IDE_ADDR: host.docker.internal:9003
+    extra_hosts:
+      - host.docker.internal:host-gateway   # needed on Linux
+```
+
+Then set `xdebug.client_host` to the Buggregator service name, for example `buggregator`. Here the IDE can stay on port 9003. PHP on your machine needs a different layout; see the Docker section of the Xdebug docs.
+
+### 4. Send the trigger
 Add `XDEBUG_TRIGGER` to the one request you want to debug: as a GET or POST variable, or as a cookie. For a CLI script, set the `XDEBUG_TRIGGER` environment variable. Xdebug does not look at the value, unless you set `xdebug.trigger_value`; then only a matching value starts it.
 
-### 4. Tell the script where to stop
+### 5. Tell the script where to stop
 Without an IDE, put this line where you want to stop, or set a breakpoint on the Xdebug page.
 
 ```php

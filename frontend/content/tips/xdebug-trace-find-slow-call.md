@@ -15,7 +15,7 @@ Record an Xdebug trace of one request in the computer-readable format and send t
 ## Steps
 
 ### 1. Turn on tracing
-Add this to `php.ini`. `xdebug.trace_format=1` is required: Buggregator refuses the other formats with 400.
+Add this to `php.ini`. `xdebug.trace_format=1` is required: Buggregator refuses the other formats with 400. Xdebug does not create the output folder, so create it first with `mkdir -p /tmp/traces`.
 
 ```ini
 xdebug.mode=trace

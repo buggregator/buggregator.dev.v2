@@ -10,7 +10,7 @@ requires: "v2.6.0"
 related: [claude-code-sees-your-errors, claude-code-steps-through-php, sentry-breadcrumbs-before-the-error]
 checked: { date: 2026-11-10, version: v2.8.0 }
 ---
-Start Buggregator with `MCP_ENABLED=true` and add `buggregator mcp` as an MCP server in Cursor settings. With this Cursor MCP setup, Cursor reads the Sentry error you just hit, with its stack trace, plus your variable dumps and profiles, from the Buggregator on your machine.
+Start Buggregator with `MCP_ENABLED=true` and add it to Cursor's `mcp.json` with the command `buggregator` and the argument `mcp`. With this Cursor MCP setup, Cursor reads the Sentry error you just hit, with its stack trace, plus your variable dumps and profiles, from the Buggregator on your machine.
 
 ## Steps
 
@@ -21,15 +21,22 @@ MCP is off by default. Start Buggregator with this variable, or set `mcp.enabled
 MCP_ENABLED=true
 ```
 
-### 2. Add the MCP server in Cursor
-Open Cursor settings and add an MCP server with this command. `buggregator` is the binary: the name works when it is on your PATH, otherwise give the full path.
+### 2. Add the server to mcp.json
+Cursor reads MCP servers from `.cursor/mcp.json` in your project, or from `~/.cursor/mcp.json` for every project. The command and its argument go in separate fields. `buggregator` is the binary: the name works when it is on your PATH, otherwise give the full path.
 
-```text
-Command: buggregator mcp
+```json
+{
+  "mcpServers": {
+    "buggregator": {
+      "command": "buggregator",
+      "args": ["mcp"]
+    }
+  }
+}
 ```
 
 ### 3. Use the HTTP URL if Buggregator runs in Docker
-Run Buggregator with the HTTP transport and give Cursor the URL instead of the command.
+Run Buggregator with the HTTP transport, then give Cursor a `url` instead of `command` and `args`.
 
 ```yaml
 services:
@@ -44,8 +51,14 @@ services:
       MCP_ADDR: ":8001"
 ```
 
-```text
-http://localhost:8001/mcp
+```json
+{
+  "mcpServers": {
+    "buggregator": {
+      "url": "http://localhost:8001/mcp"
+    }
+  }
+}
 ```
 
 ### 4. Ask about the error
@@ -58,4 +71,4 @@ Trigger the error, then ask Cursor about it. The assistant picks the tools.
 ```
 
 ## Why it works
-Buggregator has a built-in MCP server. `sentry_event` returns an error's message, severity, exception chain with stack traces and environment; `vardump_get` returns a dump as plain text; `profiler_summary` and `profiler_top` give the slowest functions. Cursor reads the data your app already sent, so nothing is copied by hand.
+Buggregator has a built-in MCP server, and `mcp.json` is Cursor's own format (https://cursor.com/docs/mcp). `sentry_event` returns an error's message, severity, exception chain with stack traces and environment; `vardump_get` returns a dump as plain text; `profiler_summary` and `profiler_top` give the slowest functions. Cursor reads the data your app already sent, so nothing is copied by hand.

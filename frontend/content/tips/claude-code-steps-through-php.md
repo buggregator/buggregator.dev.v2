@@ -22,10 +22,10 @@ XDEBUG_PROXY_ENABLED=true
 MCP_ENABLED=true
 ```
 
-Nothing else to set: the default mode, `auto`, lets Buggregator drive a session when no IDE answers.
+The default mode, `auto`, lets Buggregator drive a session when no IDE answers. Outside Docker that is all.
 
 ### 2. Point Xdebug at Buggregator
-A typical `php.ini`. In Docker, set `xdebug.client_host` to the Buggregator service name, for example `buggregator`.
+A typical `php.ini`. With `trigger`, Xdebug starts only for a request that carries `XDEBUG_TRIGGER`.
 
 ```ini
 xdebug.mode=debug
@@ -33,6 +33,8 @@ xdebug.client_host=127.0.0.1
 xdebug.client_port=9003
 xdebug.start_with_request=trigger
 ```
+
+In Docker, the proxy listens on `127.0.0.1:9003` inside its container by default. Set `XDEBUG_PROXY_ADDR: 0.0.0.0:9003` on the Buggregator service and `xdebug.client_host` to its service name, for example `buggregator`. The Docker section of the Xdebug docs has the full Compose block.
 
 ### 3. Connect Claude Code
 Add Buggregator as an MCP server. If Buggregator runs in Docker, use the HTTP transport on port 8001 instead, as the MCP docs show.
@@ -49,7 +51,7 @@ Say what you want in plain words. The assistant picks the tools: it saves a brea
   → xdebug_breakpoint_set → runs the request (curl) → xdebug_wait → xdebug_variables
 ```
 
-With no breakpoint and no `xdebug_break();` in the code, the script runs to the end and does not stop.
+Tell it that the request must carry the trigger, for example `?XDEBUG_TRIGGER=1` on the URL or an `XDEBUG_TRIGGER` cookie. Without it, Xdebug does not start and nothing pauses. With no breakpoint and no `xdebug_break();` in the code, the script runs to the end and does not stop.
 
 ### 5. Watch on the Xdebug page
 Open **Xdebug** in the sidebar. **Agent activity** lists the MCP calls the assistant made in this session, including refused ones.

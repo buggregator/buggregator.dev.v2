@@ -45,13 +45,13 @@ add_action( 'phpmailer_init', function( $phpmailer ) : void {
 ```
 
 ### 3. Check the environment type
-The plugin returns early unless `WP_ENVIRONMENT_TYPE` is defined and equals `local`. On staging and production it does nothing, so mail there is sent as before.
+The plugin returns early unless the `WP_ENVIRONMENT_TYPE` constant is defined and equals `local`. On staging and production it does nothing, so mail there is sent as before. If you set the type as an environment variable instead of a constant, check `wp_get_environment_type() === 'local'`: WordPress reads both forms there (https://developer.wordpress.org/reference/functions/wp_get_environment_type/).
 
 ### 4. Use the service name in Docker
 If WordPress runs in Docker Compose next to Buggregator, set `$phpmailer->Host` to the Buggregator service name, for example `'buggregator'`.
 
 ### 5. Send an email and open it
-Trigger an email from your local site, then open http://127.0.0.1:8000. You see the rendered HTML with a desktop/mobile switcher, the plain text version, the addresses, the attachments and the raw MIME source.
+Trigger an email from your local site, then open http://127.0.0.1:8000. You see the rendered HTML with a Desktop / Tablet / Mobile width switcher, the plain text version, the addresses, the attachments and the raw MIME source.
 
 ## Why it works
 On `phpmailer_init`, the plugin tells PHPMailer to send over SMTP to Buggregator. Buggregator includes a fake SMTP server on port 1025 that stores each email and shows it in the UI instead of delivering it.

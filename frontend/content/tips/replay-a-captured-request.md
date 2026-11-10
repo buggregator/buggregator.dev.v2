@@ -31,7 +31,7 @@ curl 'http://127.0.0.1:8000/any/path?foo=bar' \
 Open `http://127.0.0.1:8000` and open the request. Next to the method, URI, headers, cookies, form data and files, you find the cURL command with a copy button.
 
 ### 4. Paste it in a terminal
-Run the command and the same request arrives again. Uploaded files are named in the command, not attached.
+The copied command targets Buggregator, so running it as is captures the same request again. To replay it into your own handler, change the URL in the command to your app's address first. Uploaded files are named in the command, not attached.
 
 ## Why it works
 Buggregator stores the whole request it received, then writes it back out as a `curl` command. Running that command sends the same method, URL, headers and body again. Uploaded files are the one part it does not carry.

@@ -15,9 +15,8 @@ To stop tailing `var/log/dev.log`, add one socket handler to your Symfony Monolo
 ## Steps
 
 ### 1. Add a socket handler for dev
-Add the handler to `config/packages/dev/monolog.php`. The `monolog.formatter.json` formatter is required: without it, Buggregator cannot parse the log records.
+Put the handler in `config/packages/dev/monolog.php`. If that file already configures handlers, add the `socket` handler to the existing chain instead of replacing it. The `monolog.formatter.json` formatter is required: without it, Buggregator cannot parse the log records.
 ```php
-# config/packages/dev/monolog.php
 <?php
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
@@ -26,7 +25,6 @@ use Symfony\Config\MonologConfig;
 
 return static function (MonologConfig $monologConfig): void {
     $monologConfig
-        ...
         ->handler('socket')
             ->level('debug')
             ->formatter('monolog.formatter.json')

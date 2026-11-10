@@ -1,7 +1,7 @@
 ---
 slug: test-html-email-on-mobile-width
 title: Check an HTML email at phone width before it ships
-description: Send your app's email to Buggregator on port 1025, then switch the HTML preview between desktop and mobile width. Nothing reaches a real inbox.
+description: Send your app's email to Buggregator on port 1025, then switch the HTML preview between Desktop, Tablet and Mobile width. Nothing reaches a real inbox.
 query: test html email
 feature: Mail
 feature_page: /features/email-testing
@@ -10,7 +10,7 @@ requires: null
 related: [laravel-mail-to-local-inbox, symfony-mailer-to-local-inbox, nodemailer-to-local-inbox, smtp-catcher-in-docker-compose]
 checked: { date: 2026-11-10, version: v2.8.0 }
 ---
-To test an HTML email before it ships, point your app's SMTP settings at Buggregator on `127.0.0.1:1025`, send the email, and open it in the Buggregator UI. The HTML preview has a desktop/mobile viewport switcher, so you see the phone layout without sending anything to a real inbox.
+To test an HTML email before it ships, point your app's SMTP settings at Buggregator on `127.0.0.1:1025`, send the email, and open it in the Buggregator UI. The HTML preview has a Desktop / Tablet / Mobile width switcher, so you see the phone layout without sending anything to a real inbox.
 
 ## Steps
 
@@ -40,8 +40,8 @@ In Docker Compose, replace `127.0.0.1` with the Buggregator service name, for ex
 ### 3. Send the email and open it
 Trigger the email from your app as usual: a sign-up, a password reset, an order. Open http://127.0.0.1:8000. The email shows up in the UI with its rendered HTML.
 
-### 4. Switch between desktop and mobile
-Use the viewport switcher in the HTML preview to check the responsive layout. Look for text that overflows, buttons that are too small, and images that do not scale.
+### 4. Switch the preview width
+Pick **Desktop**, **Tablet** or **Mobile** above the HTML preview to check the responsive layout. Look for text that overflows, buttons that are too small, and images that do not scale.
 
 ### 5. Check the rest of the message
 The same email also shows the plain text version, the addresses (From, To, CC, BCC, Reply-To), the attachments and the raw MIME source. Inline images display in the HTML preview. Use the raw source when you need to debug encoding or headers.
