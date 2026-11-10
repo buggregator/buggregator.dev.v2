@@ -141,6 +141,13 @@ onUnmounted(() => {
                   <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: fl.color }" />
                   {{ fl.label }}
                 </NuxtLink>
+                <NuxtLink
+                  to="/tips"
+                  class="flex items-center gap-2.5 mt-1 pt-3 px-4 pb-2 border-t border-landing-border-subtle text-sm text-on-dark-secondary hover:text-white hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-150 no-underline font-sans"
+                  @click="featuresOpen = false"
+                >
+                  All tips
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -224,6 +231,13 @@ onUnmounted(() => {
             >
               <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: fl.color }" />
               {{ fl.label }}
+            </NuxtLink>
+            <NuxtLink
+              to="/tips"
+              class="flex items-center text-sm text-on-dark-secondary hover:text-on-dark-primary transition-colors no-underline font-sans min-h-[44px]"
+              @click="mobileOpen = false"
+            >
+              All tips
             </NuxtLink>
           </div>
         </div>

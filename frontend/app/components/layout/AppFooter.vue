@@ -33,6 +33,7 @@ const featureLinks = [
   { label: 'Log Viewer', href: '/features/logs' },
   { label: 'HTTP Dumps', href: '/features/http-dumps' },
   { label: 'MCP Server & API', href: '/features/mcp-api' },
+  { label: 'Tips', href: '/tips' },
 ]
 
 const resourceLinks = [

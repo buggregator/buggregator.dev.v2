@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureTips from '~/components/tips/FeatureTips.vue'
 import FeatureHero from '~/components/features/FeatureHero.vue'
 import FeatureSetup from '~/components/features/FeatureSetup.vue'
 import FeatureScreenshot from '~/components/features/FeatureScreenshot.vue'
@@ -220,6 +221,8 @@ const worksWithItems = [
       description="Buggregator speaks standard SMTP. If your language can send emails, it works."
       :items="worksWithItems"
     />
+
+    <FeatureTips label="email testing" />
 
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/smtp.html">

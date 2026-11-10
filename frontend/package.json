@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "test:tips": "node --test tests/tips.test.ts",
+    "tips:og": "node scripts/tip-og-images.ts"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.8",
@@ -16,15 +18,19 @@
     "@vue-flow/core": "^1.48.2",
     "highlight.js": "^11.11.1",
     "lodash.isstring": "^4.0.1",
+    "markdown-it": "^14.3.3",
     "nuxt": "^4.0.0",
     "pinia": "^3.0.4",
     "vue": "^3.5.0",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.2.0",
     "@types/node": "^22.0.0",
     "autoprefixer": "^10.4.0",
     "nuxt-gtag": "^2.1.0",
+    "playwright-core": "^1.58.2",
     "postcss": "^8.4.0",
     "sass": "^1.98.0",
     "tailwindcss": "3",
