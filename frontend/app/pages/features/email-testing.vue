@@ -185,7 +185,7 @@ const worksWithItems = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </a>
-          <span class="font-mono text-xs text-on-dark-muted">Replaces <NuxtLink to="/compare/mailhog-alternatives" class="text-on-dark-secondary hover:text-white underline underline-offset-2">Mailhog</NuxtLink>, <NuxtLink to="/compare/mailtrap-alternative" class="text-on-dark-secondary hover:text-white underline underline-offset-2">Mailtrap</NuxtLink>, MailCatcher</span>
+          <span class="font-mono text-xs text-on-dark-muted">Replaces Mailhog, Mailtrap, MailCatcher</span>
         </div>
       </template>
     </FeatureHero>
