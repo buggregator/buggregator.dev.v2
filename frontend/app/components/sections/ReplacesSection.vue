@@ -5,13 +5,8 @@ const { t } = useI18n()
 const revealRef = ref<InstanceType<typeof RevealWords>>()
 
 const tools = [
-  { key: 'sentry', tool: 'Sentry (local)', color: '#f43f5e', link: '/features/sentry',
-    compare: [{ label: 'vs Spotlight, GlitchTip', to: '/compare/sentry-for-local-development' }] },
-  { key: 'mailhog', tool: 'Mailhog / Mailtrap', color: '#f59e0b', link: '/features/email-testing',
-    compare: [
-      { label: 'vs Mailhog', to: '/compare/mailhog-alternatives' },
-      { label: 'vs Mailtrap', to: '/compare/mailtrap-alternative' },
-    ] },
+  { key: 'sentry', tool: 'Sentry (local)', color: '#f43f5e', link: '/features/sentry' },
+  { key: 'mailhog', tool: 'Mailhog / Mailtrap', color: '#f59e0b', link: '/features/email-testing' },
   { key: 'ray', tool: 'Ray', color: '#06b6d4' },
   { key: 'blackfire', tool: 'Blackfire / XHProf UI', color: '#8b5cf6', link: '/features/profiler' },
   { key: 'logviewers', tool: 'Log viewers', color: '#6b7280', link: '/features/logs' },
@@ -46,50 +41,23 @@ const tools = [
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <template v-for="item in tools" :key="item.key">
-          <!-- With compare links: the card is not one link (links cannot nest);
-               its feature link stretches over the card, the compare links sit above it. -->
-          <div
-            v-if="item.compare"
-            class="relative flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle hover:border-landing-border hover:bg-landing-elevated transition-colors duration-150"
-          >
-            <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ background: item.color }" />
-            <div class="min-w-0 flex-1">
-              <p class="text-sm font-medium text-on-dark-secondary font-sans line-through opacity-50">{{ item.tool }}</p>
-              <NuxtLink
-                :to="item.link"
-                class="text-sm text-on-dark-secondary font-sans no-underline after:absolute after:inset-0 after:rounded-xl"
-              >{{ t(`replaces.tools.${item.key}`) }}</NuxtLink>
-              <p class="relative z-10 mt-1 flex flex-wrap gap-x-3 text-xs font-sans">
-                <NuxtLink
-                  v-for="c in item.compare"
-                  :key="c.to"
-                  :to="c.to"
-                  class="text-accent hover:text-accent-hover no-underline"
-                >{{ c.label }} →</NuxtLink>
-              </p>
-            </div>
-            <svg class="w-4 h-4 text-on-dark-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+        <component
+          :is="item.link ? 'NuxtLink' : 'div'"
+          v-for="item in tools"
+          :key="item.key"
+          :to="item.link || undefined"
+          class="flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle no-underline"
+          :class="item.link ? 'hover:border-landing-border hover:bg-landing-elevated transition-colors duration-150 cursor-pointer' : ''"
+        >
+          <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ background: item.color }" />
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-medium text-on-dark-secondary font-sans line-through opacity-50">{{ item.tool }}</p>
+            <p class="text-sm text-on-dark-secondary font-sans">{{ t(`replaces.tools.${item.key}`) }}</p>
           </div>
-          <component
-            :is="item.link ? 'NuxtLink' : 'div'"
-            v-else
-            :to="item.link || undefined"
-            class="flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle no-underline"
-            :class="item.link ? 'hover:border-landing-border hover:bg-landing-elevated transition-colors duration-150 cursor-pointer' : ''"
-          >
-            <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ background: item.color }" />
-            <div class="min-w-0 flex-1">
-              <p class="text-sm font-medium text-on-dark-secondary font-sans line-through opacity-50">{{ item.tool }}</p>
-              <p class="text-sm text-on-dark-secondary font-sans">{{ t(`replaces.tools.${item.key}`) }}</p>
-            </div>
-            <svg v-if="item.link" class="w-4 h-4 text-on-dark-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </component>
-        </template>
+          <svg v-if="item.link" class="w-4 h-4 text-on-dark-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </component>
       </div>
 
       <p class="text-center mt-10 text-lg font-semibold text-white font-sans">

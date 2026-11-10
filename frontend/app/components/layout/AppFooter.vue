@@ -36,12 +36,6 @@ const featureLinks = [
   { label: 'Tips', href: '/tips' },
 ]
 
-const compareLinks = [
-  { label: 'MailHog alternatives', href: '/compare/mailhog-alternatives' },
-  { label: 'Sentry for local development', href: '/compare/sentry-for-local-development' },
-  { label: 'Mailtrap alternative', href: '/compare/mailtrap-alternative' },
-]
-
 const resourceLinks = [
   { label: 'footer.links.releases', href: 'https://github.com/buggregator/server/releases' },
 ]
@@ -50,7 +44,7 @@ const resourceLinks = [
 <template>
   <footer class="bg-section-mid border-t border-landing-border-subtle py-16">
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <!-- Logo + tagline -->
         <div>
           <img :src="logoSvg" alt="Buggregator" class="h-6 mb-3" />
@@ -118,23 +112,6 @@ const resourceLinks = [
               >
                 {{ t(link.label) }}
               </a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Compare -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
-            Compare
-          </h4>
-          <ul class="md:space-y-2">
-            <li v-for="link in compareLinks" :key="link.href">
-              <NuxtLink
-                :to="link.href"
-                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
-              >
-                {{ link.label }}
-              </NuxtLink>
             </li>
           </ul>
         </div>
