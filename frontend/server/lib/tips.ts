@@ -50,6 +50,9 @@ export function featureKey(feature: string): string {
   return feature.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 }
 
+// Every tip screenshot has this size (public/img/tips/<slug>.webp).
+export const TIP_SHOT_SIZE = { width: 1280, height: 760 } as const
+
 const md = createRenderer()
 
 function escapeHtml(s: string): string {
@@ -79,6 +82,16 @@ function createRenderer(): MarkdownIt {
       + `<pre><code>${lines}</code></pre></div>\n`
   }
 
+  // Screenshots (all TIP_SHOT_SIZE): fixed box so the page does not jump,
+  // lazy, and a click opens the full-size file.
+  r.renderer.rules.image = (tokens, idx) => {
+    const token = tokens[idx]!
+    const src = escapeHtml(token.attrGet('src') ?? '')
+    const alt = escapeHtml(token.content)
+    return `<a class="tip-shot" href="${src}" target="_blank" rel="noopener">`
+      + `<img src="${src}" alt="${alt}" width="${TIP_SHOT_SIZE.width}" height="${TIP_SHOT_SIZE.height}" loading="lazy" decoding="async"></a>`
+  }
+
   // External links open in a new tab; site links stay in place.
   const defaultLinkOpen = r.renderer.rules.link_open
     ?? ((tokens, idx, options, _env, self) => self.renderToken(tokens, idx, options))
@@ -92,6 +105,15 @@ function createRenderer(): MarkdownIt {
   }
 
   return r
+}
+
+// Images in a tip's body, in order (for the content check).
+export function tipImages(source: string): Array<{ src: string, alt: string }> {
+  const { body } = splitFrontmatter(source)
+  return md.parse(body, {})
+    .flatMap(t => t.children ?? [])
+    .filter(t => t.type === 'image')
+    .map(t => ({ src: t.attrGet('src') ?? '', alt: t.content }))
 }
 
 export function splitFrontmatter(source: string): { data: Record<string, unknown>, body: string } {
@@ -192,6 +214,9 @@ export function parseTip(fileSlug: string, source: string): Tip {
   const { answer, sections } = splitBody(body)
   if (!answer) errors.push('body: the answer paragraph before «## Steps» is missing')
   if (!sections.length) errors.push('body: no «## » sections')
+  for (const img of tipImages(source)) {
+    if (!img.alt.trim()) errors.push(`image ${img.src}: alt text required`)
+  }
 
   if (errors.length) throw new Error(`tip ${fileSlug}: ${errors.join('; ')}`)
 

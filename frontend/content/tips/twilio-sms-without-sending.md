@@ -23,6 +23,8 @@ curl -X POST http://127.0.0.1:8000/sms/twilio \
 ```
 Open `http://127.0.0.1:8000`: the message shows with a Twilio badge.
 
+![An SMS with a one-time code in Buggregator, marked with the Twilio badge.](/img/tips/twilio-sms-without-sending.webp)
+
 ### 2. Send the code from your app
 In development, send the SMS with your HTTP client instead of the provider's SDK. In Laravel it looks like this:
 ```php

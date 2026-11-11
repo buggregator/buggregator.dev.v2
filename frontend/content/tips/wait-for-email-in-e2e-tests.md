@@ -40,6 +40,8 @@ UUID=$(curl -s -G http://127.0.0.1:8000/api/smtp/messages/wait \
 
 The answer is a normal Buggregator event. Its payload has `subject`, `from`, `to`, `text`, `html` and `raw`, so your test can assert on them. On timeout the answer is 408: fail the test there.
 
+![The confirmation email a test waited for, open in Buggregator: sender, recipient and the HTML preview.](/img/tips/wait-for-email-in-e2e-tests.webp)
+
 ### 5. Send the login header if SSO is on
 With SSO on, these routes need the same login as the rest of `/api`: send the `X-Auth-Token` header. Without SSO, no header is needed.
 

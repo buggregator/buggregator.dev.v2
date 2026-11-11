@@ -44,5 +44,7 @@ Other frameworks follow the same rule: wherever their docs say `127.0.0.1`, use 
 ### 3. Send an email and open the UI
 Trigger any email from your app, then open http://127.0.0.1:8000. The email appears with the HTML preview, plain text, addresses, attachments and raw source.
 
+![The Buggregator mail list with several emails from apps in Docker Compose.](/img/tips/smtp-catcher-in-docker-compose.webp)
+
 ## Why it works
 Buggregator includes a fake SMTP server on port 1025 that stores each email instead of delivering it. Inside one Compose stack, the service name resolves to the Buggregator container, so changing the host is the only change your app needs.

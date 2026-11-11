@@ -42,6 +42,8 @@ MONOLOG_SOCKET_HOST=127.0.0.1:9913
 ### 3. Open the UI
 Open `http://127.0.0.1:8000` and use your app. New records appear as they are written. Each one shows the channel (app, security, database and so on), one of the 8 PSR-3 levels, the message, the context and extra fields as JSON. Search finds records by message, channel or level.
 
+![A Monolog record from a Symfony app in Buggregator: channel app, level, message and its context as JSON.](/img/tips/symfony-logs-in-a-live-view.webp)
+
 ### 4. See where a record came from
 When a record has a `source` key in its context, Buggregator shows the file, line and function that wrote it.
 

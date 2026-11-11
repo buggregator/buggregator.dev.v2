@@ -30,10 +30,12 @@ Errors arrive as soon as the DSN is set. Traces are an SDK feature: switch them 
 SENTRY_TRACES_SAMPLE_RATE=1.0
 ```
 
-The Laravel SDK then times each request and adds spans for database queries, Redis, caches (Laravel 11.11 or newer), HTTP client calls (Laravel 8.45 or newer), views, notifications and queue jobs. Symfony's SDK instruments its framework too. Plain `sentry/sentry` creates no transactions by itself: start them in your code with `\Sentry\startTransaction()`, as Sentry's custom instrumentation guide shows (https://docs.sentry.io/platforms/php/tracing/instrumentation/custom-instrumentation/).
+The Laravel SDK then times each request and adds spans for database queries, Redis (with `SENTRY_TRACE_REDIS_COMMANDS=true`), caches (Laravel 11.11 or newer), HTTP client calls (Laravel 8.45 or newer), views, notifications and queue jobs. Symfony's SDK instruments its framework too. Plain `sentry/sentry` creates no transactions by itself: start them in your code with `\Sentry\startTransaction()`, as Sentry's custom instrumentation guide shows (https://docs.sentry.io/platforms/php/tracing/instrumentation/custom-instrumentation/).
 
 ### 3. Open the Traces tab
 Load a page, then open the Sentry page and pick **Traces**. The tab appears once the current project has traces. Open a transaction to see every span on a timeline, each marked by type. The bar shows how long it took; failed spans are tagged.
+
+![A Laravel request's Sentry trace as a waterfall: middleware, SQL queries, cache, an HTTP call and view rendering on one timeline.](/img/tips/sentry-traces-as-waterfall.webp)
 
 ### 4. Follow an error into its trace
 Throw an exception in a request. The error shows a small waterfall of the request it happened in. Open the full trace to see every query and call around it.

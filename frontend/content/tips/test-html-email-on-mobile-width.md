@@ -43,6 +43,8 @@ Trigger the email from your app as usual: a sign-up, a password reset, an order.
 ### 4. Switch the preview width
 Pick **Desktop**, **Tablet** or **Mobile** above the HTML preview to check the responsive layout. Look for text that overflows, buttons that are too small, and images that do not scale.
 
+![A newsletter email in Buggregator's preview at Mobile width.](/img/tips/test-html-email-on-mobile-width.webp)
+
 ### 5. Check the rest of the message
 The same email also shows the plain text version, the addresses (From, To, CC, BCC, Reply-To), the attachments and the raw MIME source. Inline images display in the HTML preview. Use the raw source when you need to debug encoding or headers.
 

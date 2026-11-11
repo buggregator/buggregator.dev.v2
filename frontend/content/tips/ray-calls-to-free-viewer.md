@@ -30,6 +30,8 @@ RAY_PORT=8000
 ### 3. Call ray() as usual
 Open `http://127.0.0.1:8000`. Buggregator renders 17 Ray payload types, among them SQL queries with bindings, Eloquent models, jobs, events, mailables, tables, measures and exceptions with stack traces. Each payload shows its origin: file, line and function. Click the file path to open it in your IDE.
 
+![Ray events from a Laravel app in Buggregator: a dump, a mail, a job and an SQL query with its bindings.](/img/tips/ray-calls-to-free-viewer.webp)
+
 ### 4. Outside Laravel, use a ray.php file
 In any other PHP project, create `ray.php` in the project root.
 ```php

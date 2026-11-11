@@ -47,6 +47,8 @@ config.action_mailer.delivery_method = :smtp
 ### 4. Send an email and open it
 Trigger any mailer, then open http://127.0.0.1:8000. You see the rendered HTML with a desktop/mobile switcher, the plain text version, the addresses, the attachments and the raw MIME source. In Docker Compose, use the Buggregator service name, for example `buggregator`, instead of `127.0.0.1`.
 
+![A Rails welcome email in Buggregator's mail view, with its HTML preview and the links found in it.](/img/tips/rails-mail-to-local-inbox.webp)
+
 ## Why it works
 Buggregator includes a fake SMTP server that stores each email instead of delivering it. Any app that can send email over SMTP works with it, so a Rails app, a Laravel app and a Node app can all send to the same inbox.
 

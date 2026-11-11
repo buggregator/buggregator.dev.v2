@@ -30,6 +30,8 @@ curl 'http://127.0.0.1:8000/any/path?foo=bar' \
 ### 3. Copy the cURL command
 Open `http://127.0.0.1:8000` and open the request. Next to the method, URI, headers, cookies, form data and files, you find the cURL command with a copy button.
 
+![A captured webhook request in Buggregator with the ready cURL command that sends it again.](/img/tips/replay-a-captured-request.webp)
+
 ### 4. Paste it in a terminal
 The copied command targets Buggregator, so running it as is captures the same request again. To replay it into your own handler, change the URL in the command to your app's address first. Uploaded files are named in the command, not attached.
 

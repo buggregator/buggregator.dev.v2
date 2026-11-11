@@ -43,5 +43,7 @@ Your code that sends mail through `transporter` stays the same. Trigger an email
 ### 4. Open the inbox
 Open http://127.0.0.1:8000. Each message shows the rendered HTML with a desktop/mobile switcher, the plain text version, From, To, CC, BCC and Reply-To, the attachments and the raw MIME source.
 
+![An order confirmation sent with Nodemailer, shown in Buggregator with its HTML preview and PDF attachment.](/img/tips/nodemailer-to-local-inbox.webp)
+
 ## Why it works
 Buggregator includes a fake SMTP server. Nodemailer talks to it like to any mail server, but Buggregator stores the email and shows it in the UI instead of delivering it. Any app that can send email over SMTP works the same way, so your Node, PHP, Python and Ruby apps can share one inbox.

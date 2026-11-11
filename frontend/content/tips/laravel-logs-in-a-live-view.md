@@ -45,6 +45,8 @@ LOG_SOCKET_URL=127.0.0.1:9913
 ### 3. Open the UI
 Open `http://127.0.0.1:8000`. New records appear as they are written, each with its channel, level, message and context. Search finds records by message, channel or level.
 
+![Laravel log records arriving live in Buggregator: a sign-in, an order, a slow payment warning, a queue job, a failed job and a scheduled command.](/img/tips/laravel-logs-in-a-live-view.webp)
+
 ### 4. Run your workers as usual
 Queue consumers, cron jobs and daemons write logs that are easy to miss in stdout. With the same `.env`, they log to the same view as your web requests.
 

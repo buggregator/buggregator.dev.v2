@@ -48,6 +48,8 @@ Without `MAILERS`, Django uses `EMAIL_BACKEND`, and its default is `django.core.
 ### 4. Send an email and open it
 Send mail from your app as usual. Open http://127.0.0.1:8000 and check the HTML preview, the plain text version, the addresses, the attachments and the raw MIME source. In Docker Compose, use the Buggregator service name, for example `buggregator`, instead of `127.0.0.1`.
 
+![A Django password-reset email in Buggregator's mail view: sender, recipient and the plain-text body.](/img/tips/django-mail-to-local-inbox.webp)
+
 ## Why it works
 Django's SMTP backend talks plain SMTP to whatever host and port you give it. Buggregator listens on port 1025, needs no authentication, and stores each email for the UI instead of delivering it.
 

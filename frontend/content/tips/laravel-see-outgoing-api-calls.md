@@ -62,5 +62,7 @@ $response = Http::withOptions([
 ### 5. Read the request and the response
 Open `http://127.0.0.1:8000`. Each call shows the full URL, request and response headers and body, a color-coded status code and the response time in milliseconds. JSON bodies open as a tree.
 
+![An outgoing Laravel HTTP call caught by Buggregator's proxy: method, URL, status, timing and the JSON response.](/img/tips/laravel-see-outgoing-api-calls.webp)
+
 ## Why it works
 Laravel's HTTP client is built on Guzzle ([Laravel docs](https://laravel.com/docs/12.x/http-client)), and `globalOptions` passes Guzzle options to every request. Buggregator's proxy forwards each request to the real API and records both directions. For HTTPS it signs certificates with a CA kept in memory, which is why the client must skip verification.

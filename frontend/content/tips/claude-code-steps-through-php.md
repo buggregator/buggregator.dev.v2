@@ -56,5 +56,7 @@ Tell it that the request must carry the trigger, for example `?XDEBUG_TRIGGER=1`
 ### 5. Watch on the Xdebug page
 Open **Xdebug** in the sidebar. **Agent activity** lists the MCP calls the assistant made in this session, including refused ones.
 
+![The Buggregator Xdebug page with a session paused at a line, the variables, the call stack and the agent activity panel.](/img/tips/claude-code-steps-through-php.webp)
+
 ## Why it works
 The proxy sits between Xdebug and your IDE. When no IDE answers, Buggregator drives the session itself, and the MCP tools `xdebug_step`, `xdebug_continue` and `xdebug_stop` send the same commands as the buttons on the page. These control tools are on by default; `xdebug.allow_control: false` keeps the assistant read-only, and stepping is refused while an IDE drives.
