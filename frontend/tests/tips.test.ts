@@ -5,7 +5,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 import {
-  parseTip, splitBody, sortNewestFirst, checkRelated, featureKey, countWords,
+  parseTip, splitBody, sortNewestFirst, checkRelated, featureKey, countWords, tipImages,
 } from '../server/lib/tips.ts'
 
 const here = import.meta.dirname
@@ -50,6 +50,21 @@ test('external links open in a new tab, raw HTML is escaped', () => {
   const tip = parseTip('laravel-mail-to-local-inbox', src)
   assert.match(tip.sections[0]!.html, /<a href="http:\/\/127.0.0.1:8000" target="_blank" rel="noopener">UI<\/a>/)
   assert.doesNotMatch(tip.sections[1]!.html, /<script>/)
+})
+
+test('a screenshot opens full size, loads lazily and keeps its box (no layout shift)', () => {
+  const src = fixture.replace('## Why it works', '![The mail view](/img/tips/laravel-mail-to-local-inbox.webp)\n\n## Why it works')
+  const html = parseTip('laravel-mail-to-local-inbox', src).sections[0]!.html
+  assert.match(html, /<a class="tip-shot" href="\/img\/tips\/laravel-mail-to-local-inbox.webp" target="_blank" rel="noopener">/)
+  assert.match(html, /<img src="\/img\/tips\/laravel-mail-to-local-inbox.webp" alt="The mail view" width="1280" height="760" loading="lazy" decoding="async">/)
+  assert.deepEqual(tipImages(src), [{ src: '/img/tips/laravel-mail-to-local-inbox.webp', alt: 'The mail view' }])
+  // On a phone the shot is small: a hint (hidden from screen readers, the alt names the link).
+  assert.match(html, /<span class="tip-shot-hint" aria-hidden="true">Tap to enlarge<\/span><\/a>/)
+})
+
+test('an image without alt text is refused', () => {
+  const src = fixture.replace('## Why it works', '![](/img/tips/x.webp)\n\n## Why it works')
+  assert.throws(() => parseTip('laravel-mail-to-local-inbox', src), /image \/img\/tips\/x.webp: alt text required/)
 })
 
 test('lists every frontmatter problem at once', () => {
@@ -111,6 +126,12 @@ test(`content/tips: ${files.length} file(s) parse and link correctly`, () => {
     }
   })
   errors.push(...checkRelated(tips))
+  // Every screenshot a tip shows is in public/.
+  for (const f of files) {
+    for (const img of tipImages(readFileSync(join(contentDir, f), 'utf8'))) {
+      if (!existsSync(join(here, '../public', img.src))) errors.push(`${f}: image ${img.src} is not in public/`)
+    }
+  }
   assert.deepEqual(errors, [])
 })
 

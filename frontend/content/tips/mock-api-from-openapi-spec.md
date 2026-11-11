@@ -25,6 +25,8 @@ curl -X POST http://127.0.0.1:8000/api/mocks/import/openapi \
 ### 2. Check how the rules were built
 Each operation gets the lowest 2xx status it defines. An operation with an example answers with it as is. One without an example gets a template with fake data from its schema. The path of `servers[0].url` goes in front, so `https://api.example.com/v1` with `/users/{id}` becomes `/v1/users/{id}`.
 
+![Mock rules imported from an OpenAPI spec, one per operation, next to the requests they answered.](/img/tips/mock-api-from-openapi-spec.webp)
+
 ### 3. Call the mock
 Point your app at `/mock` instead of the real base URL. In Docker Compose, replace 127.0.0.1 with the Buggregator service name, for example `buggregator`.
 ```bash

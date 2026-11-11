@@ -37,5 +37,7 @@ curl 'http://127.0.0.1:8000/any/path?foo=bar' \
 ### 4. Read the payload
 Open `http://127.0.0.1:8000`. The request shows its method, full URI, query parameters, form data, headers, cookies and uploaded files, which you can download. Search finds requests by host, method or URL.
 
+![A captured webhook in Buggregator: the JSON body, query parameters and post data.](/img/tips/webhook-payload-before-the-handler.webp)
+
 ## Why it works
 Buggregator treats any HTTP request marked with `http-dump`, by user name or header, as a dump and stores it whole. A third-party service on the internet can only reach Buggregator at a public address, so a service in the cloud cannot call your laptop's 127.0.0.1. When you need the response from a real server too, use the HTTP proxy instead.

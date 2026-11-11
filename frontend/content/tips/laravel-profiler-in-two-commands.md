@@ -44,5 +44,7 @@ XHPROF_ENABLED=true
 ### 5. Load the page and read the profile
 Open the slow page, then the profile in Buggregator. **Flamechart** shows where time is spent. **Top functions** ranks functions by CPU time, wall time, memory and call count. **Call graph** colors nodes from white to dark red: the darker, the more it costs.
 
+![An XHProf profile of a Laravel request in Buggregator's Flamechart tab.](/img/tips/laravel-profiler-in-two-commands.webp)
+
 ## Why it works
 XHProf records CPU time, wall time and memory for every function call in the request. The package sends that data to Buggregator's profiler endpoint on port 8000, next to your exceptions and logs. After a fix, compare two runs side by side to check that it helped.

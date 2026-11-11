@@ -40,5 +40,7 @@ If your app and Buggregator run in the same Compose stack, replace `127.0.0.1` w
 ### 4. Send an email and open it
 Trigger any email from your app, then open http://127.0.0.1:8000. You see the rendered HTML with a Desktop / Tablet / Mobile width switcher, the plain text version, From, To, CC, BCC and Reply-To, the attachments and the raw MIME source. Use the raw source when you need to debug encoding or headers.
 
+![A Symfony Mailer confirmation email in Buggregator: HTML preview, recipients and the link found in it.](/img/tips/symfony-mailer-to-local-inbox.webp)
+
 ## Why it works
 The `smtp://` DSN sends mail over plain SMTP to the host and port you give it. Buggregator listens on port 1025 with a fake SMTP server that stores each email and shows it in the UI instead of delivering it.

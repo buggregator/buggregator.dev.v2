@@ -46,5 +46,7 @@ Buggregator answers 200 with `{"status":true}`. It does not pick up trace files 
 ### 4. Find the slow call
 Open **Xdebug traces** in the sidebar and pick the trace. **Slowest & top** lists single calls by their time with callees, and functions by their own time. In **Call tree**, click ▸ to see what a call made, or type in **Find a function or file**, e.g. `PDO->query`.
 
+![An Xdebug trace in Buggregator: the slowest calls and the functions with the most self time.](/img/tips/xdebug-trace-find-slow-call.webp)
+
 ## Why it works
 A trace records every call: what was called, from which file and line, how long it took and how much memory it used. Buggregator sums it up, so one slow method called many times in a loop stands out. With MCP on, an AI assistant can read the same trace through `xdebug_trace_summary`.

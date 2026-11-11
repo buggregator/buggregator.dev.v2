@@ -37,6 +37,8 @@ curl http://127.0.0.1:8000/mock/users/42
 # {"id": 42, "name": "Jessica Hills", "email": "jonathon.marquardt@wilkinson.biz"}
 ```
 
+![The mock server page: the template rule and the requests it answered.](/img/tips/mock-api-with-fake-data.webp)
+
 ### 4. Find more generators
 Numbers, UUIDs, cities, prices and many more are available. The full list with each generator's parameters comes from one endpoint.
 ```text

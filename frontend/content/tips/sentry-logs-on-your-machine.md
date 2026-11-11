@@ -42,6 +42,8 @@ GET /api/sentry/logs
 
 It filters by `project`, `level`, `trace_id` and time.
 
+![The Sentry Logs tab in Buggregator: log lines with their level and time.](/img/tips/sentry-logs-on-your-machine.webp)
+
 ### 4. Use your own project name, if you want one
 A key in the DSN path, such as `/my-app`, sends the data to that project. A project that receives only logs is not added to the project list, so declare it under `projects:` in `buggregator.yaml` and pick it in the sidebar.
 

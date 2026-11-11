@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // Server-rendered Markdown of a tip (answer or a section). The HTML is built
 // from our own content files by server/lib/tips.ts (raw HTML disabled).
-// Clicks are handled here: «Copy» on code blocks, site links via the router.
+// Clicks are handled here: «Copy» on code blocks, site links via the router
+// (links with a target, like screenshots opening full size, stay native).
 const props = defineProps<{
   html: string
   lead?: boolean
@@ -24,7 +25,7 @@ async function onClick(e: MouseEvent) {
     } catch { /* clipboard blocked: the code stays selectable */ }
     return
   }
-  const link = target?.closest<HTMLAnchorElement>('a[href^="/"]')
+  const link = target?.closest<HTMLAnchorElement>('a[href^="/"]:not([target])')
   if (link && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
     e.preventDefault()
     await router.push(link.getAttribute('href')!)
@@ -137,6 +138,40 @@ async function onClick(e: MouseEvent) {
   line-height: 1.6;
   color: var(--code-text);
   white-space: pre;
+}
+.tip-prose :deep(.tip-shot) {
+  display: block;
+  border: 1px solid theme('colors.landing-border');
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: theme('colors.landing-surface');
+}
+.tip-prose :deep(.tip-shot img) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.tip-prose :deep(.tip-shot-hint) {
+  display: none;
+}
+/* Phones: the shot is ~360 px wide, small text needs the full-size file. */
+@media (max-width: 639px) {
+  .tip-prose :deep(.tip-shot-hint) {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid theme('colors.landing-border');
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    color: theme('colors.on-dark.muted');
+    text-align: center;
+  }
+}
+.tip-prose :deep(.tip-shot:hover) {
+  border-color: theme('colors.accent.DEFAULT');
+}
+.tip-prose :deep(.tip-shot:focus-visible) {
+  outline: 2px solid theme('colors.accent.DEFAULT');
+  outline-offset: 2px;
 }
 .tip-prose :deep(.tip-c-comment) { color: var(--code-comment); }
 .tip-prose :deep(.tip-c-prompt) { color: var(--code-prompt); user-select: none; }

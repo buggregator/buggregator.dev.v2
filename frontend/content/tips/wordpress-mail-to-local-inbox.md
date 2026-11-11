@@ -53,5 +53,7 @@ If WordPress runs in Docker Compose next to Buggregator, set `$phpmailer->Host` 
 ### 5. Send an email and open it
 Trigger an email from your local site, then open http://127.0.0.1:8000. You see the rendered HTML with a Desktop / Tablet / Mobile width switcher, the plain text version, the addresses, the attachments and the raw MIME source.
 
+![A WordPress password-reset email caught by Buggregator, in plain text.](/img/tips/wordpress-mail-to-local-inbox.webp)
+
 ## Why it works
 On `phpmailer_init`, the plugin tells PHPMailer to send over SMTP to Buggregator. Buggregator includes a fake SMTP server on port 1025 that stores each email and shows it in the UI instead of delivering it.

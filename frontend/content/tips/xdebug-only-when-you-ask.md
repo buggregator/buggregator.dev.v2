@@ -60,5 +60,7 @@ xdebug_break();
 
 In trigger mode, Xdebug's docs say `xdebug_break()` also starts a session on its own.
 
+![The Buggregator Xdebug page: a paused session, the code at the current line, the variables and the step buttons.](/img/tips/xdebug-only-when-you-ask.webp)
+
 ## Why it works
 The trigger rules are Xdebug's own: in trigger mode it checks for `XDEBUG_TRIGGER` in `$_ENV`, `$_GET`, `$_POST` and `$_COOKIE` when the request starts (https://xdebug.org/docs/all_settings#start_with_request). A triggered request connects to Buggregator on port 9003. Buggregator passes it to your IDE or, with no IDE, drives it from the Xdebug page.

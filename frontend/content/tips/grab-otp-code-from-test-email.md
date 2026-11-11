@@ -40,6 +40,8 @@ curl -s http://127.0.0.1:8000/api/smtp/message/$UUID/codes
 # {"data":["482913"],"pattern":"\\b\\d{4,8}\\b"}
 ```
 
+![A sign-in email with a six-digit code, open in Buggregator's mail view.](/img/tips/grab-otp-code-from-test-email.webp)
+
 ### 4. Pass your own pattern for other codes
 The default pattern finds numbers of 4 to 8 digits. For letters and digits, add a `pattern` query parameter, for example `pattern=[A-Z0-9]{6}`. An invalid pattern gets 400.
 

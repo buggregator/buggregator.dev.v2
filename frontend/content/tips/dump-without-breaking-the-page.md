@@ -39,5 +39,7 @@ Open `http://127.0.0.1:8000`. Your response stays clean: no dump HTML mixed into
 
 `dd()` is sent to Buggregator too, but it still stops the script, as it always does.
 
+![A dump() of an order array in Buggregator, with the file and line it was called from.](/img/tips/dump-without-breaking-the-page.webp)
+
 ## Why it works
 VarDumper has a server mode. With `VAR_DUMPER_FORMAT=server`, it sends each dump over TCP to the address in `VAR_DUMPER_SERVER` instead of printing it. Buggregator listens on port 9912 and renders what arrives. One limit: on the Windows binary, the VarDumper module (port 9912) does not work.

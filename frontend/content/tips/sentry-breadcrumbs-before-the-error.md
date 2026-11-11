@@ -43,5 +43,7 @@ The errors then go to the project `shop`, not `default`. Pick `shop` in the proj
 ### 4. Open the error
 Trigger the exception and open it at http://127.0.0.1:8000. **Breadcrumbs** is the timeline of user actions and system events leading up to it. **Request** shows the method, URL and headers. **Exceptions** has the stack trace frame by frame; click a frame to open it in your IDE.
 
+![A Sentry exception in Buggregator on the Breadcrumbs tab: the steps logged before the error.](/img/tips/sentry-breadcrumbs-before-the-error.webp)
+
 ## Why it works
 Buggregator accepts the same protocol as the Sentry SDK, so the SDK sends it the full event, breadcrumbs included. You see it at once, without waiting for a remote Sentry. It is tested with the Sentry PHP SDK, versions 2.5, 3.22 and 4.x.
