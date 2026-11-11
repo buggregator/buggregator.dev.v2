@@ -58,6 +58,8 @@ test('a screenshot opens full size, loads lazily and keeps its box (no layout sh
   assert.match(html, /<a class="tip-shot" href="\/img\/tips\/laravel-mail-to-local-inbox.webp" target="_blank" rel="noopener">/)
   assert.match(html, /<img src="\/img\/tips\/laravel-mail-to-local-inbox.webp" alt="The mail view" width="1280" height="760" loading="lazy" decoding="async">/)
   assert.deepEqual(tipImages(src), [{ src: '/img/tips/laravel-mail-to-local-inbox.webp', alt: 'The mail view' }])
+  // On a phone the shot is small: a hint (hidden from screen readers, the alt names the link).
+  assert.match(html, /<span class="tip-shot-hint" aria-hidden="true">Tap to enlarge<\/span><\/a>/)
 })
 
 test('an image without alt text is refused', () => {

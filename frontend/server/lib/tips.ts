@@ -89,7 +89,8 @@ function createRenderer(): MarkdownIt {
     const src = escapeHtml(token.attrGet('src') ?? '')
     const alt = escapeHtml(token.content)
     return `<a class="tip-shot" href="${src}" target="_blank" rel="noopener">`
-      + `<img src="${src}" alt="${alt}" width="${TIP_SHOT_SIZE.width}" height="${TIP_SHOT_SIZE.height}" loading="lazy" decoding="async"></a>`
+      + `<img src="${src}" alt="${alt}" width="${TIP_SHOT_SIZE.width}" height="${TIP_SHOT_SIZE.height}" loading="lazy" decoding="async">`
+      + '<span class="tip-shot-hint" aria-hidden="true">Tap to enlarge</span></a>'
   }
 
   // External links open in a new tab; site links stay in place.

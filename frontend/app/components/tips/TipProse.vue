@@ -151,6 +151,21 @@ async function onClick(e: MouseEvent) {
   width: 100%;
   height: auto;
 }
+.tip-prose :deep(.tip-shot-hint) {
+  display: none;
+}
+/* Phones: the shot is ~360 px wide, small text needs the full-size file. */
+@media (max-width: 639px) {
+  .tip-prose :deep(.tip-shot-hint) {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid theme('colors.landing-border');
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    color: theme('colors.on-dark.muted');
+    text-align: center;
+  }
+}
 .tip-prose :deep(.tip-shot:hover) {
   border-color: theme('colors.accent.DEFAULT');
 }
