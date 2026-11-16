@@ -1,0 +1,27 @@
+version: "1.0"
+namespace: app.migrations
+
+entries:
+  - name: 01_create_state_store_table
+    kind: function.lua
+    meta:
+      description: Create the state_store table behind app:state_store (store.sql)
+      target_db: app:db
+      timestamp: "2026-11-16T20:00:00Z"
+      type: migration
+    source: file://01_create_state_store_table.lua
+    imports:
+      migration: wippy.migration:migration
+    method: migrate
+
+  - name: 02_create_mcp_sessions_table
+    kind: function.lua
+    meta:
+      description: Create the mcp_sessions table used by app.mcp session_store
+      target_db: app:db
+      timestamp: "2026-11-16T20:01:00Z"
+      type: migration
+    source: file://02_create_mcp_sessions_table.lua
+    imports:
+      migration: wippy.migration:migration
+    method: migrate

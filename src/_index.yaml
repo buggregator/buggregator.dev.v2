@@ -8,13 +8,30 @@ entries:
       title: App Template
       description: Reusable application template with MCP scaffold and Temporal workflows
 
+  # ── Database ────────────────────────────────────────────────
+  # SQLite file on the app-data volume (/app/data in the image), so stored
+  # state survives restarts and deploys. Tables: src/migrations.
+  - name: db
+    kind: db.sql.sqlite
+    file: "./data/app.db"
+    lifecycle:
+      auto_start: true
+
   # ── Stores ──────────────────────────────────────────────────
+  # Key/value state (GitHub caches, the «Growing every day» stats history).
+  # Kept in app:db, not in memory: a restart used to empty the history.
   - name: state_store
-    kind: store.memory
-    max_size: 1000
+    kind: store.sql
+    database: app:db
+    table_name: state_store
+    id_column_name: key
+    payload_column_name: value
+    expire_column_name: expires_at
     cleanup_interval: "10m"
     lifecycle:
       auto_start: true
+      depends_on:
+        - app:db
 
   # ── Temporal (disabled — no workflows yet) ──────────────────
   # - name: temporal_client
