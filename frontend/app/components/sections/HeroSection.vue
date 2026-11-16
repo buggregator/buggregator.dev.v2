@@ -145,7 +145,7 @@ const formattedDownloads = computed(() => {
 
         <!-- Trust row -->
         <div class="hero__trust hero-stagger" style="--i: 4">
-          <a href="#showcase" class="hero__trust-link" @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'see_it_live' })">
+          <a href="#real-ui" class="hero__trust-link" @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'see_it_live' })">
             {{ t('hero.seeItLive') }}
           </a>
           <span class="hero__trust-dot" />
