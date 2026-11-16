@@ -48,7 +48,7 @@ smtplib.SMTP("127.0.0.1", 1025)  # emails land in Buggregator`,
     label: 'Go',
     file: 'main.go',
     code: `sentry.Init(sentry.ClientOptions{
-    Dsn: "http://sentry@127.0.0.1:8000/1", EnableTracing: true, TracesSampleRate: 1.0, EnableLogs: true,
+    Dsn: "http://sentry@127.0.0.1:8000/1", EnableTracing: true, TracesSampleRate: 1.0,
 })
 defer sentry.Flush(2 * time.Second)`,
     docs: SENTRY_DOCS,
