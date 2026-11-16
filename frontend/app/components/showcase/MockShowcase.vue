@@ -149,7 +149,7 @@ const activeDescription = computed(() =>
 
       <!-- Sentry SDK compatibility note -->
       <p class="text-center mt-6 font-mono text-sm text-on-dark-muted">
-        Sentry SDK compatible — PHP, JavaScript, Python, Ruby
+        Sentry SDK compatible — PHP, JavaScript, Python, Go
       </p>
     </div>
   </section>

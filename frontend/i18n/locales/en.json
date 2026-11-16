@@ -14,7 +14,7 @@
     },
     "headline": "Debug everything in your PHP app.",
     "headlineSub": "Install nothing.",
-    "subheadline": "Exceptions. Dumps. Emails. Profiling. Logs. All in one UI, launched with one command. Works with the SDKs you already have. No cloud account.",
+    "subheadline": "Exceptions, dumps, emails, profiling and logs in one UI, launched with one command. Built for PHP; Node.js, browser JavaScript, Python and Go send errors through their Sentry SDK, and mail and HTTP work from any language.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
@@ -37,6 +37,45 @@
       "binary": "Binary",
       "binaryNote": "One file, about {size}. One command installs it.",
       "otherPlatforms": "Other ways to install →"
+    }
+  },
+  "languages": {
+    "title": "Not PHP? It works with your stack too.",
+    "subtitle": "Same server, same UI. Point your SDK or SMTP settings at it.",
+    "tabsLabel": "Languages",
+    "copy": "Copy code",
+    "setupLink": "Setup for your language",
+    "docker": "In Docker, use the Buggregator service name instead of {host}, e.g. {example}.",
+    "tabs": {
+      "node": "Errors, traces and logs from {'@'}sentry/node; emails from nodemailer or any SMTP client; webhooks you send, captured as HTTP dumps.",
+      "browser": "Errors, page-load traces and logs from {'@'}sentry/browser. No CORS setup: Buggregator accepts requests from any origin.",
+      "python": "Errors, traces and logs from sentry-python (Django included: the SDK turns its Django integration on by itself); emails from any SMTP client.",
+      "go": "Errors, traces and logs from sentry-go; emails from any SMTP client; outgoing HTTP calls through the debug proxy.",
+      "java": "Emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/. The Sentry Java SDK is not verified yet: set the DSN and try."
+    }
+  },
+  "realUi": {
+    "title": "This is what you get",
+    "subtitle": "The real interface, not a drawing: Buggregator v2.10.0 with demo data.",
+    "videoLabel": "A 30-second clip: events arrive in Buggregator, then an exception, an email, dumps and a profile are opened",
+    "videoCaption": "Start it, send events, click in. 30 seconds, no sound.",
+    "shots": {
+      "sentry": {
+        "caption": "Sentry: the exception with its stack trace, request and breadcrumbs",
+        "alt": "Buggregator showing a Sentry exception «Undefined array key discount_code» with its stack trace"
+      },
+      "smtp": {
+        "caption": "SMTP: the email as it will look, plus text, source and headers",
+        "alt": "Buggregator showing an order confirmation email in the HTML preview"
+      },
+      "dumps": {
+        "caption": "VarDumper: dump() output with types, objects and SQL",
+        "alt": "Buggregator showing a list of VarDumper dumps: a boolean, a number, a string and an SQL query"
+      },
+      "profiler": {
+        "caption": "Profiler: the call graph with the hottest path",
+        "alt": "Buggregator showing a profiler call graph of a request, slow functions in red"
+      }
     }
   },
   "cleanApp": {
@@ -218,7 +257,7 @@
   "frameworks": {
     "title": "Works with your framework",
     "subtitle": "No vendor lock-in. Your existing SDK just works.",
-    "also": "Also: JavaScript, Python, Ruby, Go — via Sentry SDK",
+    "also": "Also: Node.js, browser JavaScript, Python and Go — via their Sentry SDK",
     "alsoRuntime": "Works with: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "See integration guides →"
   },
