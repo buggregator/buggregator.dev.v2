@@ -73,12 +73,13 @@ local function collect_snapshot()
         end
     end
 
-    -- A source that failed this time reports 0: keep its last known value
-    -- rather than draw a drop to zero.
+    -- Download totals only grow. A source that failed this time reports less
+    -- (GitHub releases count as 0, while the Docker baseline stays), so keep
+    -- the larger of this value and the last point's.
     local last = history[#history]
     if last then
-        if server_downloads == 0 then server_downloads = tonumber(last.server_downloads) or 0 end
-        if trap_downloads == 0 then trap_downloads = tonumber(last.trap_downloads) or 0 end
+        server_downloads = math.max(server_downloads, tonumber(last.server_downloads) or 0)
+        trap_downloads = math.max(trap_downloads, tonumber(last.trap_downloads) or 0)
     end
 
     -- Deduplicate: replace if today already exists
