@@ -6,7 +6,9 @@ local log = logger:named("github.stats")
 
 local STORE_ID = "app:state_store"
 local HISTORY_KEY = "github:stats:history"
-local POLL_INTERVAL = "24h"
+-- Hourly: the day's point is replaced by the latest snapshot of that day, so
+-- a snapshot taken before the downloads were fetched is corrected within an hour.
+local POLL_INTERVAL = "1h"
 local MAX_ENTRIES = 365
 
 local REPO_SLUGS = { "server", "frontend", "trap", "plugin" }
@@ -38,7 +40,14 @@ local function collect_snapshot()
     local server_downloads = 0
     local trap_downloads = 0
     local raw_downloads = cache:get("github:downloads")
-    if raw_downloads then
+    if not raw_downloads then
+        -- The downloads collector has not fetched yet (first start): a point
+        -- now would record zero downloads and replace a good one of today.
+        cache:release()
+        log:warn("downloads not fetched yet, skipping snapshot")
+        return
+    end
+    do
         local dl = json.decode(tostring(raw_downloads))
         -- Server = Docker pulls + GitHub Releases
         server_downloads = (dl.docker_pulls or 0) + (dl.github_releases and dl.github_releases.total or 0)
@@ -62,6 +71,15 @@ local function collect_snapshot()
         if decoded and decoded.entries then
             history = decoded.entries
         end
+    end
+
+    -- Download totals only grow. A source that failed this time reports less
+    -- (GitHub releases count as 0, while the Docker baseline stays), so keep
+    -- the larger of this value and the last point's.
+    local last = history[#history]
+    if last then
+        server_downloads = math.max(server_downloads, tonumber(last.server_downloads) or 0)
+        trap_downloads = math.max(trap_downloads, tonumber(last.trap_downloads) or 0)
     end
 
     -- Deduplicate: replace if today already exists
@@ -110,8 +128,9 @@ local function main()
 
     log:info("stats collector started")
 
-    -- Wait for repo monitors to complete initial fetch
-    local init_timer = time.timer("60s")
+    -- Wait for the repo monitors and the downloads collector (which itself
+    -- waits 60 s) to complete their first fetch
+    local init_timer = time.timer("90s")
     init_timer:response():receive()
 
     -- Initial snapshot
