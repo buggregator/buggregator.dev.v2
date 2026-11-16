@@ -118,7 +118,6 @@ entries:
       stable_threshold: 5s
       depends_on:
         - wippy.bootloader:bootloader.service
-        - app.mcp:mcp_session_store
       restart:
         initial_delay: 2s
         max_delay: 60s
