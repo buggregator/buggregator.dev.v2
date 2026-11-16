@@ -14,7 +14,7 @@
     },
     "headline": "Depura todo en tu app PHP.",
     "headlineSub": "Sin instalar nada.",
-    "subheadline": "Excepciones, dumps, emails, perfilado y logs en una sola interfaz, con un solo comando. Hecho para PHP; Node.js, JavaScript en el navegador, Python y Go envían errores con su Sentry SDK, y el correo y HTTP funcionan desde cualquier lenguaje.",
+    "subheadline": "Excepciones, dumps, emails, perfilado y logs en una sola interfaz, con un solo comando. Hecho para PHP; Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK, y el correo y HTTP funcionan desde cualquier lenguaje.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copiar comando",
@@ -257,7 +257,7 @@
   "frameworks": {
     "title": "Funciona con tu framework",
     "subtitle": "Sin vendor lock-in. Tu SDK existente simplemente funciona.",
-    "also": "También: Node.js, JavaScript en el navegador, Python y Go — vía su Sentry SDK",
+    "also": "También: Node.js, JavaScript en el navegador, Python, Go y Java — vía su Sentry SDK",
     "alsoRuntime": "Funciona con: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "Ver guías de integración →"
   },
