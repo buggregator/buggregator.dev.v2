@@ -14,7 +14,7 @@
     },
     "headline": "Debug everything in your PHP app.",
     "headlineSub": "Install nothing.",
-    "subheadline": "Exceptions, dumps, emails, profiling and logs in one UI, launched with one command. Built for PHP; Node.js, browser JavaScript, Python and Go send errors through their Sentry SDK, and mail and HTTP work from any language.",
+    "subheadline": "Exceptions, dumps, emails, profiling and logs in one UI, launched with one command. Built for PHP; Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK, and mail and HTTP work from any language.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
@@ -48,10 +48,10 @@
     "docker": "In Docker, use the Buggregator service name instead of {host}, e.g. {example}.",
     "tabs": {
       "node": "Errors, traces and logs from {'@'}sentry/node; emails from nodemailer or any SMTP client; webhooks you send, captured as HTTP dumps.",
-      "browser": "Errors, page-load traces and logs from {'@'}sentry/browser. No CORS setup: Buggregator accepts requests from any origin.",
+      "browser": "Errors, page-load traces and logs from {'@'}sentry/browser. No CORS setup: by default Buggregator accepts requests from any origin (CORS_ORIGINS limits it).",
       "python": "Errors, traces and logs from sentry-python (Django included: the SDK turns its Django integration on by itself); emails from any SMTP client.",
       "go": "Errors, traces and logs from sentry-go; emails from any SMTP client; outgoing HTTP calls through the debug proxy.",
-      "java": "Emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/. The Sentry Java SDK is not verified yet: set the DSN and try."
+      "java": "Errors, traces and logs from the Sentry Java SDK (io.sentry 8.64 checked); emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/."
     }
   },
   "realUi": {
@@ -257,7 +257,7 @@
   "frameworks": {
     "title": "Works with your framework",
     "subtitle": "No vendor lock-in. Your existing SDK just works.",
-    "also": "Also: Node.js, browser JavaScript, Python and Go — via their Sentry SDK",
+    "also": "Also: Node.js, browser JavaScript, Python, Go and Java — via their Sentry SDK",
     "alsoRuntime": "Works with: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "See integration guides →"
   },

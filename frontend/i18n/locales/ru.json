@@ -14,7 +14,7 @@
     },
     "headline": "Дебаж всё в PHP.",
     "headlineSub": "Не устанавливая лишнего.",
-    "subheadline": "Исключения, дампы, письма, профилирование и логи — в одном интерфейсе, запуск одной командой. Buggregator сделан для PHP, но Node.js, JavaScript в браузере, Python и Go шлют в него ошибки через свой Sentry SDK, а почта и HTTP работают из любого языка.",
+    "subheadline": "Исключения, дампы, письма, профилирование и логи — в одном интерфейсе, запуск одной командой. Buggregator сделан для PHP, но Node.js, JavaScript в браузере, Python, Go и Java шлют в него ошибки через свой Sentry SDK, а почта и HTTP работают из любого языка.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Скопировать",
@@ -48,10 +48,10 @@
     "docker": "В Docker вместо {host} укажите имя сервиса Buggregator, например {example}.",
     "tabs": {
       "node": "Ошибки, трейсы и логи из {'@'}sentry/node; письма из nodemailer или любого SMTP-клиента; вебхуки, которые вы отправляете, видны как HTTP-дампы.",
-      "browser": "Ошибки, трейсы загрузки страницы и логи из {'@'}sentry/browser. CORS настраивать не нужно: Buggregator принимает запросы с любого origin.",
+      "browser": "Ошибки, трейсы загрузки страницы и логи из {'@'}sentry/browser. CORS настраивать не нужно: по умолчанию Buggregator принимает запросы с любого origin (ограничить можно через CORS_ORIGINS).",
       "python": "Ошибки, трейсы и логи из sentry-python (и Django: SDK сам включает интеграцию с Django); письма из любого SMTP-клиента.",
       "go": "Ошибки, трейсы и логи из sentry-go; письма из любого SMTP-клиента; исходящие HTTP-запросы через отладочный прокси.",
-      "java": "Письма из Spring Mail или любого SMTP-клиента; HTTP-запросы и вебхуки как дампы; мок-API под /mock/. Sentry SDK для Java ещё не проверен: укажите DSN и попробуйте."
+      "java": "Ошибки, трейсы и логи из Sentry SDK для Java (проверен io.sentry 8.64); письма из Spring Mail или любого SMTP-клиента; HTTP-запросы и вебхуки как дампы; мок-API под /mock/."
     }
   },
   "realUi": {
@@ -257,7 +257,7 @@
   "frameworks": {
     "title": "Работает с вашим фреймворком",
     "subtitle": "Без привязки к вендору. Ваш существующий SDK просто работает.",
-    "also": "Также: Node.js, JavaScript в браузере, Python и Go — через их Sentry SDK",
+    "also": "Также: Node.js, JavaScript в браузере, Python, Go и Java — через их Sentry SDK",
     "alsoRuntime": "Работает с: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "Руководства по интеграции →"
   },

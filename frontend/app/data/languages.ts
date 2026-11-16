@@ -59,7 +59,9 @@ defer sentry.Flush(2 * time.Second)`,
     file: 'application.properties',
     code: `spring.mail.host=127.0.0.1
 spring.mail.port=1025
-sentry.dsn=http://sentry@127.0.0.1:8000/1`,
-    docs: 'https://docs.buggregator.dev/config/smtp.html',
+sentry.dsn=http://sentry@127.0.0.1:8000/1
+sentry.traces-sample-rate=1.0
+sentry.logs.enabled=true`,
+    docs: SENTRY_DOCS,
   },
 ]
