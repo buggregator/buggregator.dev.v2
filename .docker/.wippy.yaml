@@ -6,3 +6,10 @@ logger:
 
 shutdown:
   timeout: 30s
+
+# Wippy denies every check when a process has no actor and scope (strict
+# mode, on by default in current runtimes). This app's services and public
+# HTTP handlers declare no security context, so keep the permissive mode
+# they were written for.
+security:
+  strict_mode: false

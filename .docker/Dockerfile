@@ -25,8 +25,13 @@ COPY .docker/.wippy.yaml ./
 # Copy application source
 COPY src/ ./src/
 
-# Initialize and install dependencies
-RUN wippy install
+# Initialize and install dependencies.
+# Drop the empty npm artifact dir that install leaves behind: on start the
+# runtime renames it to a backup, and a rename of a directory from an image
+# layer fails on overlayfs (EXDEV, "invalid cross-device link"). Without it
+# the runtime creates the dir in the container layer.
+RUN wippy install \
+    && rm -rf /app/.wippy/npm
 
 EXPOSE 8080
 
