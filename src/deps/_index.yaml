@@ -11,6 +11,17 @@ entries:
         value: app.env:store
       - name: application_host
         value: app:processes
+      - name: app_db
+        value: app:db
+
+  # Runs the migrations in src/migrations (meta.type: migration) on app:db.
+  - name: migration
+    kind: ns.dependency
+    component: wippy/migration
+    version: '>=v0.0.7'
+    parameters:
+      - name: app_db
+        value: app:db
 
   - name: security
     kind: ns.dependency

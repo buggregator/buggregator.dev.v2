@@ -23,6 +23,10 @@ ENV PATH="/root/.wippy/bin:${PATH}"
 
 WORKDIR /app
 
+# app:db is ./data/app.db. Compose mounts the app-data volume here; without
+# a mount the directory must still exist, or the runtime fails to start.
+RUN mkdir -p /app/data
+
 ARG CACHE_DATE=2
 
 # Copy runtime config

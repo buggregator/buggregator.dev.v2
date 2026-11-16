@@ -25,8 +25,8 @@ Load skill `wippy`
 
 | Resource              | Kind              | Purpose                         |
 |-----------------------|-------------------|---------------------------------|
-| `app:db`              | `db.sql.postgres` | PostgreSQL (10 conn pool)       |
-| `app:state_store`     | `store.memory`    | Runtime state (1000 items, 10m) |
+| `app:db`              | `db.sql.sqlite`   | SQLite `./data/app.db` (app-data volume); tables in `src/migrations` |
+| `app:state_store`     | `store.sql`       | Key/value state in `app:db` (`state_store` table), survives restarts |
 | `app:temporal_client` | `temporal.client`  | Temporal server connection      |
 | `app:temporal_worker` | `temporal.worker`  | Task queue `app-tasks`          |
 | `app:processes`       | `process.host`    | 4-worker process executor       |
