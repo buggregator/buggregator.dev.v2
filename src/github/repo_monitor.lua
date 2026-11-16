@@ -56,8 +56,12 @@ local function fetch_latest_release(log, repo)
         log:warn("failed to fetch latest release", { error = tostring(err), repo = repo })
         return nil
     end
+    if resp.status_code == 404 then
+        log:warn("no releases found", { repo = repo })
+        return false
+    end
     if resp.status_code ~= 200 then
-        log:warn("no releases found", { status = resp.status_code, repo = repo })
+        log:warn("latest release api error", { status = resp.status_code, repo = repo })
         return nil
     end
 
@@ -83,11 +87,11 @@ local function fetch_all_releases(log, repo)
     })
     if err then
         log:warn("failed to fetch releases", { error = tostring(err), repo = repo })
-        return 0, {}
+        return nil
     end
     if resp.status_code ~= 200 then
         log:warn("releases api error", { status = resp.status_code, repo = repo })
-        return 0, {}
+        return nil
     end
 
     local data = json.decode(resp.body)
@@ -127,11 +131,11 @@ local function fetch_contributors(log, repo)
     })
     if err then
         log:warn("failed to fetch contributors", { error = tostring(err), repo = repo })
-        return {}
+        return nil
     end
     if resp.status_code ~= 200 then
         log:warn("contributors api error", { status = resp.status_code, repo = repo })
-        return {}
+        return nil
     end
 
     local data = json.decode(resp.body)
@@ -189,29 +193,72 @@ local function fetch_and_cache(log, slug, repo)
     local contributors = fetch_contributors(log, repo)
     local total_downloads, releases = fetch_all_releases(log, repo)
 
+    -- A failed request (rate limit, 403, timeout) returns nil: keep what is
+    -- cached for that part instead of writing zeros, which the repo cards and
+    -- the stats history would show as a drop.
+    local cached = get_cached(slug) or {}
+    local failed = {}
+
     local result = {
         slug = slug,
         repo = repo,
-        stars = repo_info and repo_info.stars or 0,
-        forks = repo_info and repo_info.forks or 0,
-        open_issues = repo_info and repo_info.open_issues or 0,
-        description = repo_info and repo_info.description or "",
-        latest_version = release and release.version or nil,
-        latest_version_url = release and release.url or nil,
-        published_at = release and release.published_at or nil,
-        contributors = contributors,
-        total_downloads = total_downloads,
-        releases = releases,
     }
 
+    if repo_info then
+        result.stars = repo_info.stars
+        result.forks = repo_info.forks
+        result.open_issues = repo_info.open_issues
+        result.description = repo_info.description
+    else
+        table.insert(failed, "repo")
+        result.stars = cached.stars or 0
+        result.forks = cached.forks or 0
+        result.open_issues = cached.open_issues or 0
+        result.description = cached.description or ""
+    end
+
+    if release == nil then
+        table.insert(failed, "latest_release")
+        result.latest_version = cached.latest_version
+        result.latest_version_url = cached.latest_version_url
+        result.published_at = cached.published_at
+    elseif release then
+        result.latest_version = release.version
+        result.latest_version_url = release.url
+        result.published_at = release.published_at
+    end
+
+    if contributors then
+        result.contributors = contributors
+    else
+        table.insert(failed, "contributors")
+        result.contributors = cached.contributors or {}
+    end
+
+    if total_downloads then
+        result.total_downloads = total_downloads
+        result.releases = releases
+    else
+        table.insert(failed, "releases")
+        result.total_downloads = cached.total_downloads or 0
+        result.releases = cached.releases or {}
+    end
+
     save_cached(log, slug, result)
+
+    if #failed > 0 then
+        log:warn("github fetch failed, kept cached values", {
+            repo = repo,
+            parts = table.concat(failed, ","),
+        })
+    end
 
     log:info("cached github data", {
         repo = repo,
         stars = result.stars,
         version = result.latest_version or "none",
-        contributors = #contributors,
-        downloads = total_downloads,
+        contributors = #result.contributors,
+        downloads = result.total_downloads,
     })
 end
 
