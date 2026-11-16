@@ -48,7 +48,7 @@ smtplib.SMTP("127.0.0.1", 1025)  # emails land in Buggregator`,
     label: 'Go',
     file: 'main.go',
     code: `sentry.Init(sentry.ClientOptions{
-    Dsn: "http://sentry@127.0.0.1:8000/1", EnableTracing: true, TracesSampleRate: 1.0,
+    Dsn: "http://sentry@127.0.0.1:8000/1", EnableTracing: true, TracesSampleRate: 1.0, EnableLogs: true,
 })
 defer sentry.Flush(2 * time.Second)`,
     docs: SENTRY_DOCS,
@@ -59,7 +59,9 @@ defer sentry.Flush(2 * time.Second)`,
     file: 'application.properties',
     code: `spring.mail.host=127.0.0.1
 spring.mail.port=1025
-sentry.dsn=http://sentry@127.0.0.1:8000/1`,
-    docs: 'https://docs.buggregator.dev/config/smtp.html',
+sentry.dsn=http://sentry@127.0.0.1:8000/1
+sentry.traces-sample-rate=1.0
+sentry.logs.enabled=true`,
+    docs: SENTRY_DOCS,
   },
 ]

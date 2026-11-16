@@ -20,9 +20,12 @@ export function useRovingTabs<T extends string>(ids: readonly T[], active: Ref<T
     return id === active.value ? 0 : -1
   }
 
+  /** Make `id` active, focus its tab and scroll it into view (a narrow row scrolls). */
   function select(id: T) {
     active.value = id
-    buttons.get(id)?.focus()
+    const el = buttons.get(id)
+    el?.focus()
+    el?.scrollIntoView?.({ inline: 'nearest', block: 'nearest' })
   }
 
   function onKeydown(e: KeyboardEvent) {
@@ -38,5 +41,5 @@ export function useRovingTabs<T extends string>(ids: readonly T[], active: Ref<T
     select(ids[next]!)
   }
 
-  return { setTabRef, tabindex, onKeydown }
+  return { setTabRef, tabindex, onKeydown, select }
 }

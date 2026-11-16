@@ -48,10 +48,10 @@
     "docker": "In Docker, use the Buggregator service name instead of {host}, e.g. {example}.",
     "tabs": {
       "node": "Errors, traces and logs from {'@'}sentry/node; emails from nodemailer or any SMTP client; webhooks you send, captured as HTTP dumps.",
-      "browser": "Errors, page-load traces and logs from {'@'}sentry/browser. No CORS setup: Buggregator accepts requests from any origin.",
+      "browser": "Errors, page-load traces and logs from {'@'}sentry/browser. No CORS setup: by default Buggregator accepts requests from any origin (CORS_ORIGINS limits it).",
       "python": "Errors, traces and logs from sentry-python (Django included: the SDK turns its Django integration on by itself); emails from any SMTP client.",
       "go": "Errors, traces and logs from sentry-go; emails from any SMTP client; outgoing HTTP calls through the debug proxy.",
-      "java": "Emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/. The Sentry Java SDK is not verified yet: set the DSN and try."
+      "java": "Errors, traces and logs from the Sentry Java SDK (io.sentry 8.64 checked); emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/."
     }
   },
   "realUi": {

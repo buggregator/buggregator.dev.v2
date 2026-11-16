@@ -12,7 +12,12 @@ const ids = LANGUAGE_TABS.map(tab => tab.id)
 const active = ref<TabId>('node')
 const current = computed(() => LANGUAGE_TABS.find(tab => tab.id === active.value) ?? LANGUAGE_TABS[0]!)
 
-const { setTabRef, tabindex, onKeydown } = useRovingTabs(ids, active)
+const { setTabRef, tabindex, onKeydown, select } = useRovingTabs(ids, active)
+
+// On a phone the tab row is wider than the screen: fade the side that has
+// more tabs, so it is clear the row scrolls.
+const tabBar = ref<HTMLElement | null>(null)
+const { canScrollLeft, canScrollRight } = useScrollEdges(tabBar)
 const { copied, copy } = useClipboardCopy()
 
 async function copyCode() {
@@ -31,34 +36,47 @@ async function copyCode() {
       </div>
 
       <div class="rounded-xl border border-code-border overflow-hidden">
-        <div
-          class="flex gap-1 bg-code-bg px-2 pt-2 border-b border-code-border overflow-x-auto"
-          role="tablist"
-          :aria-label="t('languages.tabsLabel')"
-          @keydown="onKeydown"
-        >
-          <button
-            v-for="tab in LANGUAGE_TABS"
-            :id="`lang-tab-${tab.id}`"
-            :key="tab.id"
-            :ref="el => setTabRef(tab.id, el)"
-            type="button"
-            role="tab"
-            :aria-selected="active === tab.id"
-            :aria-controls="`lang-panel-${tab.id}`"
-            :tabindex="tabindex(tab.id)"
-            class="min-h-[44px] px-4 py-1.5 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
-            :class="active === tab.id
-              ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
-              : 'text-[#8b949e] border-transparent hover:text-code-text'"
-            @click="active = tab.id"
+        <div class="relative">
+          <div
+            ref="tabBar"
+            class="flex gap-1 bg-code-bg px-2 pt-2 border-b border-code-border overflow-x-auto scroll-px-2"
+            role="tablist"
+            :aria-label="t('languages.tabsLabel')"
+            @keydown="onKeydown"
           >
-            {{ tab.label }}
-          </button>
+            <button
+              v-for="tab in LANGUAGE_TABS"
+              :id="`lang-tab-${tab.id}`"
+              :key="tab.id"
+              :ref="el => setTabRef(tab.id, el)"
+              type="button"
+              role="tab"
+              :aria-selected="active === tab.id"
+              aria-controls="lang-panel"
+              :tabindex="tabindex(tab.id)"
+              class="min-h-[44px] px-4 py-1.5 font-mono text-sm transition-colors duration-150 border-b-2 rounded-t-md whitespace-nowrap"
+              :class="active === tab.id
+                ? 'text-code-text bg-[rgba(255,255,255,0.04)] border-accent'
+                : 'text-[#8b949e] border-transparent hover:text-code-text'"
+              @click="select(tab.id)"
+            >
+              {{ tab.label }}
+            </button>
+          </div>
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute top-0 bottom-px left-0 w-6 bg-gradient-to-r from-code-bg to-transparent transition-opacity duration-150"
+            :class="canScrollLeft ? 'opacity-100' : 'opacity-0'"
+          />
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute top-0 bottom-px right-0 w-6 bg-gradient-to-l from-code-bg to-transparent transition-opacity duration-150"
+            :class="canScrollRight ? 'opacity-100' : 'opacity-0'"
+          />
         </div>
 
         <div
-          :id="`lang-panel-${current.id}`"
+          id="lang-panel"
           role="tabpanel"
           :aria-labelledby="`lang-tab-${current.id}`"
           class="bg-code-bg"
