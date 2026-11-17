@@ -268,7 +268,7 @@
     "features": {
       "sso": { "title": "SSO-аутентификация", "desc": "Вход через Auth0, Google, GitHub, Keycloak, GitLab или любой OIDC-провайдер" },
       "db": { "title": "Постоянное хранение", "desc": "События сохраняются между перезапусками в файле SQLite — отдельный сервер БД не нужен" },
-      "k8s": { "title": "Готов для Kubernetes", "desc": "Деплой как Deployment + Service в вашем кластере" },
+      "k8s": { "title": "Готов для Kubernetes", "desc": "Один helm install. События хранятся на постоянном томе, под работает не от root." },
       "webhooks": { "title": "Вебхуки", "desc": "Вызов внешних действий при поступлении событий" },
       "prometheus": { "title": "Метрики Prometheus", "desc": "Мониторинг количества событий через Grafana" },
       "multiproject": { "title": "Мультипроект", "desc": "Разделение событий по проектам или командам" }
