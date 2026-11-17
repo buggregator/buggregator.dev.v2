@@ -268,7 +268,7 @@
     "features": {
       "sso": { "title": "Autenticación SSO", "desc": "Inicio de sesión con Auth0, Google, GitHub, Keycloak, GitLab o cualquier proveedor OIDC" },
       "db": { "title": "Almacenamiento persistente", "desc": "Conserva los eventos entre reinicios en un archivo SQLite, sin servidor de base de datos" },
-      "k8s": { "title": "Listo para Kubernetes", "desc": "Despliega como Deployment + Service en tu clúster" },
+      "k8s": { "title": "Listo para Kubernetes", "desc": "Un solo helm install. Los eventos se guardan en un volumen persistente y el pod no se ejecuta como root." },
       "webhooks": { "title": "Webhooks", "desc": "Ejecuta acciones externas en eventos entrantes" },
       "prometheus": { "title": "Métricas Prometheus", "desc": "Monitorea conteos de eventos con Grafana" },
       "multiproject": { "title": "Multi-proyecto", "desc": "Separa eventos por proyecto o equipo" }
