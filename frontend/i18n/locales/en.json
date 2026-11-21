@@ -51,7 +51,8 @@
       "browser": "Errors, page-load traces and logs from {'@'}sentry/browser. No CORS setup: by default Buggregator accepts requests from any origin (CORS_ORIGINS limits it).",
       "python": "Errors, traces and logs from sentry-python (Django included: the SDK turns its Django integration on by itself); emails from any SMTP client.",
       "go": "Errors, traces and logs from sentry-go; emails from any SMTP client; outgoing HTTP calls through the debug proxy.",
-      "java": "Errors, traces and logs from the Sentry Java SDK (io.sentry 8.64 checked); emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/."
+      "java": "Errors, traces and logs from the Sentry Java SDK (io.sentry 8.64 checked); emails from Spring Mail or any SMTP client; HTTP requests and webhooks as dumps; mock APIs under /mock/.",
+      "otel": "Traces and logs from any OpenTelemetry SDK, or from the OTel Collector with the otlphttp exporter. Sent over OTLP/HTTP to port 8000, shown in Sentry Traces and Logs with an OTel label. Not accepted: gRPC (port 4317) and metrics."
     }
   },
   "realUi": {
@@ -257,7 +258,7 @@
   "frameworks": {
     "title": "Works with your framework",
     "subtitle": "No vendor lock-in. Your existing SDK just works.",
-    "also": "Also: Node.js, browser JavaScript, Python, Go and Java — via their Sentry SDK",
+    "also": "Also: Node.js, browser JavaScript, Python, Go and Java — via their Sentry SDK. Any language with OpenTelemetry — via OTLP.",
     "alsoRuntime": "Works with: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "See integration guides →"
   },
@@ -388,28 +389,25 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "New in v2.6",
-    "title": "Mock APIs and AI-assisted debugging",
+    "eyebrow": "New in v2.12",
+    "title": "OpenTelemetry and trace graphs",
     "cards": {
-      "mock": {
-        "title": "Fake the API you're waiting for",
-        "desc": "The API isn't ready, or its sandbox is slow? Write a rule — method, path, status, body, delay — and Buggregator answers /mock/... with it. Every call is recorded, with what was sent back or why no rule matched. Rules can live in buggregator.yaml, so CI gets the same answers.",
-        "cta": "Set up a mock"
+      "otel": {
+        "title": "Send OpenTelemetry straight to Buggregator",
+        "desc": "Your app already uses OpenTelemetry? Point the OTel SDK or the Collector at port 8000. Traces and logs show up on the Sentry Traces and Logs pages, next to your Sentry events, each labelled OTel or Sentry SDK. Same port, nothing to turn on. No Jaeger, no Grafana, no cloud account.",
+        "cta": "Set up OpenTelemetry"
       },
-      "ai": {
-        "title": "Let your AI assistant see the runtime",
-        "desc": "Your AI assistant can read your code but not what happened when it ran. Buggregator's MCP server lets Claude Code, Cursor and other MCP clients read your errors, dumps and profiles. With the new Xdebug proxy, they can also read a paused session — stack and variables — while your IDE stays in control. Off by default. The Xdebug tools read the paused session; stepping stays in your IDE.",
-        "cta": "Connect your AI assistant",
-        "links": {
-          "xdebug": "Xdebug proxy"
-        }
+      "graphs": {
+        "title": "See a trace four ways",
+        "desc": "Next to the waterfall, every trace now has a flame graph, a call graph and a sequence diagram. The traces list has a service map: which service calls which, with traffic over the period you pick. Click a service to see what it uses and what uses it.",
+        "cta": "See the Sentry page"
       }
     },
     "also": {
       "lead": "Also new:",
-      "pwa": "install the UI as an app with a badge for new events",
+      "filters": "filter traces by service and by source (Sentry or OpenTelemetry)",
       "and": ", and",
-      "sentry": "filter Sentry errors, traces, logs and metrics by project and time period"
+      "notes": "the full v2.12.0 release notes"
     }
   },
   "harnsy": {

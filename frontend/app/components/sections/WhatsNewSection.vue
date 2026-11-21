@@ -5,22 +5,22 @@ const docs = 'https://docs.buggregator.dev'
 
 const cards = [
   {
-    key: 'mock',
-    href: `${docs}/config/mock-server.html`,
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-3 3 3 3m8-6l3 3-3 3M13 7l-2 10" /></svg>`,
-    links: [],
+    key: 'otel',
+    href: `${docs}/config/opentelemetry.html`,
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+    links: [] as { key: string, href: string }[],
   },
   {
-    key: 'ai',
-    href: `${docs}/config/mcp.html`,
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
-    links: [{ key: 'xdebug', href: `${docs}/config/xdebug.html` }],
+    key: 'graphs',
+    href: '/features/sentry',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>`,
+    links: [] as { key: string, href: string }[],
   },
 ]
 
 const alsoLinks = [
-  { key: 'pwa', href: `${docs}/config/pwa.html` },
-  { key: 'sentry', href: `${docs}/config/sentry.html#projects` },
+  { key: 'filters', href: `${docs}/config/opentelemetry.html#where-you-see-it` },
+  { key: 'notes', href: 'https://github.com/buggregator/server/releases/tag/v2.12.0' },
 ]
 </script>
 
@@ -56,8 +56,8 @@ const alsoLinks = [
           <div class="flex flex-wrap gap-x-5 gap-y-2">
             <a
               :href="card.href"
-              target="_blank"
-              rel="noopener"
+              :target="card.href.startsWith('http') ? '_blank' : undefined"
+              :rel="card.href.startsWith('http') ? 'noopener' : undefined"
               class="text-sm font-medium text-accent hover:underline font-sans"
             >
               {{ t(`whatsNew.cards.${card.key}.cta`) }} →
@@ -78,8 +78,8 @@ const alsoLinks = [
 
       <p class="mt-8 text-center text-sm text-on-dark-secondary font-sans leading-relaxed">
         {{ t('whatsNew.also.lead') }}
-        <a :href="alsoLinks[0].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.pwa') }}</a>{{ t('whatsNew.also.and') }}
-        <a :href="alsoLinks[1].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.sentry') }}</a>.
+        <a :href="alsoLinks[0].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.filters') }}</a>{{ t('whatsNew.also.and') }}
+        <a :href="alsoLinks[1].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.notes') }}</a>.
       </p>
     </div>
   </section>

@@ -14,6 +14,8 @@ const KNOWN_SIZES: Record<string, [number, number]> = {
   '/features/http-proxy.png': [1317, 989],
   '/features/profiler.png': [1317, 931],
   '/features/sentry.png': [1317, 931],
+  '/features/sentry-call-graph.png': [1600, 900],
+  '/features/sentry-service-map.png': [1600, 900],
   '/features/sms.png': [1317, 931],
 }
 

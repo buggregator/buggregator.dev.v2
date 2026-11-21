@@ -3,7 +3,7 @@
 // tab lives in i18n under `languages.tabs.<id>`. Copy: #5768 (copywriter).
 
 export type LanguageTab = {
-  id: 'node' | 'browser' | 'python' | 'go' | 'java'
+  id: 'node' | 'browser' | 'python' | 'go' | 'java' | 'otel'
   label: string
   /** Shown as the code box's caption and read by screen readers. */
   file: string
@@ -12,6 +12,7 @@ export type LanguageTab = {
 }
 
 const SENTRY_DOCS = 'https://docs.buggregator.dev/config/sentry.html'
+const OTEL_DOCS = 'https://docs.buggregator.dev/config/opentelemetry.html'
 
 export const LANGUAGE_TABS: LanguageTab[] = [
   {
@@ -63,5 +64,14 @@ sentry.dsn=http://sentry@127.0.0.1:8000/1
 sentry.traces-sample-rate=1.0
 sentry.logs.enabled=true`,
     docs: SENTRY_DOCS,
+  },
+  {
+    id: 'otel',
+    label: 'OpenTelemetry',
+    file: '.env',
+    code: `OTEL_SERVICE_NAME=checkout
+OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:8000
+OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf`,
+    docs: OTEL_DOCS,
   },
 ]

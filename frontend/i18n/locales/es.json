@@ -51,7 +51,8 @@
       "browser": "Errores, trazas de carga de página y logs de {'@'}sentry/browser. Sin configurar CORS: por defecto Buggregator acepta peticiones de cualquier origen (CORS_ORIGINS lo limita).",
       "python": "Errores, trazas y logs de sentry-python (Django incluido: el SDK activa su integración con Django por sí mismo); emails de cualquier cliente SMTP.",
       "go": "Errores, trazas y logs de sentry-go; emails de cualquier cliente SMTP; llamadas HTTP salientes a través del proxy de depuración.",
-      "java": "Errores, trazas y logs del Sentry SDK de Java (verificado io.sentry 8.64); emails de Spring Mail o de cualquier cliente SMTP; peticiones HTTP y webhooks como dumps; APIs simuladas bajo /mock/."
+      "java": "Errores, trazas y logs del Sentry SDK de Java (verificado io.sentry 8.64); emails de Spring Mail o de cualquier cliente SMTP; peticiones HTTP y webhooks como dumps; APIs simuladas bajo /mock/.",
+      "otel": "Trazas y logs de cualquier SDK de OpenTelemetry, o del OTel Collector con el exportador otlphttp. Se envían por OTLP/HTTP al puerto 8000 y aparecen en Traces y Logs de la página de Sentry con la etiqueta OTel. No se aceptan: gRPC (puerto 4317) ni métricas."
     }
   },
   "realUi": {
@@ -257,7 +258,7 @@
   "frameworks": {
     "title": "Funciona con tu framework",
     "subtitle": "Sin vendor lock-in. Tu SDK existente simplemente funciona.",
-    "also": "También: Node.js, JavaScript en el navegador, Python, Go y Java — vía su Sentry SDK",
+    "also": "También: Node.js, JavaScript en el navegador, Python, Go y Java — vía su Sentry SDK. Cualquier lenguaje con OpenTelemetry — vía OTLP.",
     "alsoRuntime": "Funciona con: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
     "guides": "Ver guías de integración →"
   },
@@ -388,28 +389,25 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "Novedades en v2.6",
-    "title": "APIs simuladas y depuración asistida por IA",
+    "eyebrow": "Novedades en v2.12",
+    "title": "OpenTelemetry y gráficos de trazas",
     "cards": {
-      "mock": {
-        "title": "Simula la API que estás esperando",
-        "desc": "¿La API no está lista o su sandbox es lento? Escribe una regla — método, ruta, estado, cuerpo, retraso — y Buggregator responde con ella en /mock/... Cada llamada queda registrada, con lo que se devolvió o por qué ninguna regla coincidió. Las reglas pueden vivir en buggregator.yaml, así CI recibe las mismas respuestas.",
-        "cta": "Configurar un mock"
+      "otel": {
+        "title": "Envía OpenTelemetry directo a Buggregator",
+        "desc": "¿Tu app ya usa OpenTelemetry? Apunta el SDK de OTel o el Collector al puerto 8000. Las trazas y los logs aparecen en las páginas Traces y Logs de Sentry, junto a tus eventos de Sentry, cada uno con la etiqueta OTel o Sentry SDK. El mismo puerto, nada que activar. Sin Jaeger, sin Grafana, sin cuenta en la nube.",
+        "cta": "Configurar OpenTelemetry"
       },
-      "ai": {
-        "title": "Deja que tu asistente de IA vea la ejecución",
-        "desc": "Tu asistente de IA puede leer tu código, pero no lo que pasó al ejecutarlo. El servidor MCP de Buggregator permite a Claude Code, Cursor y otros clientes MCP leer tus errores, dumps y perfiles. Con el nuevo proxy de Xdebug también pueden leer una sesión en pausa — pila y variables — mientras tu IDE mantiene el control. Desactivado por defecto. Las herramientas de Xdebug leen la sesión en pausa; los pasos se dan en tu IDE.",
-        "cta": "Conecta tu asistente de IA",
-        "links": {
-          "xdebug": "Proxy de Xdebug"
-        }
+      "graphs": {
+        "title": "Una traza, cuatro vistas",
+        "desc": "Además del waterfall, cada traza tiene ahora un flame graph, un grafo de llamadas y un diagrama de secuencia. La lista de trazas tiene un mapa de servicios: qué servicio llama a cuál, con el tráfico del periodo que elijas. Haz clic en un servicio para ver qué usa y quién lo usa.",
+        "cta": "Ver la página de Sentry"
       }
     },
     "also": {
       "lead": "También nuevo:",
-      "pwa": "instala la interfaz como app con un contador de eventos nuevos",
+      "filters": "filtra las trazas por servicio y por origen (Sentry u OpenTelemetry)",
       "and": " y",
-      "sentry": "filtra errores, trazas, logs y métricas de Sentry por proyecto y periodo"
+      "notes": "las notas completas de la versión v2.12.0"
     }
   },
   "harnsy": {
