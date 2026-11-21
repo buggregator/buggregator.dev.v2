@@ -13,18 +13,18 @@ definePageMeta({ layout: 'landing' })
 // English only: no /ru or /es copies of this page (they would be duplicates).
 defineI18nRoute(false)
 
-const seoTitle = 'Local Sentry for Development: Errors, Traces, Logs, Metrics — Buggregator'
+const seoTitle = 'Local Sentry and OpenTelemetry for Development: Errors, Traces, Logs — Buggregator'
 
 useSeoMeta({
   title: seoTitle,
-  description: 'Point your Sentry SDK at Buggregator and see errors, traces, logs and metrics on your own machine. No Sentry account, nothing sent to the cloud. Free and open source.',
+  description: 'Point your Sentry SDK or OpenTelemetry at Buggregator and see Sentry errors, traces, logs and metrics and OpenTelemetry traces and logs on your own machine. Flame graph, call graph, service map. No account, nothing sent to the cloud. Free and open source.',
   ogTitle: seoTitle,
-  ogDescription: 'Errors, traces, logs and metrics from your Sentry SDK, on your own machine. Change one DSN.',
+  ogDescription: 'Errors, traces, logs and metrics from your Sentry SDK, traces and logs from OpenTelemetry, on your own machine. Change one address.',
   ogImage: 'https://buggregator.dev/buggregator.png',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: seoTitle,
-  twitterDescription: 'Errors, traces, logs and metrics from your Sentry SDK, locally.',
+  twitterDescription: 'Errors, traces, logs and metrics from your Sentry SDK, traces and logs from OpenTelemetry, locally.',
 })
 
 const accentColor = '#f43f5e'
@@ -57,7 +57,7 @@ const steps = [
   },
   {
     title: 'Point your SDK at Buggregator',
-    description: 'One line in your config. Put a project name in the DSN to keep each app\u2019s data apart.',
+    description: 'One line in your config. Put a project name in the DSN to keep each app\u2019s data apart. Using OpenTelemetry? Point its exporter at the same port.',
     tabs: [
       {
         id: 'laravel',
@@ -90,6 +90,31 @@ SENTRY_DSN=http://sentry@127.0.0.1:8000/my-app`,
         id: 'any',
         label: 'Any SDK',
         code: `SENTRY_DSN=http://sentry@127.0.0.1:8000/my-app`,
+      },
+      {
+        id: 'otel-sdk',
+        label: 'OTel SDK',
+        code: `OTEL_SERVICE_NAME=checkout
+OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:8000
+OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf`,
+        note: 'Any language. The protocol must be http/protobuf or http/json: some SDKs default to gRPC, which Buggregator does not accept. OTEL_SERVICE_NAME is what the Service column shows.',
+      },
+      {
+        id: 'otel-collector',
+        label: 'OTel Collector',
+        code: `exporters:
+  otlphttp:
+    endpoint: http://buggregator:8000
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [otlphttp]
+    logs:
+      receivers: [otlp]
+      exporters: [otlphttp]`,
+        note: 'Works with any Collector version; newer ones also call this exporter otlp_http. Add it to the pipelines you already have.',
       },
     ],
   },
@@ -140,9 +165,19 @@ const highlights = [
     description: 'Every span of a request on a timeline: database queries, cache, HTTP calls, queues \u2014 each marked by type. The bar shows how long it took; failed spans are tagged.',
   },
   {
+    icon: '\u{1F525}',
+    title: 'Trace graphs',
+    description: 'Next to the waterfall, each trace has a flame graph, a call graph and a sequence diagram. Click a span to see its attributes, events, links and exception.',
+  },
+  {
     icon: '\u{1F5FA}\uFE0F',
     title: 'Service map',
-    description: 'Which service calls which database, cache or API, with request counts and average time. Links turn amber or red when calls fail. Built from the last hour of traces.',
+    description: 'Which service calls which database, cache or API, with traffic over the period you pick. Click a service to see what it uses and what uses it, or a line to see its numbers and the traces through it.',
+  },
+  {
+    icon: '\u{1F52D}',
+    title: 'OpenTelemetry too',
+    description: 'Traces and logs from any OTel SDK or the Collector land in the same tabs, labelled OTel or Sentry SDK. Filter traces by source and by service.',
   },
   {
     icon: '\u{1F4DC}',
@@ -170,6 +205,7 @@ const worksWith = {
   items: [
     { name: 'PHP', detail: '\u2014 sentry/sentry, Laravel, Symfony' },
     { name: 'Any Sentry SDK', detail: '\u2014 set the DSN and try it' },
+    { name: 'OpenTelemetry', detail: '\u2014 any OTel SDK or the Collector, traces and logs over OTLP/HTTP' },
   ],
 }
 </script>
@@ -179,7 +215,7 @@ const worksWith = {
     <FeatureHero
       title="Everything your Sentry SDK sends, on your machine"
       subtitle="Sentry, locally"
-      description="Your app already has the Sentry SDK. Change the DSN, and Buggregator shows its errors, traces, logs and metrics on your computer — each in its own tab, linked by trace. No Sentry account, no data leaving your machine."
+      description="Your app already has the Sentry SDK or OpenTelemetry. Change one address, and Buggregator shows errors, traces, logs and metrics from your Sentry SDK, traces and logs from OpenTelemetry — on your computer, each in its own tab, linked by trace. No account, no data leaving your machine."
       :accent-color="accentColor"
     >
       <template #cta>
@@ -218,6 +254,40 @@ const worksWith = {
       :accent-color="accentColor"
     />
 
+    <!-- Use case: several services, one trace -->
+    <section id="services" class="py-16 lg:py-20 bg-section-dark border-t border-landing-border-subtle">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
+        <div class="text-center mb-10">
+          <h2 class="text-section font-bold text-white mb-3">Several services on your laptop? See one request go through all of them</h2>
+          <p class="text-lg text-on-dark-secondary leading-relaxed">
+            Your PHP app calls a Go service, which hands work to a worker. Point each one at the same Buggregator, with its
+            Sentry SDK or with OpenTelemetry. A trace that crosses services shows every service it went through, and the
+            service map shows who calls whom, with the failed calls in red.
+          </p>
+        </div>
+      </div>
+      <div class="px-4 sm:px-6 lg:px-8 space-y-10">
+        <FeatureScreenshot
+          src="/features/sentry-service-map.png"
+          alt="Buggregator service map: shop-web calls checkout-api, which calls payments-worker; failed calls in red; a panel shows what checkout-api uses and what uses it"
+          caption="Service map: which service calls which, with traffic over the period you pick. Click a service to see what it uses and what uses it."
+        />
+        <FeatureScreenshot
+          src="/features/sentry-call-graph.png"
+          alt="Call graph of one checkout request across three services: shop-web sends with the Sentry SDK, checkout-api and payments-worker with OpenTelemetry"
+          caption="One request across three services as a call graph. shop-web sends with the Sentry SDK, the other two with OpenTelemetry."
+        />
+      </div>
+      <p class="mt-8 text-center font-sans">
+        <a
+          href="https://docs.buggregator.dev/config/opentelemetry.html"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
+        >Set up OpenTelemetry →</a>
+      </p>
+    </section>
+
     <!-- Setup -->
     <section id="setup">
       <FeatureSetup :steps="steps" />
@@ -247,6 +317,7 @@ const worksWith = {
           <h2 class="text-lg font-semibold text-white mb-2">What it leaves out</h2>
           <p class="text-sm leading-relaxed text-on-dark-secondary">
             Session replays, profiles, cron check-ins, release health sessions and attachments are not kept.
+            From OpenTelemetry: metrics and OTLP over gRPC (port 4317) are not accepted.
             For PHP profiling, use the
             <NuxtLink to="/features/profiler" class="text-accent hover:text-accent-hover no-underline">Profiler (XHProf) page</NuxtLink>.
           </p>
