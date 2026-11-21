@@ -406,8 +406,7 @@
     "also": {
       "lead": "Also new:",
       "filters": "filter traces by service and by source (Sentry or OpenTelemetry)",
-      "and": ", and",
-      "notes": "the full v2.12.0 release notes"
+      "notes": "More in the v2.12.0 release notes"
     }
   },
   "harnsy": {

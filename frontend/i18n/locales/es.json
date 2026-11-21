@@ -406,8 +406,7 @@
     "also": {
       "lead": "También nuevo:",
       "filters": "filtra las trazas por servicio y por origen (Sentry u OpenTelemetry)",
-      "and": " y",
-      "notes": "las notas completas de la versión v2.12.0"
+      "notes": "Más detalles en las notas de la versión v2.12.0"
     }
   },
   "harnsy": {

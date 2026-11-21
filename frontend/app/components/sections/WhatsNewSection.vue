@@ -78,7 +78,7 @@ const alsoLinks = [
 
       <p class="mt-8 text-center text-sm text-on-dark-secondary font-sans leading-relaxed">
         {{ t('whatsNew.also.lead') }}
-        <a :href="alsoLinks[0].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.filters') }}</a>{{ t('whatsNew.also.and') }}
+        <a :href="alsoLinks[0].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.filters') }}</a>.
         <a :href="alsoLinks[1].href" target="_blank" rel="noopener" class="text-accent hover:underline">{{ t('whatsNew.also.notes') }}</a>.
       </p>
     </div>

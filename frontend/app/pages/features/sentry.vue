@@ -17,14 +17,14 @@ const seoTitle = 'Local Sentry and OpenTelemetry for Development: Errors, Traces
 
 useSeoMeta({
   title: seoTitle,
-  description: 'Point your Sentry SDK or OpenTelemetry at Buggregator and see errors, traces, logs and metrics on your own machine. Flame graph, call graph, service map. No account, nothing sent to the cloud. Free and open source.',
+  description: 'Point your Sentry SDK or OpenTelemetry at Buggregator and see Sentry errors, traces, logs and metrics and OpenTelemetry traces and logs on your own machine. Flame graph, call graph, service map. No account, nothing sent to the cloud. Free and open source.',
   ogTitle: seoTitle,
-  ogDescription: 'Errors, traces, logs and metrics from your Sentry SDK or OpenTelemetry, on your own machine. Change one address.',
+  ogDescription: 'Errors, traces, logs and metrics from your Sentry SDK, traces and logs from OpenTelemetry, on your own machine. Change one address.',
   ogImage: 'https://buggregator.dev/buggregator.png',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: seoTitle,
-  twitterDescription: 'Errors, traces, logs and metrics from your Sentry SDK or OpenTelemetry, locally.',
+  twitterDescription: 'Errors, traces, logs and metrics from your Sentry SDK, traces and logs from OpenTelemetry, locally.',
 })
 
 const accentColor = '#f43f5e'
@@ -215,7 +215,7 @@ const worksWith = {
     <FeatureHero
       title="Everything your Sentry SDK sends, on your machine"
       subtitle="Sentry, locally"
-      description="Your app already has the Sentry SDK or OpenTelemetry. Change one address, and Buggregator shows its errors, traces, logs and metrics on your computer — each in its own tab, linked by trace. No account, no data leaving your machine."
+      description="Your app already has the Sentry SDK or OpenTelemetry. Change one address, and Buggregator shows errors, traces, logs and metrics from your Sentry SDK, traces and logs from OpenTelemetry — on your computer, each in its own tab, linked by trace. No account, no data leaving your machine."
       :accent-color="accentColor"
     >
       <template #cta>
