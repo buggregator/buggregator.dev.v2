@@ -30,7 +30,8 @@
       "docker": "Docker",
       "binary": "Бинарник",
       "binaryNote": "Один файл, около {size}. Ставится одной командой.",
-      "otherWays": "Бинарник, Windows, Docker Compose →"
+      "otherWays": "Docker Compose, скачать файл вручную →",
+      "os": "Операционная система"
     },
     "languages": "Node.js, JavaScript в браузере, Python, Go и Java шлют ошибки через свой Sentry SDK.",
     "aiAgent": "Пусть AI-агент всё настроит →",

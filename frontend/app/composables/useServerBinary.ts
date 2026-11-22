@@ -79,6 +79,20 @@ export function binaryPrompt(os: BinaryOs): string {
   return os === 'windows' ? 'PS>' : '$'
 }
 
+/**
+ * Install and start as two single lines, for the hero box: the run line keeps
+ * its 127.0.0.1 binds but is not wrapped (the box scrolls sideways; the lines
+ * are copied, not read). PowerShell joins its statements with «; ».
+ */
+export function binaryOneLiners(os: BinaryOs): string[] {
+  if (os === 'windows') {
+    const binds = LOCAL_BINDS.filter(b => b.windows).map(b => `$env:${b.env}="127.0.0.1:${b.port}"`)
+    return [binaryInstallCommand(os), [...binds, `& ${WINDOWS_EXE}`].join('; ')]
+  }
+  const binds = LOCAL_BINDS.map(b => `${b.env}=127.0.0.1:${b.port}`)
+  return [binaryInstallCommand(os), [...binds, UNIX_BIN].join(' ')]
+}
+
 /** Best guess of the visitor's OS family from the browser. */
 export function detectBinaryOs(userAgent: string, platformHint = ''): BinaryOs {
   const ua = `${platformHint} ${userAgent}`.toLowerCase()
@@ -107,4 +121,68 @@ export function useBinaryPlatform() {
   const copyText = computed(() => commands.value.join('\n'))
 
   return { os, commands, installCommand, prompt, copyText }
+}
+
+/**
+ * Hero install box: the visitor's own OS (the binary) or Docker.
+ * macOS and Linux run the same install.sh; the tabs are there so a visitor
+ * finds their OS by name.
+ */
+export type InstallTarget = 'macos' | 'linux' | 'windows' | 'docker'
+
+/** Tabs of the hero install box, in order. */
+export const INSTALL_TARGETS: ReadonlyArray<{ id: InstallTarget; label: string }> = [
+  { id: 'macos', label: 'macOS' },
+  { id: 'linux', label: 'Linux' },
+  { id: 'windows', label: 'Windows' },
+  { id: 'docker', label: 'Docker' },
+]
+
+/** Rendered on the server and for any OS the binary does not cover (phones, ChromeOS). */
+export const DEFAULT_INSTALL_TARGET: InstallTarget = 'docker'
+
+/**
+ * The visitor's OS from the browser. Phones and tablets get Docker: the
+ * command is for their computer, and Docker runs on any of them. An iPad in
+ * desktop mode says «Macintosh»; more than one touch point tells it apart.
+ */
+export function detectInstallTarget(userAgent: string, platformHint = '', maxTouchPoints = 0): InstallTarget {
+  const ua = `${platformHint} ${userAgent}`.toLowerCase()
+  if (/android|iphone|ipad|ipod|cros/.test(ua)) return 'docker'
+  if (/windows|win32|win64/.test(ua)) return 'windows'
+  if (/macintosh|mac os|macos|macintel/.test(ua)) return maxTouchPoints > 1 ? 'docker' : 'macos'
+  if (/linux|x11/.test(ua)) return 'linux'
+  return DEFAULT_INSTALL_TARGET
+}
+
+/** The binary OS family behind a tab, or null for Docker. */
+export function binaryOsOf(target: InstallTarget): BinaryOs | null {
+  if (target === 'docker') return null
+  return target === 'windows' ? 'windows' : 'unix'
+}
+
+/**
+ * The selected tab of the hero install box. The server renders Docker; the
+ * visitor's OS is applied after mount, so server and client HTML match.
+ * Picking an OS here also sets the page-wide binary OS (Get started follows).
+ */
+export function useInstallTarget() {
+  const target = useState<InstallTarget>('install-target', () => DEFAULT_INSTALL_TARGET)
+  const detected = useState<boolean>('install-target-detected', () => false)
+  const { os } = useBinaryPlatform()
+
+  function select(next: InstallTarget) {
+    target.value = next
+    const binary = binaryOsOf(next)
+    if (binary) os.value = binary
+  }
+
+  onMounted(() => {
+    if (detected.value) return
+    detected.value = true
+    const nav = navigator as Navigator & { userAgentData?: { platform?: string } }
+    select(detectInstallTarget(nav.userAgent, nav.userAgentData?.platform ?? '', nav.maxTouchPoints ?? 0))
+  })
+
+  return { target, select }
 }

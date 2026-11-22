@@ -30,7 +30,8 @@
       "docker": "Docker",
       "binary": "Binary",
       "binaryNote": "One file, about {size}. One command installs it.",
-      "otherWays": "Binary, Windows, Docker Compose →"
+      "otherWays": "Docker Compose, manual download →",
+      "os": "Operating system"
     },
     "languages": "Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK.",
     "aiAgent": "Let an AI agent set it up →",
