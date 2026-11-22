@@ -116,7 +116,7 @@
         "footer": "Abre http://127.0.0.1:8000 — listo."
       },
       "composeCaption": "Sin configuración de entorno necesaria. Funciona de inmediato.",
-      "privacy": "Tus datos de depuración nunca salen de tu máquina. Sin almacenamiento en la nube. Sin servidores de terceros. Privacidad total."
+      "privacy": "Tus datos de depuración se quedan en tu máquina, salvo que tú mismo los envíes. Sin almacenamiento en la nube. Sin servidores de terceros."
     },
     "envComparison": {
       "title": "Solo cambia la dirección",
@@ -205,7 +205,7 @@
       "profiler": "Visualiza call graphs de XHProf para encontrar cuellos de botella. Haz clic en cualquier nodo para trazar la ruta desde el punto de entrada.",
       "vardump": "Inspecciona variables con dump(). Propiedades de objetos, contenido de arrays y tipos — directo en el navegador.",
       "ray": "Depura con ray() — tablas, consultas, modelos, jobs, mail, contadores y 18 tipos más. Funciona con SDKs de PHP, JS, Ruby, Go.",
-      "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — ningún email se envía realmente.",
+      "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — nada sale salvo que tú lo envíes a tu bandeja.",
       "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Busca por mensaje, canal o nivel.",
       "http": "Captura e inspecciona peticiones HTTP entrantes. Headers, body y parámetros de consulta de un vistazo.",
       "httpProxy": "Ve cada petición HTTP que tu app hace a APIs externas — con respuesta completa. Configura HTTP_PROXY y captura llamadas de Guzzle, cURL y SDKs. Reemplaza Charles, Fiddler y mitmproxy.",

@@ -212,7 +212,7 @@ const highlights = [
   },
 ]
 
-// «Works with», option A of the copy (#4527). Option B (eight platform
+// «Works with», option A of the copy. Option B (eight platform
 // rows) is a swap of this object only.
 const worksWith = {
   title: 'Built on the Sentry SDK format',

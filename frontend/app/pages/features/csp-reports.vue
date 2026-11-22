@@ -154,7 +154,7 @@ const worksWithItems = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </a>
-          <span class="font-mono text-xs text-on-dark-muted">One header line, report-uri or report-to</span>
+          <span class="font-mono text-xs text-on-dark-muted">One line in your policy: report-uri, or report-to with Reporting-Endpoints</span>
         </div>
       </template>
     </FeatureHero>
@@ -184,7 +184,7 @@ const worksWithItems = [
         <h2 class="text-section font-bold text-white mb-3">Tighten your policy without breaking checkout</h2>
         <p class="text-lg text-on-dark-secondary leading-relaxed">
           Add the policy as Content-Security-Policy-Report-Only and click through your app. Nothing is blocked yet, but
-          every script, style or image the policy would block shows up in Buggregator, with the rule and the page. Allow
+          what the policy would block shows up in Buggregator, with the rule and the page. Allow
           what you need, and switch to the enforcing header once the reports stop.
         </p>
       </div>
@@ -198,7 +198,7 @@ const worksWithItems = [
     <!-- Works with -->
     <FeatureWorksWithSection
       title="Works with browser reports"
-      description="It is one header in your app. Buggregator takes both report formats browsers send."
+      description="One or two headers in your app. Buggregator takes both report formats browsers send."
       :items="worksWithItems"
     />
     <section class="-mt-10 lg:-mt-12 pb-16 lg:pb-20 bg-section-dark">

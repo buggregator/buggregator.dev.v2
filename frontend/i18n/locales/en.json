@@ -116,7 +116,7 @@
         "footer": "Open http://127.0.0.1:8000 — done."
       },
       "composeCaption": "No environment configuration needed. Works out of the box.",
-      "privacy": "Your debug data never leaves your machine. No cloud storage. No third-party servers. Full privacy."
+      "privacy": "Your debug data stays on your machine unless you send it on yourself. No cloud storage. No third-party servers."
     },
     "envComparison": {
       "title": "Just change the address",
@@ -205,7 +205,7 @@
       "profiler": "Visualize XHProf call graphs to find performance bottlenecks. Click any node to trace the path from entry point.",
       "vardump": "Inspect variables with dump(). See object properties, array contents, and types — right in the browser.",
       "ray": "Debug with ray() — tables, queries, models, jobs, mail, counters and 18 more payload types. Works with PHP, JS, Ruby, Go SDKs.",
-      "emails": "Intercept outgoing emails during development. Preview HTML, inspect headers — no emails actually sent.",
+      "emails": "Intercept outgoing emails during development. Preview HTML, inspect headers — nothing goes out unless you send it to your inbox.",
       "logs": "Aggregate Monolog, Symfony, and Laravel logs in real time. Search by message, channel or level.",
       "http": "Capture and inspect incoming HTTP requests. See headers, body, and query parameters at a glance.",
       "httpProxy": "See every HTTP request your app makes to external APIs — with full response. Set HTTP_PROXY and capture Guzzle, cURL, and SDK calls. Replaces Charles, Fiddler, and mitmproxy.",
