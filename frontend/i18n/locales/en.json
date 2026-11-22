@@ -416,13 +416,12 @@
     }
   },
   "notFound": {
-    "code": "404",
     "title": "Bug not found",
     "line": "But we will catch it. The page you opened is not here.",
     "home": "Home",
     "docs": "Documentation",
     "errorTitle": "Something broke",
-    "errorLine": "We caught the error. Try again in a moment.",
+    "errorLine": "Something went wrong on our side. Try again in a moment.",
     "alt": "Robot arms build mechanical beetles on a glowing assembly line"
   },
   "assemblyLine": {

@@ -416,13 +416,12 @@
     }
   },
   "notFound": {
-    "code": "404",
     "title": "Bug no encontrado",
     "line": "Pero lo atraparemos. La página que abriste no está aquí.",
     "home": "Inicio",
     "docs": "Documentación",
     "errorTitle": "Algo se rompió",
-    "errorLine": "Atrapamos el error. Inténtalo de nuevo en un momento.",
+    "errorLine": "Algo salió mal de nuestro lado. Inténtalo de nuevo en un momento.",
     "alt": "Brazos robóticos ensamblan escarabajos mecánicos en una línea de montaje luminosa"
   },
   "assemblyLine": {
