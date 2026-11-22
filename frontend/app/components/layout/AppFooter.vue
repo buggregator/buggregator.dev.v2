@@ -1,157 +1,146 @@
 <script setup lang="ts">
-import logoSvg from '~/assets/img/logo.svg'
+import FooterBrand from '~/components/layout/AppFooter/FooterBrand.vue'
+import FooterGroup from '~/components/layout/AppFooter/FooterGroup.vue'
+import FooterLink from '~/components/layout/AppFooter/FooterLink.vue'
+import FooterBottom from '~/components/layout/AppFooter/FooterBottom.vue'
+import { FEATURE_MENU_COLUMNS, FEATURE_PAGES } from '~/data/features'
+import { FOOTER_RESOURCES, footerCommunity } from '~/data/footer'
+import type { FooterLink as FooterLinkData } from '~/data/footer'
 
+// Site footer (#6758, design #6756 A): brand with install and stars, the
+// feature groups of the «Features» menu in three columns (an accordion on
+// phones), Resources and Community, then the bottom row.
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { discordUrl } = useRuntimeConfig().public
 
-const localePath = useLocalePath()
-
-// A bare anchor led nowhere on feature pages: point at the home page.
-const productLinks = computed(() => [
-  { label: 'footer.links.docs', href: 'https://docs.buggregator.dev' },
-  { label: 'footer.links.features', href: `${localePath('/')}#real-ui` },
-  { label: 'footer.links.trap', href: 'https://github.com/buggregator/trap' },
-  { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/26344-buggregator' },
-  { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started.html' },
+const side = computed(() => [
+  { id: 'resources', title: t('footer.resources'), links: FOOTER_RESOURCES },
+  { id: 'community', title: t('footer.community'), links: footerCommunity(discordUrl as string) },
 ])
 
-const communityLinks = computed(() => [
-  { label: 'footer.links.github', href: 'https://github.com/buggregator/server' },
-  { label: 'footer.links.discord', href: discordUrl as string },
-  { label: 'footer.links.bugs', href: 'https://github.com/buggregator/server/issues' },
-  { label: 'footer.links.sponsors', href: '/sponsors' },
-])
-
-const featureLinks = [
-  { label: 'Email Testing', href: '/features/email-testing' },
-  { label: 'Sentry', href: '/features/sentry' },
-  { label: 'Performance Profiler', href: '/features/profiler' },
-  { label: 'HTTP Proxy', href: '/features/http-proxy' },
-  { label: 'SMS Testing', href: '/features/sms' },
-  { label: 'Mock Server', href: '/features/mock-server' },
-  { label: 'Xdebug Proxy', href: '/features/xdebug' },
-  { label: 'Dumps (Ray, VarDumper)', href: '/features/dumps' },
-  { label: 'Log Viewer', href: '/features/logs' },
-  { label: 'HTTP Dumps', href: '/features/http-dumps' },
-  { label: 'MCP Server & API', href: '/features/mcp-api' },
-  { label: 'Broadcast Events', href: '/features/broadcast-events' },
-  { label: 'Cron Monitoring', href: '/features/cron-monitoring' },
-  { label: 'CSP Reports', href: '/features/csp-reports' },
-  { label: 'Tips', href: '/tips' },
-]
-
-const resourceLinks = [
-  { label: 'footer.links.releases', href: 'https://github.com/buggregator/server/releases' },
-]
+function linkProps(link: FooterLinkData) {
+  if ('href' in link) return { label: t(link.label), href: link.href }
+  return link.localized
+    ? { label: t(link.label), to: localePath(link.to) }
+    : { label: t(link.label), to: link.to, enOnly: true }
+}
 </script>
 
 <template>
-  <footer class="bg-section-mid border-t border-landing-border-subtle py-16">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        <!-- Logo + tagline -->
-        <div>
-          <img :src="logoSvg" alt="Buggregator" class="h-6 mb-3" />
-          <p class="text-sm text-on-dark-muted font-sans">{{ t('footer.tagline') }}</p>
-        </div>
+  <footer class="ft">
+    <div class="ft__inner">
+      <div class="ft__grid">
+        <FooterBrand />
 
-        <!-- Product -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
-            {{ t('footer.product') }}
-          </h4>
-          <ul class="md:space-y-2">
-            <li v-for="link in productLinks" :key="link.href">
-              <a
-                :href="link.href"
-                :target="link.href.startsWith('http') ? '_blank' : undefined"
-                :rel="link.href.startsWith('http') ? 'noopener' : undefined"
-                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
-              >
-                {{ t(link.label) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Community -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
-            {{ t('footer.community') }}
-          </h4>
-          <ul class="md:space-y-2">
-            <li v-for="link in communityLinks" :key="link.href">
-              <a
-                :href="link.href"
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
-              >
-                {{ t(link.label) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Features -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-on-dark-secondary mb-4 font-sans">
-            Features
-          </h4>
-          <ul class="md:space-y-2">
-            <li v-for="link in featureLinks" :key="link.href">
-              <NuxtLink
-                :to="link.href"
-                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
-              >
-                {{ link.label }}
-              </NuxtLink>
-            </li>
-            <li v-for="link in resourceLinks" :key="link.href">
-              <a
-                :href="link.href"
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center min-h-[44px] md:min-h-0 text-sm text-on-dark-muted hover:text-on-dark-secondary transition-colors duration-150 no-underline font-sans"
-              >
-                {{ t(link.label) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Author -->
-      <div class="mt-10 pt-6 border-t border-landing-border-subtle flex flex-col sm:flex-row items-center justify-between gap-6">
-        <a
-          href="https://linkedin.com/in/butschster"
-          target="_blank"
-          rel="noopener"
-          class="group inline-flex items-center gap-3 no-underline"
-        >
-          <img
-            src="https://avatars.githubusercontent.com/u/773481?v=4"
-            alt="Pavel Buchnev"
-            class="w-9 h-9 rounded-full object-cover border-2 border-landing-border-subtle"
-          />
-          <div>
-            <div class="text-xs font-bold text-white flex items-center gap-1.5 font-sans">
-              Pavel Buchnev
-              <svg class="w-3 h-3 text-[#0a66c2]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-              </svg>
-            </div>
-            <div class="font-mono text-[9px] uppercase tracking-wider text-on-dark-muted">Creator</div>
+        <nav class="ft__features" :aria-label="t('nav.features')">
+          <div v-for="(column, i) in FEATURE_MENU_COLUMNS" :key="i" class="ft__column">
+            <FooterGroup
+              v-for="group in column"
+              :id="`features-${group.id}`"
+              :key="group.id"
+              :title="t(`featureMenu.groups.${group.id}`)"
+              :count="group.features.length"
+              collapsible
+            >
+              <FooterLink
+                v-for="id in group.features"
+                :key="id"
+                :label="FEATURE_PAGES[id].label"
+                :to="FEATURE_PAGES[id].to"
+                :is-new="FEATURE_PAGES[id].isNew"
+                en-only
+              />
+            </FooterGroup>
           </div>
-        </a>
+        </nav>
 
-        <div class="flex items-center gap-4 text-on-dark-muted">
-          <span class="font-mono text-[10px]">
-            Built with <a href="https://wippy.ai" target="_blank" rel="noopener" class="text-on-dark-secondary hover:text-white transition-colors no-underline">Wippy</a>
-          </span>
-          <span class="font-mono text-[10px]">&copy; {{ new Date().getFullYear() }} Buggregator</span>
+        <div class="ft__side">
+          <FooterGroup v-for="list in side" :id="list.id" :key="list.id" :title="list.title">
+            <FooterLink v-for="link in list.links" :key="link.label" v-bind="linkProps(link)" />
+          </FooterGroup>
         </div>
       </div>
+
+      <FooterBottom />
     </div>
   </footer>
 </template>
+
+<style scoped>
+.ft {
+  padding: 56px 0 0;
+  border-top: 1px solid theme('colors.landing-border-subtle');
+  background: theme('colors.section-mid');
+}
+
+.ft__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.ft__grid {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 170px;
+  gap: 40px;
+}
+
+.ft__features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.ft__column > * + * {
+  margin-top: 24px;
+}
+
+.ft__side > * + * {
+  margin-top: 28px;
+}
+
+@media (max-width: 1023px) {
+  .ft__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ft__side {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+
+  .ft__side > * + * {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .ft {
+    padding-top: 40px;
+  }
+
+  .ft__inner {
+    padding: 0 16px;
+  }
+
+  .ft__grid {
+    gap: 32px;
+  }
+
+  .ft__features {
+    display: block;
+    border-bottom: 1px solid theme('colors.landing-border-subtle');
+  }
+
+  .ft__column > * + * {
+    margin-top: 0;
+  }
+
+  .ft__side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+</style>
