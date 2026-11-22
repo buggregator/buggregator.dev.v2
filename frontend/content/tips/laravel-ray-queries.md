@@ -4,7 +4,7 @@ title: Every SQL query of a Laravel request with ray()
 description: Call ray()->showQueries() and each SQL query lands in Buggregator with its bindings filled in, the connection and the time in milliseconds.
 query: laravel ray
 feature: Dumps
-feature_page: null
+feature_page: /features/dumps
 docs: https://docs.buggregator.dev/config/ray.html#supported-payload-types
 requires: null
 related: [ray-calls-to-free-viewer, laravel-profiler-in-two-commands, dump-without-breaking-the-page, laravel-logs-in-a-live-view]

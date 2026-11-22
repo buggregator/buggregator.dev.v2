@@ -4,7 +4,7 @@ title: dump() in Yii without breaking the page
 description: Install Symfony VarDumper in your Yii app and set two values in the entry script. dump() output goes to Buggregator; your page and JSON stay clean.
 query: yii2 debug
 feature: Dumps
-feature_page: null
+feature_page: /features/dumps
 docs: https://docs.buggregator.dev/config/var-dumper.html#setup
 requires: null
 related: [dump-without-breaking-the-page, php-trap-dump-anywhere, yii2-mail-local-inbox]

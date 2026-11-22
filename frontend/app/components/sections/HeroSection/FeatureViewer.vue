@@ -28,6 +28,11 @@ const TABS: Tab[] = [
   { id: 'cron', src: '/features/cron-monitoring.png', width: 1600, height: 1000 },
   { id: 'broadcast', src: '/features/broadcast-events.png', width: 1600, height: 1000 },
   { id: 'csp', src: '/features/csp-reports.png', width: 1600, height: 1000 },
+  // v2.14
+  { id: 'requestTimeline', src: '/features/request-timeline.png', width: 1600, height: 1000 },
+  { id: 'queues', src: '/features/queue-jobs.png', width: 1600, height: 1000 },
+  { id: 'logs', src: '/features/logs-screen.png', width: 1600, height: 1000 },
+  { id: 'feedFilters', src: '/features/feed-filters.png', width: 1600, height: 1000 },
 ]
 const ids = TABS.map(tab => tab.id)
 

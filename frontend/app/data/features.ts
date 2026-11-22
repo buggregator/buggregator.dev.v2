@@ -7,6 +7,7 @@ export type FeatureId =
   | 'httpDumps' | 'proxy' | 'mock'
   | 'email' | 'sms' | 'broadcast'
   | 'dumps' | 'logs' | 'cron'
+  | 'requestTimeline' | 'queues' | 'feedFilters'
   | 'mcp'
 
 export type FeaturePage = {
@@ -19,7 +20,8 @@ export type FeaturePage = {
 
 export const FEATURE_PAGES: Record<FeatureId, FeaturePage> = {
   sentry: { label: 'Sentry', to: '/features/sentry', icon: 'sentry' },
-  csp: { label: 'CSP reports', to: '/features/csp-reports', icon: 'shield', isNew: true },
+  csp: { label: 'CSP reports', to: '/features/csp-reports', icon: 'shield' },
+  requestTimeline: { label: 'Request timeline', to: '/features/request-timeline', icon: 'trace', isNew: true },
   profiler: { label: 'Profiler', to: '/features/profiler', icon: 'profiler' },
   xdebug: { label: 'Xdebug', to: '/features/xdebug', icon: 'trace' },
   httpDumps: { label: 'HTTP dumps', to: '/features/http-dumps', icon: 'http-dump' },
@@ -27,10 +29,12 @@ export const FEATURE_PAGES: Record<FeatureId, FeaturePage> = {
   mock: { label: 'Mock server', to: '/features/mock-server', icon: 'mock-server' },
   email: { label: 'Email testing', to: '/features/email-testing', icon: 'smtp' },
   sms: { label: 'SMS testing', to: '/features/sms', icon: 'sms' },
-  broadcast: { label: 'Broadcast events', to: '/features/broadcast-events', icon: 'broadcast', isNew: true },
+  broadcast: { label: 'Broadcast events', to: '/features/broadcast-events', icon: 'broadcast' },
   dumps: { label: 'Dumps (Ray, VarDumper)', to: '/features/dumps', icon: 'var-dump' },
-  logs: { label: 'Logs', to: '/features/logs', icon: 'monolog' },
-  cron: { label: 'Cron monitoring', to: '/features/cron-monitoring', icon: 'heartBeat', isNew: true },
+  logs: { label: 'Logs', to: '/features/logs', icon: 'monolog', isNew: true },
+  queues: { label: 'Queue jobs', to: '/features/queue-jobs', icon: 'sentry', isNew: true },
+  cron: { label: 'Cron monitoring', to: '/features/cron-monitoring', icon: 'heartBeat' },
+  feedFilters: { label: 'Feed filters', to: '/features/feed-filters', icon: 'events', isNew: true },
   mcp: { label: 'MCP & API', to: '/features/mcp-api', icon: 'bolt' },
 }
 
@@ -40,7 +44,7 @@ export type FeatureGroup = { id: string, features: FeatureId[] }
 // Group titles: nav.menu.groups.<id>.
 export const FEATURE_MENU_COLUMNS: FeatureGroup[][] = [
   [
-    { id: 'errors', features: ['sentry', 'csp'] },
+    { id: 'errors', features: ['sentry', 'requestTimeline', 'csp'] },
     { id: 'perf', features: ['profiler', 'xdebug'] },
   ],
   [
@@ -48,14 +52,14 @@ export const FEATURE_MENU_COLUMNS: FeatureGroup[][] = [
     { id: 'mail', features: ['email', 'sms', 'broadcast'] },
   ],
   [
-    { id: 'logs', features: ['dumps', 'logs', 'cron'] },
-    { id: 'agents', features: ['mcp'] },
+    { id: 'logs', features: ['dumps', 'logs', 'queues', 'cron'] },
+    { id: 'agents', features: ['feedFilters', 'mcp'] },
   ],
 ]
 
 // The release the NEW marks and the «What's new» link speak about.
 export const FEATURE_RELEASE = {
-  version: '2.13',
-  tag: '2.13.0',
-  url: 'https://github.com/buggregator/server/releases/tag/v2.13.0',
+  version: '2.14',
+  tag: '2.14.0',
+  url: 'https://github.com/buggregator/server/releases/tag/v2.14.0',
 }

@@ -18,7 +18,7 @@
     "badge": {
       "version": "v{version} · just released",
       "free": "Free & Open Source",
-      "release": "v{version}: broadcasts, cron jobs, CSP reports"
+      "release": "v{version}: request timeline, queue jobs, log search"
     },
     "headline": "Errors, dumps, emails and logs from your PHP app.",
     "headlineSub": "In one window.",
@@ -345,34 +345,31 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "New in v2.13",
-    "title": "Broadcasts, cron jobs and a real inbox",
+    "eyebrow": "New in v2.14",
+    "title": "One request on one screen, and every queue job",
     "cards": {
-      "broadcast": {
-        "title": "See what your app broadcasts",
-        "desc": "Point Laravel Reverb, Pusher or soketi broadcasts at Buggregator. Every event shows up under its channel, with its payload and what changed since the previous one. Set an upstream, and each event goes on to your real server, so the browser keeps getting live updates.",
-        "cta": "See broadcast events"
+      "timeline": {
+        "title": "Everything one request did",
+        "desc": "Open a Sentry trace and see its SQL queries, cache calls, logs, mails, outgoing calls, jobs and errors on one time scale. When the same query runs five times or more, a hint names it and, when the SDK sends it, the file and line: the classic N+1.",
+        "cta": "See the request timeline"
       },
-      "crons": {
-        "title": "Know if your scheduled jobs ran",
-        "desc": "Jobs report each run through Sentry Crons or a plain ping URL called with curl. The Crons tab in Sentry shows which runs went fine, which failed, which never started and which never finished. No Sentry account needed.",
-        "cta": "See cron monitoring"
+      "queues": {
+        "title": "Queue jobs, attempt by attempt",
+        "desc": "Sentry → Queues lists the jobs your Laravel worker ran: which failed, how many attempts they took, the exception of each attempt, how long they waited, and the request that queued them.",
+        "cta": "See queue jobs"
       },
-      "inbox": {
-        "title": "Send a caught email to a real inbox",
-        "desc": "Want to see an email in Gmail, or tap its link on your phone? Set up an outgoing SMTP server, press Send to inbox and type your address. Only that one message goes out, only to the addresses you type. Without login, it works only from your own machine and only to allowed addresses.",
-        "cta": "Set up sending"
+      "logs": {
+        "title": "A Logs screen with search",
+        "desc": "All Monolog lines as one live stream, like tail -f with search. Filter by level, channel and time, see lines per minute on a chart, pause to read, and open all lines of one request.",
+        "cta": "See the Logs screen"
       },
-      "small": {
-        "title": "User feedback, notifications, CSP reports",
-        "desc": "Feedback your users send through the Sentry SDK shows on the error it is about. Desktop notifications tell you about a new Sentry error while you work in another window. And Buggregator now catches Content Security Policy reports from the browser: what was blocked, by which rule, on which page.",
-        "cta": "See user feedback",
-        "links": {
-          "csp": "See CSP reports"
-        }
+      "filters": {
+        "title": "Feed filters for a shared server",
+        "desc": "One Buggregator for the whole team? Show only your machine’s events, or one environment, user, Monolog channel, level, release or tag. The filters go into the link you share.",
+        "cta": "See feed filters"
       }
     },
-    "notes": "More in the v2.13.0 release notes"
+    "notes": "More in the v2.14.0 release notes"
   },
   "harnsy": {
     "title": "An AI team builds Buggregator. We make the decisions.",
@@ -390,7 +387,7 @@
       "http": "HTTP",
       "mail": "Mail & messaging",
       "logs": "Logs & jobs",
-      "agents": "For AI agents"
+      "agents": "Team & AI agents"
     },
     "new": "NEW",
     "current": "you are here",
@@ -409,7 +406,11 @@
     "desc": {
       "cron": "Which scheduled jobs ran, failed or never started.",
       "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",
-      "csp": "What the browser blocked, by directive, with the file and line."
+      "csp": "What the browser blocked, by directive, with the file and line.",
+      "requestTimeline": "Every query, cache call, log and job of one request on one time scale.",
+      "queues": "Which queue jobs failed, how many attempts they took and why.",
+      "logs": "All Monolog lines as one live stream, filtered by level, channel and time.",
+      "feedFilters": "Only your machine, environment, channel or level: one team server, your events."
     },
     "alt": {
       "sentry": "Buggregator Sentry page: an exception with its stack trace",
@@ -419,7 +420,11 @@
       "sms": "Buggregator SMS view showing caught messages with sender, recipient and body",
       "cron": "Buggregator Crons tab: scheduled jobs with status, schedule, last and next run",
       "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
-      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
+      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column",
+      "requestTimeline": "Buggregator request timeline: SQL queries, cache calls, logs and jobs of one Sentry trace on one time scale",
+      "queues": "Buggregator Queues page: queue jobs with status, attempts and the exception of each attempt",
+      "logs": "Buggregator Logs screen: a live stream of Monolog lines with level, channel and time filters",
+      "feedFilters": "Buggregator event feed filtered by machine, environment and level"
     }
   },
   "notFound": {

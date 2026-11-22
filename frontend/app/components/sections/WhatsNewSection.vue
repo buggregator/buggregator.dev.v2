@@ -4,34 +4,32 @@ const { t } = useI18n()
 // An `href` starting with http opens in a new tab; others are pages of this site.
 const cards = [
   {
-    key: 'broadcast',
-    href: '/features/broadcast-events',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" /></svg>`,
+    key: 'timeline',
+    href: '/features/request-timeline',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h6M17 15l3 3-3 3" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
   {
-    key: 'crons',
-    href: '/features/cron-monitoring',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+    key: 'queues',
+    href: '/features/queue-jobs',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h10M18 15v4m0 0l-2-2m2 2l2-2" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
   {
-    key: 'inbox',
-    href: '/features/email-testing#send-to-inbox',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+    key: 'logs',
+    href: '/features/logs',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
   {
-    key: 'small',
-    href: '/features/sentry#user-feedback',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>`,
-    links: [
-      { key: 'csp', href: '/features/csp-reports' },
-    ],
+    key: 'filters',
+    href: '/features/feed-filters',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18l-7 8v6l-4 2v-8L3 4z" /></svg>`,
+    links: [] as { key: string, href: string }[],
   },
 ]
 
-const notesHref = 'https://github.com/buggregator/server/releases/tag/v2.13.0'
+const notesHref = 'https://github.com/buggregator/server/releases/tag/v2.14.0'
 
 const isExternal = (href: string) => href.startsWith('http')
 </script>
