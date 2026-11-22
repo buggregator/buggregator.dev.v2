@@ -17,6 +17,10 @@ export const TIP_FEATURE_META: Record<TipFeature, { color: string }> = {
   'Profiler': { color: '#8b5cf6' },
   'MCP': { color: '#14b8a6' },
   'SMS': { color: '#a855f7' },
+  'Broadcast': { color: '#ec4899' },
+  'Crons': { color: '#eab308' },
+  'CSP': { color: '#84cc16' },
+  'OpenTelemetry': { color: '#6366f1' },
 }
 
 export const TIP_FEATURES = Object.keys(TIP_FEATURE_META) as TipFeature[]

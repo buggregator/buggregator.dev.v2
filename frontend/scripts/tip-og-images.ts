@@ -16,6 +16,7 @@ const font = (f: string) => `data:font/woff2;base64,${readFileSync(join(root, 'p
 const COLORS: Record<string, string> = {
   'Mail': '#f59e0b', 'Sentry': '#f43f5e', 'Dumps': '#ef4444', 'Logs': '#6b7280', 'Xdebug': '#f97316',
   'Mock server': '#0ea5e9', 'HTTP': '#22c55e', 'Profiler': '#8b5cf6', 'MCP': '#14b8a6', 'SMS': '#a855f7',
+  'Broadcast': '#ec4899', 'Crons': '#eab308', 'CSP': '#84cc16', 'OpenTelemetry': '#6366f1',
 }
 const MAX_LINES = 9
 const MAX_COLS = 62
