@@ -151,7 +151,7 @@ const highlights = [
   {
     icon: '\u{1F50D}',
     title: 'Profile comparison',
-    description: 'Compare two runs side by side: wall time, CPU and memory, with the change for each function. See whether your fix helped.',
+    description: 'Compare two runs side by side: wall time, memory and calls for each function, with the change. See whether your fix helped.',
   },
   {
     icon: '\u{1F916}',
