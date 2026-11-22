@@ -14,6 +14,7 @@ import { parse as parseYaml } from 'yaml'
 
 export const TIP_FEATURES = [
   'Mail', 'Sentry', 'Dumps', 'Logs', 'Xdebug', 'Mock server', 'HTTP', 'Profiler', 'MCP', 'SMS',
+  'Broadcast', 'Crons', 'CSP', 'OpenTelemetry',
 ] as const
 
 export type TipFeature = typeof TIP_FEATURES[number]
