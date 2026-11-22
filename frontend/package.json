@@ -8,6 +8,7 @@
     "preview": "nuxt preview",
     "test:tips": "node --test tests/tips.test.ts",
     "test:install": "node --test tests/install-target.test.ts",
+    "test:footer": "node --test tests/footer.test.ts",
     "tips:og": "node scripts/tip-og-images.ts"
   },
   "dependencies": {

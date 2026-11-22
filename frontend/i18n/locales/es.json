@@ -284,13 +284,11 @@
     }
   },
   "footer": {
-    "tagline": "Hecho para la comunidad PHP",
-    "product": "Producto",
+    "tagline": "Errores, dumps, emails y logs de tu app PHP en una sola ventana. Gratis y de código abierto.",
     "community": "Comunidad",
     "resources": "Recursos",
     "links": {
       "docs": "Documentación",
-      "features": "Características",
       "trap": "Trap",
       "plugin": "Plugin PhpStorm",
       "gettingStarted": "Empezar",
@@ -300,7 +298,28 @@
       "bugs": "Reportar bugs",
       "changelog": "Registro de cambios",
       "releases": "Versiones",
-      "sponsors": "Patrocinadores"
+      "sponsors": "Patrocinadores",
+      "tips": "Consejos"
+    },
+    "install": "Comando de instalación",
+    "copy": "Copiar",
+    "copyLabel": "Copiar el comando de instalación",
+    "star": "Estrella en GitHub",
+    "starLabel": "Dale una estrella a Buggregator en GitHub, {count} estrellas",
+    "newTab": "se abre en una pestaña nueva",
+    "language": "Idioma",
+    "license": "Licencia MIT",
+    "builtWith": "Hecho con",
+    "creator": "Creador",
+    "logo": "Buggregator. Prueba a hacer clic en el bicho",
+    "egg": {
+      "type": "bug",
+      "caughtOne": "{n} evento capturado",
+      "caughtMany": "{n} eventos capturados",
+      "final": "{n} bugs capturados en el footer",
+      "justNow": "ahora mismo",
+      "cta": "Ese es su trabajo. Apunta tu app a Buggregator y atrapará el resto:",
+      "close": "Cerrar"
     }
   },
   "seo": {
