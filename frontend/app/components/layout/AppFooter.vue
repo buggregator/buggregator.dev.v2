@@ -33,6 +33,9 @@ const featureLinks = [
   { label: 'Log Viewer', href: '/features/logs' },
   { label: 'HTTP Dumps', href: '/features/http-dumps' },
   { label: 'MCP Server & API', href: '/features/mcp-api' },
+  { label: 'Broadcast Events', href: '/features/broadcast-events' },
+  { label: 'Cron Monitoring', href: '/features/cron-monitoring' },
+  { label: 'CSP Reports', href: '/features/csp-reports' },
   { label: 'Tips', href: '/tips' },
 ]
 

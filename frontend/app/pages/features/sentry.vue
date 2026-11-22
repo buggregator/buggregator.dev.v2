@@ -194,9 +194,25 @@ const highlights = [
     title: 'Linked by trace',
     description: 'An error shows its trace in a small waterfall; a trace lists the errors that happened in it; logs and metrics link to their trace.',
   },
+  {
+    icon: '\u{1F4AC}',
+    title: 'User feedback with its error',
+    description: 'Feedback from the Sentry feedback widget, captureFeedback or captureUserFeedback shows on the error it is about: name, email, message, page. The Feedback tab lists it all, also feedback sent without an error.',
+  },
+  {
+    icon: '\u{1F514}',
+    title: 'Desktop notifications',
+    description: 'Working in another window? Turn them on in Settings, and each new error brings a notice; click it to open the error. Several errors within 10 seconds come as one. The tab must stay open; needs https or localhost.',
+  },
+  {
+    icon: '\u{23F0}',
+    title: 'Cron monitors',
+    description: 'Sentry Crons check-ins land in a Crons tab: which scheduled runs went fine, failed, never started or never finished.',
+    link: { href: '/features/cron-monitoring', label: 'Cron monitoring' },
+  },
 ]
 
-// «Works with», option A of the copy (#4527). Option B (eight platform
+// «Works with», option A of the copy. Option B (eight platform
 // rows) is a swap of this object only.
 const worksWith = {
   title: 'Built on the Sentry SDK format',
@@ -253,6 +269,26 @@ const worksWith = {
       :items="highlights"
       :accent-color="accentColor"
     />
+
+    <!-- User feedback next to the error -->
+    <section id="user-feedback" class="py-16 lg:py-20 bg-section-dark border-t border-landing-border-subtle">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
+        <div class="text-center mb-10">
+          <h2 class="text-section font-bold text-white mb-3">«The pay button did nothing»: read it next to the error</h2>
+          <p class="text-lg text-on-dark-secondary leading-relaxed">
+            When a user sends feedback through your Sentry SDK, it shows on the error it is about, above the tabs: name,
+            email, message, page and time. Nothing to set up beyond the usual DSN.
+          </p>
+        </div>
+      </div>
+      <div class="px-4 sm:px-6 lg:px-8">
+        <FeatureScreenshot
+          src="/features/sentry-user-feedback.png"
+          alt="Buggregator Sentry error page with the user's feedback above the tabs: name, email, message and page"
+          caption="Feedback tied to an error shows on that error's page. The Feedback tab lists all feedback for the project."
+        />
+      </div>
+    </section>
 
     <!-- Use case: several services, one trace -->
     <section id="services" class="py-16 lg:py-20 bg-section-dark border-t border-landing-border-subtle">
@@ -316,7 +352,7 @@ const worksWith = {
         <div class="rounded-xl border border-landing-border-subtle p-5">
           <h2 class="text-lg font-semibold text-white mb-2">What it leaves out</h2>
           <p class="text-sm leading-relaxed text-on-dark-secondary">
-            Session replays, profiles, cron check-ins, release health sessions and attachments are not kept.
+            Session replays, profiles, release health sessions, attachments and screenshots sent with user feedback are not kept.
             From OpenTelemetry: metrics and OTLP over gRPC (port 4317) are not accepted.
             For PHP profiling, use the
             <NuxtLink to="/features/profiler" class="text-accent hover:text-accent-hover no-underline">Profiler (XHProf) page</NuxtLink>.
@@ -330,6 +366,7 @@ const worksWith = {
     <!-- CTA -->
     <FeatureCTA docs-url="https://docs.buggregator.dev/config/sentry.html">
       <template #related>
+        <FeatureRelatedLink to="/features/cron-monitoring" label="Cron Monitoring" color="#84cc16" />
         <FeatureRelatedLink to="/features/logs" label="Logs" color="#6b7280" />
         <FeatureRelatedLink to="/features/profiler" label="Performance Profiler" color="#8b5cf6" />
         <FeatureRelatedLink to="/features/email-testing" label="Email Testing" color="#f59e0b" />
