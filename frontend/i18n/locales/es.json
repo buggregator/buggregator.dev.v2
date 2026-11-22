@@ -10,11 +10,12 @@
   "hero": {
     "badge": {
       "version": "v{version} · recién lanzada",
-      "free": "Gratuito y de código abierto"
+      "free": "Gratuito y de código abierto",
+      "release": "v{version}: eventos broadcast, tareas cron, informes CSP →"
     },
-    "headline": "Depura todo en tu app PHP.",
-    "headlineSub": "Sin instalar nada.",
-    "subheadline": "Excepciones, dumps, emails, perfilado y logs en una sola interfaz, con un solo comando. Hecho para PHP; Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK, y el correo y HTTP funcionan desde cualquier lenguaje.",
+    "headline": "Errores, dumps, emails y logs de tu app PHP.",
+    "headlineSub": "En una sola ventana.",
+    "subheadline": "Un servidor de depuración gratuito y de código abierto. Ejecuta un comando, apunta tu app hacia él y mira llegar los eventos en directo.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copiar comando",
@@ -36,7 +37,26 @@
       "docker": "Docker",
       "binary": "Binario",
       "binaryNote": "Un solo archivo, de unos {size}. Se instala con un comando.",
-      "otherPlatforms": "Otras formas de instalar →"
+      "otherPlatforms": "Otras formas de instalar →",
+      "otherWays": "Binario, Windows, Docker Compose →"
+    },
+    "languages": "Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK.",
+    "aiAgent": "Deja que un agente de IA lo configure →",
+    "trustLine": "Gratis y de código abierto, MIT · Sin cuenta · Windows, macOS, Linux",
+    "preview": {
+      "label": "Vista previa de la interfaz de Buggregator",
+      "tabs": {
+        "exceptions": "Excepciones",
+        "email": "Email",
+        "dumps": "Dumps",
+        "profiler": "Profiler"
+      },
+      "alt": {
+        "exceptions": "Buggregator mostrando una excepción con su stack trace",
+        "email": "Buggregator mostrando un email capturado con su vista HTML",
+        "dumps": "Buggregator mostrando un dump con el archivo y la línea de origen",
+        "profiler": "Buggregator mostrando un perfil con las llamadas más lentas"
+      }
     }
   },
   "languages": {

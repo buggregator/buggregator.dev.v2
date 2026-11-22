@@ -10,11 +10,12 @@
   "hero": {
     "badge": {
       "version": "v{version} · just released",
-      "free": "Free & Open Source"
+      "free": "Free & Open Source",
+      "release": "v{version}: broadcasts, cron jobs, CSP reports →"
     },
-    "headline": "Debug everything in your PHP app.",
-    "headlineSub": "Install nothing.",
-    "subheadline": "Exceptions, dumps, emails, profiling and logs in one UI, launched with one command. Built for PHP; Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK, and mail and HTTP work from any language.",
+    "headline": "Errors, dumps, emails and logs from your PHP app.",
+    "headlineSub": "In one window.",
+    "subheadline": "A free, open-source debugging server. Run one command, point your app at it, and watch events arrive live.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
@@ -36,7 +37,26 @@
       "docker": "Docker",
       "binary": "Binary",
       "binaryNote": "One file, about {size}. One command installs it.",
-      "otherPlatforms": "Other ways to install →"
+      "otherPlatforms": "Other ways to install →",
+      "otherWays": "Binary, Windows, Docker Compose →"
+    },
+    "languages": "Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK.",
+    "aiAgent": "Let an AI agent set it up →",
+    "trustLine": "Free and open source, MIT · No account · Windows, macOS, Linux",
+    "preview": {
+      "label": "Buggregator interface preview",
+      "tabs": {
+        "exceptions": "Exceptions",
+        "email": "Email",
+        "dumps": "Dumps",
+        "profiler": "Profiler"
+      },
+      "alt": {
+        "exceptions": "Buggregator showing an exception with its stack trace",
+        "email": "Buggregator showing a caught email with its HTML preview",
+        "dumps": "Buggregator showing a dump with the file and line it came from",
+        "profiler": "Buggregator showing a profile with the slowest function calls"
+      }
     }
   },
   "languages": {

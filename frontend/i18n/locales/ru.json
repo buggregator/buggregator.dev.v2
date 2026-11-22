@@ -10,11 +10,12 @@
   "hero": {
     "badge": {
       "version": "v{version} · только что вышла",
-      "free": "Бесплатный и open source"
+      "free": "Бесплатный и open source",
+      "release": "v{version}: broadcast-события, cron-задачи, отчёты CSP →"
     },
-    "headline": "Дебаж всё в PHP.",
-    "headlineSub": "Не устанавливая лишнего.",
-    "subheadline": "Исключения, дампы, письма, профилирование и логи — в одном интерфейсе, запуск одной командой. Buggregator сделан для PHP, но Node.js, JavaScript в браузере, Python, Go и Java шлют в него ошибки через свой Sentry SDK, а почта и HTTP работают из любого языка.",
+    "headline": "Ошибки, дампы, письма и логи вашего PHP-приложения.",
+    "headlineSub": "В одном окне.",
+    "subheadline": "Бесплатный отладочный сервер с открытым кодом. Запустите одну команду, направьте на него приложение и смотрите, как приходят события.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Скопировать",
@@ -36,7 +37,26 @@
       "docker": "Docker",
       "binary": "Бинарник",
       "binaryNote": "Один файл, около {size}. Ставится одной командой.",
-      "otherPlatforms": "Другие способы установки →"
+      "otherPlatforms": "Другие способы установки →",
+      "otherWays": "Бинарник, Windows, Docker Compose →"
+    },
+    "languages": "Node.js, JavaScript в браузере, Python, Go и Java шлют ошибки через свой Sentry SDK.",
+    "aiAgent": "Пусть AI-агент всё настроит →",
+    "trustLine": "Бесплатно, открытый код, MIT · Без аккаунта · Windows, macOS, Linux",
+    "preview": {
+      "label": "Интерфейс Buggregator",
+      "tabs": {
+        "exceptions": "Исключения",
+        "email": "Почта",
+        "dumps": "Дампы",
+        "profiler": "Профайлер"
+      },
+      "alt": {
+        "exceptions": "Buggregator: исключение со стеком вызовов",
+        "email": "Buggregator: пойманное письмо с HTML-превью",
+        "dumps": "Buggregator: дамп с файлом и строкой, откуда он пришёл",
+        "profiler": "Buggregator: профиль с самыми медленными вызовами функций"
+      }
     }
   },
   "languages": {
