@@ -9,6 +9,7 @@
     "test:tips": "node --test tests/tips.test.ts",
     "test:install": "node --test tests/install-target.test.ts",
     "test:footer": "node --test tests/footer.test.ts",
+    "test:picture": "node --test tests/site-picture.test.ts",
     "tips:og": "node scripts/tip-og-images.ts"
   },
   "dependencies": {

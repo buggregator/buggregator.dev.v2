@@ -7,6 +7,10 @@ import SegmentedPicker from '~/components/ui/SegmentedPicker.vue'
 // shows install + start (bound to 127.0.0.1), Docker one `docker run`.
 // Top row: the tabs, Copy on the right at the tabs' size; the command
 // takes the whole width below. The lines scroll sideways; they are copied, not read.
+// The same box closes the home page (the assembly line band): ctaLocation
+// tells the two apart in analytics.
+const props = withDefaults(defineProps<{ ctaLocation?: string }>(), { ctaLocation: 'hero' })
+
 const { t } = useI18n()
 const { trackEvent } = useGtag()
 const { copied, copy } = useClipboardCopy()
@@ -19,7 +23,7 @@ const prompt = computed(() => binaryOs.value ? binaryPrompt(binaryOs.value) : '$
 async function onCopy() {
   if (await copy(lines.value.join('\n'))) {
     trackEvent('copy_install_command', {
-      cta_location: 'hero',
+      cta_location: props.ctaLocation,
       install_method: binaryOs.value ? 'binary' : 'docker',
       platform: target.value,
     })

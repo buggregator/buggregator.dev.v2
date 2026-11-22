@@ -414,5 +414,19 @@
       "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
       "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
     }
+  },
+  "notFound": {
+    "title": "Bug not found",
+    "line": "But we will catch it. The page you opened is not here.",
+    "home": "Home",
+    "docs": "Documentation",
+    "errorTitle": "Something broke",
+    "errorLine": "Something went wrong on our side. Try again in a moment.",
+    "alt": "Robot arms build mechanical beetles on a glowing assembly line"
+  },
+  "assemblyLine": {
+    "title": "Every bug from your app, caught on one line",
+    "sub": "Run one command and watch exceptions, dumps, emails and logs arrive as they happen.",
+    "alt": "Robot arms build mechanical beetles on a glowing assembly line"
   }
 }

@@ -414,5 +414,19 @@
       "broadcast": "Página Broadcast de Buggregator: los canales a la izquierda y, a la derecha, los eventos en vivo de un canal",
       "csp": "Informe CSP de Buggregator: la página, la directiva, el recurso bloqueado y el archivo con línea y columna"
     }
+  },
+  "notFound": {
+    "title": "Bug no encontrado",
+    "line": "Pero lo atraparemos. La página que abriste no está aquí.",
+    "home": "Inicio",
+    "docs": "Documentación",
+    "errorTitle": "Algo se rompió",
+    "errorLine": "Algo salió mal de nuestro lado. Inténtalo de nuevo en un momento.",
+    "alt": "Brazos robóticos ensamblan escarabajos mecánicos en una línea de montaje luminosa"
+  },
+  "assemblyLine": {
+    "title": "Cada bug de tu app, atrapado en una sola línea",
+    "sub": "Ejecuta un comando y mira llegar excepciones, dumps, emails y logs en el momento en que ocurren.",
+    "alt": "Brazos robóticos ensamblan escarabajos mecánicos en una línea de montaje luminosa"
   }
 }

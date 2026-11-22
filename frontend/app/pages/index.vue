@@ -9,6 +9,7 @@ import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSecti
 import EcosystemSection from '~/components/sections/EcosystemSection.vue'
 import CommunitySection from '~/components/sections/CommunitySection.vue'
 import HarnsySection from '~/components/sections/HarnsySection.vue'
+import AssemblyLineSection from '~/components/sections/AssemblyLineSection.vue'
 
 definePageMeta({ layout: 'landing' })
 
@@ -20,13 +21,18 @@ useSeoMeta({
   description: () => t('seo.home.description'),
   ogTitle: () => t('seo.home.ogTitle'),
   ogDescription: () => t('seo.home.ogDescription'),
-  ogImage: 'https://buggregator.dev/buggregator.png',
+  // public/og/home.jpg: drawn by scripts/home-og-image.ts (#6831).
+  ogImage: `${siteUrl}/og/home.jpg`,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: () => t('assemblyLine.alt'),
   ogType: 'website',
   ogSiteName: 'Buggregator',
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('seo.home.title'),
   twitterDescription: () => t('seo.home.twitterDescription'),
-  twitterImage: 'https://buggregator.dev/buggregator.png',
+  twitterImage: `${siteUrl}/og/home.jpg`,
+  twitterImageAlt: () => t('assemblyLine.alt'),
 })
 
 // What the page shows, for search engines: no ratings or reviews (there are none).
@@ -57,7 +63,7 @@ const { demoEnabled } = useRuntimeConfig().public
 <template>
   <!-- Nine blocks, each said once: what it is and the command with the real
        UI under it (one tab per feature), what it replaces, how it works, your stack, what's new, for teams,
-       ecosystem, open source (with sponsors), then the AI team by the footer. -->
+       ecosystem, open source (with sponsors), the AI team, then the assembly line band by the footer. -->
   <div>
     <HeroSection />
     <DemoSection v-if="demoEnabled" />
@@ -69,5 +75,6 @@ const { demoEnabled } = useRuntimeConfig().public
     <EcosystemSection />
     <CommunitySection />
     <HarnsySection />
+    <AssemblyLineSection />
   </div>
 </template>
