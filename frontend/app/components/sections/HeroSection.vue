@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import HeroCommand from '~/components/sections/HeroSection/HeroCommand.vue'
-import HeroPreview from '~/components/sections/HeroSection/HeroPreview.vue'
+import FeatureViewer from '~/components/sections/HeroSection/FeatureViewer.vue'
 import { FEATURE_RELEASE } from '~/data/features'
 
 // First screen, «product first»: who and what in one line, one line about
-// other languages, one `docker run` with Copy, then the real interface.
+// other languages, one `docker run` with Copy, then the real interface:
+// one tab per feature (FeatureViewer).
 // Other ways to install live in «How it works», step 1.
 const { t } = useI18n()
 const { trackEvent } = useGtag()
@@ -45,7 +46,7 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
         <p class="hero__trust">{{ t('hero.trustLine') }}</p>
       </div>
 
-      <HeroPreview class="hero__preview hero-stagger" style="--i: 4" />
+      <FeatureViewer class="hero__preview hero-stagger" style="--i: 4" />
     </div>
   </section>
 </template>
@@ -146,7 +147,12 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 }
 
 .hero__preview {
+  /* Wider than the text above: all eight feature tabs fit in one row
+     from 1132 px up. Below that the tab row scrolls. */
+  --preview-w: min(1100px, calc(100vw - 32px));
+  width: var(--preview-w);
   margin-top: 44px;
+  margin-left: calc((100% - var(--preview-w)) / 2);
 }
 
 /* ── Stagger ─────────────────────────────────────────────── */

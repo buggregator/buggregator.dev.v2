@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HeroSection from '~/components/sections/HeroSection.vue'
-import RealUiSection from '~/components/sections/RealUiSection.vue'
 import ReplacesSection from '~/components/sections/ReplacesSection.vue'
 import StepsSection from '~/components/sections/StepsSection.vue'
 import FrameworksSection from '~/components/sections/FrameworksSection.vue'
@@ -56,12 +55,11 @@ const { demoEnabled } = useRuntimeConfig().public
 </script>
 
 <template>
-  <!-- Ten blocks, each said once: what it is and the command, the real UI,
-       what it replaces, how it works, your stack, what's new, for teams,
+  <!-- Nine blocks, each said once: what it is and the command with the real
+       UI under it (one tab per feature), what it replaces, how it works, your stack, what's new, for teams,
        ecosystem, open source (with sponsors), then the AI team by the footer. -->
   <div>
     <HeroSection />
-    <RealUiSection />
     <DemoSection v-if="demoEnabled" />
     <ReplacesSection />
     <StepsSection />
