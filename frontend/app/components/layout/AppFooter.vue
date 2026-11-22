@@ -30,6 +30,7 @@ const featureLinks = [
   { label: 'SMS Testing', href: '/features/sms' },
   { label: 'Mock Server', href: '/features/mock-server' },
   { label: 'Xdebug Proxy', href: '/features/xdebug' },
+  { label: 'Dumps (Ray, VarDumper)', href: '/features/dumps' },
   { label: 'Log Viewer', href: '/features/logs' },
   { label: 'HTTP Dumps', href: '/features/http-dumps' },
   { label: 'MCP Server & API', href: '/features/mcp-api' },

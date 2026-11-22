@@ -4,7 +4,7 @@ title: Send ray() calls to a free local viewer
 description: Set RAY_HOST and RAY_PORT in your Laravel .env. Your ray() calls, queries, jobs and mails show up in Buggregator, free and MIT licensed.
 query: ray laravel
 feature: Dumps
-feature_page: null
+feature_page: /features/dumps
 docs: https://docs.buggregator.dev/config/ray.html#laravel
 requires: null
 related: [dump-without-breaking-the-page, laravel-logs-in-a-live-view, laravel-see-outgoing-api-calls]

@@ -146,6 +146,23 @@
   "replaces": {
     "title": "Reemplaza tu stack local de desarrollo — gratis",
     "footer": "Todo esto. Un comando. Sin costo.",
+    "table": {
+      "label": "En lugar de",
+      "title": "Lo que puedes dejar de ejecutar",
+      "subtitle": "Cada fila es una herramienta que se deja abierta durante el desarrollo, y la página de Buggregator que hace lo mismo.",
+      "footer": "Funciona junto a Laravel Telescope y Debugbar.",
+      "rows": {
+        "email": { "instead": "Mailpit · MailHog · Mailtrap's email sandbox", "with": "Pruebas de email", "desc": "Cada email que envía tu app: HTML, cabeceras, adjuntos." },
+        "http": { "instead": "webhook.site · RequestBin", "with": "HTTP dumps", "desc": "Apunta un webhook aquí y lee la petición completa: cabeceras, cuerpo, archivos." },
+        "errors": { "instead": "Sentry self-hosted · GlitchTip, for local dev", "with": "Errores compatibles con Sentry", "desc": "Excepciones, trazas y logs de tu SDK de Sentry." },
+        "mock": { "instead": "Mockoon · WireMock, for mock APIs in dev", "with": "Servidor mock", "desc": "Respuestas listas para las API que llama tu app, por método y ruta." },
+        "dumps": { "instead": "The Ray app, for viewing ray() calls", "with": "Dumps", "desc": "La salida de ray(), dump() y dd() en una pestaña del navegador, con archivo y línea." },
+        "prof": { "instead": "XHProf UI", "with": "Profiler", "desc": "Flame chart, grafo de llamadas y las funciones más lentas de una petición." },
+        "logs": { "instead": "tail -f laravel.log", "with": "Logs", "desc": "Registros de Monolog en vivo, con nivel, canal y contexto." },
+        "proxy": { "instead": "Charles · Fiddler · mitmproxy, in dev", "with": "Proxy HTTP", "desc": "Las llamadas de tu app a otros servicios, con sus respuestas." },
+        "sms": { "instead": "SMS gateway sandboxes", "with": "Pruebas de SMS", "desc": "Los SMS que envía tu app, atrapados antes de llegar a un teléfono." }
+      }
+    },
     "trapNote": "¿Quieres funciones de depuración en tu código? Añade Buggregator Trap — trap(), tr(), td() listas para usar.",
     "tools": {
       "sentry": "Excepciones y stack traces",
