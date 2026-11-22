@@ -8,6 +8,12 @@
     "getStarted": "Empezar"
   },
   "hero": {
+    "xray": {
+      "label": "Vista de rayos X de un bicho detrás del título: mueve el puntero, desliza de lado en una pantalla táctil o usa las flechas.",
+      "hintPointer": "Pasa el cursor sobre el bicho",
+      "hintTouch": "Desliza de lado para escanear el bicho",
+      "hintStill": "Señala el bicho para ver por dentro"
+    },
     "badge": {
       "version": "v{version} · recién lanzada",
       "free": "Gratuito y de código abierto",

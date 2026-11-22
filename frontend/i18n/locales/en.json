@@ -8,6 +8,12 @@
     "getStarted": "Get Started"
   },
   "hero": {
+    "xray": {
+      "label": "X-ray view of a bug behind the heading: move the pointer, drag sideways on a touch screen, or use the arrow keys.",
+      "hintPointer": "Move the cursor over the bug",
+      "hintTouch": "Drag sideways to scan the bug",
+      "hintStill": "Point at the bug to look inside"
+    },
     "badge": {
       "version": "v{version} · just released",
       "free": "Free & Open Source",
