@@ -79,7 +79,7 @@ tcpService:
 ```
 
 ### 5. Sign in and pick a project
-Buggregator lets in anyone who finishes the provider's sign-in. Keep it to your team at the provider: in Google Cloud, set the OAuth app's user type to **Internal**, so only accounts of your Google Workspace can sign in. With Keycloak or GitLab, use a realm or group that holds only your team.
+Buggregator lets in anyone who finishes the provider's sign-in. Keep it to your team at the provider: in Google Cloud, set the OAuth app's user type to **Internal**, so only accounts of your Google Workspace can sign in. With Keycloak, use a realm that holds only your team, with user registration off. With GitLab, only a self-hosted instance limits it to its own users; on gitlab.com any account can sign in.
 
 Open https://mail-sandbox.example.com and sign in with your provider. The project selector in the sidebar switches between apps.
 
