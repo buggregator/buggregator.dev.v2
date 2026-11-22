@@ -399,7 +399,11 @@
     "desc": {
       "cron": "Which scheduled jobs ran, failed or never started.",
       "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",
-      "csp": "What the browser blocked, by directive, with the file and line."
+      "csp": "What the browser blocked, by directive, with the file and line.",
+      "requestTimeline": "Every query, cache call, log and job of one request on one time scale.",
+      "queues": "Which queue jobs failed, how many attempts they took and why.",
+      "logs": "All Monolog lines as one live stream, filtered by level, channel and time.",
+      "feedFilters": "Only your machine, environment, channel or level: one team server, your events."
     },
     "alt": {
       "sentry": "Buggregator Sentry page: an exception with its stack trace",
@@ -409,7 +413,11 @@
       "sms": "Buggregator SMS view showing caught messages with sender, recipient and body",
       "cron": "Buggregator Crons tab: scheduled jobs with status, schedule, last and next run",
       "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
-      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
+      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column",
+      "requestTimeline": "Buggregator request timeline: SQL queries, cache calls, logs and jobs of one Sentry trace on one time scale",
+      "queues": "Buggregator Queues page: queue jobs with status, attempts and the exception of each attempt",
+      "logs": "Buggregator Logs screen: a live stream of Monolog lines with level, channel and time filters",
+      "feedFilters": "Buggregator event feed filtered by machine, environment and level"
     }
   }
 }

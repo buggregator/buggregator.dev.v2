@@ -399,7 +399,11 @@
     "desc": {
       "cron": "Qué tareas programadas se ejecutaron, fallaron o nunca llegaron a arrancar.",
       "broadcast": "Eventos de Laravel Reverb, Pusher y soketi, por canal.",
-      "csp": "Lo que bloqueó el navegador, por directiva, con el archivo y la línea."
+      "csp": "Lo que bloqueó el navegador, por directiva, con el archivo y la línea.",
+      "requestTimeline": "Todas las consultas, cachés, logs y trabajos de una petición en una misma línea de tiempo.",
+      "queues": "Qué trabajos de la cola fallaron, cuántos intentos hicieron y por qué.",
+      "logs": "Todas las líneas de Monolog en un flujo en vivo, filtradas por nivel, canal y tiempo.",
+      "feedFilters": "Solo tu máquina, entorno, canal o nivel: un servidor para el equipo, tus eventos."
     },
     "alt": {
       "sentry": "Página de Sentry en Buggregator: una excepción con su stack trace",
@@ -409,7 +413,11 @@
       "sms": "Vista de SMS de Buggregator: mensajes capturados con remitente, destinatario y texto",
       "cron": "Pestaña Crons de Buggregator: tareas programadas con estado, programación, última y próxima ejecución",
       "broadcast": "Página Broadcast de Buggregator: los canales a la izquierda y, a la derecha, los eventos en vivo de un canal",
-      "csp": "Informe CSP de Buggregator: la página, la directiva, el recurso bloqueado y el archivo con línea y columna"
+      "csp": "Informe CSP de Buggregator: la página, la directiva, el recurso bloqueado y el archivo con línea y columna",
+      "requestTimeline": "Línea de tiempo de Buggregator: consultas SQL, caché, logs y trabajos de una traza de Sentry en una misma escala",
+      "queues": "Página de colas de Buggregator: trabajos con estado, intentos y la excepción de cada intento",
+      "logs": "Pantalla de logs de Buggregator: flujo en vivo de líneas de Monolog con filtros por nivel, canal y tiempo",
+      "feedFilters": "Feed de eventos de Buggregator filtrado por máquina, entorno y nivel"
     }
   }
 }
