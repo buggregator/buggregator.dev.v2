@@ -11,7 +11,7 @@
     "badge": {
       "version": "v{version} · только что вышла",
       "free": "Бесплатный и open source",
-      "release": "v{version}: broadcast-события, cron-задачи, отчёты CSP →"
+      "release": "v{version}: broadcast-события, cron-задачи, отчёты CSP"
     },
     "headline": "Ошибки, дампы, письма и логи вашего PHP-приложения.",
     "headlineSub": "В одном окне.",
@@ -30,11 +30,11 @@
       "docker": "Docker",
       "binary": "Бинарник",
       "binaryNote": "Один файл, около {size}. Ставится одной командой.",
-      "otherWays": "Docker Compose, скачать файл вручную →",
+      "otherWays": "Docker Compose, скачать файл вручную",
       "os": "Операционная система"
     },
     "languages": "Node.js, JavaScript в браузере, Python, Go и Java шлют ошибки через свой Sentry SDK.",
-    "aiAgent": "Пусть AI-агент всё настроит →",
+    "aiAgent": "Пусть AI-агент всё настроит",
     "trustLine": "Бесплатно, открытый код, MIT · Без аккаунта · Windows, macOS, Linux",
     "preview": {
       "label": "Интерфейс Buggregator",
@@ -260,10 +260,10 @@
       "windowsNote": "В Windows недоступен VarDumper (порт 9912). Остальные модули работают."
     },
     "platforms": "Работает на Windows, macOS и Linux — на Intel/AMD и ARM.",
-    "localOnly": "По умолчанию доступен со всех сетевых интерфейсов. Чтобы он был виден только на этом компьютере, — одна настройка →",
-    "localOnlyBound": "Эта команда запуска оставляет его только на этом компьютере. Без настроек *_ADDR он доступен со всех сетевых интерфейсов →",
+    "localOnly": "По умолчанию доступен со всех сетевых интерфейсов. Чтобы он был виден только на этом компьютере, — одна настройка",
+    "localOnlyBound": "Эта команда запуска оставляет его только на этом компьютере. Без настроек *_ADDR он доступен со всех сетевых интерфейсов",
     "scriptCpu": "Скрипт сам выберет файл под ваш процессор: Intel/AMD или ARM.",
-    "agent": "Не хотите настраивать сами? Это может сделать ваш ИИ-агент →",
+    "agent": "Не хотите настраивать сами? Это может сделать ваш ИИ-агент",
     "trust": {
       "free": "Бесплатно навсегда",
       "noReg": "Без регистрации",
@@ -271,9 +271,9 @@
       "oss": "Открытый исходный код (MIT)"
     },
     "links": {
-      "fullGuide": "Полное руководство по установке →",
-      "binaries": "Все файлы на GitHub Releases →",
-      "manual": "Не хотите запускать скрипт? Скачайте файл сами →"
+      "fullGuide": "Полное руководство по установке",
+      "binaries": "Все файлы на GitHub Releases",
+      "manual": "Не хотите запускать скрипт? Скачайте файл сами"
     }
   },
   "demo": {
@@ -283,19 +283,19 @@
     "mobileTitle": "Смотрите на десктопе",
     "mobileBody": "Интерактивное демо лучше всего работает на большом экране. Посетите buggregator.dev на ноутбуке или настольном компьютере.",
     "more": "Ещё инструменты",
-    "docs": "документация →"
+    "docs": "документация"
   },
   "frameworks": {
     "title": "Работает с вашим фреймворком",
     "subtitle": "Без привязки к вендору. Ваш существующий SDK просто работает.",
     "also": "Также: Node.js, JavaScript в браузере, Python, Go и Java — через их Sentry SDK. Любой язык с OpenTelemetry — через OTLP.",
     "alsoRuntime": "Работает с: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
-    "guides": "Руководства по интеграции →"
+    "guides": "Руководства по интеграции"
   },
   "advanced": {
     "title": "Один экземпляр на всю команду",
     "subtitle": "Запустите один Buggregator для всей команды, когда это нужно.",
-    "viewAll": "Все параметры конфигурации →",
+    "viewAll": "Все параметры конфигурации",
     "features": {
       "sso": { "title": "SSO-аутентификация", "desc": "Вход через Auth0, Google, GitHub, Keycloak, GitLab или любой OIDC-провайдер" },
       "db": { "title": "Постоянное хранение", "desc": "События сохраняются между перезапусками в файле SQLite — отдельный сервер БД не нужен" },
@@ -356,7 +356,7 @@
     "headline": "При поддержке сообщества",
     "subheadline": "Buggregator бесплатен навсегда. Спонсоры делают это возможным.",
     "patreonBtn": "Поддержать на Patreon",
-    "learnMore": "Все способы помочь →",
+    "learnMore": "Все способы помочь",
     "becomeCard": "Стать спонсором",
     "empty": "Станьте первым спонсором Buggregator.",
     "page": {
@@ -373,8 +373,8 @@
       "currentSponsors": "Наши спонсоры",
       "noSponsors": "Пока нет спонсоров. Станьте первым!",
       "tiers": {
-        "individual": { "label": "Индивидуальный спонсор", "via": "через Patreon", "from": "От $5/месяц", "cta": "Поддержать на Patreon →" },
-        "company": { "label": "Корпоративный спонсор", "via": "прямой контакт", "from": "Индивидуальные пакеты", "cta": "Связаться →" }
+        "individual": { "label": "Индивидуальный спонсор", "via": "через Patreon", "from": "От $5/месяц", "cta": "Поддержать на Patreon" },
+        "company": { "label": "Корпоративный спонсор", "via": "прямой контакт", "from": "Индивидуальные пакеты", "cta": "Связаться" }
       },
       "contact": {
         "title": "Хотите стать корпоративным спонсором?",
@@ -454,7 +454,7 @@
     "cta": "Перейти на harnsy.dev",
     "operator": {
       "text": "ИИ‑сотрудник для вашей команды в harnsy: ставит Buggregator, подключает ваше приложение и отлаживает через Xdebug.",
-      "cta": "Наймите оператора Buggregator в свой проект →"
+      "cta": "Наймите оператора Buggregator в свой проект"
     }
   },
   "featureMenu": {
@@ -468,9 +468,9 @@
     },
     "new": "NEW",
     "current": "you are here",
-    "allTips": "All tips →",
+    "allTips": "All tips",
     "docs": "Documentation ↗",
-    "whatsNew": "What's new in v{version} →",
+    "whatsNew": "What's new in v{version}",
     "enMarker": "EN",
     "enMarkerLabel": "(page in English)",
     "openMenu": "Open menu",
@@ -479,7 +479,7 @@
   "realUiTabs": {
     "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
     "tabsLabel": "Features",
-    "open": "Open the {feature} page →",
+    "open": "Open the {feature} page",
     "desc": {
       "cron": "Which scheduled jobs ran, failed or never started.",
       "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",

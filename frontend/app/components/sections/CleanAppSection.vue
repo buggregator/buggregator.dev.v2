@@ -73,7 +73,7 @@ const pillars = [
           href="#how-it-works"
           class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors no-underline font-sans"
         >
-          Ready to try it? Jump to install →
+          Ready to try it? Jump to install
         </a>
       </div>
     </div>

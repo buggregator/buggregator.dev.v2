@@ -11,7 +11,7 @@
     "badge": {
       "version": "v{version} · just released",
       "free": "Free & Open Source",
-      "release": "v{version}: broadcasts, cron jobs, CSP reports →"
+      "release": "v{version}: broadcasts, cron jobs, CSP reports"
     },
     "headline": "Errors, dumps, emails and logs from your PHP app.",
     "headlineSub": "In one window.",
@@ -30,11 +30,11 @@
       "docker": "Docker",
       "binary": "Binary",
       "binaryNote": "One file, about {size}. One command installs it.",
-      "otherWays": "Docker Compose, manual download →",
+      "otherWays": "Docker Compose, manual download",
       "os": "Operating system"
     },
     "languages": "Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK.",
-    "aiAgent": "Let an AI agent set it up →",
+    "aiAgent": "Let an AI agent set it up",
     "trustLine": "Free and open source, MIT · No account · Windows, macOS, Linux",
     "preview": {
       "label": "Buggregator interface preview",
@@ -260,10 +260,10 @@
       "windowsNote": "On Windows, VarDumper (port 9912) is not available. Every other module works."
     },
     "platforms": "Runs on Windows, macOS and Linux, on Intel/AMD and ARM.",
-    "localOnly": "Listens on all network interfaces by default. To keep it on this computer only, see the one-line setting →",
-    "localOnlyBound": "This run line keeps it on this computer. Without the *_ADDR settings it listens on all network interfaces →",
+    "localOnly": "Listens on all network interfaces by default. To keep it on this computer only, see the one-line setting",
+    "localOnlyBound": "This run line keeps it on this computer. Without the *_ADDR settings it listens on all network interfaces",
     "scriptCpu": "The script picks the file for your CPU: Intel/AMD or ARM.",
-    "agent": "Prefer not to do it yourself? Your AI agent can set Buggregator up for you →",
+    "agent": "Prefer not to do it yourself? Your AI agent can set Buggregator up for you",
     "trust": {
       "free": "Free forever",
       "noReg": "No registration",
@@ -271,9 +271,9 @@
       "oss": "Open source (MIT)"
     },
     "links": {
-      "fullGuide": "Full installation guide →",
-      "binaries": "All downloads on GitHub Releases →",
-      "manual": "Rather not run a script? Download the file yourself →"
+      "fullGuide": "Full installation guide",
+      "binaries": "All downloads on GitHub Releases",
+      "manual": "Rather not run a script? Download the file yourself"
     }
   },
   "demo": {
@@ -283,19 +283,19 @@
     "mobileTitle": "See it live on desktop",
     "mobileBody": "The interactive demo is best experienced on a larger screen. Visit buggregator.dev on your laptop or desktop to try it live.",
     "more": "More tools",
-    "docs": "docs →"
+    "docs": "docs"
   },
   "frameworks": {
     "title": "Works with your framework",
     "subtitle": "No vendor lock-in. Your existing SDK just works.",
     "also": "Also: Node.js, browser JavaScript, Python, Go and Java — via their Sentry SDK. Any language with OpenTelemetry — via OTLP.",
     "alsoRuntime": "Works with: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
-    "guides": "See integration guides →"
+    "guides": "See integration guides"
   },
   "advanced": {
     "title": "Share one instance with your team",
     "subtitle": "Run one Buggregator for the whole team when you need it.",
-    "viewAll": "View all configuration options →",
+    "viewAll": "View all configuration options",
     "features": {
       "sso": { "title": "SSO Authentication", "desc": "Sign in with Auth0, Google, GitHub, Keycloak, GitLab or any OIDC provider" },
       "db": { "title": "Persistent Storage", "desc": "Keep events across restarts in a SQLite file — no database server to run" },
@@ -356,7 +356,7 @@
     "headline": "Backed by the community",
     "subheadline": "Buggregator is free forever. Sponsors make that possible.",
     "patreonBtn": "Support on Patreon",
-    "learnMore": "See all ways to help →",
+    "learnMore": "See all ways to help",
     "becomeCard": "Become a sponsor",
     "empty": "Be the first to support Buggregator.",
     "page": {
@@ -373,8 +373,8 @@
       "currentSponsors": "Our sponsors",
       "noSponsors": "No sponsors yet. Be the first!",
       "tiers": {
-        "individual": { "label": "Individual sponsor", "via": "via Patreon", "from": "Starting from $5/month", "cta": "Support on Patreon →" },
-        "company": { "label": "Company sponsor", "via": "via direct contact", "from": "Custom packages", "cta": "Contact us →" }
+        "individual": { "label": "Individual sponsor", "via": "via Patreon", "from": "Starting from $5/month", "cta": "Support on Patreon" },
+        "company": { "label": "Company sponsor", "via": "via direct contact", "from": "Custom packages", "cta": "Contact us" }
       },
       "contact": {
         "title": "Want to become a company sponsor?",
@@ -454,7 +454,7 @@
     "cta": "Visit harnsy.dev",
     "operator": {
       "text": "An AI employee that sets up Buggregator, connects your app and debugs with Xdebug — for your harnsy team.",
-      "cta": "Hire the Buggregator operator into your project →"
+      "cta": "Hire the Buggregator operator into your project"
     }
   },
   "featureMenu": {
@@ -468,9 +468,9 @@
     },
     "new": "NEW",
     "current": "you are here",
-    "allTips": "All tips →",
+    "allTips": "All tips",
     "docs": "Documentation ↗",
-    "whatsNew": "What's new in v{version} →",
+    "whatsNew": "What's new in v{version}",
     "enMarker": "EN",
     "enMarkerLabel": "(page in English)",
     "openMenu": "Open menu",
@@ -479,7 +479,7 @@
   "realUiTabs": {
     "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
     "tabsLabel": "Features",
-    "open": "Open the {feature} page →",
+    "open": "Open the {feature} page",
     "desc": {
       "cron": "Which scheduled jobs ran, failed or never started.",
       "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",

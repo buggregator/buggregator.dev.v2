@@ -72,7 +72,7 @@ const isExternal = (href: string) => href.startsWith('http')
               :rel="isExternal(card.href) ? 'noopener' : undefined"
               class="text-sm font-medium text-accent hover:underline font-sans"
             >
-              {{ t(`whatsNew.cards.${card.key}.cta`) }} →
+              {{ t(`whatsNew.cards.${card.key}.cta`) }}
             </a>
             <a
               v-for="link in card.links"
@@ -82,7 +82,7 @@ const isExternal = (href: string) => href.startsWith('http')
               :rel="isExternal(link.href) ? 'noopener' : undefined"
               class="text-sm font-medium text-accent hover:underline font-sans"
             >
-              {{ t(`whatsNew.cards.${card.key}.links.${link.key}`) }} →
+              {{ t(`whatsNew.cards.${card.key}.links.${link.key}`) }}
             </a>
           </div>
         </article>

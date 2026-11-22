@@ -265,7 +265,7 @@ const worksWithItems = [
         <a
           href="#setup"
           class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
-        >Set up the relay →</a>
+        >Set up the relay</a>
       </p>
     </section>
 

@@ -84,7 +84,7 @@ const steps = [
       {"id": {{ path "id" }},
        "name": "{{ fake "name" }}"}`,
         note: 'GET /mock/users/42 → {"id": 42, "name": "Lavina Kuhn"} — the name is fake data, new on every call unless you set a seed.',
-        link: { href: TEMPLATE_DOCS, label: 'Template reference →' },
+        link: { href: TEMPLATE_DOCS, label: 'Template reference' },
       },
       {
         id: 'api',
@@ -127,7 +127,7 @@ const highlights = [
     icon: '\u{1F9EC}',
     title: 'Responses that follow the request',
     description: 'Turn on template for a rule, and its body and headers can use the request: the path {id}, query, headers, JSON body fields. Add fake names, emails and dates, loops and if/else. Body up to 1 MB. Write it in the rule form, with the helpers and fake data one click away, and run a preview before you save.',
-    link: { href: TEMPLATE_DOCS, label: 'Template reference →' },
+    link: { href: TEMPLATE_DOCS, label: 'Template reference' },
   },
   {
     icon: '\u{1F4A5}',

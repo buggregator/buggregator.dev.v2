@@ -11,7 +11,7 @@
     "badge": {
       "version": "v{version} · recién lanzada",
       "free": "Gratuito y de código abierto",
-      "release": "v{version}: eventos broadcast, tareas cron, informes CSP →"
+      "release": "v{version}: eventos broadcast, tareas cron, informes CSP"
     },
     "headline": "Errores, dumps, emails y logs de tu app PHP.",
     "headlineSub": "En una sola ventana.",
@@ -30,11 +30,11 @@
       "docker": "Docker",
       "binary": "Binario",
       "binaryNote": "Un solo archivo, de unos {size}. Se instala con un comando.",
-      "otherWays": "Docker Compose, descarga manual →",
+      "otherWays": "Docker Compose, descarga manual",
       "os": "Sistema operativo"
     },
     "languages": "Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK.",
-    "aiAgent": "Deja que un agente de IA lo configure →",
+    "aiAgent": "Deja que un agente de IA lo configure",
     "trustLine": "Gratis y de código abierto, MIT · Sin cuenta · Windows, macOS, Linux",
     "preview": {
       "label": "Vista previa de la interfaz de Buggregator",
@@ -260,10 +260,10 @@
       "windowsNote": "En Windows, VarDumper (puerto 9912) no está disponible. El resto de módulos funciona."
     },
     "platforms": "Funciona en Windows, macOS y Linux, en Intel/AMD y ARM.",
-    "localOnly": "Por defecto escucha en todas las interfaces de red. Para que solo se vea en este equipo, basta un ajuste →",
-    "localOnlyBound": "Esta línea lo deja solo en este equipo. Sin los ajustes *_ADDR escucha en todas las interfaces de red →",
+    "localOnly": "Por defecto escucha en todas las interfaces de red. Para que solo se vea en este equipo, basta un ajuste",
+    "localOnlyBound": "Esta línea lo deja solo en este equipo. Sin los ajustes *_ADDR escucha en todas las interfaces de red",
     "scriptCpu": "El script elige el archivo para tu procesador: Intel/AMD o ARM.",
-    "agent": "¿Prefieres no hacerlo tú? Tu agente de IA puede configurar Buggregator por ti →",
+    "agent": "¿Prefieres no hacerlo tú? Tu agente de IA puede configurar Buggregator por ti",
     "trust": {
       "free": "Gratis para siempre",
       "noReg": "Sin registro",
@@ -271,9 +271,9 @@
       "oss": "Código abierto (MIT)"
     },
     "links": {
-      "fullGuide": "Guía completa de instalación →",
-      "binaries": "Todas las descargas en GitHub Releases →",
-      "manual": "¿Prefieres no ejecutar un script? Descarga el archivo tú mismo →"
+      "fullGuide": "Guía completa de instalación",
+      "binaries": "Todas las descargas en GitHub Releases",
+      "manual": "¿Prefieres no ejecutar un script? Descarga el archivo tú mismo"
     }
   },
   "demo": {
@@ -283,19 +283,19 @@
     "mobileTitle": "Verlo en escritorio",
     "mobileBody": "El demo interactivo se experimenta mejor en una pantalla grande. Visita buggregator.dev en tu portátil o escritorio.",
     "more": "Más herramientas",
-    "docs": "documentación →"
+    "docs": "documentación"
   },
   "frameworks": {
     "title": "Funciona con tu framework",
     "subtitle": "Sin vendor lock-in. Tu SDK existente simplemente funciona.",
     "also": "También: Node.js, JavaScript en el navegador, Python, Go y Java — vía su Sentry SDK. Cualquier lenguaje con OpenTelemetry — vía OTLP.",
     "alsoRuntime": "Funciona con: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
-    "guides": "Ver guías de integración →"
+    "guides": "Ver guías de integración"
   },
   "advanced": {
     "title": "Una instancia para todo tu equipo",
     "subtitle": "Ejecuta un solo Buggregator para todo el equipo cuando lo necesites.",
-    "viewAll": "Ver todas las opciones de configuración →",
+    "viewAll": "Ver todas las opciones de configuración",
     "features": {
       "sso": { "title": "Autenticación SSO", "desc": "Inicio de sesión con Auth0, Google, GitHub, Keycloak, GitLab o cualquier proveedor OIDC" },
       "db": { "title": "Almacenamiento persistente", "desc": "Conserva los eventos entre reinicios en un archivo SQLite, sin servidor de base de datos" },
@@ -356,7 +356,7 @@
     "headline": "Respaldado por la comunidad",
     "subheadline": "Buggregator es gratis para siempre. Los sponsors lo hacen posible.",
     "patreonBtn": "Apoyar en Patreon",
-    "learnMore": "Ver todas las formas de ayudar →",
+    "learnMore": "Ver todas las formas de ayudar",
     "becomeCard": "Conviértete en sponsor",
     "empty": "Sé el primero en apoyar Buggregator.",
     "page": {
@@ -373,8 +373,8 @@
       "currentSponsors": "Nuestros sponsors",
       "noSponsors": "Aún no hay sponsors. ¡Sé el primero!",
       "tiers": {
-        "individual": { "label": "Sponsor individual", "via": "vía Patreon", "from": "Desde $5/mes", "cta": "Apoyar en Patreon →" },
-        "company": { "label": "Sponsor empresarial", "via": "vía contacto directo", "from": "Paquetes personalizados", "cta": "Contactar →" }
+        "individual": { "label": "Sponsor individual", "via": "vía Patreon", "from": "Desde $5/mes", "cta": "Apoyar en Patreon" },
+        "company": { "label": "Sponsor empresarial", "via": "vía contacto directo", "from": "Paquetes personalizados", "cta": "Contactar" }
       },
       "contact": {
         "title": "¿Quieres ser sponsor empresarial?",
@@ -454,7 +454,7 @@
     "cta": "Visitar harnsy.dev",
     "operator": {
       "text": "Un empleado de IA para tu equipo en harnsy: instala Buggregator, conecta tu aplicación y depura con Xdebug.",
-      "cta": "Contrata al operador de Buggregator para tu proyecto →"
+      "cta": "Contrata al operador de Buggregator para tu proyecto"
     }
   },
   "featureMenu": {
@@ -468,9 +468,9 @@
     },
     "new": "NEW",
     "current": "you are here",
-    "allTips": "All tips →",
+    "allTips": "All tips",
     "docs": "Documentation ↗",
-    "whatsNew": "What's new in v{version} →",
+    "whatsNew": "What's new in v{version}",
     "enMarker": "EN",
     "enMarkerLabel": "(page in English)",
     "openMenu": "Open menu",
@@ -479,7 +479,7 @@
   "realUiTabs": {
     "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
     "tabsLabel": "Features",
-    "open": "Open the {feature} page →",
+    "open": "Open the {feature} page",
     "desc": {
       "cron": "Which scheduled jobs ran, failed or never started.",
       "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",

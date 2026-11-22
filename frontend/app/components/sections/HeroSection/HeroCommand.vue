@@ -64,8 +64,8 @@ async function onCopy() {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
-  padding: 8px 8px 8px 16px;
+  gap: 10px;
+  padding: 12px;
   border: 1px solid theme('colors.landing-border');
   border-radius: 10px;
   background: theme('colors.code.bg');
@@ -154,10 +154,6 @@ async function onCopy() {
 }
 
 @media (max-width: 639px) {
-  .hero-cmd {
-    padding: 12px;
-  }
-
   .hero-cmd__tabs {
     width: 100%;
   }

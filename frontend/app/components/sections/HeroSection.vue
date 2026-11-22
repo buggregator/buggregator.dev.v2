@@ -34,14 +34,30 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 
       <div class="hero__action hero-stagger" style="--i: 3">
         <HeroCommand />
+        <!-- Secondary ways in: ghost buttons with an icon, no arrows. -->
         <div class="hero__under">
-          <a href="#how-it-works" @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'other_ways' })">{{ t('hero.install.otherWays') }}</a>
+          <a
+            href="#how-it-works"
+            class="hero__alt"
+            @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'other_ways' })"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 13 9 5 9-5" />
+            </svg>
+            {{ t('hero.install.otherWays') }}
+          </a>
           <a
             :href="AGENT_SETUP_URL"
             target="_blank"
             rel="noopener"
+            class="hero__alt"
             @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'agent_setup' })"
-          >{{ t('hero.aiAgent') }}</a>
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v3M12 18v3M3 12h3M18 12h3" /><path d="m12 8 1.2 2.8L16 12l-2.8 1.2L12 16l-1.2-2.8L8 12l2.8-1.2L12 8Z" />
+            </svg>
+            {{ t('hero.aiAgent') }}
+          </a>
         </div>
         <p class="hero__trust">{{ t('hero.trustLine') }}</p>
       </div>
@@ -123,20 +139,42 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px 20px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.hero__alt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid theme('colors.landing-border');
+  border-radius: 999px;
+  background: theme('colors.landing-surface');
+  color: theme('colors.on-dark.secondary');
   font-family: "DM Sans", sans-serif;
   font-size: 14px;
-}
-
-.hero__under a {
-  color: theme('colors.accent.DEFAULT');
+  font-weight: 500;
   text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease;
 }
 
-.hero__under a:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.hero__alt svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: theme('colors.accent.DEFAULT');
+}
+
+.hero__alt:hover {
+  color: #fff;
+  border-color: theme('colors.accent.DEFAULT');
+}
+
+.hero__alt:focus-visible {
+  outline: 2px solid theme('colors.accent.DEFAULT');
+  outline-offset: 2px;
 }
 
 .hero__trust {
@@ -183,14 +221,8 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
     margin-top: 24px;
   }
 
-  .hero__under {
-    gap: 0 14px;
-  }
-
-  .hero__under a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
+  .hero__alt {
+    height: 44px;
   }
 
   .hero__preview {

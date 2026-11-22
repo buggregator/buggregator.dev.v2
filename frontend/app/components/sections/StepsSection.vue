@@ -196,7 +196,7 @@ const trustBadges = computed(() => [
               rel="noopener"
               class="inline-flex items-center gap-2 font-mono text-base text-accent hover:text-accent-hover transition-colors no-underline"
             >
-              http://127.0.0.1:8000 →
+              http://127.0.0.1:8000
             </a>
           </template>
           <template #preview>
