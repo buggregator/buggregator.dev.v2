@@ -288,7 +288,7 @@ const worksWithItems = [
         <ul class="grid gap-4 sm:grid-cols-2 text-on-dark-secondary leading-relaxed list-none p-0 m-0">
           <li><strong class="text-white">Apple Watch.</strong> The watch version at phone width, with its source.</li>
           <li><strong class="text-white">AMP.</strong> A static view of the AMP version (its scripts do not run), with its source.</li>
-          <li><strong class="text-white">Calendar invite.</strong> A card above the email: what, when, where, the organizer and who accepted, declined or has not answered. The time is in your time zone; a cancelled invite is struck out.</li>
+          <li><strong class="text-white">Calendar invite.</strong> A card above the email: what, when, where, the organizer and who accepted, declined or has not answered. The time is in your time zone, or in the sender's with its name when the zone is unknown; a cancelled invite is struck out.</li>
           <li><strong class="text-white">Bounces and receipts.</strong> Delivery status, Read receipt and Original headers tabs.</li>
           <li class="sm:col-span-2"><strong class="text-white">In the list.</strong> Emails are marked Watch, AMP, Invite or Cancelled, and an invite shows its title and time in one line.</li>
         </ul>
