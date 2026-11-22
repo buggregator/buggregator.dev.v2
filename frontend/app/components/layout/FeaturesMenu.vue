@@ -127,7 +127,6 @@ onBeforeUnmount(() => {
       ref="trigger"
       type="button"
       class="features-menu__trigger"
-      aria-haspopup="true"
       :aria-expanded="open"
       aria-controls="features-menu-panel"
       @click="onTriggerClick"

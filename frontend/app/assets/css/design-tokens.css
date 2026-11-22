@@ -64,13 +64,6 @@ html {
   --color-var-dump: #ef4444;
   --color-sms: #c084fc;
 
-  /* ── Version badge ── */
-  --version-bg: rgba(59, 130, 246, 0.12);
-  --version-border: rgba(59, 130, 246, 0.25);
-  --version-text: #60a5fa;
-  --version-dot-new: #f59e0b;
-  --version-dot-stable: #22c55e;
-
   /* ── Trust badge ── */
   --badge-bg: rgba(255, 255, 255, 0.06);
   --badge-border: rgba(255, 255, 255, 0.1);

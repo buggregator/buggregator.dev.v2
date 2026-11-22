@@ -94,67 +94,7 @@
   },
   "cleanApp": {
     "headline": "Your app doesn't know we exist.",
-    "subheadline": "Not a package. A server.",
-    "telescopeCallout": {
-      "quote": "Telescope works inside your app. Buggregator works beside it.",
-      "body": "Zero performance overhead. Works with RoadRunner, FrankenPHP, Swoole, and Octane. Catches emails, SMS, and external HTTP — things Telescope never sees. Works across every service in your stack."
-    },
-    "body": "Buggregator runs beside your application — as one binary or one Docker container. Your codebase doesn't change. Your dependencies don't change. You already have the SDKs installed — they just need a different address.",
-    "pillars": {
-      "noDeps": {
-        "title": "No new dependencies",
-        "body": "Your app's composer.json stays untouched. No service providers. No migrations. No Buggregator code inside your project."
-      },
-      "oneEnvVar": {
-        "title": "One env variable",
-        "body": "Already using Sentry SDK, VarDumper, or Monolog? Change where they send data. That's it. Your code doesn't need to know about Buggregator."
-      },
-      "crossProject": {
-        "title": "One instance, all your apps",
-        "body": "Run one Buggregator — binary or container. Point all your projects at it. Microservices, monorepos, multiple teams — one dashboard."
-      }
-    },
-    "devEnv": {
-      "headline": "Made for dev environments.",
-      "subheadline": "No account. No credit card. No project setup.",
-      "body": "Add Buggregator to your docker-compose.yml alongside your other services. Change your .env. Start debugging. That's 60 seconds — not 15 minutes of cloud dashboard configuration.",
-      "cloudSetup": {
-        "label": "Getting started with Sentry / Mailtrap / Blackfire:",
-        "steps": ["Create an account", "Verify your email", "Create an organization", "Create a project", "Choose your platform / SDK", "Copy DSN or credentials", "Paste into your .env", "Wait for first event to arrive"],
-        "footer": "~15 minutes before you see a single debug event"
-      },
-      "buggregatorSetup": {
-        "label": "Getting started with Buggregator:",
-        "steps": ["Add to docker-compose.yml", "Change your .env"],
-        "footer": "Open http://127.0.0.1:8000 — done."
-      },
-      "composeCaption": "No environment configuration needed. Works out of the box.",
-      "privacy": "Your debug data stays on your machine unless you send it on yourself. No cloud storage. No third-party servers."
-    },
-    "envComparison": {
-      "title": "Just change the address",
-      "tabs": {
-        "sentry": "Sentry DSN",
-        "email": "Email",
-        "varDumper": "VarDumper",
-        "logs": "Logs",
-        "proxy": "HTTP Proxy"
-      },
-      "beforeLabel": "BEFORE",
-      "afterLabel": "AFTER",
-      "sentryAnnotation": "Only the host changed. Your Sentry SDK keeps working exactly the same.",
-      "sentryNote": "Buggregator speaks the Sentry protocol."
-    },
-    "table": {
-      "title": "How does it compare?",
-      "disclaimer": "Telescope and Ray are excellent tools for their use cases. This comparison highlights the architectural difference: Buggregator is infrastructure, not a library.",
-      "cols": {
-        "feature": "Feature",
-        "buggregator": "Buggregator",
-        "telescope": "Laravel Telescope",
-        "ray": "Ray (spatie)"
-      }
-    }
+    "subheadline": "Not a package. A server."
   },
   "replaces": {
     "title": "Replaces your local dev stack — for free",
@@ -211,40 +151,6 @@
         "description": "Exceptions, logs, dumps, emails, profiling, HTTP requests — all in real time, all in one tab."
       }
     }
-  },
-  "showcase": {
-    "title": "Everything in one dashboard",
-    "subtitle": "12 debugging tools. One interface.",
-    "guideLink": "Read the guide",
-    "tabs": {
-      "exceptions": "Exceptions",
-      "profiler": "Profiler",
-      "vardump": "VarDump",
-      "ray": "Ray",
-      "emails": "Emails",
-      "logs": "Logs",
-      "http": "HTTP",
-      "httpProxy": "HTTP Proxy",
-      "inspector": "Inspector",
-      "sms": "SMS",
-      "mockServer": "Mock Server",
-      "xdebug": "Xdebug"
-    },
-    "descriptions": {
-      "exceptions": "Catch unhandled exceptions with full stack traces via Sentry SDK. See exactly where your code breaks.",
-      "profiler": "Visualize XHProf call graphs to find performance bottlenecks. Click any node to trace the path from entry point.",
-      "vardump": "Inspect variables with dump(). See object properties, array contents, and types — right in the browser.",
-      "ray": "Debug with ray() — tables, queries, models, jobs, mail, counters and 18 more payload types. Works with PHP, JS, Ruby, Go SDKs.",
-      "emails": "Intercept outgoing emails during development. Preview HTML, inspect headers — nothing goes out unless you send it to your inbox.",
-      "logs": "Aggregate Monolog, Symfony, and Laravel logs in real time. Search by message, channel or level.",
-      "http": "Capture and inspect incoming HTTP requests. See headers, body, and query parameters at a glance.",
-      "httpProxy": "See every HTTP request your app makes to external APIs — with full response. Set HTTP_PROXY and capture Guzzle, cURL, and SDK calls. Replaces Charles, Fiddler, and mitmproxy.",
-      "inspector": "Monitor application performance with transaction tracing, memory tracking, and timeline breakdowns. Local APM alternative.",
-      "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more.",
-      "mockServer": "Fake the API your app depends on. Set a rule — method, path, status, headers, body, delay — and /mock answers with it. Every call is captured, with the rule that answered or why none matched.",
-      "xdebug": "See a paused Xdebug session in the browser: stack, variables, source, and watches when eval is on. Stepping stays in your IDE, which gets the session unchanged; your AI assistant can read it over MCP. Off by default."
-    },
-    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
   },
   "install": {
     "title": "Get started in 60 seconds",
@@ -344,13 +250,7 @@
     }
   },
   "stats": {
-    "title": "Growing every day",
-    "description": "Stars and downloads across all repositories.",
-    "stars": "Total Stars",
-    "downloads": "Total Downloads",
-    "serverDownloads": "Server",
-    "trapDownloads": "Trap",
-    "collectingData": "Collecting data — charts will appear soon."
+    "downloads": "Total Downloads"
   },
   "sponsors": {
     "headline": "Backed by the community",

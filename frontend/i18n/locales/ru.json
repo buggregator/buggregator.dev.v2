@@ -34,7 +34,7 @@
       "os": "Операционная система"
     },
     "languages": "Node.js, JavaScript в браузере, Python, Go и Java шлют ошибки через свой Sentry SDK.",
-    "aiAgent": "Пусть AI-агент всё настроит",
+    "aiAgent": "Пусть ИИ-агент всё настроит",
     "trustLine": "Бесплатно, открытый код, MIT · Без аккаунта · Windows, macOS, Linux",
     "preview": {
       "label": "Интерфейс Buggregator",
@@ -94,67 +94,7 @@
   },
   "cleanApp": {
     "headline": "Ваше приложение не знает о нас.",
-    "subheadline": "Не пакет. Сервер.",
-    "telescopeCallout": {
-      "quote": "Telescope работает внутри вашего приложения. Buggregator — рядом с ним.",
-      "body": "Нулевое влияние на производительность. Работает с RoadRunner, FrankenPHP, Swoole и Octane. Перехватывает письма, SMS и внешние HTTP-запросы — то, что Telescope никогда не увидит. Работает со всеми сервисами в вашем стеке."
-    },
-    "body": "Buggregator работает рядом с приложением — одним файлом или одним Docker-контейнером. Код не меняется. Зависимости не меняются. SDK у вас уже стоят — им нужен только другой адрес.",
-    "pillars": {
-      "noDeps": {
-        "title": "Без новых зависимостей",
-        "body": "Ваш composer.json остаётся нетронутым. Никаких сервис-провайдеров. Никаких миграций. Никакого кода Buggregator внутри вашего проекта."
-      },
-      "oneEnvVar": {
-        "title": "Одна переменная окружения",
-        "body": "Уже используете Sentry SDK, VarDumper или Monolog? Измените адрес, куда они отправляют данные. Всё. Вашему коду не нужно знать о Buggregator."
-      },
-      "crossProject": {
-        "title": "Один экземпляр, все ваши приложения",
-        "body": "Запустите один Buggregator — файлом или контейнером. Направьте на него все проекты. Микросервисы, монорепозитории, несколько команд — одна панель."
-      }
-    },
-    "devEnv": {
-      "headline": "Создан для dev-окружений.",
-      "subheadline": "Без аккаунта. Без карты. Без настройки проекта.",
-      "body": "Добавьте Buggregator в docker-compose.yml рядом с другими сервисами. Измените .env. Начните отладку. Это 60 секунд — а не 15 минут настройки облачного дашборда.",
-      "cloudSetup": {
-        "label": "Начало работы с Sentry / Mailtrap / Blackfire:",
-        "steps": ["Создать аккаунт", "Подтвердить email", "Создать организацию", "Создать проект", "Выбрать платформу / SDK", "Скопировать DSN или учётные данные", "Вставить в .env", "Ждать первого события"],
-        "footer": "~15 минут до первого события отладки"
-      },
-      "buggregatorSetup": {
-        "label": "Начало работы с Buggregator:",
-        "steps": ["Добавить в docker-compose.yml", "Изменить .env"],
-        "footer": "Откройте http://127.0.0.1:8000 — готово."
-      },
-      "composeCaption": "Не нужна настройка окружения. Работает из коробки.",
-      "privacy": "Данные отладки остаются на вашей машине, если вы сами не отправите их дальше. Без облачного хранилища. Без сторонних серверов."
-    },
-    "envComparison": {
-      "title": "Просто измените адрес",
-      "tabs": {
-        "sentry": "Sentry DSN",
-        "email": "Email",
-        "varDumper": "VarDumper",
-        "logs": "Логи",
-        "proxy": "HTTP Прокси"
-      },
-      "beforeLabel": "БЫЛО",
-      "afterLabel": "СТАЛО",
-      "sentryAnnotation": "Изменился только хост. Ваш Sentry SDK работает точно так же.",
-      "sentryNote": "Buggregator говорит на протоколе Sentry."
-    },
-    "table": {
-      "title": "Сравнение",
-      "disclaimer": "Telescope и Ray — отличные инструменты для своих задач. Это сравнение подчёркивает архитектурную разницу: Buggregator — это инфраструктура, а не библиотека.",
-      "cols": {
-        "feature": "Возможность",
-        "buggregator": "Buggregator",
-        "telescope": "Laravel Telescope",
-        "ray": "Ray (spatie)"
-      }
-    }
+    "subheadline": "Не пакет. Сервер."
   },
   "replaces": {
     "title": "Заменяет ваш локальный dev-стек — бесплатно",
@@ -170,7 +110,7 @@
         "errors": { "instead": "Sentry self-hosted · GlitchTip — для локальной разработки", "with": "Ошибки в формате Sentry", "desc": "Исключения, трейсы и логи из вашего Sentry SDK." },
         "mock": { "instead": "Mockoon · WireMock — моки API при разработке", "with": "Мок-сервер", "desc": "Готовые ответы для API, которые вызывает приложение, по методу и пути." },
         "dumps": { "instead": "Приложение Ray для вызовов ray()", "with": "Дампы", "desc": "Вывод ray(), dump() и dd() во вкладке браузера, с файлом и строкой." },
-        "prof": { "instead": "XHProf UI", "with": "Профилировщик", "desc": "Флейм-график, граф вызовов и самые медленные функции запроса." },
+        "prof": { "instead": "XHProf UI", "with": "Профайлер", "desc": "Флейм-график, граф вызовов и самые медленные функции запроса." },
         "logs": { "instead": "tail -f laravel.log", "with": "Логи", "desc": "Записи Monolog вживую, с уровнем, каналом и контекстом." },
         "proxy": { "instead": "Charles · Fiddler · mitmproxy при разработке", "with": "HTTP-прокси", "desc": "Запросы вашего приложения к другим сервисам вместе с ответами." },
         "sms": { "instead": "Песочницы SMS-шлюзов", "with": "Тестирование SMS", "desc": "SMS вашего приложения ловятся до того, как дойдут до телефона." }
@@ -211,40 +151,6 @@
         "description": "Исключения, логи, дампы, письма, профилирование, HTTP-запросы — всё в реальном времени, в одной вкладке."
       }
     }
-  },
-  "showcase": {
-    "title": "Всё в одной панели",
-    "subtitle": "12 инструментов отладки. Один интерфейс.",
-    "guideLink": "Читать руководство",
-    "tabs": {
-      "exceptions": "Исключения",
-      "profiler": "Профайлер",
-      "vardump": "VarDump",
-      "ray": "Ray",
-      "emails": "Письма",
-      "logs": "Логи",
-      "http": "HTTP",
-      "httpProxy": "HTTP Прокси",
-      "inspector": "Inspector",
-      "sms": "SMS",
-      "mockServer": "Mock-сервер",
-      "xdebug": "Xdebug"
-    },
-    "descriptions": {
-      "exceptions": "Перехватывайте необработанные исключения с полными стек-трейсами через Sentry SDK. Видите точное место ошибки в коде.",
-      "profiler": "Визуализируйте call-графы XHProf для поиска узких мест производительности. Кликните на любой узел, чтобы проследить путь от точки входа.",
-      "vardump": "Инспектируйте переменные через dump(). Свойства объектов, содержимое массивов, типы — прямо в браузере.",
-      "ray": "Отлаживайте через ray() — таблицы, запросы, модели, задачи, почта, счётчики и ещё 18 типов. Работает с PHP, JS, Ruby, Go SDK.",
-      "emails": "Перехватывайте исходящие письма при разработке. Предпросмотр HTML, инспекция заголовков — ничего не уходит, пока вы сами не отправите письмо себе в ящик.",
-      "logs": "Агрегируйте логи Monolog, Symfony и Laravel в реальном времени. Поиск по сообщению, каналу или уровню.",
-      "http": "Перехватывайте и инспектируйте входящие HTTP-запросы. Заголовки, тело и параметры запроса — всё на виду.",
-      "httpProxy": "Видите каждый HTTP-запрос вашего приложения к внешним API — с полным ответом. Установите HTTP_PROXY и перехватывайте вызовы Guzzle, cURL и SDK. Заменяет Charles, Fiddler и mitmproxy.",
-      "inspector": "Мониторинг производительности с трассировкой транзакций, отслеживанием памяти и разбивкой по временной шкале. Локальная альтернатива APM.",
-      "sms": "Перехватывайте исходящие SMS при разработке. Автоопределение 40+ провайдеров, включая Twilio, Vonage, Plivo, Sinch и другие.",
-      "mockServer": "Подмените внешний API. Задайте правило — метод, путь, статус, заголовки, тело, задержку — и /mock ответит по нему. Каждый вызов сохраняется: видно, какое правило ответило или почему ни одно не подошло.",
-      "xdebug": "Смотрите остановленную сессию Xdebug в браузере: стек, переменные, исходный код, а при включённом eval — watch-выражения. Пошаговое выполнение остаётся в IDE, которая получает сессию без изменений; ИИ-ассистент может читать её через MCP. По умолчанию выключено."
-    },
-    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
   },
   "install": {
     "title": "Начните за 60 секунд",
@@ -344,13 +250,7 @@
     }
   },
   "stats": {
-    "title": "Растём каждый день",
-    "description": "Звёзды и скачивания по всем репозиториям.",
-    "stars": "Всего звёзд",
-    "downloads": "Всего скачиваний",
-    "serverDownloads": "Сервер",
-    "trapDownloads": "Trap",
-    "collectingData": "Собираем данные — графики появятся скоро."
+    "downloads": "Всего скачиваний"
   },
   "sponsors": {
     "headline": "При поддержке сообщества",
@@ -459,41 +359,41 @@
   },
   "featureMenu": {
     "groups": {
-      "errors": "Errors & traces",
-      "perf": "Performance",
+      "errors": "Ошибки и трейсы",
+      "perf": "Производительность",
       "http": "HTTP",
-      "mail": "Mail & messaging",
-      "logs": "Logs & jobs",
-      "agents": "For AI agents"
+      "mail": "Почта и сообщения",
+      "logs": "Логи и задачи",
+      "agents": "Для ИИ-агентов"
     },
-    "new": "NEW",
-    "current": "you are here",
-    "allTips": "All tips",
-    "docs": "Documentation ↗",
-    "whatsNew": "What's new in v{version}",
+    "new": "НОВОЕ",
+    "current": "вы здесь",
+    "allTips": "Все советы",
+    "docs": "Документация ↗",
+    "whatsNew": "Что нового в v{version}",
     "enMarker": "EN",
-    "enMarkerLabel": "(page in English)",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "enMarkerLabel": "(страница на английском)",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню"
   },
   "realUiTabs": {
-    "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
-    "tabsLabel": "Features",
-    "open": "Open the {feature} page",
+    "subtitle": "Настоящий интерфейс, а не рисунок. Выберите функцию, чтобы увидеть её экран.",
+    "tabsLabel": "Возможности",
+    "open": "Открыть страницу {feature}",
     "desc": {
-      "cron": "Which scheduled jobs ran, failed or never started.",
-      "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",
-      "csp": "What the browser blocked, by directive, with the file and line."
+      "cron": "Какие задачи по расписанию отработали, упали или так и не запустились.",
+      "broadcast": "События Laravel Reverb, Pusher и soketi по каналам.",
+      "csp": "Что заблокировал браузер: по директивам, с файлом и строкой."
     },
     "alt": {
-      "sentry": "Buggregator Sentry page: an exception with its stack trace",
-      "email": "Buggregator email preview with HTML rendering, attachments and raw source",
-      "profiler": "Buggregator call graph showing PHP function execution times",
-      "proxy": "Buggregator HTTP proxy showing a request and its response with headers and body",
-      "sms": "Buggregator SMS view showing caught messages with sender, recipient and body",
-      "cron": "Buggregator Crons tab: scheduled jobs with status, schedule, last and next run",
-      "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
-      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
+      "sentry": "Страница Sentry в Buggregator: исключение со стек-трейсом",
+      "email": "Предпросмотр письма в Buggregator: HTML, вложения и исходный текст",
+      "profiler": "Граф вызовов в Buggregator со временем выполнения PHP-функций",
+      "proxy": "HTTP-прокси в Buggregator: запрос и ответ с заголовками и телом",
+      "sms": "SMS в Buggregator: пойманные сообщения с отправителем, получателем и текстом",
+      "cron": "Вкладка Crons в Buggregator: задачи по расписанию со статусом, расписанием, последним и следующим запуском",
+      "broadcast": "Страница Broadcast в Buggregator: слева каналы, справа события одного канала в реальном времени",
+      "csp": "CSP-отчёт в Buggregator: страница, директива, заблокированный ресурс и файл со строкой и столбцом"
     }
   }
 }

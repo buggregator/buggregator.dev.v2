@@ -94,67 +94,7 @@
   },
   "cleanApp": {
     "headline": "Tu app no sabe que existimos.",
-    "subheadline": "No es un paquete. Es un servidor.",
-    "telescopeCallout": {
-      "quote": "Telescope funciona dentro de tu app. Buggregator funciona al lado.",
-      "body": "Cero impacto en el rendimiento. Funciona con RoadRunner, FrankenPHP, Swoole y Octane. Captura emails, SMS y HTTP externos — cosas que Telescope nunca ve. Funciona con todos los servicios de tu stack."
-    },
-    "body": "Buggregator se ejecuta junto a tu aplicación, como un único binario o un contenedor Docker. Tu código no cambia. Tus dependencias no cambian. Ya tienes los SDK instalados: solo necesitan otra dirección.",
-    "pillars": {
-      "noDeps": {
-        "title": "Sin nuevas dependencias",
-        "body": "Tu composer.json permanece intacto. Sin service providers. Sin migraciones. Sin código de Buggregator dentro de tu proyecto."
-      },
-      "oneEnvVar": {
-        "title": "Una variable de entorno",
-        "body": "¿Ya usas Sentry SDK, VarDumper o Monolog? Cambia a dónde envían los datos. Eso es todo. Tu código no necesita saber sobre Buggregator."
-      },
-      "crossProject": {
-        "title": "Una instancia, todas tus apps",
-        "body": "Ejecuta un solo Buggregator, binario o contenedor. Apunta todos tus proyectos a él. Microservicios, monorepos, varios equipos: un solo panel."
-      }
-    },
-    "devEnv": {
-      "headline": "Hecho para entornos de desarrollo.",
-      "subheadline": "Sin cuenta. Sin tarjeta. Sin configuración de proyecto.",
-      "body": "Añade Buggregator a tu docker-compose.yml junto a tus otros servicios. Cambia tu .env. Empieza a depurar. Son 60 segundos — no 15 minutos de configuración en la nube.",
-      "cloudSetup": {
-        "label": "Empezar con Sentry / Mailtrap / Blackfire:",
-        "steps": ["Crear una cuenta", "Verificar tu email", "Crear una organización", "Crear un proyecto", "Elegir plataforma / SDK", "Copiar DSN o credenciales", "Pegar en tu .env", "Esperar el primer evento"],
-        "footer": "~15 minutos antes de ver un solo evento de depuración"
-      },
-      "buggregatorSetup": {
-        "label": "Empezar con Buggregator:",
-        "steps": ["Añadir a docker-compose.yml", "Cambiar tu .env"],
-        "footer": "Abre http://127.0.0.1:8000 — listo."
-      },
-      "composeCaption": "Sin configuración de entorno necesaria. Funciona de inmediato.",
-      "privacy": "Tus datos de depuración se quedan en tu máquina, salvo que tú mismo los envíes. Sin almacenamiento en la nube. Sin servidores de terceros."
-    },
-    "envComparison": {
-      "title": "Solo cambia la dirección",
-      "tabs": {
-        "sentry": "Sentry DSN",
-        "email": "Email",
-        "varDumper": "VarDumper",
-        "logs": "Logs",
-        "proxy": "HTTP Proxy"
-      },
-      "beforeLabel": "ANTES",
-      "afterLabel": "DESPUÉS",
-      "sentryAnnotation": "Solo cambió el host. Tu Sentry SDK sigue funcionando exactamente igual.",
-      "sentryNote": "Buggregator habla el protocolo Sentry."
-    },
-    "table": {
-      "title": "Comparación",
-      "disclaimer": "Telescope y Ray son herramientas excelentes para sus casos de uso. Esta comparación destaca la diferencia arquitectónica: Buggregator es infraestructura, no una biblioteca.",
-      "cols": {
-        "feature": "Característica",
-        "buggregator": "Buggregator",
-        "telescope": "Laravel Telescope",
-        "ray": "Ray (spatie)"
-      }
-    }
+    "subheadline": "No es un paquete. Es un servidor."
   },
   "replaces": {
     "title": "Reemplaza tu stack local de desarrollo — gratis",
@@ -211,40 +151,6 @@
         "description": "Excepciones, logs, dumps, emails, profiling, peticiones HTTP — todo en tiempo real, en una pestaña."
       }
     }
-  },
-  "showcase": {
-    "title": "Todo en un dashboard",
-    "subtitle": "12 herramientas de depuración. Una interfaz.",
-    "guideLink": "Leer la guía",
-    "tabs": {
-      "exceptions": "Excepciones",
-      "profiler": "Profiler",
-      "vardump": "VarDump",
-      "ray": "Ray",
-      "emails": "Emails",
-      "logs": "Logs",
-      "http": "HTTP",
-      "httpProxy": "HTTP Proxy",
-      "inspector": "Inspector",
-      "sms": "SMS",
-      "mockServer": "Mock Server",
-      "xdebug": "Xdebug"
-    },
-    "descriptions": {
-      "exceptions": "Captura excepciones no manejadas con stack traces completos vía Sentry SDK. Ve exactamente dónde falla tu código.",
-      "profiler": "Visualiza call graphs de XHProf para encontrar cuellos de botella. Haz clic en cualquier nodo para trazar la ruta desde el punto de entrada.",
-      "vardump": "Inspecciona variables con dump(). Propiedades de objetos, contenido de arrays y tipos — directo en el navegador.",
-      "ray": "Depura con ray() — tablas, consultas, modelos, jobs, mail, contadores y 18 tipos más. Funciona con SDKs de PHP, JS, Ruby, Go.",
-      "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — nada sale salvo que tú lo envíes a tu bandeja.",
-      "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Busca por mensaje, canal o nivel.",
-      "http": "Captura e inspecciona peticiones HTTP entrantes. Headers, body y parámetros de consulta de un vistazo.",
-      "httpProxy": "Ve cada petición HTTP que tu app hace a APIs externas — con respuesta completa. Configura HTTP_PROXY y captura llamadas de Guzzle, cURL y SDKs. Reemplaza Charles, Fiddler y mitmproxy.",
-      "inspector": "Monitorea el rendimiento con trazado de transacciones, seguimiento de memoria y desglose temporal. Alternativa local a APM.",
-      "sms": "Intercepta SMS salientes durante el desarrollo. Auto-detecta 40+ proveedores incluyendo Twilio, Vonage, Plivo, Sinch y más.",
-      "mockServer": "Simula la API de la que depende tu app. Define una regla —método, ruta, estado, cabeceras, cuerpo, retardo— y /mock responde con ella. Cada llamada se guarda, con la regla que respondió o por qué ninguna coincidió.",
-      "xdebug": "Ve una sesión de Xdebug en pausa en el navegador: pila, variables, código y watches cuando eval está activado. La ejecución paso a paso sigue en tu IDE, que recibe la sesión sin cambios; tu asistente de IA puede leerla por MCP. Desactivado por defecto."
-    },
-    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
   },
   "install": {
     "title": "Empieza en 60 segundos",
@@ -344,13 +250,7 @@
     }
   },
   "stats": {
-    "title": "Creciendo cada día",
-    "description": "Estrellas y descargas en todos los repositorios.",
-    "stars": "Total de estrellas",
-    "downloads": "Total de descargas",
-    "serverDownloads": "Servidor",
-    "trapDownloads": "Trap",
-    "collectingData": "Recopilando datos — los gráficos aparecerán pronto."
+    "downloads": "Total de descargas"
   },
   "sponsors": {
     "headline": "Respaldado por la comunidad",
@@ -398,9 +298,9 @@
       "discord": "Discord",
       "contributing": "Contribuir",
       "bugs": "Reportar bugs",
-      "changelog": "Changelog",
-      "releases": "Releases",
-      "sponsors": "Sponsors"
+      "changelog": "Registro de cambios",
+      "releases": "Versiones",
+      "sponsors": "Patrocinadores"
     }
   },
   "seo": {
@@ -459,41 +359,41 @@
   },
   "featureMenu": {
     "groups": {
-      "errors": "Errors & traces",
-      "perf": "Performance",
+      "errors": "Errores y trazas",
+      "perf": "Rendimiento",
       "http": "HTTP",
-      "mail": "Mail & messaging",
-      "logs": "Logs & jobs",
-      "agents": "For AI agents"
+      "mail": "Correo y mensajería",
+      "logs": "Logs y tareas",
+      "agents": "Para agentes de IA"
     },
-    "new": "NEW",
-    "current": "you are here",
-    "allTips": "All tips",
-    "docs": "Documentation ↗",
-    "whatsNew": "What's new in v{version}",
+    "new": "NUEVO",
+    "current": "estás aquí",
+    "allTips": "Todos los consejos",
+    "docs": "Documentación ↗",
+    "whatsNew": "Novedades de la v{version}",
     "enMarker": "EN",
-    "enMarkerLabel": "(page in English)",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "enMarkerLabel": "(página en inglés)",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "realUiTabs": {
-    "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
-    "tabsLabel": "Features",
-    "open": "Open the {feature} page",
+    "subtitle": "La interfaz real, no un dibujo. Elige una función para ver su pantalla.",
+    "tabsLabel": "Funciones",
+    "open": "Abrir la página de {feature}",
     "desc": {
-      "cron": "Which scheduled jobs ran, failed or never started.",
-      "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",
-      "csp": "What the browser blocked, by directive, with the file and line."
+      "cron": "Qué tareas programadas se ejecutaron, fallaron o nunca llegaron a arrancar.",
+      "broadcast": "Eventos de Laravel Reverb, Pusher y soketi, por canal.",
+      "csp": "Lo que bloqueó el navegador, por directiva, con el archivo y la línea."
     },
     "alt": {
-      "sentry": "Buggregator Sentry page: an exception with its stack trace",
-      "email": "Buggregator email preview with HTML rendering, attachments and raw source",
-      "profiler": "Buggregator call graph showing PHP function execution times",
-      "proxy": "Buggregator HTTP proxy showing a request and its response with headers and body",
-      "sms": "Buggregator SMS view showing caught messages with sender, recipient and body",
-      "cron": "Buggregator Crons tab: scheduled jobs with status, schedule, last and next run",
-      "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
-      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
+      "sentry": "Página de Sentry en Buggregator: una excepción con su stack trace",
+      "email": "Vista previa de un email en Buggregator con el HTML renderizado, los adjuntos y el código fuente",
+      "profiler": "Grafo de llamadas de Buggregator con los tiempos de ejecución de las funciones PHP",
+      "proxy": "Proxy HTTP de Buggregator: una petición y su respuesta con cabeceras y cuerpo",
+      "sms": "Vista de SMS de Buggregator: mensajes capturados con remitente, destinatario y texto",
+      "cron": "Pestaña Crons de Buggregator: tareas programadas con estado, programación, última y próxima ejecución",
+      "broadcast": "Página Broadcast de Buggregator: los canales a la izquierda y, a la derecha, los eventos en vivo de un canal",
+      "csp": "Informe CSP de Buggregator: la página, la directiva, el recurso bloqueado y el archivo con línea y columna"
     }
   }
 }

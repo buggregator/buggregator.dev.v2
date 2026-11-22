@@ -11,7 +11,8 @@ const props = defineProps<{
 const emit = defineEmits<{ 'update:modelValue': [value: T] }>()
 
 // Under sm the buttons are 44 px tall (touch); above, 32 px with a 44 px hit area.
-const chip = 'relative hit-area flex-1 min-h-11 sm:min-h-[32px] px-2.5 font-mono text-[11px] whitespace-nowrap transition-colors duration-150'
+// Under 400 px less side padding, so "Windows" fits a quarter of a 360 px row.
+const chip = 'relative hit-area flex-1 min-h-11 sm:min-h-[32px] px-1.5 min-[400px]:px-2.5 font-mono text-[11px] whitespace-nowrap transition-colors duration-150'
 const on = 'text-white bg-[rgba(59,130,246,0.18)]'
 const off = 'text-[#8b949e] hover:text-code-text'
 </script>

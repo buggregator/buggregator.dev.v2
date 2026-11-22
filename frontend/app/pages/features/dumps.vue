@@ -187,12 +187,12 @@ const worksWithItems = [
     <section class="py-16 lg:py-20 bg-section-dark">
       <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
         <h2 class="text-2xl lg:text-[1.75rem] font-bold text-white tracking-tight mb-4">
-          A dd() in a queue job
+          A dump() in a queue job
         </h2>
         <p class="text-lg text-on-dark-secondary leading-relaxed mb-8">
-          A job fails only in the worker. You add dd($payload), but the worker has no browser, and the output scrolls
+          A job fails only in the worker. You add dump($payload), but the worker has no browser, and the output scrolls
           past in a terminal you are not watching. With Buggregator, the dump shows up in your browser tab with the
-          file and line it came from, and your API response stays clean JSON.
+          file and line it came from.
         </p>
         <FeatureScreenshot
           src="/img/tips/dump-without-breaking-the-page.webp"
@@ -215,16 +215,6 @@ const worksWithItems = [
       description="Dumps come in through Symfony VarDumper or Spatie Ray. Laravel and Symfony use VarDumper for dump() and dd() already."
       :items="worksWithItems"
     />
-
-    <!-- Good to know -->
-    <section class="py-12 bg-section-dark">
-      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
-        <p class="text-base text-on-dark-secondary leading-relaxed">
-          <strong class="text-white">Good to know:</strong> large objects with deep nesting are slow to preview in the
-          list. Set <code>VAR_DUMPER_PREVIEW_MAX_DEPTH=3</code> on the server; the full dump stays on the event page.
-        </p>
-      </div>
-    </section>
 
     <FeatureTips label="dumps" />
 
