@@ -279,6 +279,7 @@ onBeforeUnmount(() => {
     @pointerenter="onMove"
     @pointerdown="onDown"
     @pointerup="onUp"
+    @pointercancel="onUp"
     @pointerleave="onLeave"
   >
     <div ref="stage" class="xray__stage" aria-hidden="true">
@@ -357,7 +358,7 @@ onBeforeUnmount(() => {
     >
       <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 0.5v3M8 12.5v3M0.5 8h3M12.5 8h3" /></svg>
       <span>{{ button }}</span>
-      <span class="xray__toggle-state">{{ enabled ? on : off }}</span>
+      <span class="xray__toggle-state" aria-hidden="true">{{ enabled ? on : off }}</span>
     </button>
     <p class="xray__said" aria-live="polite">{{ said }}</p>
   </div>

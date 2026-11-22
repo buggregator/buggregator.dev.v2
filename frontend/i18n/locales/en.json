@@ -12,7 +12,7 @@
       "button": "X-ray",
       "on": "on",
       "off": "off",
-      "saidOn": "X-ray on. Move the pointer over the page, or use the arrow keys.",
+      "saidOn": "X-ray on. Move the pointer over the picture, or use the arrow keys.",
       "saidOff": "X-ray off"
     },
     "badge": {

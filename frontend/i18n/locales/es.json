@@ -12,7 +12,7 @@
       "button": "X-ray",
       "on": "sí",
       "off": "no",
-      "saidOn": "Rayos X activados. Mueve el puntero por la página o usa las flechas.",
+      "saidOn": "Rayos X activados. Mueve el puntero por la imagen o usa las flechas.",
       "saidOff": "Rayos X desactivados"
     },
     "badge": {
