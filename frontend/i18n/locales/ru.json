@@ -463,5 +463,24 @@
       "text": "ИИ‑сотрудник для вашей команды в harnsy: ставит Buggregator, подключает ваше приложение и отлаживает через Xdebug.",
       "cta": "Наймите оператора Buggregator в свой проект →"
     }
+  },
+  "featureMenu": {
+    "groups": {
+      "errors": "Errors & traces",
+      "perf": "Performance",
+      "http": "HTTP",
+      "mail": "Mail & messaging",
+      "logs": "Logs & jobs",
+      "agents": "For AI agents"
+    },
+    "new": "NEW",
+    "current": "you are here",
+    "allTips": "All tips →",
+    "docs": "Documentation ↗",
+    "whatsNew": "What's new in v{version} →",
+    "enMarker": "EN",
+    "enMarkerLabel": "(page in English)",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   }
 }

@@ -463,5 +463,24 @@
       "text": "Un empleado de IA para tu equipo en harnsy: instala Buggregator, conecta tu aplicación y depura con Xdebug.",
       "cta": "Contrata al operador de Buggregator para tu proyecto →"
     }
+  },
+  "featureMenu": {
+    "groups": {
+      "errors": "Errors & traces",
+      "perf": "Performance",
+      "http": "HTTP",
+      "mail": "Mail & messaging",
+      "logs": "Logs & jobs",
+      "agents": "For AI agents"
+    },
+    "new": "NEW",
+    "current": "you are here",
+    "allTips": "All tips →",
+    "docs": "Documentation ↗",
+    "whatsNew": "What's new in v{version} →",
+    "enMarker": "EN",
+    "enMarkerLabel": "(page in English)",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   }
 }
