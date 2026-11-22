@@ -43,7 +43,7 @@ const pillars = [
         <div
           v-for="p in pillars"
           :key="p.key"
-          class="bg-landing-surface border border-landing-border-subtle rounded-2xl p-6 hover:-translate-y-0.5 transition-all duration-200"
+          class="bg-landing-surface border border-landing-border-subtle rounded-2xl p-6"
         >
           <div class="w-10 h-10 rounded-xl bg-[rgba(59,130,246,0.1)] flex items-center justify-center mb-4" v-html="p.icon" />
           <h3 class="font-semibold text-white mb-2 font-sans">
