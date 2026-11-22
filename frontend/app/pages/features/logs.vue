@@ -7,7 +7,6 @@ import FeatureHighlights from '~/components/features/FeatureHighlights.vue'
 import FeatureWorksWithSection from '~/components/features/FeatureWorksWithSection.vue'
 import FeatureCTA from '~/components/features/FeatureCTA.vue'
 import FeatureRelatedLink from '~/components/features/FeatureRelatedLink.vue'
-import LogRecordsVisual from '~/components/features/visuals/LogRecordsVisual.vue'
 
 definePageMeta({ layout: 'landing' })
 // English only: no /ru or /es copies of this page (they would be duplicates).
@@ -15,7 +14,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'PHP Log Viewer for Local Development — Monolog Logs in One Place — Buggregator',
-  description: 'See Monolog logs from every service and worker in one live view: channel, level, message and context as JSON. Works with Laravel, Symfony and Spiral. No Elasticsearch, no logging stack. Free and open source.',
+  description: 'Search Monolog logs from every service and worker in one live stream: filter by level, channel and time, see errors per minute, and open all lines of one request. Laravel, Symfony, Spiral. No Elasticsearch, no logging stack. Free and open source.',
   ogTitle: 'Monolog Logs in One Live View — Buggregator',
   ogDescription: 'Logs from every service, worker and container in one place, with structured context. No logging stack to run.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -107,7 +106,7 @@ $log->warning('Payment retry', ['order' => 42]);`,
   },
   {
     title: 'Point it at Buggregator',
-    description: 'Set the address in .env and open http://127.0.0.1:8000. New records appear as they are written.',
+    description: 'Set the address in .env, then open Logs in the sidebar, or http://127.0.0.1:8000/logs. New lines appear as they are written. The Logs screen needs Buggregator v2.14.0 or later.',
     tabs: [
       {
         id: 'laravel-env',
@@ -132,34 +131,34 @@ MONOLOG_SOCKET_HOST=127.0.0.1:9913`,
 
 const highlights = [
   {
-    icon: '\u{1F9E9}',
-    title: 'Context as JSON',
-    description: 'Context and extra fields from Monolog processors are shown as formatted JSON, not one long string in a terminal.',
-  },
-  {
-    icon: '\u{1F4CD}',
-    title: 'Where it was logged',
-    description: 'File, line and function, when your logger puts them in the record\'s context as source.',
-  },
-  {
     icon: '\u{1F50E}',
-    title: 'Search',
-    description: 'Find records by message, channel or level — type "error" or "security".',
+    title: 'Search every word',
+    description: 'Type words, and only lines that contain all of them stay. Search looks in the message, the channel and the keys and values of context and extra. Case does not matter.',
   },
   {
     icon: '\u{1F6A6}',
-    title: 'All PSR-3 levels',
-    description: 'All 8 PSR-3 levels, colour-coded by severity, so errors stand out.',
+    title: 'Levels, channels, time',
+    description: 'One chip per level with its count, for example error 12. Pick channels such as payments or db. The last hour by default, up to all time.',
+  },
+  {
+    icon: '\u{1F4C8}',
+    title: 'Lines per minute',
+    description: 'A chart colored by level. A spike of red bars is a burst of errors.',
+  },
+  {
+    icon: '\u{23F8}',
+    title: 'Live, with a pause',
+    description: 'New lines appear as they come. Pause to read in peace: the screen counts what came in, and Show them adds it.',
   },
   {
     icon: '\u{1F9F5}',
-    title: 'Workers and daemons too',
-    description: 'Queue consumers, cron jobs and daemons write logs that are easy to miss in stdout. Buggregator catches them all.',
+    title: 'All lines of one request',
+    description: 'A line with a trace id links to every line of the same request, and to its trace in Sentry.',
   },
   {
-    icon: '\u{1F433}',
-    title: 'Every service, one place',
-    description: 'Point every container at the same Buggregator and read their logs side by side — next to the exceptions and dumps from the same moment, in one feed.',
+    icon: '\u{1F517}',
+    title: 'Views you can share',
+    description: 'The address keeps the view, for example /logs?q=order+failed&level=error&channel=payments. Context and extra open as JSON.',
   },
 ]
 
@@ -177,7 +176,7 @@ const worksWithItems = [
     <FeatureHero
       title="Stop tailing log files"
       subtitle="Logs"
-      description="During development your logs end up in a file you tail -f, in container output you scroll, or in a worker's stdout you never see. Send them to Buggregator instead: logs from every service land in the same live view as your exceptions, dumps and emails — with the context readable as JSON."
+      description="During development your logs end up in a file you tail -f, in container output you scroll, or in a worker's stdout you never see. Send them to Buggregator instead: the Logs screen shows lines from every service as one live stream, like tail -f with search, filters by level and channel, and a chart of errors per minute."
       :accent-color="accentColor"
       accent-text-color="#9ca3af"
     >
@@ -201,21 +200,32 @@ const worksWithItems = [
     <section class="pb-16 lg:pb-20 bg-section-dark">
       <div class="px-4 sm:px-6 lg:px-8">
         <FeatureScreenshot
-          alt="Buggregator log records: channel, level, message and context as JSON"
-          caption="Each record with its channel, level, message and context. Example data."
-        >
-          <LogRecordsVisual />
-        </FeatureScreenshot>
+          src="/features/logs-screen.png"
+          alt="Buggregator Logs screen: a search box, level chips with counts, channel and period pickers, a chart of lines per minute colored by level, and the live stream of log lines"
+          caption="The Logs screen: search, level chips with counts, a chart of lines per minute and the live stream."
+        />
       </div>
     </section>
 
     <!-- Highlights -->
     <FeatureHighlights
-      title="Logs you can actually read"
+      title="Find the line you need"
       subtitle="No Elasticsearch, no log shipper, no separate logging stack — one handler in your logger config."
       :items="highlights"
       :accent-color="accentColor"
     />
+
+    <!-- Use case -->
+    <section id="use-case" class="py-16 lg:py-20 bg-section-dark border-t border-landing-border-subtle">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans text-center">
+        <h2 class="text-section font-bold text-white mb-3">A burst of payment errors at 14:05</h2>
+        <p class="text-lg text-on-dark-secondary leading-relaxed">
+          The chart shows a red spike. Turn off every level but error, pick the payments channel and type
+          «card declined». Click a line: its context shows the order and the code. All lines of this request shows
+          every line with the same trace id: what the request did before it failed.
+        </p>
+      </div>
+    </section>
 
     <!-- Setup -->
     <section id="setup">

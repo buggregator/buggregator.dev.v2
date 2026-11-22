@@ -4,7 +4,7 @@ title: "Plain PHP: dump() to a browser tab instead of var_dump()"
 description: Install symfony/var-dumper, set VAR_DUMPER_FORMAT=server and call dump(). Values show as a foldable tree in Buggregator, and your page stays clean.
 query: php var dump
 feature: Dumps
-feature_page: null
+feature_page: /features/dumps
 docs: https://docs.buggregator.dev/config/var-dumper.html#setup
 requires: null
 related: [dump-without-breaking-the-page, php-trap-dump-anywhere, symfony-dump-server-in-browser, yii-dumps-without-breaking-output]

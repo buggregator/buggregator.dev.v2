@@ -22,6 +22,11 @@ const KNOWN_SIZES: Record<string, [number, number]> = {
   '/features/csp-reports.png': [1600, 1000],
   '/features/sentry-user-feedback.png': [1600, 521],
   '/features/email-send-to-inbox.png': [1600, 1000],
+  '/features/request-timeline.png': [1600, 1000],
+  '/features/queue-jobs.png': [1600, 1000],
+  '/features/queue-jobs-list.png': [1600, 1000],
+  '/features/feed-filters.png': [1600, 1000],
+  '/features/logs-screen.png': [1600, 1000],
 }
 
 const size = computed(() => {

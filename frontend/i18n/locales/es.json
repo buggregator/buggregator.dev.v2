@@ -11,7 +11,7 @@
     "badge": {
       "version": "v{version} · recién lanzada",
       "free": "Gratuito y de código abierto",
-      "release": "v{version}: eventos broadcast, tareas cron, informes CSP"
+      "release": "v{version}: línea de tiempo de una petición, colas, búsqueda en logs"
     },
     "headline": "Errores, dumps, emails y logs de tu app PHP.",
     "headlineSub": "En una sola ventana.",
@@ -338,34 +338,31 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "Novedades en v2.13",
-    "title": "Broadcasts, tareas cron y envío a un buzón real",
+    "eyebrow": "Novedades en v2.14",
+    "title": "Una petición en una sola pantalla, y cada tarea de la cola",
     "cards": {
-      "broadcast": {
-        "title": "Mira lo que emite tu app",
-        "desc": "Apunta los broadcasts de Laravel Reverb, Pusher o soketi a Buggregator. Cada evento aparece en su canal, con sus datos y con lo que cambió desde el anterior. Configura un upstream y cada evento sigue hacia tu servidor real, así el navegador sigue recibiendo las actualizaciones en vivo.",
-        "cta": "Ver eventos de broadcast"
+      "timeline": {
+        "title": "Todo lo que hizo una petición",
+        "desc": "Abre una traza de Sentry y verás sus consultas SQL, llamadas a la caché, logs, correos, llamadas salientes, tareas y errores en una sola escala de tiempo. Si la misma consulta se ejecuta cinco veces o más, un aviso la nombra con el archivo y la línea: el clásico N+1.",
+        "cta": "Ver la línea de tiempo"
       },
-      "crons": {
-        "title": "Comprueba si tus tareas programadas se ejecutaron",
-        "desc": "Las tareas informan de cada ejecución con Sentry Crons o con una simple URL de ping que llamas con curl. La pestaña Crons de Sentry muestra qué ejecuciones fueron bien, cuáles fallaron, cuáles nunca empezaron y cuáles nunca terminaron. Sin cuenta de Sentry.",
-        "cta": "Ver el monitoreo de cron"
+      "queues": {
+        "title": "Tareas de la cola, intento a intento",
+        "desc": "Sentry → Queues muestra las tareas que ejecutó tu worker de Laravel: cuáles fallaron, cuántos intentos hicieron falta, la excepción de cada intento, cuánto esperaron en la cola y qué petición las encoló.",
+        "cta": "Ver las tareas de la cola"
       },
-      "inbox": {
-        "title": "Envía un correo capturado a un buzón real",
-        "desc": "¿Quieres ver un correo en Gmail o probar su enlace en el móvil? Configura un servidor SMTP de salida, pulsa Send to inbox y escribe tu dirección. Solo sale ese mensaje y solo a las direcciones que escribas. Sin inicio de sesión, funciona solo desde tu propia máquina y solo hacia direcciones permitidas.",
-        "cta": "Configurar el envío"
+      "logs": {
+        "title": "Una pantalla de logs con búsqueda",
+        "desc": "Todas las líneas de Monolog en un solo flujo en vivo, como tail -f con búsqueda. Filtra por nivel, canal y tiempo, mira las líneas por minuto en un gráfico, pausa para leer y abre todas las líneas de una petición.",
+        "cta": "Ver la pantalla de logs"
       },
-      "small": {
-        "title": "Comentarios de usuarios, notificaciones, informes CSP",
-        "desc": "Los comentarios que tus usuarios envían con el SDK de Sentry aparecen en el error al que se refieren. Las notificaciones de escritorio te avisan de un error nuevo de Sentry mientras trabajas en otra ventana. Y Buggregator ahora recibe los informes de Content Security Policy del navegador: qué se bloqueó, con qué regla y en qué página.",
-        "cta": "Ver comentarios de usuarios",
-        "links": {
-          "csp": "Ver informes CSP"
-        }
+      "filters": {
+        "title": "Filtros del feed para un servidor compartido",
+        "desc": "¿Un Buggregator para todo el equipo? Muestra solo los eventos de tu máquina, o de un entorno, usuario, canal de Monolog, nivel, release o etiqueta. Los filtros van en el enlace que compartes.",
+        "cta": "Ver los filtros del feed"
       }
     },
-    "notes": "Más detalles en las notas de la versión v2.13.0"
+    "notes": "Más en las notas de la versión v2.14.0"
   },
   "harnsy": {
     "title": "Un equipo de IA desarrolla Buggregator. Las decisiones las tomamos nosotros.",
@@ -383,7 +380,7 @@
       "http": "HTTP",
       "mail": "Correo y mensajería",
       "logs": "Logs y tareas",
-      "agents": "Para agentes de IA"
+      "agents": "Equipo y agentes de IA"
     },
     "new": "NUEVO",
     "current": "estás aquí",
