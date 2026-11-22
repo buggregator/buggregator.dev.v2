@@ -213,7 +213,7 @@ const worksWithItems = [
       <div class="px-4 sm:px-6 lg:px-8">
         <FeatureScreenshot
           src="/features/broadcast-events.png"
-          alt="Buggregator Broadcast page: channels on the left, the events of one channel on the right, one event open with its payload"
+          alt="Buggregator Broadcast page: channels on the left, the live events of one channel on the right"
           caption="Channels on the left, their events on the right. Open an event for its payload, what changed and the signature check."
         />
       </div>
