@@ -71,7 +71,7 @@ const formatStars = (n: number) =>
               class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
               @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'trap_github' })"
             >
-              {{ t('ecosystem.trap.github') }} →
+              {{ t('ecosystem.trap.github') }}
             </a>
             <a
               href="https://docs.buggregator.dev/trap/what-is-trap.html"
@@ -80,7 +80,7 @@ const formatStars = (n: number) =>
               class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
               @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'trap_docs' })"
             >
-              {{ t('ecosystem.trap.docs') }} →
+              {{ t('ecosystem.trap.docs') }}
             </a>
           </div>
         </div>
@@ -118,7 +118,7 @@ const formatStars = (n: number) =>
               class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline font-sans"
               @click="trackEvent('cta_click', { cta_location: 'ecosystem', cta_text: 'jetbrains_install' })"
             >
-              {{ t('ecosystem.jetbrains.install') }} →
+              {{ t('ecosystem.jetbrains.install') }}
             </a>
           </div>
         </div>

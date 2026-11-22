@@ -2,6 +2,8 @@
 import DocSearch from '~/components/layout/DocSearch.vue'
 import GitHubStars from '~/components/layout/GitHubStars.vue'
 import LanguageSwitcher from '~/components/ui/LanguageSwitcher.vue'
+import FeaturesMenu from '~/components/layout/FeaturesMenu.vue'
+import FeaturesAccordion from '~/components/layout/FeaturesMenu/FeaturesAccordion.vue'
 import logoSvg from '~/assets/img/logo.svg'
 
 const { t } = useI18n()
@@ -14,47 +16,16 @@ const docsUrl = 'https://docs.buggregator.dev'
 
 const localePath = useLocalePath()
 
-const navLinks = computed(() => [
-  { label: t('nav.howItWorks'), href: `${localePath('/')}#how-it-works` },
-  { label: t('nav.features'), href: `${localePath('/')}#showcase` },
-  { label: t('nav.docs'), href: docsUrl, external: true },
-])
+// How it works · Features ▾ · Documentation. «Features» is the menu of
+// feature pages (FeaturesMenu); there is no anchor link to the home page.
+const howItWorksHref = computed(() => `${localePath('/')}#how-it-works`)
 
-const featureLinks = [
-  { label: 'Email Testing', to: '/features/email-testing', color: '#f59e0b' },
-  { label: 'Sentry', to: '/features/sentry', color: '#f43f5e' },
-  { label: 'Profiler', to: '/features/profiler', color: '#8b5cf6' },
-  { label: 'HTTP Proxy', to: '/features/http-proxy', color: '#10b981' },
-  { label: 'SMS Testing', to: '/features/sms', color: '#a855f7' },
-  { label: 'Mock Server', to: '/features/mock-server', color: '#0ea5e9' },
-  { label: 'Xdebug', to: '/features/xdebug', color: '#f97316' },
-  { label: 'Logs', to: '/features/logs', color: '#6b7280' },
-  { label: 'HTTP Dumps', to: '/features/http-dumps', color: '#22c55e' },
-  { label: 'MCP & API', to: '/features/mcp-api', color: '#14b8a6' },
-  { label: 'Broadcast Events', to: '/features/broadcast-events', color: '#ec4899' },
-  { label: 'Cron Monitoring', to: '/features/cron-monitoring', color: '#84cc16' },
-  { label: 'CSP Reports', to: '/features/csp-reports', color: '#d946ef' },
-]
-
-const featuresOpen = ref(false)
-const guidesButton = ref<HTMLButtonElement | null>(null)
-
-// «Guides» opens on hover, click and Enter/Space; Escape or tabbing out closes it.
-// A tap fires mouseenter and then click: a pointer click only opens, so the
-// menu does not open and close at once. Enter/Space (detail 0) toggle.
-function onGuidesClick(e: MouseEvent) {
-  featuresOpen.value = e.detail === 0 ? !featuresOpen.value : true
-}
-
-function closeGuides() {
-  if (!featuresOpen.value) return
-  featuresOpen.value = false
-  guidesButton.value?.focus()
-}
-
-function onGuidesFocusOut(e: FocusEvent) {
-  const box = e.currentTarget as HTMLElement
-  if (!box.contains(e.relatedTarget as Node | null)) featuresOpen.value = false
+// Phone menu: Esc closes it and gives focus back to the ☰ button.
+const burger = ref<HTMLButtonElement | null>(null)
+function closeMobile() {
+  if (!mobileOpen.value) return
+  mobileOpen.value = false
+  burger.value?.focus()
 }
 
 function onScroll() {
@@ -87,73 +58,13 @@ onUnmounted(() => {
 
         <!-- Desktop nav links -->
         <div class="hidden md:flex items-center gap-6">
-          <template v-for="link in navLinks" :key="link.href">
-            <a
-              v-if="link.external"
-              :href="link.href"
-              target="_blank"
-              rel="noopener"
-              class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 no-underline font-sans"
-            >
-              {{ link.label }}
-            </a>
-            <a
-              v-else
-              :href="link.href"
-              class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 no-underline font-sans"
-            >
-              {{ link.label }}
-            </a>
-          </template>
-
-          <!-- Features dropdown -->
-          <div
-            class="relative"
-            @mouseenter="featuresOpen = true"
-            @mouseleave="featuresOpen = false"
-            @focusout="onGuidesFocusOut"
-            @keydown.escape="closeGuides"
-          >
-            <button
-              ref="guidesButton"
-              type="button"
-              aria-haspopup="true"
-              :aria-expanded="featuresOpen"
-              aria-controls="nav-guides-menu"
-              @click="onGuidesClick"
-              class="min-h-[44px] text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 font-sans flex items-center gap-1"
-            >
-              Guides
-              <svg class="w-3.5 h-3.5 transition-transform duration-150" :class="featuresOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div
-              v-show="featuresOpen"
-              id="nav-guides-menu"
-              class="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
-            >
-              <div class="bg-landing-elevated border border-landing-border rounded-xl shadow-card-hover py-2 min-w-[200px]">
-                <NuxtLink
-                  v-for="fl in featureLinks"
-                  :key="fl.to"
-                  :to="fl.to"
-                  class="flex items-center gap-2.5 px-4 py-2 text-sm text-on-dark-secondary hover:text-white hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-150 no-underline font-sans"
-                  @click="featuresOpen = false"
-                >
-                  <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: fl.color }" />
-                  {{ fl.label }}
-                </NuxtLink>
-                <NuxtLink
-                  to="/tips"
-                  class="flex items-center gap-2.5 mt-1 pt-3 px-4 pb-2 border-t border-landing-border-subtle text-sm text-on-dark-secondary hover:text-white hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-150 no-underline font-sans"
-                  @click="featuresOpen = false"
-                >
-                  All tips
-                </NuxtLink>
-              </div>
-            </div>
-          </div>
+          <a :href="howItWorksHref" class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 no-underline font-sans">
+            {{ t('nav.howItWorks') }}
+          </a>
+          <FeaturesMenu />
+          <a :href="docsUrl" target="_blank" rel="noopener" class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors duration-150 no-underline font-sans">
+            {{ t('nav.docs') }}
+          </a>
         </div>
 
         <!-- Right side -->
@@ -180,8 +91,12 @@ onUnmounted(() => {
 
         <!-- Mobile hamburger -->
         <button
+          ref="burger"
+          type="button"
           class="md:hidden flex items-center justify-center w-11 h-11 rounded-lg text-on-dark-secondary hover:text-on-dark-primary transition-colors"
-          :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
+          :aria-label="mobileOpen ? t('featureMenu.closeMenu') : t('featureMenu.openMenu')"
+          :aria-expanded="mobileOpen"
+          aria-controls="nav-mobile-sheet"
           @click="mobileOpen = !mobileOpen"
         >
           <svg v-if="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -197,53 +112,21 @@ onUnmounted(() => {
     <!-- Mobile drawer -->
     <div
       v-if="mobileOpen"
-      class="md:hidden bg-[#0c0e14] border-t border-landing-border-subtle px-4 py-6"
+      id="nav-mobile-sheet"
+      @keydown.esc="closeMobile"
+      class="md:hidden max-h-[calc(100dvh-64px)] overflow-y-auto bg-[#0c0e14] border-t border-landing-border-subtle px-4 py-6"
     >
       <div class="flex flex-col gap-4">
-        <template v-for="link in navLinks" :key="link.href">
-          <a
-            v-if="link.external"
-            :href="link.href"
-            target="_blank"
-            rel="noopener"
-            class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors no-underline font-sans min-h-[44px] flex items-center"
-            @click="mobileOpen = false"
-          >
-            {{ link.label }}
+        <div class="flex flex-col">
+          <a :href="howItWorksHref" class="text-base font-medium text-on-dark-primary hover:text-white transition-colors no-underline font-sans min-h-[48px] flex items-center border-b border-landing-border-subtle" @click="mobileOpen = false">
+            {{ t('nav.howItWorks') }}
           </a>
-          <a
-            v-else
-            :href="link.href"
-            class="text-sm font-medium text-on-dark-secondary hover:text-on-dark-primary transition-colors no-underline font-sans min-h-[44px] flex items-center"
-            @click="mobileOpen = false"
-          >
-            {{ link.label }}
+          <a :href="docsUrl" target="_blank" rel="noopener" class="text-base font-medium text-on-dark-primary hover:text-white transition-colors no-underline font-sans min-h-[48px] flex items-center border-b border-landing-border-subtle" @click="mobileOpen = false">
+            {{ t('nav.docs') }} ↗
           </a>
-        </template>
-
-        <!-- Feature links (mobile) -->
-        <div class="pt-2 border-t border-landing-border-subtle">
-          <p class="text-xs font-semibold uppercase tracking-wider text-on-dark-muted mb-2 font-sans">Guides</p>
-          <div class="flex flex-col gap-1">
-            <NuxtLink
-              v-for="fl in featureLinks"
-              :key="fl.to"
-              :to="fl.to"
-              class="flex items-center gap-2 text-sm text-on-dark-secondary hover:text-on-dark-primary transition-colors no-underline font-sans min-h-[44px]"
-              @click="mobileOpen = false"
-            >
-              <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ background: fl.color }" />
-              {{ fl.label }}
-            </NuxtLink>
-            <NuxtLink
-              to="/tips"
-              class="flex items-center text-sm text-on-dark-secondary hover:text-on-dark-primary transition-colors no-underline font-sans min-h-[44px]"
-              @click="mobileOpen = false"
-            >
-              All tips
-            </NuxtLink>
-          </div>
         </div>
+
+        <FeaturesAccordion @navigate="mobileOpen = false" />
 
         <div class="flex items-center gap-3 pt-2 border-t border-landing-border-subtle">
           <ClientOnly>

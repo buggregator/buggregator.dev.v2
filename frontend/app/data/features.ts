@@ -1,0 +1,61 @@
+import type { FeatureIconName } from '~/data/feature-icons'
+
+// The feature pages of the site. They are English only
+// (defineI18nRoute(false)): the path has no locale prefix in any locale.
+export type FeatureId =
+  | 'sentry' | 'csp' | 'profiler' | 'xdebug'
+  | 'httpDumps' | 'proxy' | 'mock'
+  | 'email' | 'sms' | 'broadcast'
+  | 'dumps' | 'logs' | 'cron'
+  | 'mcp'
+
+export type FeaturePage = {
+  label: string
+  to: string
+  icon: FeatureIconName
+  // New in the latest release: a NEW mark in the menu.
+  isNew?: boolean
+}
+
+export const FEATURE_PAGES: Record<FeatureId, FeaturePage> = {
+  sentry: { label: 'Sentry', to: '/features/sentry', icon: 'sentry' },
+  csp: { label: 'CSP reports', to: '/features/csp-reports', icon: 'shield', isNew: true },
+  profiler: { label: 'Profiler', to: '/features/profiler', icon: 'profiler' },
+  xdebug: { label: 'Xdebug', to: '/features/xdebug', icon: 'trace' },
+  httpDumps: { label: 'HTTP dumps', to: '/features/http-dumps', icon: 'http-dump' },
+  proxy: { label: 'HTTP proxy', to: '/features/http-proxy', icon: 'host' },
+  mock: { label: 'Mock server', to: '/features/mock-server', icon: 'mock-server' },
+  email: { label: 'Email testing', to: '/features/email-testing', icon: 'smtp' },
+  sms: { label: 'SMS testing', to: '/features/sms', icon: 'sms' },
+  broadcast: { label: 'Broadcast events', to: '/features/broadcast-events', icon: 'broadcast', isNew: true },
+  dumps: { label: 'Dumps (Ray, VarDumper)', to: '/features/dumps', icon: 'var-dump' },
+  logs: { label: 'Logs', to: '/features/logs', icon: 'monolog' },
+  cron: { label: 'Cron monitoring', to: '/features/cron-monitoring', icon: 'heartBeat', isNew: true },
+  mcp: { label: 'MCP & API', to: '/features/mcp-api', icon: 'bolt' },
+}
+
+export type FeatureGroup = { id: string, features: FeatureId[] }
+
+// «Features» menu: grouped by the visitor's task, two groups a column.
+// Group titles: nav.menu.groups.<id>.
+export const FEATURE_MENU_COLUMNS: FeatureGroup[][] = [
+  [
+    { id: 'errors', features: ['sentry', 'csp'] },
+    { id: 'perf', features: ['profiler', 'xdebug'] },
+  ],
+  [
+    { id: 'http', features: ['httpDumps', 'proxy', 'mock'] },
+    { id: 'mail', features: ['email', 'sms', 'broadcast'] },
+  ],
+  [
+    { id: 'logs', features: ['dumps', 'logs', 'cron'] },
+    { id: 'agents', features: ['mcp'] },
+  ],
+]
+
+// The release the NEW marks and the «What's new» link speak about.
+export const FEATURE_RELEASE = {
+  version: '2.13',
+  tag: '2.13.0',
+  url: 'https://github.com/buggregator/server/releases/tag/v2.13.0',
+}

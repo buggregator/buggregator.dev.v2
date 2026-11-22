@@ -320,7 +320,7 @@ const worksWith = {
           target="_blank"
           rel="noopener"
           class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
-        >Set up OpenTelemetry →</a>
+        >Set up OpenTelemetry</a>
       </p>
     </section>
 
@@ -344,7 +344,7 @@ const worksWith = {
             rel="noopener"
             class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
           >
-            Your SDK doesn’t show up? Tell us on GitHub →
+            Your SDK doesn’t show up? Tell us on GitHub
           </a>
         </p>
 

@@ -10,24 +10,18 @@
   "hero": {
     "badge": {
       "version": "v{version} · just released",
-      "free": "Free & Open Source"
+      "free": "Free & Open Source",
+      "release": "v{version}: broadcasts, cron jobs, CSP reports"
     },
-    "headline": "Debug everything in your PHP app.",
-    "headlineSub": "Install nothing.",
-    "subheadline": "Exceptions, dumps, emails, profiling and logs in one UI, launched with one command. Built for PHP; Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK, and mail and HTTP work from any language.",
+    "headline": "Errors, dumps, emails and logs from your PHP app.",
+    "headlineSub": "In one window.",
+    "subheadline": "A free, open-source debugging server. Run one command, point your app at it, and watch events arrive live.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copy command",
       "copied": "Copied!"
     },
-    "seeItLive": "See it in action →",
     "starHelp": "If Buggregator saves you time, a star helps others find it.",
-    "trustRow": {
-      "stars": "GitHub Stars",
-      "downloads": "Downloads",
-      "license": "MIT License",
-      "free": "Free forever"
-    },
     "liveFeed": {
       "live": "Live"
     },
@@ -36,7 +30,26 @@
       "docker": "Docker",
       "binary": "Binary",
       "binaryNote": "One file, about {size}. One command installs it.",
-      "otherPlatforms": "Other ways to install →"
+      "otherWays": "Docker Compose, manual download",
+      "os": "Operating system"
+    },
+    "languages": "Node.js, browser JavaScript, Python, Go and Java send errors through their Sentry SDK.",
+    "aiAgent": "Let an AI agent set it up",
+    "trustLine": "Free and open source, MIT · No account · Windows, macOS, Linux",
+    "preview": {
+      "label": "Buggregator interface preview",
+      "tabs": {
+        "exceptions": "Exceptions",
+        "email": "Email",
+        "dumps": "Dumps",
+        "profiler": "Profiler"
+      },
+      "alt": {
+        "exceptions": "Buggregator showing an exception with its stack trace",
+        "email": "Buggregator showing a caught email with its HTML preview",
+        "dumps": "Buggregator showing a dump with the file and line it came from",
+        "profiler": "Buggregator showing a profile with the slowest function calls"
+      }
     }
   },
   "languages": {
@@ -81,71 +94,28 @@
   },
   "cleanApp": {
     "headline": "Your app doesn't know we exist.",
-    "subheadline": "Not a package. A server.",
-    "telescopeCallout": {
-      "quote": "Telescope works inside your app. Buggregator works beside it.",
-      "body": "Zero performance overhead. Works with RoadRunner, FrankenPHP, Swoole, and Octane. Catches emails, SMS, and external HTTP — things Telescope never sees. Works across every service in your stack."
-    },
-    "body": "Buggregator runs beside your application — as one binary or one Docker container. Your codebase doesn't change. Your dependencies don't change. You already have the SDKs installed — they just need a different address.",
-    "pillars": {
-      "noDeps": {
-        "title": "No new dependencies",
-        "body": "Your app's composer.json stays untouched. No service providers. No migrations. No Buggregator code inside your project."
-      },
-      "oneEnvVar": {
-        "title": "One env variable",
-        "body": "Already using Sentry SDK, VarDumper, or Monolog? Change where they send data. That's it. Your code doesn't need to know about Buggregator."
-      },
-      "crossProject": {
-        "title": "One instance, all your apps",
-        "body": "Run one Buggregator — binary or container. Point all your projects at it. Microservices, monorepos, multiple teams — one dashboard."
-      }
-    },
-    "devEnv": {
-      "headline": "Made for dev environments.",
-      "subheadline": "No account. No credit card. No project setup.",
-      "body": "Add Buggregator to your docker-compose.yml alongside your other services. Change your .env. Start debugging. That's 60 seconds — not 15 minutes of cloud dashboard configuration.",
-      "cloudSetup": {
-        "label": "Getting started with Sentry / Mailtrap / Blackfire:",
-        "steps": ["Create an account", "Verify your email", "Create an organization", "Create a project", "Choose your platform / SDK", "Copy DSN or credentials", "Paste into your .env", "Wait for first event to arrive"],
-        "footer": "~15 minutes before you see a single debug event"
-      },
-      "buggregatorSetup": {
-        "label": "Getting started with Buggregator:",
-        "steps": ["Add to docker-compose.yml", "Change your .env"],
-        "footer": "Open http://127.0.0.1:8000 — done."
-      },
-      "composeCaption": "No environment configuration needed. Works out of the box.",
-      "privacy": "Your debug data stays on your machine unless you send it on yourself. No cloud storage. No third-party servers."
-    },
-    "envComparison": {
-      "title": "Just change the address",
-      "tabs": {
-        "sentry": "Sentry DSN",
-        "email": "Email",
-        "varDumper": "VarDumper",
-        "logs": "Logs",
-        "proxy": "HTTP Proxy"
-      },
-      "beforeLabel": "BEFORE",
-      "afterLabel": "AFTER",
-      "sentryAnnotation": "Only the host changed. Your Sentry SDK keeps working exactly the same.",
-      "sentryNote": "Buggregator speaks the Sentry protocol."
-    },
-    "table": {
-      "title": "How does it compare?",
-      "disclaimer": "Telescope and Ray are excellent tools for their use cases. This comparison highlights the architectural difference: Buggregator is infrastructure, not a library.",
-      "cols": {
-        "feature": "Feature",
-        "buggregator": "Buggregator",
-        "telescope": "Laravel Telescope",
-        "ray": "Ray (spatie)"
-      }
-    }
+    "subheadline": "Not a package. A server."
   },
   "replaces": {
     "title": "Replaces your local dev stack — for free",
     "footer": "All of this. One command. Zero cost.",
+    "table": {
+      "label": "Instead of",
+      "title": "What you can stop running",
+      "subtitle": "Each row is a tool people keep open during development, and the Buggregator page that does the same job.",
+      "footer": "Works next to Laravel Telescope and Debugbar.",
+      "rows": {
+        "email": { "instead": "Mailpit · MailHog · Mailtrap's email sandbox", "with": "Email testing", "desc": "Every email your app sends: HTML preview, headers, attachments." },
+        "http": { "instead": "webhook.site · RequestBin", "with": "HTTP dumps", "desc": "Point a webhook at it and read the whole request: headers, body, files." },
+        "errors": { "instead": "Sentry self-hosted · GlitchTip, for local dev", "with": "Sentry-compatible errors", "desc": "Exceptions, traces and logs from your Sentry SDK." },
+        "mock": { "instead": "Mockoon · WireMock, for mock APIs in dev", "with": "Mock server", "desc": "Ready answers for the APIs your app calls, by method and path." },
+        "dumps": { "instead": "The Ray app, for viewing ray() calls", "with": "Dumps", "desc": "ray(), dump() and dd() output in a browser tab, with the file and line." },
+        "prof": { "instead": "XHProf UI", "with": "Profiler", "desc": "Flame chart, call graph and the slowest functions of a request." },
+        "logs": { "instead": "tail -f laravel.log", "with": "Logs", "desc": "Monolog records live, with level, channel and context." },
+        "proxy": { "instead": "Charles · Fiddler · mitmproxy, in dev", "with": "HTTP proxy", "desc": "The calls your app makes to other services, with their answers." },
+        "sms": { "instead": "SMS gateway sandboxes", "with": "SMS testing", "desc": "Messages your app sends, caught before they reach a phone." }
+      }
+    },
     "trapNote": "Want debugging functions in your code? Add Buggregator Trap — trap(), tr(), td() out of the box.",
     "tools": {
       "sentry": "Exceptions & stack traces",
@@ -182,40 +152,6 @@
       }
     }
   },
-  "showcase": {
-    "title": "Everything in one dashboard",
-    "subtitle": "12 debugging tools. One interface.",
-    "guideLink": "Read the guide",
-    "tabs": {
-      "exceptions": "Exceptions",
-      "profiler": "Profiler",
-      "vardump": "VarDump",
-      "ray": "Ray",
-      "emails": "Emails",
-      "logs": "Logs",
-      "http": "HTTP",
-      "httpProxy": "HTTP Proxy",
-      "inspector": "Inspector",
-      "sms": "SMS",
-      "mockServer": "Mock Server",
-      "xdebug": "Xdebug"
-    },
-    "descriptions": {
-      "exceptions": "Catch unhandled exceptions with full stack traces via Sentry SDK. See exactly where your code breaks.",
-      "profiler": "Visualize XHProf call graphs to find performance bottlenecks. Click any node to trace the path from entry point.",
-      "vardump": "Inspect variables with dump(). See object properties, array contents, and types — right in the browser.",
-      "ray": "Debug with ray() — tables, queries, models, jobs, mail, counters and 18 more payload types. Works with PHP, JS, Ruby, Go SDKs.",
-      "emails": "Intercept outgoing emails during development. Preview HTML, inspect headers — nothing goes out unless you send it to your inbox.",
-      "logs": "Aggregate Monolog, Symfony, and Laravel logs in real time. Search by message, channel or level.",
-      "http": "Capture and inspect incoming HTTP requests. See headers, body, and query parameters at a glance.",
-      "httpProxy": "See every HTTP request your app makes to external APIs — with full response. Set HTTP_PROXY and capture Guzzle, cURL, and SDK calls. Replaces Charles, Fiddler, and mitmproxy.",
-      "inspector": "Monitor application performance with transaction tracing, memory tracking, and timeline breakdowns. Local APM alternative.",
-      "sms": "Intercept outgoing SMS during development. Auto-detects 40+ providers including Twilio, Vonage, Plivo, Sinch, and more.",
-      "mockServer": "Fake the API your app depends on. Set a rule — method, path, status, headers, body, delay — and /mock answers with it. Every call is captured, with the rule that answered or why none matched.",
-      "xdebug": "See a paused Xdebug session in the browser: stack, variables, source, and watches when eval is on. Stepping stays in your IDE, which gets the session unchanged; your AI assistant can read it over MCP. Off by default."
-    },
-    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
-  },
   "install": {
     "title": "Get started in 60 seconds",
     "tabs": {
@@ -230,10 +166,10 @@
       "windowsNote": "On Windows, VarDumper (port 9912) is not available. Every other module works."
     },
     "platforms": "Runs on Windows, macOS and Linux, on Intel/AMD and ARM.",
-    "localOnly": "Listens on all network interfaces by default. To keep it on this computer only, see the one-line setting →",
-    "localOnlyBound": "This run line keeps it on this computer. Without the *_ADDR settings it listens on all network interfaces →",
+    "localOnly": "Listens on all network interfaces by default. To keep it on this computer only, see the one-line setting",
+    "localOnlyBound": "This run line keeps it on this computer. Without the *_ADDR settings it listens on all network interfaces",
     "scriptCpu": "The script picks the file for your CPU: Intel/AMD or ARM.",
-    "agent": "Prefer not to do it yourself? Your AI agent can set Buggregator up for you →",
+    "agent": "Prefer not to do it yourself? Your AI agent can set Buggregator up for you",
     "trust": {
       "free": "Free forever",
       "noReg": "No registration",
@@ -241,9 +177,9 @@
       "oss": "Open source (MIT)"
     },
     "links": {
-      "fullGuide": "Full installation guide →",
-      "binaries": "All downloads on GitHub Releases →",
-      "manual": "Rather not run a script? Download the file yourself →"
+      "fullGuide": "Full installation guide",
+      "binaries": "All downloads on GitHub Releases",
+      "manual": "Rather not run a script? Download the file yourself"
     }
   },
   "demo": {
@@ -253,19 +189,19 @@
     "mobileTitle": "See it live on desktop",
     "mobileBody": "The interactive demo is best experienced on a larger screen. Visit buggregator.dev on your laptop or desktop to try it live.",
     "more": "More tools",
-    "docs": "docs →"
+    "docs": "docs"
   },
   "frameworks": {
     "title": "Works with your framework",
     "subtitle": "No vendor lock-in. Your existing SDK just works.",
     "also": "Also: Node.js, browser JavaScript, Python, Go and Java — via their Sentry SDK. Any language with OpenTelemetry — via OTLP.",
     "alsoRuntime": "Works with: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
-    "guides": "See integration guides →"
+    "guides": "See integration guides"
   },
   "advanced": {
     "title": "Share one instance with your team",
     "subtitle": "Run one Buggregator for the whole team when you need it.",
-    "viewAll": "View all configuration options →",
+    "viewAll": "View all configuration options",
     "features": {
       "sso": { "title": "SSO Authentication", "desc": "Sign in with Auth0, Google, GitHub, Keycloak, GitLab or any OIDC provider" },
       "db": { "title": "Persistent Storage", "desc": "Keep events across restarts in a SQLite file — no database server to run" },
@@ -314,19 +250,13 @@
     }
   },
   "stats": {
-    "title": "Growing every day",
-    "description": "Stars and downloads across all repositories.",
-    "stars": "Total Stars",
-    "downloads": "Total Downloads",
-    "serverDownloads": "Server",
-    "trapDownloads": "Trap",
-    "collectingData": "Collecting data — charts will appear soon."
+    "downloads": "Total Downloads"
   },
   "sponsors": {
     "headline": "Backed by the community",
     "subheadline": "Buggregator is free forever. Sponsors make that possible.",
     "patreonBtn": "Support on Patreon",
-    "learnMore": "See all ways to help →",
+    "learnMore": "See all ways to help",
     "becomeCard": "Become a sponsor",
     "empty": "Be the first to support Buggregator.",
     "page": {
@@ -343,8 +273,8 @@
       "currentSponsors": "Our sponsors",
       "noSponsors": "No sponsors yet. Be the first!",
       "tiers": {
-        "individual": { "label": "Individual sponsor", "via": "via Patreon", "from": "Starting from $5/month", "cta": "Support on Patreon →" },
-        "company": { "label": "Company sponsor", "via": "via direct contact", "from": "Custom packages", "cta": "Contact us →" }
+        "individual": { "label": "Individual sponsor", "via": "via Patreon", "from": "Starting from $5/month", "cta": "Support on Patreon" },
+        "company": { "label": "Company sponsor", "via": "via direct contact", "from": "Custom packages", "cta": "Contact us" }
       },
       "contact": {
         "title": "Want to become a company sponsor?",
@@ -424,7 +354,46 @@
     "cta": "Visit harnsy.dev",
     "operator": {
       "text": "An AI employee that sets up Buggregator, connects your app and debugs with Xdebug — for your harnsy team.",
-      "cta": "Hire the Buggregator operator into your project →"
+      "cta": "Hire the Buggregator operator into your project"
+    }
+  },
+  "featureMenu": {
+    "groups": {
+      "errors": "Errors & traces",
+      "perf": "Performance",
+      "http": "HTTP",
+      "mail": "Mail & messaging",
+      "logs": "Logs & jobs",
+      "agents": "For AI agents"
+    },
+    "new": "NEW",
+    "current": "you are here",
+    "allTips": "All tips",
+    "docs": "Documentation ↗",
+    "whatsNew": "What's new in v{version}",
+    "enMarker": "EN",
+    "enMarkerLabel": "(page in English)",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "realUiTabs": {
+    "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
+    "tabsLabel": "Features",
+    "open": "Open the {feature} page",
+    "desc": {
+      "cron": "Which scheduled jobs ran, failed or never started.",
+      "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",
+      "csp": "What the browser blocked, by directive, with the file and line."
+    },
+    "alt": {
+      "sentry": "Buggregator Sentry page: an exception with its stack trace",
+      "email": "Buggregator email preview with HTML rendering, attachments and raw source",
+      "profiler": "Buggregator call graph showing PHP function execution times",
+      "proxy": "Buggregator HTTP proxy showing a request and its response with headers and body",
+      "sms": "Buggregator SMS view showing caught messages with sender, recipient and body",
+      "cron": "Buggregator Crons tab: scheduled jobs with status, schedule, last and next run",
+      "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
+      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
     }
   }
 }

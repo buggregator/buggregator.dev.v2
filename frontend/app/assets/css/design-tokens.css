@@ -28,7 +28,7 @@ html {
   /* ── Text on dark ── */
   --text-on-dark-primary: #ffffff;
   --text-on-dark-secondary: #8b919a;
-  --text-on-dark-muted: #7f858f;
+  --text-on-dark-muted: #888e98;
 
   /* ── Text on light ── */
   --text-on-light-primary: #111827;
@@ -36,8 +36,11 @@ html {
   --text-on-light-muted: #6b7280;
 
   /* ── Accent ── */
-  --accent-blue: #3b82f6;
-  --accent-blue-hover: #2563eb;
+  --accent-blue: #60a5fa;
+  --accent-blue-hover: #93c5fd;
+  /* Fill behind white text (buttons). */
+  --accent-blue-strong: #2563eb;
+  --accent-blue-strong-hover: #1d4ed8;
   --accent-blue-subtle: rgba(59, 130, 246, 0.12);
   --accent-blue-border: rgba(59, 130, 246, 0.25);
 
@@ -53,20 +56,13 @@ html {
 
   /* ── Event type colors ── */
   --color-sentry: #f43f5e;
-  --color-profiler: #8b5cf6;
+  --color-profiler: #a78bfa;
   --color-smtp: #f59e0b;
   --color-http-dump: #22c55e;
   --color-ray: #06b6d4;
   --color-monolog: #6b7280;
   --color-var-dump: #ef4444;
-  --color-sms: #a855f7;
-
-  /* ── Version badge ── */
-  --version-bg: rgba(59, 130, 246, 0.12);
-  --version-border: rgba(59, 130, 246, 0.25);
-  --version-text: #60a5fa;
-  --version-dot-new: #f59e0b;
-  --version-dot-stable: #22c55e;
+  --color-sms: #c084fc;
 
   /* ── Trust badge ── */
   --badge-bg: rgba(255, 255, 255, 0.06);

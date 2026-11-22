@@ -10,24 +10,18 @@
   "hero": {
     "badge": {
       "version": "v{version} · recién lanzada",
-      "free": "Gratuito y de código abierto"
+      "free": "Gratuito y de código abierto",
+      "release": "v{version}: eventos broadcast, tareas cron, informes CSP"
     },
-    "headline": "Depura todo en tu app PHP.",
-    "headlineSub": "Sin instalar nada.",
-    "subheadline": "Excepciones, dumps, emails, perfilado y logs en una sola interfaz, con un solo comando. Hecho para PHP; Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK, y el correo y HTTP funcionan desde cualquier lenguaje.",
+    "headline": "Errores, dumps, emails y logs de tu app PHP.",
+    "headlineSub": "En una sola ventana.",
+    "subheadline": "Un servidor de depuración gratuito y de código abierto. Ejecuta un comando, apunta tu app hacia él y mira llegar los eventos en directo.",
     "command": "docker run --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest",
     "cta": {
       "copy": "Copiar comando",
       "copied": "¡Copiado!"
     },
-    "seeItLive": "Verlo en acción →",
     "starHelp": "Si Buggregator te ahorra tiempo, una estrella ayuda a otros a encontrarlo.",
-    "trustRow": {
-      "stars": "Estrellas en GitHub",
-      "downloads": "Descargas",
-      "license": "Licencia MIT",
-      "free": "Gratis para siempre"
-    },
     "liveFeed": {
       "live": "En vivo"
     },
@@ -36,7 +30,26 @@
       "docker": "Docker",
       "binary": "Binario",
       "binaryNote": "Un solo archivo, de unos {size}. Se instala con un comando.",
-      "otherPlatforms": "Otras formas de instalar →"
+      "otherWays": "Docker Compose, descarga manual",
+      "os": "Sistema operativo"
+    },
+    "languages": "Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK.",
+    "aiAgent": "Deja que un agente de IA lo configure",
+    "trustLine": "Gratis y de código abierto, MIT · Sin cuenta · Windows, macOS, Linux",
+    "preview": {
+      "label": "Vista previa de la interfaz de Buggregator",
+      "tabs": {
+        "exceptions": "Excepciones",
+        "email": "Email",
+        "dumps": "Dumps",
+        "profiler": "Profiler"
+      },
+      "alt": {
+        "exceptions": "Buggregator mostrando una excepción con su stack trace",
+        "email": "Buggregator mostrando un email capturado con su vista HTML",
+        "dumps": "Buggregator mostrando un dump con el archivo y la línea de origen",
+        "profiler": "Buggregator mostrando un perfil con las llamadas más lentas"
+      }
     }
   },
   "languages": {
@@ -81,71 +94,28 @@
   },
   "cleanApp": {
     "headline": "Tu app no sabe que existimos.",
-    "subheadline": "No es un paquete. Es un servidor.",
-    "telescopeCallout": {
-      "quote": "Telescope funciona dentro de tu app. Buggregator funciona al lado.",
-      "body": "Cero impacto en el rendimiento. Funciona con RoadRunner, FrankenPHP, Swoole y Octane. Captura emails, SMS y HTTP externos — cosas que Telescope nunca ve. Funciona con todos los servicios de tu stack."
-    },
-    "body": "Buggregator se ejecuta junto a tu aplicación, como un único binario o un contenedor Docker. Tu código no cambia. Tus dependencias no cambian. Ya tienes los SDK instalados: solo necesitan otra dirección.",
-    "pillars": {
-      "noDeps": {
-        "title": "Sin nuevas dependencias",
-        "body": "Tu composer.json permanece intacto. Sin service providers. Sin migraciones. Sin código de Buggregator dentro de tu proyecto."
-      },
-      "oneEnvVar": {
-        "title": "Una variable de entorno",
-        "body": "¿Ya usas Sentry SDK, VarDumper o Monolog? Cambia a dónde envían los datos. Eso es todo. Tu código no necesita saber sobre Buggregator."
-      },
-      "crossProject": {
-        "title": "Una instancia, todas tus apps",
-        "body": "Ejecuta un solo Buggregator, binario o contenedor. Apunta todos tus proyectos a él. Microservicios, monorepos, varios equipos: un solo panel."
-      }
-    },
-    "devEnv": {
-      "headline": "Hecho para entornos de desarrollo.",
-      "subheadline": "Sin cuenta. Sin tarjeta. Sin configuración de proyecto.",
-      "body": "Añade Buggregator a tu docker-compose.yml junto a tus otros servicios. Cambia tu .env. Empieza a depurar. Son 60 segundos — no 15 minutos de configuración en la nube.",
-      "cloudSetup": {
-        "label": "Empezar con Sentry / Mailtrap / Blackfire:",
-        "steps": ["Crear una cuenta", "Verificar tu email", "Crear una organización", "Crear un proyecto", "Elegir plataforma / SDK", "Copiar DSN o credenciales", "Pegar en tu .env", "Esperar el primer evento"],
-        "footer": "~15 minutos antes de ver un solo evento de depuración"
-      },
-      "buggregatorSetup": {
-        "label": "Empezar con Buggregator:",
-        "steps": ["Añadir a docker-compose.yml", "Cambiar tu .env"],
-        "footer": "Abre http://127.0.0.1:8000 — listo."
-      },
-      "composeCaption": "Sin configuración de entorno necesaria. Funciona de inmediato.",
-      "privacy": "Tus datos de depuración se quedan en tu máquina, salvo que tú mismo los envíes. Sin almacenamiento en la nube. Sin servidores de terceros."
-    },
-    "envComparison": {
-      "title": "Solo cambia la dirección",
-      "tabs": {
-        "sentry": "Sentry DSN",
-        "email": "Email",
-        "varDumper": "VarDumper",
-        "logs": "Logs",
-        "proxy": "HTTP Proxy"
-      },
-      "beforeLabel": "ANTES",
-      "afterLabel": "DESPUÉS",
-      "sentryAnnotation": "Solo cambió el host. Tu Sentry SDK sigue funcionando exactamente igual.",
-      "sentryNote": "Buggregator habla el protocolo Sentry."
-    },
-    "table": {
-      "title": "Comparación",
-      "disclaimer": "Telescope y Ray son herramientas excelentes para sus casos de uso. Esta comparación destaca la diferencia arquitectónica: Buggregator es infraestructura, no una biblioteca.",
-      "cols": {
-        "feature": "Característica",
-        "buggregator": "Buggregator",
-        "telescope": "Laravel Telescope",
-        "ray": "Ray (spatie)"
-      }
-    }
+    "subheadline": "No es un paquete. Es un servidor."
   },
   "replaces": {
     "title": "Reemplaza tu stack local de desarrollo — gratis",
     "footer": "Todo esto. Un comando. Sin costo.",
+    "table": {
+      "label": "En lugar de",
+      "title": "Lo que puedes dejar de ejecutar",
+      "subtitle": "Cada fila es una herramienta que se deja abierta durante el desarrollo, y la página de Buggregator que hace lo mismo.",
+      "footer": "Funciona junto a Laravel Telescope y Debugbar.",
+      "rows": {
+        "email": { "instead": "Mailpit · MailHog · el sandbox de email de Mailtrap", "with": "Pruebas de email", "desc": "Cada email que envía tu app: HTML, cabeceras, adjuntos." },
+        "http": { "instead": "webhook.site · RequestBin", "with": "HTTP dumps", "desc": "Apunta un webhook aquí y lee la petición completa: cabeceras, cuerpo, archivos." },
+        "errors": { "instead": "Sentry self-hosted · GlitchTip, para desarrollo local", "with": "Errores compatibles con Sentry", "desc": "Excepciones, trazas y logs de tu SDK de Sentry." },
+        "mock": { "instead": "Mockoon · WireMock, para mocks de API en desarrollo", "with": "Servidor mock", "desc": "Respuestas listas para las API que llama tu app, por método y ruta." },
+        "dumps": { "instead": "La app Ray, para ver las llamadas a ray()", "with": "Dumps", "desc": "La salida de ray(), dump() y dd() en una pestaña del navegador, con archivo y línea." },
+        "prof": { "instead": "XHProf UI", "with": "Profiler", "desc": "Flame chart, grafo de llamadas y las funciones más lentas de una petición." },
+        "logs": { "instead": "tail -f laravel.log", "with": "Logs", "desc": "Registros de Monolog en vivo, con nivel, canal y contexto." },
+        "proxy": { "instead": "Charles · Fiddler · mitmproxy, en desarrollo", "with": "Proxy HTTP", "desc": "Las llamadas de tu app a otros servicios, con sus respuestas." },
+        "sms": { "instead": "Sandboxes de pasarelas SMS", "with": "Pruebas de SMS", "desc": "Los SMS que envía tu app, atrapados antes de llegar a un teléfono." }
+      }
+    },
     "trapNote": "¿Quieres funciones de depuración en tu código? Añade Buggregator Trap — trap(), tr(), td() listas para usar.",
     "tools": {
       "sentry": "Excepciones y stack traces",
@@ -182,40 +152,6 @@
       }
     }
   },
-  "showcase": {
-    "title": "Todo en un dashboard",
-    "subtitle": "12 herramientas de depuración. Una interfaz.",
-    "guideLink": "Leer la guía",
-    "tabs": {
-      "exceptions": "Excepciones",
-      "profiler": "Profiler",
-      "vardump": "VarDump",
-      "ray": "Ray",
-      "emails": "Emails",
-      "logs": "Logs",
-      "http": "HTTP",
-      "httpProxy": "HTTP Proxy",
-      "inspector": "Inspector",
-      "sms": "SMS",
-      "mockServer": "Mock Server",
-      "xdebug": "Xdebug"
-    },
-    "descriptions": {
-      "exceptions": "Captura excepciones no manejadas con stack traces completos vía Sentry SDK. Ve exactamente dónde falla tu código.",
-      "profiler": "Visualiza call graphs de XHProf para encontrar cuellos de botella. Haz clic en cualquier nodo para trazar la ruta desde el punto de entrada.",
-      "vardump": "Inspecciona variables con dump(). Propiedades de objetos, contenido de arrays y tipos — directo en el navegador.",
-      "ray": "Depura con ray() — tablas, consultas, modelos, jobs, mail, contadores y 18 tipos más. Funciona con SDKs de PHP, JS, Ruby, Go.",
-      "emails": "Intercepta emails salientes durante el desarrollo. Previsualiza HTML, inspecciona headers — nada sale salvo que tú lo envíes a tu bandeja.",
-      "logs": "Agrega logs de Monolog, Symfony y Laravel en tiempo real. Busca por mensaje, canal o nivel.",
-      "http": "Captura e inspecciona peticiones HTTP entrantes. Headers, body y parámetros de consulta de un vistazo.",
-      "httpProxy": "Ve cada petición HTTP que tu app hace a APIs externas — con respuesta completa. Configura HTTP_PROXY y captura llamadas de Guzzle, cURL y SDKs. Reemplaza Charles, Fiddler y mitmproxy.",
-      "inspector": "Monitorea el rendimiento con trazado de transacciones, seguimiento de memoria y desglose temporal. Alternativa local a APM.",
-      "sms": "Intercepta SMS salientes durante el desarrollo. Auto-detecta 40+ proveedores incluyendo Twilio, Vonage, Plivo, Sinch y más.",
-      "mockServer": "Simula la API de la que depende tu app. Define una regla —método, ruta, estado, cabeceras, cuerpo, retardo— y /mock responde con ella. Cada llamada se guarda, con la regla que respondió o por qué ninguna coincidió.",
-      "xdebug": "Ve una sesión de Xdebug en pausa en el navegador: pila, variables, código y watches cuando eval está activado. La ejecución paso a paso sigue en tu IDE, que recibe la sesión sin cambios; tu asistente de IA puede leerla por MCP. Desactivado por defecto."
-    },
-    "profilerCaption": "XHProf Call Graph · Laravel app · 891ms wall time"
-  },
   "install": {
     "title": "Empieza en 60 segundos",
     "tabs": {
@@ -230,10 +166,10 @@
       "windowsNote": "En Windows, VarDumper (puerto 9912) no está disponible. El resto de módulos funciona."
     },
     "platforms": "Funciona en Windows, macOS y Linux, en Intel/AMD y ARM.",
-    "localOnly": "Por defecto escucha en todas las interfaces de red. Para que solo se vea en este equipo, basta un ajuste →",
-    "localOnlyBound": "Esta línea lo deja solo en este equipo. Sin los ajustes *_ADDR escucha en todas las interfaces de red →",
+    "localOnly": "Por defecto escucha en todas las interfaces de red. Para que solo se vea en este equipo, basta un ajuste",
+    "localOnlyBound": "Esta línea lo deja solo en este equipo. Sin los ajustes *_ADDR escucha en todas las interfaces de red",
     "scriptCpu": "El script elige el archivo para tu procesador: Intel/AMD o ARM.",
-    "agent": "¿Prefieres no hacerlo tú? Tu agente de IA puede configurar Buggregator por ti →",
+    "agent": "¿Prefieres no hacerlo tú? Tu agente de IA puede configurar Buggregator por ti",
     "trust": {
       "free": "Gratis para siempre",
       "noReg": "Sin registro",
@@ -241,9 +177,9 @@
       "oss": "Código abierto (MIT)"
     },
     "links": {
-      "fullGuide": "Guía completa de instalación →",
-      "binaries": "Todas las descargas en GitHub Releases →",
-      "manual": "¿Prefieres no ejecutar un script? Descarga el archivo tú mismo →"
+      "fullGuide": "Guía completa de instalación",
+      "binaries": "Todas las descargas en GitHub Releases",
+      "manual": "¿Prefieres no ejecutar un script? Descarga el archivo tú mismo"
     }
   },
   "demo": {
@@ -253,19 +189,19 @@
     "mobileTitle": "Verlo en escritorio",
     "mobileBody": "El demo interactivo se experimenta mejor en una pantalla grande. Visita buggregator.dev en tu portátil o escritorio.",
     "more": "Más herramientas",
-    "docs": "documentación →"
+    "docs": "documentación"
   },
   "frameworks": {
     "title": "Funciona con tu framework",
     "subtitle": "Sin vendor lock-in. Tu SDK existente simplemente funciona.",
     "also": "También: Node.js, JavaScript en el navegador, Python, Go y Java — vía su Sentry SDK. Cualquier lenguaje con OpenTelemetry — vía OTLP.",
     "alsoRuntime": "Funciona con: RoadRunner · FrankenPHP · Swoole · Laravel Octane",
-    "guides": "Ver guías de integración →"
+    "guides": "Ver guías de integración"
   },
   "advanced": {
     "title": "Una instancia para todo tu equipo",
     "subtitle": "Ejecuta un solo Buggregator para todo el equipo cuando lo necesites.",
-    "viewAll": "Ver todas las opciones de configuración →",
+    "viewAll": "Ver todas las opciones de configuración",
     "features": {
       "sso": { "title": "Autenticación SSO", "desc": "Inicio de sesión con Auth0, Google, GitHub, Keycloak, GitLab o cualquier proveedor OIDC" },
       "db": { "title": "Almacenamiento persistente", "desc": "Conserva los eventos entre reinicios en un archivo SQLite, sin servidor de base de datos" },
@@ -314,19 +250,13 @@
     }
   },
   "stats": {
-    "title": "Creciendo cada día",
-    "description": "Estrellas y descargas en todos los repositorios.",
-    "stars": "Total de estrellas",
-    "downloads": "Total de descargas",
-    "serverDownloads": "Servidor",
-    "trapDownloads": "Trap",
-    "collectingData": "Recopilando datos — los gráficos aparecerán pronto."
+    "downloads": "Total de descargas"
   },
   "sponsors": {
     "headline": "Respaldado por la comunidad",
     "subheadline": "Buggregator es gratis para siempre. Los sponsors lo hacen posible.",
     "patreonBtn": "Apoyar en Patreon",
-    "learnMore": "Ver todas las formas de ayudar →",
+    "learnMore": "Ver todas las formas de ayudar",
     "becomeCard": "Conviértete en sponsor",
     "empty": "Sé el primero en apoyar Buggregator.",
     "page": {
@@ -343,8 +273,8 @@
       "currentSponsors": "Nuestros sponsors",
       "noSponsors": "Aún no hay sponsors. ¡Sé el primero!",
       "tiers": {
-        "individual": { "label": "Sponsor individual", "via": "vía Patreon", "from": "Desde $5/mes", "cta": "Apoyar en Patreon →" },
-        "company": { "label": "Sponsor empresarial", "via": "vía contacto directo", "from": "Paquetes personalizados", "cta": "Contactar →" }
+        "individual": { "label": "Sponsor individual", "via": "vía Patreon", "from": "Desde $5/mes", "cta": "Apoyar en Patreon" },
+        "company": { "label": "Sponsor empresarial", "via": "vía contacto directo", "from": "Paquetes personalizados", "cta": "Contactar" }
       },
       "contact": {
         "title": "¿Quieres ser sponsor empresarial?",
@@ -368,9 +298,9 @@
       "discord": "Discord",
       "contributing": "Contribuir",
       "bugs": "Reportar bugs",
-      "changelog": "Changelog",
-      "releases": "Releases",
-      "sponsors": "Sponsors"
+      "changelog": "Registro de cambios",
+      "releases": "Versiones",
+      "sponsors": "Patrocinadores"
     }
   },
   "seo": {
@@ -424,7 +354,46 @@
     "cta": "Visitar harnsy.dev",
     "operator": {
       "text": "Un empleado de IA para tu equipo en harnsy: instala Buggregator, conecta tu aplicación y depura con Xdebug.",
-      "cta": "Contrata al operador de Buggregator para tu proyecto →"
+      "cta": "Contrata al operador de Buggregator para tu proyecto"
+    }
+  },
+  "featureMenu": {
+    "groups": {
+      "errors": "Errores y trazas",
+      "perf": "Rendimiento",
+      "http": "HTTP",
+      "mail": "Correo y mensajería",
+      "logs": "Logs y tareas",
+      "agents": "Para agentes de IA"
+    },
+    "new": "NUEVO",
+    "current": "estás aquí",
+    "allTips": "Todos los consejos",
+    "docs": "Documentación ↗",
+    "whatsNew": "Novedades de la v{version}",
+    "enMarker": "EN",
+    "enMarkerLabel": "(página en inglés)",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "realUiTabs": {
+    "subtitle": "La interfaz real, no un dibujo. Elige una función para ver su pantalla.",
+    "tabsLabel": "Funciones",
+    "open": "Abrir la página de {feature}",
+    "desc": {
+      "cron": "Qué tareas programadas se ejecutaron, fallaron o nunca llegaron a arrancar.",
+      "broadcast": "Eventos de Laravel Reverb, Pusher y soketi, por canal.",
+      "csp": "Lo que bloqueó el navegador, por directiva, con el archivo y la línea."
+    },
+    "alt": {
+      "sentry": "Página de Sentry en Buggregator: una excepción con su stack trace",
+      "email": "Vista previa de un email en Buggregator con el HTML renderizado, los adjuntos y el código fuente",
+      "profiler": "Grafo de llamadas de Buggregator con los tiempos de ejecución de las funciones PHP",
+      "proxy": "Proxy HTTP de Buggregator: una petición y su respuesta con cabeceras y cuerpo",
+      "sms": "Vista de SMS de Buggregator: mensajes capturados con remitente, destinatario y texto",
+      "cron": "Pestaña Crons de Buggregator: tareas programadas con estado, programación, última y próxima ejecución",
+      "broadcast": "Página Broadcast de Buggregator: los canales a la izquierda y, a la derecha, los eventos en vivo de un canal",
+      "csp": "Informe CSP de Buggregator: la página, la directiva, el recurso bloqueado y el archivo con línea y columna"
     }
   }
 }

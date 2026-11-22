@@ -33,12 +33,15 @@ export default {
         // Landing borders
         'landing-border-subtle': '#1e2128',
         'landing-border': '#2a2f38',
+        // Border of a row or card under the pointer (with a lighter fill).
+        'landing-border-hover': '#3a404b',
 
         // Landing text (dark bg)
         'on-dark': {
           primary: '#ffffff',
           secondary: '#8b919a',
-          muted: '#7f858f',
+          // 5.64:1 on #111318, 5.12:1 on #1a1d24.
+          muted: '#888e98',
         },
         // Landing text (light bg)
         'on-light': {
@@ -49,8 +52,9 @@ export default {
 
         // Accent
         accent: {
-          DEFAULT: '#3b82f6',
-          hover: '#2563eb',
+          // Text, borders and focus rings on dark: #60a5fa gives 6.63:1 on #1a1d24.
+          DEFAULT: '#60a5fa',
+          hover: '#93c5fd',
           subtle: 'rgba(59,130,246,0.12)',
           // Fill behind white text: #3b82f6 gives only 3.68:1, these pass AA.
           strong: '#2563eb',
@@ -70,13 +74,13 @@ export default {
 
         // Event types
         sentry: '#f43f5e',
-        profiler: '#8b5cf6',
+        profiler: '#a78bfa',
         smtp: '#f59e0b',
         'http-dump': '#22c55e',
         ray: '#06b6d4',
         monolog: '#6b7280',
         'var-dump': '#ef4444',
-        sms: '#a855f7',
+        sms: '#c084fc',
       },
       fontSize: {
         '2xs': ['0.7rem', { lineHeight: '1.1rem' }],

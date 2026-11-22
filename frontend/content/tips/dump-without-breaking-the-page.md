@@ -4,7 +4,7 @@ title: dump() without breaking your page or JSON response
 description: Send Symfony VarDumper output to Buggregator with two env vars. dump() stops landing in your HTML or JSON and shows the file and line it came from.
 query: laravel dump server
 feature: Dumps
-feature_page: null
+feature_page: /features/dumps
 docs: https://docs.buggregator.dev/config/var-dumper.html#setup
 requires: null
 related: [ray-calls-to-free-viewer, laravel-logs-in-a-live-view, symfony-logs-in-a-live-view]

@@ -2,14 +2,14 @@
 import logoSvg from '~/assets/img/logo.svg'
 
 const { t } = useI18n()
-const { discordUrl, crtBadgeId } = useRuntimeConfig().public
+const { discordUrl } = useRuntimeConfig().public
 
 const localePath = useLocalePath()
 
-// «#showcase» alone led nowhere on feature pages: point at the home page.
+// A bare anchor led nowhere on feature pages: point at the home page.
 const productLinks = computed(() => [
   { label: 'footer.links.docs', href: 'https://docs.buggregator.dev' },
-  { label: 'footer.links.features', href: `${localePath('/')}#showcase` },
+  { label: 'footer.links.features', href: `${localePath('/')}#real-ui` },
   { label: 'footer.links.trap', href: 'https://github.com/buggregator/trap' },
   { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/26344-buggregator' },
   { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started.html' },
@@ -30,6 +30,7 @@ const featureLinks = [
   { label: 'SMS Testing', href: '/features/sms' },
   { label: 'Mock Server', href: '/features/mock-server' },
   { label: 'Xdebug Proxy', href: '/features/xdebug' },
+  { label: 'Dumps (Ray, VarDumper)', href: '/features/dumps' },
   { label: 'Log Viewer', href: '/features/logs' },
   { label: 'HTTP Dumps', href: '/features/http-dumps' },
   { label: 'MCP Server & API', href: '/features/mcp-api' },
@@ -145,14 +146,6 @@ const resourceLinks = [
         </a>
 
         <div class="flex items-center gap-4 text-on-dark-muted">
-          <a
-            v-if="crtBadgeId"
-            :href="`https://crt.guru/badge/${crtBadgeId}`"
-            target="_blank"
-            rel="noopener"
-          >
-            <img :src="`https://crt.guru/badge/${crtBadgeId}/shield.svg`" alt="SSL Grade" class="h-5" />
-          </a>
           <span class="font-mono text-[10px]">
             Built with <a href="https://wippy.ai" target="_blank" rel="noopener" class="text-on-dark-secondary hover:text-white transition-colors no-underline">Wippy</a>
           </span>

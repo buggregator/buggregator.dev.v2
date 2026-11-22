@@ -1,75 +1,53 @@
 <script setup lang="ts">
-import RevealWords from '~/components/ui/RevealWords.vue'
+import ReplacesRow, { type ReplacesRowData } from '~/components/sections/ReplacesSection/ReplacesRow.vue'
 
 const { t } = useI18n()
-const revealRef = ref<InstanceType<typeof RevealWords>>()
 
-const tools = [
-  { key: 'sentry', tool: 'Sentry (local)', color: '#f43f5e', link: '/features/sentry' },
-  { key: 'mailhog', tool: 'Mailhog / Mailtrap', color: '#f59e0b', link: '/features/email-testing' },
-  { key: 'ray', tool: 'Ray', color: '#06b6d4' },
-  { key: 'blackfire', tool: 'Blackfire / XHProf UI', color: '#8b5cf6', link: '/features/profiler' },
-  { key: 'logviewers', tool: 'Log viewers', color: '#6b7280', link: '/features/logs' },
-  { key: 'requestbin', tool: 'RequestBin', color: '#22c55e', link: '/features/http-dumps' },
-  { key: 'inspector', tool: 'Inspector.dev (local)', color: '#eab308' },
-  { key: 'smsgateway', tool: 'SMS gateways (dev)', color: '#a855f7', link: '/features/sms' },
-  { key: 'proxy', tool: 'Charles / Fiddler / mitmproxy', color: '#10b981', link: '/features/http-proxy' },
-  { key: 'mockapi', tool: 'Mockoon / Beeceptor (dev)', color: '#0ea5e9', link: '/features/mock-server' },
+// «Instead of → in Buggregator»: what a visitor runs today, and the feature
+// page that does the same job. Every row is a link. Order: search volume and
+// fit (marketing, Keyword Planner 2026-11-21). Texts: replaces.table.rows.<key>.
+const rows: ReplacesRowData[] = [
+  { key: 'email', to: '/features/email-testing', color: '#f59e0b', icon: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>' },
+  { key: 'http', to: '/features/http-dumps', color: '#22c55e', icon: '<path d="M4 7h11M4 12h16M4 17h8"/><path d="m16 14 4 3-4 3"/>' },
+  { key: 'errors', to: '/features/sentry', color: '#f43f5e', icon: '<path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/>' },
+  { key: 'mock', to: '/features/mock-server', color: '#38bdf8', icon: '<rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/>' },
+  { key: 'dumps', to: '/features/dumps', color: '#06b6d4', icon: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>' },
+  { key: 'prof', to: '/features/profiler', color: '#a78bfa', icon: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>' },
+  { key: 'logs', to: '/features/logs', color: '#9ca3af', icon: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 19h4"/>' },
+  { key: 'proxy', to: '/features/http-proxy', color: '#10b981', icon: '<path d="M4 8h13l-3-3M20 16H7l3 3"/>' },
+  { key: 'sms', to: '/features/sms', color: '#c084fc', icon: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/>' },
 ]
 </script>
 
 <template>
-  <section
-    class="py-20 lg:py-28 bg-section-mid replaces-gradient relative"
-    @mousemove="revealRef?.handleMouse($event)"
-    @mouseleave="revealRef?.handleLeave()"
-  >
-    <ClientOnly>
-      <RevealWords
-        ref="revealRef"
-        :words="['Sentry', 'Mailtrap', 'Ray', 'Blackfire', 'Telescope', 'RequestBin', 'Mailhog', 'Inspector', 'Twilio', 'Clockwork', 'Papertrail', 'Bugsnag', 'Rollbar', 'free forever', 'all-in-one', 'zero cost', 'no signup', 'one command', 'replaces them all', 'console.log? nah', 'tail -f laravel.log', '¯\\_(ツ)_/¯', 'buggregator is cool']"
-        color="#f43f5e"
-        :radius="220"
-        :density="28"
-      />
-    </ClientOnly>
-    <div class="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-section font-bold text-white mb-3 font-sans">
-          {{ t('replaces.title') }}
+  <section id="replaces" class="py-16 lg:py-24 bg-section-mid replaces-gradient" aria-labelledby="replaces-title">
+    <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 id="replaces-title" class="text-[1.75rem] sm:text-4xl leading-tight font-bold text-white mb-3 font-sans">
+          {{ t('replaces.table.title') }}
         </h2>
+        <p class="max-w-[620px] mx-auto text-base sm:text-[17px] text-on-dark-secondary font-sans">
+          {{ t('replaces.table.subtitle') }}
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <component
-          :is="item.link ? 'NuxtLink' : 'div'"
-          v-for="item in tools"
-          :key="item.key"
-          :to="item.link || undefined"
-          class="flex items-center gap-3 p-4 rounded-xl bg-landing-surface border border-landing-border-subtle no-underline"
-          :class="item.link ? 'hover:border-landing-border hover:bg-landing-elevated transition-colors duration-150 cursor-pointer' : ''"
-        >
-          <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ background: item.color }" />
-          <div class="min-w-0 flex-1">
-            <p class="text-sm font-medium text-on-dark-secondary font-sans line-through opacity-50">{{ item.tool }}</p>
-            <p class="text-sm text-on-dark-secondary font-sans">{{ t(`replaces.tools.${item.key}`) }}</p>
-          </div>
-          <svg v-if="item.link" class="w-4 h-4 text-on-dark-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </component>
+      <div class="replaces-table">
+        <div class="replaces-table__head" aria-hidden="true">
+          <span>{{ t('replaces.table.label') }}</span>
+          <span />
+          <span>Buggregator</span>
+          <span />
+        </div>
+        <ul class="list-none m-0 p-0">
+          <li v-for="row in rows" :key="row.key">
+            <ReplacesRow :row="row" />
+          </li>
+        </ul>
+        <p class="replaces-table__note">{{ t('replaces.table.footer') }}</p>
       </div>
 
-      <p class="text-center mt-10 text-lg font-semibold text-white font-sans">
+      <p class="text-center mt-9 text-lg font-semibold text-white font-sans">
         {{ t('replaces.footer') }}
-      </p>
-
-      <p class="text-center mt-3 text-sm text-on-dark-muted font-sans">
-        {{ t('replaces.trapNote') }}
-        <a
-          href="#ecosystem"
-          class="text-accent hover:text-accent-hover transition-colors no-underline"
-        >→</a>
       </p>
     </div>
   </section>
@@ -80,5 +58,49 @@ const tools = [
   background-image:
     radial-gradient(ellipse 50% 60% at 80% 20%, rgba(244, 63, 94, 0.04) 0%, transparent 70%),
     radial-gradient(ellipse 40% 50% at 20% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
+}
+
+.replaces-table {
+  overflow: hidden;
+  border: 1px solid theme('colors.landing-border');
+  border-radius: 12px;
+  background: theme('colors.landing-surface');
+}
+
+.replaces-table__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1.15fr) 24px;
+  gap: 16px;
+  padding: 12px 24px;
+  border-bottom: 1px solid theme('colors.landing-border');
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: theme('colors.on-dark.muted');
+}
+
+.replaces-table li + li {
+  border-top: 1px solid theme('colors.landing-border-subtle');
+}
+
+.replaces-table__note {
+  margin: 0;
+  padding: 12px 24px;
+  border-top: 1px solid theme('colors.landing-border');
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: theme('colors.on-dark.secondary');
+}
+
+@media (max-width: 639px) {
+  .replaces-table__head {
+    display: none;
+  }
+
+  .replaces-table__note {
+    padding: 12px 16px;
+  }
 }
 </style>

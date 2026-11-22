@@ -32,7 +32,6 @@ export default defineNuxtConfig({
 
     public: {
       gaMeasurementId: process.env.PUBLIC_GA_MEASUREMENT_ID || '',
-      crtBadgeId: process.env.PUBLIC_CRT_BADGE_ID || '',
       appUrl: process.env.PUBLIC_APP_URL || '',
       siteUrl: process.env.SITE_URL || 'https://buggregator.dev',
       discordUrl: process.env.DISCORD_URL || 'https://discord.gg/vDsCD3EKUB',
@@ -40,8 +39,6 @@ export default defineNuxtConfig({
       buggregatorUrl: process.env.BUGGREGATOR_URL || 'http://buggregator.app.localhost',
       patreonUrl: process.env.PATREON_URL || 'https://www.patreon.com/butschster',
       sponsorEmail: process.env.SPONSOR_EMAIL || 'butschster@gmail.com',
-      heroVideoUrl: process.env.HERO_VIDEO_URL || '/video.webm',
-      heroPosterUrl: process.env.HERO_POSTER_URL || '/img.webp',
       typesenseHost: process.env.TYPESENSE_HOST || 'localhost',
       typesensePort: process.env.TYPESENSE_PORT || '8108',
       typesenseProtocol: process.env.TYPESENSE_PROTOCOL || 'http',
