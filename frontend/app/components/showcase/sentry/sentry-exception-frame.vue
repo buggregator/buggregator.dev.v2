@@ -162,7 +162,12 @@ const toggleOpen = () => {
   >
     <div
       class="frame__head"
+      :role="hasBody || hasVars ? 'button' : undefined"
+      :tabindex="hasBody || hasVars ? 0 : undefined"
+      :aria-expanded="hasBody || hasVars ? isFrameOpen : undefined"
       @click="toggleOpen"
+      @keydown.enter.self.prevent="toggleOpen"
+      @keydown.space.self.prevent="toggleOpen"
     >
       <div class="frame__title">
         <a
@@ -294,6 +299,10 @@ const toggleOpen = () => {
 
   .frame--empty & {
     @apply cursor-default;
+  }
+
+  &:focus-visible {
+    @apply outline-none ring-2 ring-inset ring-blue-500;
   }
 }
 
