@@ -4,7 +4,7 @@ title: Symfony dump server output in a browser tab
 description: Set VAR_DUMPER_FORMAT=server and VAR_DUMPER_SERVER in .env.local. Buggregator is your dump server, dump() shows as a tree, and the page stays clean.
 query: symfony var dumper
 feature: Dumps
-feature_page: /features/dumps
+feature_page: null
 docs: https://docs.buggregator.dev/config/var-dumper.html#setup
 requires: null
 related: [dump-without-breaking-the-page, php-trap-dump-anywhere, symfony-logs-in-a-live-view, symfony-errors-locally]

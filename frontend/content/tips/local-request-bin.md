@@ -24,7 +24,7 @@ docker run --pull always \
 ```
 
 ### 2. Send a request to any path
-`http-dump` as the URL user name marks the request. Any method and any path work.
+`http-dump` as the URL user name marks the request. Any method and almost any path work. Paths Buggregator uses itself, such as `/api/`, `/mock/` or ones ending in `/store`, go elsewhere.
 
 ```bash
 curl -X POST 'http://http-dump@127.0.0.1:8000/orders/42?source=test' \
@@ -57,6 +57,7 @@ docker run --pull always \
 ```
 
 ### 6. Empty it
+This also clears the HTTP proxy captures and the mock server's call history.
 
 ```bash
 curl -X DELETE http://127.0.0.1:8000/api/events \

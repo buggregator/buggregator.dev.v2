@@ -15,7 +15,7 @@ Already send dev mail to a fake SMTP server on port 1025? Stop it and start Bugg
 ## Steps
 
 ### 1. Stop the old server
-Only one program can listen on port 1025. If it is still taken, Buggregator stops at start with `failed to start TCP servers` and `address already in use`.
+Only one program can listen on port 1025. If it is still taken, the binary stops at start with `failed to start TCP servers` and `address already in use`, and `docker run` refuses with `port is already allocated`.
 
 ### 2. Start Buggregator on the same port
 With Docker:

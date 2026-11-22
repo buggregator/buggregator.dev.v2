@@ -1,7 +1,7 @@
 ---
 slug: laravel-log-stack-keep-files
 title: Add Buggregator to Laravel's log stack, keep daily files
-description: Add a socket channel and set LOG_STACK=daily,socket. Every Laravel log line shows up live in Buggregator, and laravel.log keeps being written.
+description: Add a socket channel and set LOG_STACK=daily,socket. Every Laravel log line shows up live in Buggregator, and your daily log files keep being written.
 query: laravel logging
 feature: Logs
 feature_page: /features/logs
@@ -10,7 +10,7 @@ requires: null
 related: [laravel-logs-in-a-live-view, laravel-queue-job-errors, symfony-logs-in-a-live-view]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---
-Keep `LOG_CHANNEL=stack` and add a `socket` channel to it: `LOG_STACK=daily,socket`. Laravel then writes every record twice, once to your daily `laravel.log` files and once to Buggregator on port 9913. You read logs live in the browser, and the files stay for grep and for anyone who expects them.
+Keep `LOG_CHANNEL=stack` and add a `socket` channel to it: `LOG_STACK=daily,socket`. Laravel then writes every record twice, once to your daily `laravel-YYYY-MM-DD.log` files and once to Buggregator on port 9913. You read logs live in the browser, and the files stay for grep and for anyone who expects them.
 
 ## Steps
 
@@ -41,7 +41,7 @@ Add it to `channels` in `config/logging.php`. The JSON formatter is required.
 ```
 
 ### 3. Put it in the stack
-In current Laravel apps, the `stack` channel reads its channels from `LOG_STACK`. Add `socket` next to the file channel you use. In Docker Compose, use the service name, for example `buggregator:9913`.
+In Laravel 11 and later, the `stack` channel reads its channels from `LOG_STACK`. Add `socket` next to the file channel you use. In Docker Compose, use the service name, for example `buggregator:9913`.
 
 ```dotenv
 LOG_CHANNEL=stack

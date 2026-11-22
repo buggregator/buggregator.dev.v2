@@ -46,7 +46,7 @@ const pusher = new Pusher({
   host: '127.0.0.1', port: '8000', useTLS: false,
 })
 
-await pusher.trigger('orders', 'OrderShipped', { id: 42 })
+pusher.trigger('orders', 'OrderShipped', { id: 42 })
 ```
 
 In Laravel, change the server-side Pusher settings in `.env`:
@@ -68,7 +68,7 @@ VITE_PUSHER_SCHEME=http
 ```
 
 ### 4. Open the Broadcast console
-Publish an event and open http://127.0.0.1:8000, then **Broadcast**. On the left you see each channel with its kind and event count. On the right, each event with its time, name, size and payload. Open one to see what **Changed** since the previous event of the same name, whether the signature is `valid`, and soketi's answer.
+Publish an event and open http://127.0.0.1:8000, then **Broadcast**. On the left you see each channel with its kind and event count. On the right, each event with its time, name, size and payload. Open one to see the **Changes** since the previous event of the same name, whether the signature is `valid`, and the upstream URL with soketi's status and response time.
 
 ## Why it works
 A Pusher server SDK publishes each event as a signed `POST /apps/<app-id>/events` request. Buggregator answers that API on port 8000, stores the event, and sends the same path, query and body to the upstream, so soketi accepts the signature. Your backend gets soketi's answer. If soketi is down, the backend gets `502` and the event is still stored.

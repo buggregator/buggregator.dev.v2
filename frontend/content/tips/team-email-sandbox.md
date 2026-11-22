@@ -10,7 +10,7 @@ requires: null
 related: [projects-per-service, smtp-catcher-in-docker-compose, wait-for-email-in-e2e-tests, fake-smtp-single-binary]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---
-Install Buggregator once in your cluster with the Helm chart, list your apps as projects, and turn on SSO. Each app sends its mail to port 1025 with its project key as the SMTP user name. Everyone on the team signs in to one inbox and picks a project to see only that app's emails. No email reaches a real mailbox.
+Install Buggregator once in your cluster with the Helm chart, list your apps as projects, and turn on SSO. Each app sends its mail to port 1025 with its project key as the SMTP user name. Your team signs in to one inbox and picks a project to see only that app's emails. No email reaches a real mailbox.
 
 ## Steps
 
@@ -69,7 +69,7 @@ MAIL_PASSWORD=any
 For Symfony: `MAILER_DSN=smtp://billing:any@buggregator.default.svc:1025`. Mail without a user name lands in the `default` project.
 
 ### 4. Reach SMTP from outside the cluster
-An Ingress carries only HTTP. For apps outside the cluster, add a TCP Service for port 1025 and limit who can connect, because the SMTP port has no sign-in:
+An Ingress carries only HTTP. For apps outside the cluster, add a TCP Service and limit who can connect, because the SMTP port has no sign-in. It exposes SMTP on 1025 together with the VarDumper and Monolog ports 9912 and 9913:
 
 ```yaml
 tcpService:
@@ -79,7 +79,9 @@ tcpService:
 ```
 
 ### 5. Sign in and pick a project
+Buggregator lets in anyone who finishes the provider's sign-in. Keep it to your team at the provider: in Google Cloud, set the OAuth app's user type to **Internal**, so only accounts of your Google Workspace can sign in. With Keycloak or GitLab, use a realm or group that holds only your team.
+
 Open https://mail-sandbox.example.com and sign in with your provider. The project selector in the sidebar switches between apps.
 
 ## Why it works
-SSO protects the web UI and its API. Ingestion stays open: apps send mail over SMTP with no sign-in, and the SMTP user name only chooses the project. Test scripts that read mail through `/api/smtp/*` need the `X-Auth-Token` header while SSO is on. The chart runs one replica with SQLite on its own volume, so nothing else needs to be set up.
+SSO puts the web UI and its API behind your provider's sign-in, and the provider decides who gets in. Ingestion stays open: apps send mail over SMTP with no sign-in, and the SMTP user name only chooses the project. Test scripts that read mail through `/api/smtp/*` need the `X-Auth-Token` header while SSO is on. The chart runs one replica with SQLite on its own volume, so nothing else needs to be set up.

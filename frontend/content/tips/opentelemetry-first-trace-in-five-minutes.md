@@ -41,7 +41,7 @@ curl -X POST http://127.0.0.1:8000/v1/traces \
 Open http://127.0.0.1:8000, then **Sentry → Traces**. The trace `POST /checkout` is there, marked **OTel**, with the service `checkout`. Open it to see its spans as a waterfall with a **Service** column.
 
 ### 4. Point your app at Buggregator
-Set the standard OTel variables in your app's environment. They work with the OTel SDK of any language.
+Set the standard OTel variables in your app's environment. Most OTel SDKs read them.
 
 ```dotenv
 OTEL_SERVICE_NAME=checkout

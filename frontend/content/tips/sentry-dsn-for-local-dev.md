@@ -6,11 +6,11 @@ query: sentry dsn
 feature: Sentry
 feature_page: /features/sentry
 docs: https://docs.buggregator.dev/config/sentry.html#projects
-requires: null
+requires: "v2.11.0"
 related: [projects-per-service, laravel-errors-without-sentry-account, python-script-errors-sentry, sentry-locally-without-self-hosting]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---
-For local development, use `SENTRY_DSN=http://sentry@127.0.0.1:8000/1` with Buggregator running on your machine. The same DSN works in every Sentry SDK: PHP, JavaScript, Python, Go. Errors then land in the Buggregator UI on port 8000, not in a Sentry account. To keep apps apart, name the project in the DSN: `http://sentry@127.0.0.1:8000/shop` in PHP, or `http://shop@127.0.0.1:8000/1` in SDKs that accept only a number at the end.
+For local development, use `SENTRY_DSN=http://sentry@127.0.0.1:8000/1` with Buggregator running on your machine. The same DSN works in the Sentry SDKs for PHP, JavaScript, Python and Go. Errors then land in the Buggregator UI on port 8000, not in a Sentry account. To keep apps apart, name the project in the DSN: `http://sentry@127.0.0.1:8000/shop` in PHP, or `http://shop@127.0.0.1:8000/1` in SDKs that accept only a number at the end.
 
 ## Steps
 
@@ -67,4 +67,4 @@ The JavaScript SDK takes only letters, digits and `_` before `@`. Write `store_f
 Throw an error in your app and open http://127.0.0.1:8000, then **Sentry**. Pick the project in the sidebar to see only its errors, traces and logs.
 
 ## Why it works
-Buggregator accepts the Sentry SDK protocol on port 8000. It reads the project from the DSN path first, then from the `X-Buggregator-Project` header, then from the key before `@` if a project with that key exists. Without any of them, the event goes to the `default` project. A number at the end is the SDK's own project id, so it never picks a Buggregator project. The key `sentry` never does either.
+Buggregator accepts the Sentry SDK protocol on port 8000. It reads the project from the DSN path first, then from the `X-Buggregator-Event: sentry` and `X-Buggregator-Project` headers sent together, then from the key before `@` if a project with that key exists. Without any of them, the event goes to the `default` project. A number at the end is the SDK's own project id, so it never picks a Buggregator project. The key `sentry` never does either.

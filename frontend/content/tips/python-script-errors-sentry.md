@@ -6,7 +6,7 @@ query: sentry python
 feature: Sentry
 feature_page: /features/sentry
 docs: https://docs.buggregator.dev/config/sentry.html#python
-requires: "v2.9.0"
+requires: "v2.10.0"
 related: [django-errors-and-traces, python-cron-monitor-decorator, sentry-dsn-for-local-dev, python-opentelemetry-fastapi]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

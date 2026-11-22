@@ -10,7 +10,7 @@ requires: "v2.13.0"
 related: [cron-script-ping-url, laravel-scheduler-missed-runs, python-cron-monitor-decorator]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---
-"Not running" can mean three different things: the job never started, it started and failed, or it started and never finished. Wrap the job in pings to Buggregator: one at the start, one at the end with the job's output. Buggregator then marks each run as `ok`, `error`, `missed` or `timeout`, and keeps the last 10 KB of what the job printed. You see which of the three happened, and why.
+"Not running" can mean three different things: the job never started, it started and failed, or it started and never finished. Wrap the job in pings to Buggregator: one at the start, one at the end with the job's output. Buggregator then marks each run as finished, failed, missed or timed out, and keeps the last 10 KB of what the job printed. You see which of the three happened, and why.
 
 ## Steps
 
@@ -53,8 +53,8 @@ Open http://127.0.0.1:8000, then **Sentry → Crons**. Jobs that failed, hung or
 | Status | What it means | Where to look |
 |---|---|---|
 | `missed` | the run was due and no ping came | the crontab line, the cron daemon, the schedule and time zone |
-| `error` | the command exited with an error | the run's output |
-| `timeout` | the run started and did not finish within `max_runtime` | a lock, a stuck network call, a too small limit |
+| Failed | the command exited with an error | the run's output |
+| Timed out | the run started and did not finish within `max_runtime` | a lock, a stuck network call, a too small limit |
 | `ok` | the run finished fine | nothing |
 
 A run counts as missed when nothing comes within the margin after it was due: 1 minute by default. A run counts as hung after 30 minutes by default. Change both in the start ping with `margin` and `max_runtime`, in whole minutes.

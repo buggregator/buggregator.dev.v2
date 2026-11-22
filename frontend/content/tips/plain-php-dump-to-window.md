@@ -4,7 +4,7 @@ title: "Plain PHP: dump() to a browser tab instead of var_dump()"
 description: Install symfony/var-dumper, set VAR_DUMPER_FORMAT=server and call dump(). Values show as a foldable tree in Buggregator, and your page stays clean.
 query: php var dump
 feature: Dumps
-feature_page: /features/dumps
+feature_page: null
 docs: https://docs.buggregator.dev/config/var-dumper.html#setup
 requires: null
 related: [dump-without-breaking-the-page, php-trap-dump-anywhere, symfony-dump-server-in-browser, yii-dumps-without-breaking-output]
@@ -60,7 +60,7 @@ $order = ['id' => 42, 'items' => [['sku' => 'A-1', 'qty' => 2]], 'paid' => false
 dump($order, $_GET);
 ```
 
-Open http://127.0.0.1:8000. Each value shows with its type as an expandable tree, next to the file and line of the call. Click the location to open the file in your editor. `dd()` sends the value too and then stops the script.
+Open http://127.0.0.1:8000. Each value shows with its type as an expandable tree, next to the file and line of the call. Click the location to open the file in your editor: VS Code by default, or the one you pick in Settings. `dd()` sends the value too and then stops the script.
 
 ## Why it works
 VarDumper reads `VAR_DUMPER_FORMAT` the first time you call `dump()`. With `server`, it sends each dump over TCP to `VAR_DUMPER_SERVER` instead of printing it. Without `VAR_DUMPER_SERVER` it uses `127.0.0.1:9912`. Buggregator listens on that port and renders what arrives. On the Windows binary the VarDumper module is not available: run Buggregator in Docker or WSL there.

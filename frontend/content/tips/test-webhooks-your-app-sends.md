@@ -6,7 +6,7 @@ query: webhook tester
 feature: HTTP
 feature_page: /features/http-dumps
 docs: https://docs.buggregator.dev/config/http-dumps.html#use-cases
-requires: null
+requires: "v2.6.0"
 related: [webhook-payload-before-the-handler, replay-a-captured-request, mock-a-third-party-api, local-request-bin]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

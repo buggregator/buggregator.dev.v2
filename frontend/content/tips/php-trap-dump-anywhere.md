@@ -4,7 +4,7 @@ title: Dump from any PHP script with Trap, no Docker
 description: Add buggregator/trap with Composer, run vendor/bin/trap --ui and call trap() in a plain PHP script. Dumps show in a local web UI, not in your output.
 query: php dump
 feature: Dumps
-feature_page: /features/dumps
+feature_page: null
 docs: https://docs.buggregator.dev/trap/getting-started.html
 requires: null
 related: [dump-without-breaking-the-page, ray-calls-to-free-viewer, symfony-dump-server-in-browser, yii-dumps-without-breaking-output]

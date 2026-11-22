@@ -36,7 +36,7 @@ add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src '
 ```
 
 ### 3. Click through the site
-Open the pages people use: sign-in, checkout, the pages with embeds and widgets. Then open http://localhost:8000. The feed gets one card per report: the page, then one line per violation, for example «script-src-elem blocked https://cdn.example.com/x.js». Report-only violations get a badge. The event page shows the directive, the blocked resource, the file with line and column, and the full policy. **CSP reports** in the menu lists only these events.
+Open the pages people use: sign-in, checkout, the pages with embeds and widgets. Then open http://localhost:8000. The feed gets one card per report: the page, then one line per violation, for example «script-src-elem blocked cdn.example.com/x.js». Report-only violations get a badge. The event page shows the directive, the blocked resource, the file with line and column, and the full policy. **CSP reports** in the menu lists only these events.
 
 ### 4. Fix each report
 For each line, decide: the resource is yours and needed, so add its source to the directive (`script-src 'self' https://cdn.example.com`), or it should not load, so remove it from the page.
@@ -50,11 +50,11 @@ curl -X DELETE http://localhost:8000/api/events \
 ```
 
 ### 6. Enforce it
-Rename the header to `Content-Security-Policy` and keep `report-uri`. The browser now blocks what the policy forbids, and you still see each block in Buggregator, now without the report-only badge.
+Rename the header to `Content-Security-Policy` and keep `report-uri`. The browser now blocks what the policy forbids, and you still see each block in Buggregator, now without the report-only badge on the feed card.
 
 ```http
 Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.example.com; img-src 'self' data:; report-uri http://localhost:8000/csp/shop
 ```
 
 ## Why it works
-With the Report-Only header, the browser checks every resource against the policy but loads it anyway, and POSTs a JSON report for each one that fails. Buggregator accepts these reports at `/csp`, answers the browser's CORS check and stores each request as one event. You see the full list of what the policy would break before any user meets it. `report-uri` also works over plain http, so the same setup runs in Docker with `http://buggregator:8000/csp/shop`.
+With the Report-Only header, the browser checks every resource against the policy but loads it anyway, and POSTs a JSON report for each one that fails. Buggregator accepts these reports at `/csp`, answers the browser's CORS check and stores each request as one event. You see the full list of what the policy would break before any user meets it. `report-uri` also works over plain http. In Docker, publish port 8000 and keep `http://localhost:8000/csp/shop`: the reports come from your browser, and a browser on your machine cannot resolve a Compose service name.

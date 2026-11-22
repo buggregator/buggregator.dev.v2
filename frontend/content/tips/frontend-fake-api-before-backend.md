@@ -6,7 +6,7 @@ query: fake api
 feature: Mock server
 feature_page: /features/mock-server
 docs: https://docs.buggregator.dev/config/mock-templates.html#fake-data
-requires: "v2.6.0"
+requires: "v2.7.0"
 related: [mock-api-with-fake-data, mock-api-from-openapi-spec, mock-a-third-party-api, react-errors-locally]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

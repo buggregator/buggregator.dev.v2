@@ -15,7 +15,7 @@ Buggregator is a fake SMTP server in one file. Install it with one command, run 
 ## Steps
 
 ### 1. Install the binary
-On Linux and macOS, the install script picks the file for your system, checks its signed checksums and puts it in `~/.local/bin/buggregator`. No `sudo`.
+On Linux and macOS, the install script picks the file for your system, checks its checksums and puts it in `~/.local/bin/buggregator`. No `sudo`.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/buggregator/server/master/scripts/install.sh | sh
@@ -36,8 +36,14 @@ buggregator -http-addr 127.0.0.1:8000 -smtp-addr 127.0.0.1:1025 -db ./buggregato
 
 If `~/.local/bin` is not in your `PATH`, run `~/.local/bin/buggregator`.
 
+On Windows, the installer does not add the binary to `PATH`. In PowerShell:
+
+```powershell
+& "$env:LOCALAPPDATA\Programs\buggregator\buggregator.exe" -http-addr 127.0.0.1:8000 -smtp-addr 127.0.0.1:1025 -db .\buggregator.db
+```
+
 ### 3. Point your app's SMTP at it
-Host `127.0.0.1`, port `1025`. A user name and password are optional: Buggregator accepts any. For a Laravel app:
+Host `127.0.0.1`, port `1025`. A user name and password are optional: Buggregator accepts any, and a user name picks the project the email lands in. For a Laravel app:
 
 ```dotenv
 MAIL_MAILER=smtp

@@ -6,7 +6,7 @@ query: sentry self hosted
 feature: Sentry
 feature_page: /features/sentry
 docs: https://docs.buggregator.dev/config/sentry.html#configuration
-requires: null
+requires: "v2.10.0"
 related: [laravel-errors-without-sentry-account, sentry-dsn-for-local-dev, projects-per-service, sentry-traces-as-waterfall]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

@@ -43,8 +43,8 @@ The proxy signs each site's certificate itself, so the client must not verify it
 # curl
 curl -x http://127.0.0.1:8080 -k https://api.example.com/users
 
-# Node.js: for the whole process
-NODE_TLS_REJECT_UNAUTHORIZED=0 node app.js
+# Node.js: built-in fetch and http read the proxy variables only with NODE_USE_ENV_PROXY=1
+NODE_USE_ENV_PROXY=1 NODE_TLS_REJECT_UNAUTHORIZED=0 node app.js
 ```
 
 ```python
