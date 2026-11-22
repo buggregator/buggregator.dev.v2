@@ -172,15 +172,15 @@
       "subtitle": "В каждой строке — инструмент, который держат открытым при разработке, и страница Buggregator, которая делает то же самое.",
       "footer": "Работает рядом с Laravel Telescope и Debugbar.",
       "rows": {
-        "email": { "instead": "Mailpit · MailHog · Mailtrap's email sandbox", "with": "Тестирование почты", "desc": "Каждое письмо вашего приложения: HTML, заголовки, вложения." },
+        "email": { "instead": "Mailpit · MailHog · песочница Mailtrap", "with": "Тестирование почты", "desc": "Каждое письмо вашего приложения: HTML, заголовки, вложения." },
         "http": { "instead": "webhook.site · RequestBin", "with": "HTTP-дампы", "desc": "Направьте вебхук сюда и читайте запрос целиком: заголовки, тело, файлы." },
-        "errors": { "instead": "Sentry self-hosted · GlitchTip, for local dev", "with": "Ошибки в формате Sentry", "desc": "Исключения, трейсы и логи из вашего Sentry SDK." },
-        "mock": { "instead": "Mockoon · WireMock, for mock APIs in dev", "with": "Мок-сервер", "desc": "Готовые ответы для API, которые вызывает приложение, по методу и пути." },
-        "dumps": { "instead": "The Ray app, for viewing ray() calls", "with": "Дампы", "desc": "Вывод ray(), dump() и dd() во вкладке браузера, с файлом и строкой." },
+        "errors": { "instead": "Sentry self-hosted · GlitchTip — для локальной разработки", "with": "Ошибки в формате Sentry", "desc": "Исключения, трейсы и логи из вашего Sentry SDK." },
+        "mock": { "instead": "Mockoon · WireMock — моки API при разработке", "with": "Мок-сервер", "desc": "Готовые ответы для API, которые вызывает приложение, по методу и пути." },
+        "dumps": { "instead": "Приложение Ray для вызовов ray()", "with": "Дампы", "desc": "Вывод ray(), dump() и dd() во вкладке браузера, с файлом и строкой." },
         "prof": { "instead": "XHProf UI", "with": "Профилировщик", "desc": "Флейм-график, граф вызовов и самые медленные функции запроса." },
         "logs": { "instead": "tail -f laravel.log", "with": "Логи", "desc": "Записи Monolog вживую, с уровнем, каналом и контекстом." },
-        "proxy": { "instead": "Charles · Fiddler · mitmproxy, in dev", "with": "HTTP-прокси", "desc": "Запросы вашего приложения к другим сервисам вместе с ответами." },
-        "sms": { "instead": "SMS gateway sandboxes", "with": "Тестирование SMS", "desc": "SMS вашего приложения ловятся до того, как дойдут до телефона." }
+        "proxy": { "instead": "Charles · Fiddler · mitmproxy при разработке", "with": "HTTP-прокси", "desc": "Запросы вашего приложения к другим сервисам вместе с ответами." },
+        "sms": { "instead": "Песочницы SMS-шлюзов", "with": "Тестирование SMS", "desc": "SMS вашего приложения ловятся до того, как дойдут до телефона." }
       }
     },
     "trapNote": "Нужны функции отладки в коде? Добавьте Buggregator Trap — trap(), tr(), td() из коробки.",
