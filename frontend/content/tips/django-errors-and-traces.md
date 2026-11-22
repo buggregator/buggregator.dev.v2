@@ -6,7 +6,7 @@ query: sentry django
 feature: Sentry
 feature_page: /features/sentry
 docs: https://docs.buggregator.dev/guides/django.html#errors-traces-and-logs-sentry
-requires: "v2.6.0"
+requires: "v2.9.0"
 related: [django-mail-to-local-inbox, sentry-traces-as-waterfall, sentry-logs-on-your-machine, python-opentelemetry-fastapi]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

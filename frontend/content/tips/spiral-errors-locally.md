@@ -46,7 +46,7 @@ public function defineBootloaders(): array
 }
 ```
 
-To also send your app's logs, register `\Spiral\Bootloader\Debug\LogCollectorBootloader` before it.
+To attach your app's recent log messages to each error, register `\Spiral\Bootloader\Debug\LogCollectorBootloader` before it.
 
 ### 4. Point the DSN at Buggregator
 One line in `.env`. Keep the number in the path: the data then goes to the `default` project.

@@ -6,7 +6,7 @@ query: mailpit docker
 feature: Mail
 feature_page: /features/email-testing
 docs: https://docs.buggregator.dev/guides/ci.html#github-actions
-requires: null
+requires: "v2.3.0"
 related: [wait-for-email-in-e2e-tests, grab-otp-code-from-test-email, smtp-catcher-in-docker-compose]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

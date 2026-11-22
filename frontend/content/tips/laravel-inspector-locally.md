@@ -4,7 +4,7 @@ title: Inspector transactions from Laravel, locally
 description: Install inspector-laravel and set INSPECTOR_URL to Buggregator. Each request shows its duration, memory and a timeline, and nothing goes to the cloud.
 query: inspector dev
 feature: Profiler
-feature_page: /features/sentry
+feature_page: /features/profiler
 docs: https://docs.buggregator.dev/config/inspector.html#laravel
 requires: null
 related: [laravel-profiler-in-two-commands, laravel-opentelemetry-traces, sentry-traces-as-waterfall]
@@ -29,7 +29,7 @@ composer require inspector-apm/inspector-laravel
 ```
 
 ### 3. Point it at Buggregator
-Four lines in `.env`. The keys can be any value unless you set a secret key on the server.
+Four lines in `.env`. The keys can be any value.
 
 ```dotenv
 INSPECTOR_URL=http://inspector@127.0.0.1:8000

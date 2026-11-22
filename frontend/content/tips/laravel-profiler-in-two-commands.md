@@ -47,4 +47,4 @@ Open the slow page, then the profile in Buggregator. **Flamechart** shows where 
 ![An XHProf profile of a Laravel request in Buggregator's Flamechart tab.](/img/tips/laravel-profiler-in-two-commands.webp)
 
 ## Why it works
-XHProf records CPU time, wall time and memory for every function call in the request. The package sends that data to Buggregator's profiler endpoint on port 8000, next to your exceptions and logs. After a fix, compare two runs side by side to check that it helped.
+XHProf records CPU time, wall time and memory for every function call in the request. The package sends that data to Buggregator's profiler endpoint on port 8000, next to your exceptions and logs.

@@ -6,7 +6,7 @@ query: sentry nextjs
 feature: Sentry
 feature_page: /features/sentry
 docs: https://docs.buggregator.dev/guides/frontend.html#nuxt-and-next-js
-requires: null
+requires: "v2.9.0"
 related: [react-errors-locally, express-errors-locally, sentry-traces-as-waterfall, sentry-logs-on-your-machine]
 checked: { date: 2026-11-22, version: v2.13.0 }
 ---

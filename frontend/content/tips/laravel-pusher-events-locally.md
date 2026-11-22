@@ -40,7 +40,7 @@ Older Laravel apps use `BROADCAST_DRIVER` instead of `BROADCAST_CONNECTION`. Whe
 `php artisan install:broadcasting --pusher` writes `VITE_PUSHER_HOST="${PUSHER_HOST}"` and `VITE_PUSHER_PORT="${PUSHER_PORT}"`. Once `PUSHER_HOST` points at Buggregator, Echo in the browser would connect there too. Buggregator does not speak WebSocket. Set the `VITE_PUSHER_*` values to your real server, as they were before.
 
 ### 4. Pass the events on, if you want them live
-Without an upstream, Buggregator stores each event and answers «ok», and browsers get nothing. To keep live updates, give it your real server. For Pusher it is the `api-<cluster>.pusher.com` host Laravel would use; for a local soketi, its own address.
+Without an upstream, Buggregator stores each event and answers your app with `{}`, as Pusher does, and browsers get nothing. To keep live updates, give it your real server. For Pusher it is the `api-<cluster>.pusher.com` host Laravel would use; for a local soketi, its own address.
 
 ```bash
 docker run --pull always \

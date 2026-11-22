@@ -80,8 +80,11 @@ final class NightlyReport
 A task without the Sentry SDK can call a URL when it starts and when it ends. The `schedule` query sets the crontab (a `+` is a space).
 
 ```bash
+# when it starts
 curl -fsS "http://127.0.0.1:8000/ping/nightly-report/start?schedule=0+3+*+*+*"
+# when it ends fine
 curl -fsS "http://127.0.0.1:8000/ping/nightly-report"
+# when it fails
 curl -fsS "http://127.0.0.1:8000/ping/nightly-report/fail"
 ```
 

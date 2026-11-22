@@ -54,4 +54,4 @@ Sentry.captureException(new IllegalStateException("Check error"));
 Open `http://127.0.0.1:8000`. The error «Check error» shows with its stack trace. The log is on the Sentry page, **Logs** tab. Traces are on the **Traces** tab.
 
 ## Why it works
-The Sentry Java SDK sends its data to the host in the DSN. Buggregator accepts the Sentry protocol on port 8000 and stores errors, transactions and logs instead of forwarding them. The Java SDK 8.64 (`io.sentry:sentry`) was checked against Buggregator 2.10.0: errors, transactions and logs arrive. The Spring Boot starter is built on that SDK.
+The Sentry Java SDK sends its data to the host in the DSN. Buggregator accepts the Sentry protocol on port 8000 and stores errors, transactions and logs instead of forwarding them.

@@ -77,4 +77,4 @@ PROFILER_MIDDLEWARE_DEFAULT_ENABLED=false
 Open `http://127.0.0.1:8000` and the profile. **Call graph** colors nodes from white to dark red: the darker, the more it costs. **Flame graph** shows where time is spent. **Top functions** ranks functions by CPU time, wall time, memory and call count.
 
 ## Why it works
-XHProf records CPU time, wall time and memory for every function call in the request. The middleware starts it before your code runs and sends the result to Buggregator's `/api/profiler/store` endpoint on port 8000. After a fix, compare two runs side by side to check that it helped.
+XHProf records CPU time, wall time and memory for every function call in the request. The middleware starts it before your code runs and sends the result to Buggregator's `/api/profiler/store` endpoint on port 8000.

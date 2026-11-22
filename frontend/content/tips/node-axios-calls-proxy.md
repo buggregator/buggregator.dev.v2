@@ -5,7 +5,7 @@ description: Pass an HttpsProxyAgent to axios and turn off its own proxy. Each o
 query: axios proxy
 feature: HTTP
 feature_page: /features/http-proxy
-docs: https://docs.buggregator.dev/config/http-proxy.html#javascript-—-node-js-—-axios
+docs: https://docs.buggregator.dev/config/http-proxy.html#javascript-node-js-—-axios
 requires: null
 related: [laravel-see-outgoing-api-calls, python-requests-through-debug-proxy, go-http-client-proxy, express-errors-locally]
 checked: { date: 2026-11-22, version: v2.13.0 }

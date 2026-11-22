@@ -42,7 +42,7 @@ nelmio_security:
 Open your app in the browser and click through it. Every script, style or image the policy does not allow is reported. Use `localhost:8000` in the policy, not a Docker service name: the browser sends the report, not your app.
 
 ### 4. Read the reports
-Open `http://localhost:8000`. The feed gets one card per report request: the page, then one line per violation, for example «script-src-elem blocked https://cdn.example.com/x.js». Report-only violations get a badge. The event page shows the directive, the blocked resource, the file with line and column, the code sample, the full policy and the raw report. **CSP reports** in the menu lists only these events.
+Open `http://localhost:8000`. The feed gets one card per report request: the page, then one line per violation, for example «script-src-elem blocked cdn.example.com/x.js». Report-only violations get a badge. The event page shows the directive, the blocked resource, the file with line and column, the code sample, the full policy and the raw report. **CSP reports** in the menu lists only these events.
 
 ### 5. Check it without a browser
 Send one report with curl to see that Buggregator receives it.

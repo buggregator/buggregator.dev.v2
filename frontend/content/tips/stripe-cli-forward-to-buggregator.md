@@ -5,7 +5,7 @@ description: Run stripe listen with --forward-to pointing at Buggregator. Each t
 query: stripe cli
 feature: HTTP
 feature_page: /features/http-dumps
-docs: https://docs.buggregator.dev/guides/node.html#webhooks-stripe-github-…
+docs: https://docs.buggregator.dev/guides/node.html#webhooks-stripe-github
 requires: null
 related: [webhook-payload-before-the-handler, replay-a-captured-request, laravel-see-outgoing-api-calls]
 checked: { date: 2026-11-22, version: v2.13.0 }

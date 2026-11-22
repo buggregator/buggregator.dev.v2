@@ -22,7 +22,7 @@ pecl install xhprof
 ```
 
 ### 2. Install the bundle
-The bundle is in early development, so add it as a dev dependency.
+Add it as a dev dependency.
 
 ```bash
 composer require --dev velpl/buggregator-profiler-bundle:^0.3
@@ -58,4 +58,4 @@ bin/console messenger:consume async --limit=10
 Open `http://127.0.0.1:8000` and pick the profile. **Call graph** colors nodes from white to dark red: the darker, the more it costs. **Flame graph** shows where the time goes. **Top functions** ranks functions by CPU time, wall time, memory and call count.
 
 ## Why it works
-XHProf records CPU time, wall time and memory for every function call. The bundle starts the profiler when a request or a command begins and sends the data to Buggregator when it ends. That is why it also covers code with no page to look at: JSON APIs, commands and workers. After a fix, compare two runs side by side to check that it helped.
+XHProf records CPU time, wall time and memory for every function call. The bundle starts the profiler when a request or a command begins and sends the data to Buggregator when it ends. That is why it also covers code with no page to look at: JSON APIs, commands and workers.

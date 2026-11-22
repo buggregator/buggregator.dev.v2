@@ -20,7 +20,7 @@ Point the server side of Laravel Reverb at Buggregator on port 8000 and start Bu
 Reverb listens on port 8080 by default. Buggregator's HTTP proxy also uses 8080, so move the proxy when you run the binary next to Reverb:
 
 ```bash
-PROXY_ADDR=:8081 BROADCAST_UPSTREAM=http://127.0.0.1:8080 buggregator
+BROADCAST_APPS=your-app-key:your-app-secret PROXY_ADDR=:8081 BROADCAST_UPSTREAM=http://127.0.0.1:8080 buggregator
 ```
 
 In Docker, publish only the UI port and reach Reverb on your machine through `host.docker.internal`:
@@ -30,6 +30,7 @@ docker run --pull always \
   -p 127.0.0.1:8000:8000 \
   --add-host=host.docker.internal:host-gateway \
   -e BROADCAST_UPSTREAM=http://host.docker.internal:8080 \
+  -e BROADCAST_APPS=your-app-key:your-app-secret \
   ghcr.io/buggregator/server:latest
 ```
 
@@ -46,7 +47,7 @@ REVERB_SCHEME=http
 Older Laravel apps use `BROADCAST_DRIVER` instead of `BROADCAST_CONNECTION`.
 
 ### 3. Keep the browser on Reverb
-`php artisan install:broadcasting` writes `VITE_REVERB_HOST="${REVERB_HOST}"` and `VITE_REVERB_PORT="${REVERB_PORT}"`. Buggregator does not speak WebSocket, so give Echo Reverb's own address:
+`php artisan install:broadcasting` writes `VITE_REVERB_HOST="${REVERB_HOST}"` and `VITE_REVERB_PORT="${REVERB_PORT}"`. Buggregator does not accept Echo's Pusher WebSocket connections, so give Echo Reverb's own address:
 
 ```dotenv
 VITE_REVERB_APP_KEY="${REVERB_APP_KEY}"
@@ -58,11 +59,7 @@ VITE_REVERB_SCHEME=http
 Reverb itself listens on `REVERB_SERVER_HOST` and `REVERB_SERVER_PORT`, so changing `REVERB_HOST` does not move it. Rebuild your frontend assets after changing `VITE_` values.
 
 ### 4. Check each signature
-List your app key and secret, and every event says whether its signature is `valid` or `invalid`:
-
-```bash
-BROADCAST_APPS=your-app-key:your-app-secret
-```
+`BROADCAST_APPS` in step 1 lists your app key and secret for Buggregator (not for Laravel's `.env`). With it, every event says whether its signature is `valid` or `invalid`.
 
 ### 5. Open the Broadcast console
 Trigger an event in your app and open http://127.0.0.1:8000, then **Broadcast**. On the left you see every channel with its kind and event count. On the right, each event with its time, name, size and payload. Open one to see what **Changed** since the previous event of the same name, the signature result and Reverb's answer. The event name is the full class name, for example `App\Events\OrderShipped`.
