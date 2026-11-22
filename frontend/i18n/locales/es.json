@@ -21,14 +21,7 @@
       "copy": "Copiar comando",
       "copied": "¡Copiado!"
     },
-    "seeItLive": "Verlo en acción →",
     "starHelp": "Si Buggregator te ahorra tiempo, una estrella ayuda a otros a encontrarlo.",
-    "trustRow": {
-      "stars": "Estrellas en GitHub",
-      "downloads": "Descargas",
-      "license": "Licencia MIT",
-      "free": "Gratis para siempre"
-    },
     "liveFeed": {
       "live": "En vivo"
     },
@@ -37,7 +30,6 @@
       "docker": "Docker",
       "binary": "Binario",
       "binaryNote": "Un solo archivo, de unos {size}. Se instala con un comando.",
-      "otherPlatforms": "Otras formas de instalar →",
       "otherWays": "Binario, Windows, Docker Compose →"
     },
     "languages": "Node.js, JavaScript en el navegador, Python, Go y Java envían errores con su Sentry SDK.",

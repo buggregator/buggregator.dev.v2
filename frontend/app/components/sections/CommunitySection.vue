@@ -78,7 +78,7 @@ function onMouseLeave() {
           <div class="w-px h-12 bg-white/10 hidden sm:block" />
           <div v-if="github.totalDownloads > 0" class="community-stat">
             <p class="text-3xl font-bold text-white font-sans">{{ format(github.totalDownloads) }}</p>
-            <p class="text-sm text-white/50 mt-1 font-sans">{{ t('hero.trustRow.downloads') }}</p>
+            <p class="text-sm text-white/50 mt-1 font-sans">{{ t('stats.downloads') }}</p>
           </div>
           <div v-if="github.totalDownloads > 0" class="w-px h-12 bg-white/10 hidden sm:block" />
           <div class="community-stat">

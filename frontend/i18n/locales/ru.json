@@ -21,14 +21,7 @@
       "copy": "Скопировать",
       "copied": "Скопировано!"
     },
-    "seeItLive": "Посмотреть в действии →",
     "starHelp": "Если Buggregator экономит вам время, звезда поможет другим найти его.",
-    "trustRow": {
-      "stars": "Звёзд на GitHub",
-      "downloads": "Скачиваний",
-      "license": "Лицензия MIT",
-      "free": "Бесплатно навсегда"
-    },
     "liveFeed": {
       "live": "Live"
     },
@@ -37,7 +30,6 @@
       "docker": "Docker",
       "binary": "Бинарник",
       "binaryNote": "Один файл, около {size}. Ставится одной командой.",
-      "otherPlatforms": "Другие способы установки →",
       "otherWays": "Бинарник, Windows, Docker Compose →"
     },
     "languages": "Node.js, JavaScript в браузере, Python, Go и Java шлют ошибки через свой Sentry SDK.",
