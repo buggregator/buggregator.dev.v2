@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import HeroCommand from '~/components/sections/HeroSection/HeroCommand.vue'
 import FeatureViewer from '~/components/sections/HeroSection/FeatureViewer.vue'
+import HeroXray from '~/components/sections/HeroSection/HeroXray.vue'
 import { FEATURE_RELEASE } from '~/data/features'
 
 // First screen, «product first»: who and what in one line, one line about
 // other languages, one `docker run` with Copy, then the real interface:
-// one tab per feature (FeatureViewer).
+// one tab per feature (FeatureViewer). Behind the copy: the dimmed beetle with
+// an X-ray toggle (HeroXray, #6838, #6842).
 // Other ways to install live in «How it works», step 1.
 const { t } = useI18n()
 const { trackEvent } = useGtag()
@@ -16,52 +18,62 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 
 <template>
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__inner">
-      <a
-        :href="FEATURE_RELEASE.url"
-        target="_blank"
-        rel="noopener"
-        class="hero__badge hero-stagger"
-        style="--i: 0"
-      >{{ t('hero.badge.release', { version: FEATURE_RELEASE.tag }) }}</a>
+    <HeroXray
+      :button="t('hero.xray.button')"
+      :on="t('hero.xray.on')"
+      :off="t('hero.xray.off')"
+      :said-on="t('hero.xray.saidOn')"
+      :said-off="t('hero.xray.saidOff')"
+    >
+      <div class="hero__inner">
+        <a
+          :href="FEATURE_RELEASE.url"
+          target="_blank"
+          rel="noopener"
+          class="hero__badge hero-stagger"
+          style="--i: 0"
+        >{{ t('hero.badge.release', { version: FEATURE_RELEASE.tag }) }}</a>
 
-      <h1 id="hero-title" class="hero__title hero-stagger" style="--i: 1">
-        {{ t('hero.headline') }} <span class="whitespace-nowrap">{{ t('hero.headlineSub') }}</span>
-      </h1>
+        <h1 id="hero-title" class="hero__title hero-stagger" style="--i: 1">
+          {{ t('hero.headline') }} <span class="whitespace-nowrap">{{ t('hero.headlineSub') }}</span>
+        </h1>
 
-      <p class="hero__lead hero-stagger" style="--i: 2">{{ t('hero.subheadline') }}</p>
-      <p class="hero__langs hero-stagger" style="--i: 2">{{ t('hero.languages') }}</p>
+        <p class="hero__lead hero-stagger" style="--i: 2">{{ t('hero.subheadline') }}</p>
+        <p class="hero__langs hero-stagger" style="--i: 2">{{ t('hero.languages') }}</p>
 
-      <div class="hero__action hero-stagger" style="--i: 3">
-        <HeroCommand />
-        <!-- Secondary ways in: ghost buttons with an icon, no arrows. -->
-        <div class="hero__under">
-          <a
-            href="#how-it-works"
-            class="hero__alt"
-            @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'other_ways' })"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 13 9 5 9-5" />
-            </svg>
-            {{ t('hero.install.otherWays') }}
-          </a>
-          <a
-            :href="AGENT_SETUP_URL"
-            target="_blank"
-            rel="noopener"
-            class="hero__alt"
-            @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'agent_setup' })"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 3v3M12 18v3M3 12h3M18 12h3" /><path d="m12 8 1.2 2.8L16 12l-2.8 1.2L12 16l-1.2-2.8L8 12l2.8-1.2L12 8Z" />
-            </svg>
-            {{ t('hero.aiAgent') }}
-          </a>
+        <div class="hero__action hero-stagger" style="--i: 3">
+          <HeroCommand />
+          <!-- Secondary ways in: ghost buttons with an icon, no arrows. -->
+          <div class="hero__under">
+            <a
+              href="#how-it-works"
+              class="hero__alt"
+              @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'other_ways' })"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 13 9 5 9-5" />
+              </svg>
+              {{ t('hero.install.otherWays') }}
+            </a>
+            <a
+              :href="AGENT_SETUP_URL"
+              target="_blank"
+              rel="noopener"
+              class="hero__alt"
+              @click="trackEvent('cta_click', { cta_location: 'hero', cta_text: 'agent_setup' })"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3" /><path d="m12 8 1.2 2.8L16 12l-2.8 1.2L12 16l-1.2-2.8L8 12l2.8-1.2L12 8Z" />
+              </svg>
+              {{ t('hero.aiAgent') }}
+            </a>
+          </div>
+          <p class="hero__trust">{{ t('hero.trustLine') }}</p>
         </div>
-        <p class="hero__trust">{{ t('hero.trustLine') }}</p>
       </div>
+    </HeroXray>
 
+    <div class="hero__inner hero__inner--preview">
       <FeatureViewer class="hero__preview hero-stagger" style="--i: 4" />
     </div>
   </section>
@@ -76,10 +88,30 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 }
 
 .hero__inner {
+  width: 100%;
   max-width: 1040px;
   margin: 0 auto;
-  padding: 136px 32px 0;
   text-align: center;
+}
+
+/* The copy over the beetle: a soft shadow keeps the big lines readable
+   over a bright X-ray spot. */
+.hero__title,
+.hero__lead {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65), 0 0 22px rgba(10, 11, 16, 0.85);
+}
+
+.hero__inner--preview {
+  padding: 0 32px;
+}
+
+/* Small muted lines sit on a dark plate over the picture. */
+.hero__langs,
+.hero__trust {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: rgba(10, 11, 16, 0.72);
 }
 
 .hero__badge {
@@ -189,7 +221,7 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
      from 1132 px up. Below that the tab row scrolls. */
   --preview-w: min(1100px, calc(100vw - 32px));
   width: var(--preview-w);
-  margin-top: 44px;
+  margin-top: 8px;
   margin-left: calc((100% - var(--preview-w)) / 2);
 }
 
@@ -205,8 +237,8 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 }
 
 @media (max-width: 639px) {
-  .hero__inner {
-    padding: 112px 16px 0;
+  .hero__inner--preview {
+    padding: 0 16px;
   }
 
   .hero__title {
@@ -226,7 +258,7 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
   }
 
   .hero__preview {
-    margin-top: 32px;
+    margin-top: 0;
   }
 }
 

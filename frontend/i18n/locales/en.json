@@ -8,6 +8,13 @@
     "getStarted": "Get Started"
   },
   "hero": {
+    "xray": {
+      "button": "X-ray",
+      "on": "on",
+      "off": "off",
+      "saidOn": "X-ray on. Move the pointer over the picture, or use the arrow keys.",
+      "saidOff": "X-ray off"
+    },
     "badge": {
       "version": "v{version} · just released",
       "free": "Free & Open Source",

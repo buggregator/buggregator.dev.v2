@@ -8,6 +8,13 @@
     "getStarted": "Empezar"
   },
   "hero": {
+    "xray": {
+      "button": "X-ray",
+      "on": "sí",
+      "off": "no",
+      "saidOn": "Rayos X activados. Mueve el puntero por la imagen o usa las flechas.",
+      "saidOff": "Rayos X desactivados"
+    },
     "badge": {
       "version": "v{version} · recién lanzada",
       "free": "Gratuito y de código abierto",
