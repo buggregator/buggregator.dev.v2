@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AssemblyLinePicture from '~/components/ui/AssemblyLinePicture.vue'
-import CopyCommand from '~/components/ui/CopyCommand.vue'
+import HeroCommand from '~/components/sections/HeroSection/HeroCommand.vue'
 
 // The last band of the home page, before the footer (#6831): the assembly
 // line under a shade, one line, the install command and «Star on GitHub».
@@ -20,7 +20,7 @@ const { exact } = useServerStars()
       <p class="al-band__sub">
         {{ t('assemblyLine.sub') }}
       </p>
-      <CopyCommand class="al-band__cmd" :command="t('hero.command')" cta-location="assembly_band" />
+      <HeroCommand class="al-band__cmd" cta-location="assembly_band" />
       <a
         href="https://github.com/buggregator/server"
         target="_blank"
@@ -87,7 +87,7 @@ const { exact } = useServerStars()
 .al-band__cmd {
   margin-top: 32px;
   width: 100%;
-  text-align: left;
+  max-width: 620px;
 }
 
 .al-band__star {
