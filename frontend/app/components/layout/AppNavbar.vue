@@ -31,6 +31,9 @@ const featureLinks = [
   { label: 'Logs', to: '/features/logs', color: '#6b7280' },
   { label: 'HTTP Dumps', to: '/features/http-dumps', color: '#22c55e' },
   { label: 'MCP & API', to: '/features/mcp-api', color: '#14b8a6' },
+  { label: 'Broadcast Events', to: '/features/broadcast-events', color: '#ec4899' },
+  { label: 'Cron Monitoring', to: '/features/cron-monitoring', color: '#84cc16' },
+  { label: 'CSP Reports', to: '/features/csp-reports', color: '#d946ef' },
 ]
 
 const featuresOpen = ref(false)

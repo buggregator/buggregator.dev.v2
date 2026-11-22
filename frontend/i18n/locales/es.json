@@ -389,25 +389,34 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "Novedades en v2.12",
-    "title": "OpenTelemetry y gráficos de trazas",
+    "eyebrow": "Novedades en v2.13",
+    "title": "Broadcasts, tareas cron y envío a un buzón real",
     "cards": {
-      "otel": {
-        "title": "Envía OpenTelemetry directo a Buggregator",
-        "desc": "¿Tu app ya usa OpenTelemetry? Apunta el SDK de OTel o el Collector al puerto 8000. Las trazas y los logs aparecen en las páginas Traces y Logs de Sentry, junto a tus eventos de Sentry, cada uno con la etiqueta OTel o Sentry SDK. El mismo puerto, nada que activar. Sin Jaeger, sin Grafana, sin cuenta en la nube.",
-        "cta": "Configurar OpenTelemetry"
+      "broadcast": {
+        "title": "Mira lo que emite tu app",
+        "desc": "Apunta los broadcasts de Laravel Reverb, Pusher o soketi a Buggregator. Cada evento aparece en su canal, con sus datos y con lo que cambió desde el anterior. Configura un upstream y cada evento sigue hacia tu servidor real, así el navegador sigue recibiendo las actualizaciones en vivo.",
+        "cta": "Ver eventos de broadcast"
       },
-      "graphs": {
-        "title": "Una traza, cuatro vistas",
-        "desc": "Además del waterfall, cada traza tiene ahora un flame graph, un grafo de llamadas y un diagrama de secuencia. La lista de trazas tiene un mapa de servicios: qué servicio llama a cuál, con el tráfico del periodo que elijas. Haz clic en un servicio para ver qué usa y quién lo usa.",
-        "cta": "Ver la página de Sentry"
+      "crons": {
+        "title": "Comprueba si tus tareas programadas se ejecutaron",
+        "desc": "Las tareas informan de cada ejecución con Sentry Crons o con una simple URL de ping que llamas con curl. La pestaña Crons de Sentry muestra qué ejecuciones fueron bien, cuáles fallaron, cuáles nunca empezaron y cuáles nunca terminaron. Sin cuenta de Sentry.",
+        "cta": "Ver el monitoreo de cron"
+      },
+      "inbox": {
+        "title": "Envía un correo capturado a un buzón real",
+        "desc": "¿Quieres ver un correo en Gmail o probar su enlace en el móvil? Configura un servidor SMTP de salida, pulsa Send to inbox y escribe tu dirección. Solo sale ese mensaje y solo a las direcciones que escribas. Sin inicio de sesión, funciona solo desde tu propia máquina y solo hacia direcciones permitidas.",
+        "cta": "Configurar el envío"
+      },
+      "small": {
+        "title": "Comentarios de usuarios, notificaciones, informes CSP",
+        "desc": "Los comentarios que tus usuarios envían con el SDK de Sentry aparecen en el error al que se refieren. Las notificaciones de escritorio te avisan de un error nuevo de Sentry mientras trabajas en otra ventana. Y Buggregator ahora recibe los informes de Content Security Policy del navegador: qué se bloqueó, con qué regla y en qué página.",
+        "cta": "Ver comentarios de usuarios",
+        "links": {
+          "csp": "Ver informes CSP"
+        }
       }
     },
-    "also": {
-      "lead": "También nuevo:",
-      "filters": "filtra las trazas por servicio y por origen (Sentry u OpenTelemetry)",
-      "notes": "Más detalles en las notas de la versión v2.12.0"
-    }
+    "notes": "Más detalles en las notas de la versión v2.13.0"
   },
   "harnsy": {
     "title": "Un equipo de IA desarrolla Buggregator. Las decisiones las tomamos nosotros.",

@@ -14,14 +14,14 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'Local SMTP Server for Email Testing — Buggregator',
-  description: 'Catch every email your app sends during development. No emails reach real inboxes. Preview HTML, check attachments, view raw source. Works with any language or framework. Free, open-source, runs locally.',
+  description: 'Catch every email your app sends during development. Nothing reaches a real inbox unless you send it there. Preview HTML, check attachments, view raw source. Works with any language or framework. Free, open-source, runs locally.',
   ogTitle: 'Local SMTP Server for Email Testing — Buggregator',
   ogDescription: 'Catch every email your app sends during development. Preview HTML, attachments, raw source. One Docker command to start.',
   ogImage: 'https://buggregator.dev/buggregator.png',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Local SMTP Server for Email Testing — Buggregator',
-  twitterDescription: 'Catch every email your app sends during development. No emails reach real inboxes.',
+  twitterDescription: 'Catch every email your app sends during development. Nothing reaches a real inbox unless you send it there.',
 })
 
 const accentColor = '#f59e0b'
@@ -120,6 +120,33 @@ smtp.SendMail("127.0.0.1:1025", nil, sender, recipients, msg)`,
     title: 'Send an email — see it instantly',
     description: 'Trigger any email from your app. It shows up in the Buggregator UI immediately with full HTML preview, attachments, and raw source.',
   },
+  {
+    title: 'Optional: send one email to a real inbox',
+    description: 'Want to see a caught email in Gmail or Outlook, or tap its link on your phone? Add an outgoing SMTP server (v2.13.0 or later). Then Send to inbox on an email\u2019s page sends that one message to the addresses you type. Example for Gmail, which needs an app password:',
+    tabs: [
+      {
+        id: 'yaml',
+        label: 'buggregator.yaml',
+        code: `smtp_relay:
+  host: smtp.gmail.com
+  port: 587
+  tls: starttls
+  username: me@gmail.com
+  password_file: /run/secrets/smtp_password
+  allowed_recipients: ["me@gmail.com", "*@mycompany.com"]`,
+      },
+      {
+        id: 'env',
+        label: 'Environment',
+        code: `SMTP_RELAY_HOST=smtp.gmail.com \\
+SMTP_RELAY_USERNAME=me@gmail.com \\
+SMTP_RELAY_PASSWORD=app-password \\
+SMTP_RELAY_ALLOWED_RECIPIENTS=me@gmail.com,*@mycompany.com \\
+./buggregator`,
+      },
+    ],
+    note: 'Who can send: without login (SSO off), only from this machine, with the UI opened as localhost or 127.0.0.1, and only to addresses in allowed_recipients. Each pattern must name a real domain: * or *@* turns the button off. With SSO on, any signed-in user can send, and allowed_recipients is optional. The email\u2019s original recipients never get it. Up to 20 addresses per email, 10 emails a minute for the whole server.',
+  },
 ]
 
 const highlights = [
@@ -146,7 +173,12 @@ const highlights = [
   {
     icon: '\u{1F6E1}\uFE0F',
     title: 'Safe by default',
-    description: 'Emails never leave your machine. No risk of test emails reaching real users.',
+    description: 'Nothing is forwarded by itself. An email leaves your machine only if you set up a relay and press Send to inbox.',
+  },
+  {
+    icon: '\u{1F4EC}',
+    title: 'Send to a real inbox',
+    description: 'Check how Gmail or Outlook shows an email, or whether its link works on your phone. Send to inbox sends that one message through your SMTP server, only to the addresses you type.',
   },
   {
     icon: '\u{1F504}',
@@ -209,6 +241,33 @@ const worksWithItems = [
       :items="highlights"
       :accent-color="accentColor"
     />
+
+    <!-- Send to a real inbox -->
+    <section id="send-to-inbox" class="py-16 lg:py-20 bg-section-dark border-t border-landing-border-subtle">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
+        <div class="text-center mb-10">
+          <h2 class="text-section font-bold text-white mb-3">How does it look in Gmail? Send that one email</h2>
+          <p class="text-lg text-on-dark-secondary leading-relaxed">
+            Buggregator catches every email. When you want to see one in a real mail client, press Send to inbox and type
+            your address. Only that message goes out, through the SMTP server you set up. The email’s original
+            recipients never get it.
+          </p>
+        </div>
+      </div>
+      <div class="px-4 sm:px-6 lg:px-8">
+        <FeatureScreenshot
+          src="/features/email-send-to-inbox.png"
+          alt="Buggregator Send to inbox dialog on a caught email: the addresses to send to and the option to put them in To"
+          caption="Type the addresses to send to. By default the message goes exactly as it was caught; or put your addresses in To."
+        />
+      </div>
+      <p class="mt-8 text-center font-sans">
+        <a
+          href="#setup"
+          class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
+        >Set up the relay →</a>
+      </p>
+    </section>
 
     <!-- Setup -->
     <section id="setup">

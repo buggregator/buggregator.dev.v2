@@ -389,25 +389,34 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "New in v2.12",
-    "title": "OpenTelemetry and trace graphs",
+    "eyebrow": "New in v2.13",
+    "title": "Broadcasts, cron jobs and a real inbox",
     "cards": {
-      "otel": {
-        "title": "Send OpenTelemetry straight to Buggregator",
-        "desc": "Your app already uses OpenTelemetry? Point the OTel SDK or the Collector at port 8000. Traces and logs show up on the Sentry Traces and Logs pages, next to your Sentry events, each labelled OTel or Sentry SDK. Same port, nothing to turn on. No Jaeger, no Grafana, no cloud account.",
-        "cta": "Set up OpenTelemetry"
+      "broadcast": {
+        "title": "See what your app broadcasts",
+        "desc": "Point Laravel Reverb, Pusher or soketi broadcasts at Buggregator. Every event shows up under its channel, with its payload and what changed since the previous one. Set an upstream, and each event goes on to your real server, so the browser keeps getting live updates.",
+        "cta": "See broadcast events"
       },
-      "graphs": {
-        "title": "See a trace four ways",
-        "desc": "Next to the waterfall, every trace now has a flame graph, a call graph and a sequence diagram. The traces list has a service map: which service calls which, with traffic over the period you pick. Click a service to see what it uses and what uses it.",
-        "cta": "See the Sentry page"
+      "crons": {
+        "title": "Know if your scheduled jobs ran",
+        "desc": "Jobs report each run through Sentry Crons or a plain ping URL called with curl. The Crons tab in Sentry shows which runs went fine, which failed, which never started and which never finished. No Sentry account needed.",
+        "cta": "See cron monitoring"
+      },
+      "inbox": {
+        "title": "Send a caught email to a real inbox",
+        "desc": "Want to see an email in Gmail, or tap its link on your phone? Set up an outgoing SMTP server, press Send to inbox and type your address. Only that one message goes out, only to the addresses you type. Without login, it works only from your own machine and only to allowed addresses.",
+        "cta": "Set up sending"
+      },
+      "small": {
+        "title": "User feedback, notifications, CSP reports",
+        "desc": "Feedback your users send through the Sentry SDK shows on the error it is about. Desktop notifications tell you about a new Sentry error while you work in another window. And Buggregator now catches Content Security Policy reports from the browser: what was blocked, by which rule, on which page.",
+        "cta": "See user feedback",
+        "links": {
+          "csp": "See CSP reports"
+        }
       }
     },
-    "also": {
-      "lead": "Also new:",
-      "filters": "filter traces by service and by source (Sentry or OpenTelemetry)",
-      "notes": "More in the v2.12.0 release notes"
-    }
+    "notes": "More in the v2.13.0 release notes"
   },
   "harnsy": {
     "title": "An AI team builds Buggregator. We make the decisions.",
