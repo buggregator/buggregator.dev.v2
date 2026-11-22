@@ -16,14 +16,14 @@ const seoTitle = 'Request Timeline and N+1 Query Detection for Laravel, Locally 
 
 useSeoMeta({
   title: seoTitle,
-  description: 'See everything one request did on one time scale: SQL queries, cache, logs, mails, outgoing calls, jobs and errors. Buggregator spots N+1 queries and shows the file and line. From Sentry traces, on your machine. Free and open source.',
+  description: 'See everything one request did on one time scale: SQL queries, cache, logs, mails, outgoing calls, jobs and errors. Buggregator spots N+1 queries and, when the SDK sends it, the file and line. From Sentry traces, on your machine. Free and open source.',
   ogTitle: seoTitle,
   ogDescription: 'Queries, cache, logs, mails, outgoing calls, jobs and errors of one request on one time scale, with an N+1 hint.',
   ogImage: 'https://buggregator.dev/buggregator.png',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: seoTitle,
-  twitterDescription: 'Everything one request did on one time scale, with an N+1 hint that names the query and the line.',
+  twitterDescription: 'Everything one request did on one time scale, with an N+1 hint that names the repeated query.',
 })
 
 const accentColor = '#f43f5e'
@@ -124,7 +124,7 @@ const highlights = [
   {
     icon: '\u{1F501}',
     title: 'N+1 hint',
-    description: 'When one request runs the same SQL query five times or more, a hint names the query, the count, the time it took and the file and line.',
+    description: 'When one request runs the same SQL query five times or more, a hint names the query, the count, the time it took and, when the SDK sends it, the file and line.',
   },
   {
     icon: '\u{1F4CA}',
@@ -161,7 +161,7 @@ const worksWithItems = [
     <FeatureHero
       title="See everything one request did, in order"
       subtitle="Request Timeline"
-      description="GET /posts is slow. Open its trace and see 23 queries, 20 of them the same select from users, next to the log lines and the mail this request sent. Buggregator draws them on one time scale and points to the N+1 query with its file and line. On your machine, from your Sentry traces."
+      description="GET /posts is slow. Open its trace and see 23 queries, 20 of them the same select from users, next to the log lines and the mail this request sent. Buggregator draws them on one time scale and points to the N+1 query. On your machine, from your Sentry traces."
       :accent-color="accentColor"
     >
       <template #cta>

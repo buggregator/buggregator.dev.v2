@@ -343,7 +343,7 @@
     "cards": {
       "timeline": {
         "title": "Todo lo que hizo una petición",
-        "desc": "Abre una traza de Sentry y verás sus consultas SQL, llamadas a la caché, logs, correos, llamadas salientes, tareas y errores en una sola escala de tiempo. Si la misma consulta se ejecuta cinco veces o más, un aviso la nombra con el archivo y la línea: el clásico N+1.",
+        "desc": "Abre una traza de Sentry y verás sus consultas SQL, llamadas a la caché, logs, correos, llamadas salientes, tareas y errores en una sola escala de tiempo. Si la misma consulta se ejecuta cinco veces o más, un aviso la nombra y, si el SDK los envía, también el archivo y la línea: el clásico N+1.",
         "cta": "Ver la línea de tiempo"
       },
       "queues": {

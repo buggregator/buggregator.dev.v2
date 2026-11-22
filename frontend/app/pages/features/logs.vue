@@ -14,7 +14,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'PHP Log Viewer for Local Development — Monolog Logs in One Place — Buggregator',
-  description: 'Search Monolog logs from every service and worker in one live stream: filter by level, channel and time, see errors per minute, and open all lines of one request. Laravel, Symfony, Spiral. No Elasticsearch, no logging stack. Free and open source.',
+  description: 'Search Monolog logs from every service and worker in one live stream: filter by level, channel and time, see lines per minute by level, and open all lines of one request. Laravel, Symfony, Spiral. No Elasticsearch, no logging stack. Free and open source.',
   ogTitle: 'Monolog Logs in One Live View — Buggregator',
   ogDescription: 'Logs from every service, worker and container in one place, with structured context. No logging stack to run.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -176,7 +176,7 @@ const worksWithItems = [
     <FeatureHero
       title="Stop tailing log files"
       subtitle="Logs"
-      description="During development your logs end up in a file you tail -f, in container output you scroll, or in a worker's stdout you never see. Send them to Buggregator instead: the Logs screen shows lines from every service as one live stream, like tail -f with search, filters by level and channel, and a chart of errors per minute."
+      description="During development your logs end up in a file you tail -f, in container output you scroll, or in a worker's stdout you never see. Send them to Buggregator instead: the Logs screen shows lines from every service as one live stream, like tail -f with search, filters by level and channel, and a chart of lines per minute by level."
       :accent-color="accentColor"
       accent-text-color="#9ca3af"
     >
@@ -242,7 +242,7 @@ const worksWithItems = [
     <FeatureTips label="logs" />
 
     <!-- CTA -->
-    <FeatureCTA docs-url="https://docs.buggregator.dev/config/monolog.html">
+    <FeatureCTA docs-url="https://docs.buggregator.dev/config/logs.html">
       <template #related>
         <FeatureRelatedLink to="/features/sentry" label="Sentry" color="#f43f5e" />
         <FeatureRelatedLink to="/features/http-dumps" label="HTTP Dumps" color="#22c55e" />
