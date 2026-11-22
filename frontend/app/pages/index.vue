@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import HeroSection from '~/components/sections/HeroSection.vue'
-import ReplacesSection from '~/components/sections/ReplacesSection.vue'
-import CleanAppSection from '~/components/sections/CleanAppSection.vue'
-import MockShowcase from '~/components/showcase/MockShowcase.vue'
-import LanguagesSection from '~/components/sections/LanguagesSection.vue'
 import RealUiSection from '~/components/sections/RealUiSection.vue'
+import ReplacesSection from '~/components/sections/ReplacesSection.vue'
 import StepsSection from '~/components/sections/StepsSection.vue'
-import DemoSection from '~/components/sections/DemoSection.vue'
 import FrameworksSection from '~/components/sections/FrameworksSection.vue'
-import EcosystemSection from '~/components/sections/EcosystemSection.vue'
-import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSection.vue'
+import DemoSection from '~/components/sections/DemoSection.vue'
 import WhatsNewSection from '~/components/sections/WhatsNewSection.vue'
-import HarnsySection from '~/components/sections/HarnsySection.vue'
+import AdvancedFeaturesSection from '~/components/sections/AdvancedFeaturesSection.vue'
+import EcosystemSection from '~/components/sections/EcosystemSection.vue'
 import CommunitySection from '~/components/sections/CommunitySection.vue'
-import StatsSection from '~/components/sections/StatsSection.vue'
-import SponsorsSection from '~/components/sections/SponsorsSection.vue'
+import HarnsySection from '~/components/sections/HarnsySection.vue'
 
 definePageMeta({ layout: 'landing' })
 
@@ -61,22 +56,20 @@ const { demoEnabled } = useRuntimeConfig().public
 </script>
 
 <template>
+  <!-- Ten blocks, each said once: what it is and the command, the real UI,
+       what it replaces, how it works, your stack, what's new, for teams,
+       ecosystem, open source (with sponsors), then the AI team by the footer. -->
   <div>
     <HeroSection />
-    <LanguagesSection />
     <RealUiSection />
-    <MockShowcase />
+    <DemoSection v-if="demoEnabled" />
     <ReplacesSection />
-    <CleanAppSection />
     <StepsSection />
     <FrameworksSection />
-    <AdvancedFeaturesSection />
     <WhatsNewSection />
-    <HarnsySection />
-    <DemoSection v-if="demoEnabled" />
+    <AdvancedFeaturesSection />
     <EcosystemSection />
     <CommunitySection />
-    <StatsSection />
-    <SponsorsSection />
+    <HarnsySection />
   </div>
 </template>

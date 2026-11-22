@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RevealWords from '~/components/ui/RevealWords.vue'
+import LanguageTabs from '~/components/sections/FrameworksSection/LanguageTabs.vue'
 import laravelLogo from '~/assets/img/laravel.svg'
 import symfonyLogo from '~/assets/img/symfony.svg'
 import spiralLogo from '~/assets/img/spiral.svg'
@@ -22,7 +23,9 @@ const frameworks = [
 </script>
 
 <template>
+  <!-- «Works with your stack»: PHP frameworks, then other languages. -->
   <section
+    id="stack"
     class="py-20 lg:py-28 bg-section-mid border-t border-landing-border-subtle relative"
     @mousemove="revealRef?.handleMouse($event)"
     @mouseleave="revealRef?.handleLeave()"
@@ -54,10 +57,6 @@ const frameworks = [
         />
       </div>
 
-      <p class="text-sm text-on-dark-muted font-sans mb-2">
-        {{ t('frameworks.also') }}
-      </p>
-
       <p class="text-sm text-on-dark-muted font-sans mb-6">
         {{ t('frameworks.alsoRuntime') }}
       </p>
@@ -70,6 +69,8 @@ const frameworks = [
       >
         {{ t('frameworks.guides') }}
       </a>
+
+      <LanguageTabs class="mt-16 text-left" />
     </div>
   </section>
 </template>

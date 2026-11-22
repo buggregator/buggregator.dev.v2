@@ -474,5 +474,25 @@
     "enMarkerLabel": "(page in English)",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
+  },
+  "realUiTabs": {
+    "subtitle": "The real interface, not a drawing. Pick a feature to see its screen.",
+    "tabsLabel": "Features",
+    "open": "Open the {feature} page →",
+    "desc": {
+      "cron": "Which scheduled jobs ran, failed or never started.",
+      "broadcast": "Laravel Reverb, Pusher and soketi events, by channel.",
+      "csp": "What the browser blocked, by directive, with the file and line."
+    },
+    "alt": {
+      "sentry": "Buggregator Sentry page: an exception with its stack trace",
+      "email": "Buggregator email preview with HTML rendering, attachments and raw source",
+      "profiler": "Buggregator call graph showing PHP function execution times",
+      "proxy": "Buggregator HTTP proxy showing a request and its response with headers and body",
+      "sms": "Buggregator SMS view showing caught messages with sender, recipient and body",
+      "cron": "Buggregator Crons tab: scheduled jobs with status, schedule, last and next run",
+      "broadcast": "Buggregator Broadcast page: channels on the left, the live events of one channel on the right",
+      "csp": "Buggregator CSP report: the page, the directive, the blocked resource and the file with line and column"
+    }
   }
 }

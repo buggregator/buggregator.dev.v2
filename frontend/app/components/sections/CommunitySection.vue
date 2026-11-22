@@ -4,7 +4,8 @@ import RevealWords from '~/components/ui/RevealWords.vue'
 
 const { t } = useI18n()
 const { trackEvent } = useGtag()
-const { discordUrl } = useRuntimeConfig().public
+const { discordUrl, patreonUrl } = useRuntimeConfig().public
+const localePath = useLocalePath()
 const github = useGitHubStore()
 const revealRef = ref<InstanceType<typeof RevealWords>>()
 
@@ -172,6 +173,22 @@ function onMouseLeave() {
           {{ t('community.discord') }}
         </a>
       </div>
+
+      <!-- Sponsors: one line here instead of a block of its own. -->
+      <p class="mt-10 text-sm text-on-dark-secondary font-sans">
+        {{ t('sponsors.subheadline') }}
+        <a
+          :href="patreonUrl as string"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center min-h-[44px] ml-1 text-accent hover:text-accent-hover no-underline"
+          @click="trackEvent('cta_click', { cta_location: 'community', cta_text: 'patreon' })"
+        >{{ t('sponsors.patreonBtn') }}</a>
+        <span class="mx-2 text-on-dark-muted" aria-hidden="true">·</span>
+        <NuxtLink :to="localePath('/sponsors')" class="inline-flex items-center min-h-[44px] text-accent hover:text-accent-hover no-underline">
+          {{ t('sponsors.learnMore') }}
+        </NuxtLink>
+      </p>
     </div>
   </section>
 </template>

@@ -1,77 +1,161 @@
 <script setup lang="ts">
-// The real UI, not a drawing: a ~30 s clip of the main flow (start, events
-// arrive, open an exception, a mail, dumps, a profile) and four screenshots,
-// all from Buggregator v2.10.0 with the demo data of scripts/demo (made-up
-// names, example.com addresses).
+import FeatureIcon from '~/components/ui/FeatureIcon.vue'
+import EnMarker from '~/components/ui/EnMarker.vue'
+import { FEATURE_PAGES, type FeatureId } from '~/data/features'
+
+// The real interface, one tab per feature: the screenshot of its feature
+// page and a link to that page. Replaces the clip + four shots and the
+// drawn dashboard mock-up. Shots: public/features/*.png with WebP twins.
 const { t } = useI18n()
 
-const video = ref<HTMLVideoElement | null>(null)
-useInViewAutoplay(video)
+type Tab = {
+  id: FeatureId
+  src: string
+  width: number
+  height: number
+  // Caption: replaces.table.rows.<row>.desc where the row exists, else realUiTabs.desc.<id>.
+  row?: string
+}
 
-const SHOTS = [
-  { id: 'sentry', src: '/img/ui/sentry.webp' },
-  { id: 'smtp', src: '/img/ui/smtp.webp' },
-  { id: 'dumps', src: '/img/ui/dumps.webp' },
-  { id: 'profiler', src: '/img/ui/profiler.webp' },
-] as const
-// Intrinsic size of every shot: the browser reserves the space (no shift).
-const SHOT_W = 1920
-const SHOT_H = 1200
+const TABS: Tab[] = [
+  { id: 'sentry', src: '/features/sentry.png', width: 1317, height: 931, row: 'errors' },
+  { id: 'email', src: '/features/email-testing.png', width: 1317, height: 931, row: 'email' },
+  { id: 'profiler', src: '/features/profiler.png', width: 1317, height: 931, row: 'prof' },
+  { id: 'proxy', src: '/features/http-proxy.png', width: 1317, height: 989, row: 'proxy' },
+  { id: 'sms', src: '/features/sms.png', width: 1317, height: 931, row: 'sms' },
+  { id: 'cron', src: '/features/cron-monitoring.png', width: 1600, height: 1000 },
+  { id: 'broadcast', src: '/features/broadcast-events.png', width: 1600, height: 1000 },
+  { id: 'csp', src: '/features/csp-reports.png', width: 1600, height: 1000 },
+]
+const ids = TABS.map(tab => tab.id)
+
+const active = ref<FeatureId>('sentry')
+const current = computed(() => TABS.find(tab => tab.id === active.value) ?? TABS[0]!)
+const page = computed(() => FEATURE_PAGES[current.value.id])
+const caption = computed(() => current.value.row
+  ? t(`replaces.table.rows.${current.value.row}.desc`)
+  : t(`realUiTabs.desc.${current.value.id}`))
+
+const { setTabRef, tabindex, onKeydown, select } = useRovingTabs(ids, active)
+
+const tabBar = ref<HTMLElement | null>(null)
+const { canScrollLeft, canScrollRight } = useScrollEdges(tabBar)
 </script>
 
 <template>
-  <section id="real-ui" class="py-16 lg:py-24 bg-section-dark border-t border-landing-border-subtle">
+  <section id="real-ui" class="py-16 lg:py-24 bg-section-dark border-t border-landing-border-subtle" aria-labelledby="real-ui-title">
     <div class="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10">
-        <h2 class="text-section font-bold text-white mb-3 font-sans">{{ t('realUi.title') }}</h2>
-        <p class="text-lg text-on-dark-secondary font-sans">{{ t('realUi.subtitle') }}</p>
+      <div class="text-center mb-8">
+        <h2 id="real-ui-title" class="text-section font-bold text-white mb-3 font-sans">{{ t('realUi.title') }}</h2>
+        <p class="text-lg text-on-dark-secondary font-sans">{{ t('realUiTabs.subtitle') }}</p>
       </div>
 
-      <figure class="m-0">
-        <div class="rounded-xl overflow-hidden border border-landing-border-subtle shadow-showcase bg-landing-deepest">
-          <video
-            ref="video"
-            class="block w-full h-auto"
-            width="1280"
-            height="800"
-            poster="/video/demo-poster.webp"
-            muted
-            loop
-            playsinline
-            controls
-            preload="none"
-            :aria-label="t('realUi.videoLabel')"
+      <div class="relative mb-4">
+        <div
+          ref="tabBar"
+          class="flex gap-1 overflow-x-auto scroll-px-2 sm:justify-center"
+          role="tablist"
+          :aria-label="t('realUiTabs.tabsLabel')"
+          @keydown="onKeydown"
+        >
+          <button
+            v-for="tab in TABS"
+            :id="`real-ui-tab-${tab.id}`"
+            :key="tab.id"
+            :ref="el => setTabRef(tab.id, el)"
+            type="button"
+            role="tab"
+            :aria-selected="active === tab.id"
+            aria-controls="real-ui-panel"
+            :tabindex="tabindex(tab.id)"
+            class="real-ui__tab"
+            @click="select(tab.id)"
           >
-            <source src="/video/demo.webm" type="video/webm" />
-            <source src="/video/demo.mp4" type="video/mp4" />
-          </video>
+            <FeatureIcon :name="FEATURE_PAGES[tab.id].icon" />
+            {{ FEATURE_PAGES[tab.id].label }}
+          </button>
         </div>
-        <figcaption class="mt-3 text-center font-sans text-sm text-on-dark-muted">{{ t('realUi.videoCaption') }}</figcaption>
-      </figure>
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-section-dark to-transparent transition-opacity duration-150"
+          :class="canScrollLeft ? 'opacity-100' : 'opacity-0'"
+        />
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-section-dark to-transparent transition-opacity duration-150"
+          :class="canScrollRight ? 'opacity-100' : 'opacity-0'"
+        />
+      </div>
 
-      <ul class="mt-12 grid gap-6 sm:grid-cols-2 list-none p-0">
-        <li v-for="shot in SHOTS" :key="shot.id">
-          <figure class="m-0">
-            <a
-              :href="shot.src"
-              target="_blank"
-              rel="noopener"
-              class="block rounded-lg overflow-hidden border border-landing-border-subtle hover:border-accent transition-colors"
-            >
-              <img
-                :src="shot.src"
-                :alt="t(`realUi.shots.${shot.id}.alt`)"
-                :width="SHOT_W"
-                :height="SHOT_H"
-                class="block w-full h-auto"
-                loading="lazy"
-                decoding="async"
-              />
-            </a>
-            <figcaption class="mt-2 font-sans text-sm text-on-dark-secondary">{{ t(`realUi.shots.${shot.id}.caption`) }}</figcaption>
-          </figure>
-        </li>
-      </ul>
+      <figure id="real-ui-panel" role="tabpanel" :aria-labelledby="`real-ui-tab-${current.id}`" class="m-0">
+        <div class="rounded-xl overflow-hidden border border-landing-border-subtle shadow-showcase bg-landing-deepest">
+          <picture>
+            <source :srcset="current.src.replace(/\.png$/, '.webp')" type="image/webp" />
+            <img
+              :src="current.src"
+              :alt="t(`realUiTabs.alt.${current.id}`)"
+              :width="current.width"
+              :height="current.height"
+              class="block w-full h-auto"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </div>
+        <figcaption class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-6 gap-y-1 font-sans">
+          <span class="text-on-dark-secondary">{{ caption }}</span>
+          <NuxtLink :to="page.to" class="real-ui__link">
+            {{ t('realUiTabs.open', { feature: page.label }) }}
+            <EnMarker />
+          </NuxtLink>
+        </figcaption>
+      </figure>
     </div>
   </section>
 </template>
+
+<style scoped>
+.real-ui__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: theme('colors.on-dark.secondary');
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+.real-ui__tab:hover {
+  color: theme('colors.on-dark.primary');
+  background: theme('colors.landing-surface');
+}
+
+.real-ui__tab[aria-selected="true"] {
+  color: theme('colors.on-dark.primary');
+  background: theme('colors.landing-elevated');
+  border-color: theme('colors.landing-border');
+}
+
+.real-ui__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  min-height: 44px;
+  font-weight: 500;
+  color: theme('colors.accent.DEFAULT');
+  text-decoration: none;
+}
+
+.real-ui__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+</style>

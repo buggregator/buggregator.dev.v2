@@ -10,10 +10,11 @@ const { t } = useI18n()
 
 const imageTag = useServerImageTag()
 
-// Step 1: install method tabs
-type InstallTab = 'docker' | 'binary' | 'compose'
+// Step 1: the other ways to install. `docker run` is on the first screen
+// (hero), so it is not repeated here: the one-file binary and Compose.
+type InstallTab = 'binary' | 'compose'
 const installTab = ref<InstallTab>('binary')
-const installTabs: InstallTab[] = ['binary', 'docker', 'compose']
+const installTabs: InstallTab[] = ['binary', 'compose']
 
 const ports = [
   { port: '8000:8000', hint: 'Web UI + Sentry + Ray + Inspector + XHProf' },
@@ -23,18 +24,13 @@ const ports = [
   { port: '8080:8080', hint: 'HTTP Proxy — outgoing request capture' },
 ]
 
-const dockerCommand = computed(() => {
-  const portArgs = ports.map(p => `-p 127.0.0.1:${p.port}`).join(' \\\n  ')
-  return `docker run \\\n  ${portArgs} \\\n  ghcr.io/buggregator/server:${imageTag.value}`
-})
-
 const composeCommand = computed(() => {
   const portLines = ports.map(p => `      - 127.0.0.1:${p.port}`).join('\n')
   return `services:\n  buggregator:\n    image: ghcr.io/buggregator/server:${imageTag.value}\n    ports:\n${portLines}`
 })
 
 // The binary tab has its own copy button (BinaryInstall).
-const activeCommand = computed(() => installTab.value === 'docker' ? dockerCommand.value : composeCommand.value)
+const activeCommand = composeCommand
 
 const { copied, copy } = useClipboardCopy()
 const { trackEvent } = useGtag()
@@ -77,6 +73,10 @@ const trustBadges = computed(() => [
         <p class="text-lg text-on-dark-secondary font-sans">
           {{ t('howItWorks.subtitle') }}
         </p>
+        <!-- «Your app doesn't know we exist», as one line. -->
+        <p class="mt-2 text-base text-on-dark-muted font-sans">
+          {{ t('cleanApp.headline') }} {{ t('cleanApp.subheadline') }}
+        </p>
       </div>
 
       <!-- Steps -->
@@ -109,24 +109,8 @@ const trustBadges = computed(() => [
                 <BinaryInstall bare cta-location="steps" />
               </div>
               <div v-else class="bg-code-bg p-4 font-mono text-xs leading-relaxed relative">
-                <!-- Docker run -->
-                <div v-if="installTab === 'docker'">
-                  <div>
-                    <span class="text-code-prompt select-none">$ </span>
-                    <span class="text-code-text">docker run \</span>
-                  </div>
-                  <div v-for="(p, i) in ports" :key="p.port" class="pl-6">
-                    <span class="text-code-text">-p 127.0.0.1:</span>
-                    <span class="text-accent">{{ p.port }}</span>
-                    <span class="text-code-text"> \</span>
-                  </div>
-                  <div class="pl-6">
-                    <span class="text-code-string">ghcr.io/buggregator/server:{{ imageTag }}</span>
-                  </div>
-                </div>
-
                 <!-- Docker Compose -->
-                <div v-else>
+                <div>
                   <div><span class="text-code-keyword">services</span><span class="text-code-text">:</span></div>
                   <div class="pl-4"><span class="text-code-keyword">buggregator</span><span class="text-code-text">:</span></div>
                   <div class="pl-8"><span class="text-code-text">image: </span><span class="text-code-string">ghcr.io/buggregator/server:{{ imageTag }}</span></div>

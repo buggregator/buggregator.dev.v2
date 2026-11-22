@@ -6,10 +6,10 @@ const { discordUrl } = useRuntimeConfig().public
 
 const localePath = useLocalePath()
 
-// «#showcase» alone led nowhere on feature pages: point at the home page.
+// A bare anchor led nowhere on feature pages: point at the home page.
 const productLinks = computed(() => [
   { label: 'footer.links.docs', href: 'https://docs.buggregator.dev' },
-  { label: 'footer.links.features', href: `${localePath('/')}#showcase` },
+  { label: 'footer.links.features', href: `${localePath('/')}#real-ui` },
   { label: 'footer.links.trap', href: 'https://github.com/buggregator/trap' },
   { label: 'footer.links.plugin', href: 'https://plugins.jetbrains.com/plugin/26344-buggregator' },
   { label: 'footer.links.gettingStarted', href: 'https://docs.buggregator.dev/getting-started.html' },
