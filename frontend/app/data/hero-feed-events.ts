@@ -23,7 +23,7 @@ export const heroFeedEvents: FeedEvent[] = [
   { id: 'e14', type: 'sentry', label: 'NotFoundHttpException', sublabel: 'Handled · /api/users/99', delay: 3300 },
   { id: 'e15', type: 'smtp', label: 'Invoice #4821', sublabel: 'billing@example.com', delay: 2900 },
   { id: 'e16', type: 'monolog', label: '[DEBUG] User logged in', sublabel: 'user_id=42', delay: 2000 },
-  { id: 'e17', type: 'profiler', label: 'XHProf · 1.2s', sublabel: 'N+1 detected · Eloquent', delay: 3600 },
+  { id: 'e17', type: 'profiler', label: 'XHProf · 1.2s', sublabel: 'Eloquent · 1,240 calls', delay: 3600 },
   { id: 'e18', type: 'sentry', label: 'ValidationException', sublabel: 'Handled · field: email', delay: 2700 },
   { id: 'e19', type: 'var-dump', label: 'App\\Models\\User {#42}', sublabel: 'App/Services/Auth · :89', delay: 2200 },
   { id: 'e20', type: 'smtp', label: '2FA verification code', sublabel: 'security@example.com', delay: 3100 },
