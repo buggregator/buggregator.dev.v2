@@ -17,7 +17,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'PHP Performance Profiler with Flame Graphs — Buggregator',
-  description: 'Profile your PHP application with XHProf. See flame graphs, call graphs, and the slowest functions. Compare profiles to track regressions. Free, open-source, no Blackfire subscription needed.',
+  description: 'Profile your PHP application with XHProf. See flame graphs, call graphs, and the slowest functions. Free, open-source, no Blackfire subscription needed.',
   ogTitle: 'PHP Performance Profiler with Flame Graphs — Buggregator',
   ogDescription: 'Flame graphs, call graphs, top functions. Profile PHP apps with XHProf. Free alternative to Blackfire.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -139,11 +139,6 @@ const highlights = [
     description: 'Sortable table of all functions by wall time, CPU time, memory, and call count.',
   },
   {
-    icon: '\u{1F50D}',
-    title: 'Profile comparison',
-    description: 'Compare two profiles side by side to spot regressions. See exactly what got slower and by how much.',
-  },
-  {
     icon: '\u{23F1}\uFE0F',
     title: 'Wall time & CPU time',
     description: 'Distinguish between time waiting (I/O, DB) and time computing. Find the real bottleneck.',
@@ -152,6 +147,11 @@ const highlights = [
     icon: '\u{1F9E0}',
     title: 'Memory tracking',
     description: 'See memory allocation per function. Find memory-hungry code before it causes problems.',
+  },
+  {
+    icon: '\u{1F916}',
+    title: 'Read by your AI agent',
+    description: 'Over MCP, Claude Code or Cursor reads a profile: the summary, the top functions by any metric and the call graph.',
   },
 ]
 
