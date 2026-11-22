@@ -181,6 +181,11 @@ const highlights = [
     description: 'Check how Gmail or Outlook shows an email, or whether its link works on your phone. Send to inbox sends that one message through your SMTP server, only to the addresses you type.',
   },
   {
+    icon: '\u{1F4C5}',
+    title: 'Every version of an email',
+    description: 'The Apple Watch version, the AMP version, a calendar invite, a bounce report: each in its own tab, next to the HTML preview.',
+  },
+  {
     icon: '\u{1F504}',
     title: 'No auth required',
     description: 'No username, password, or TLS setup. Just point your SMTP host and port.',
@@ -267,6 +272,34 @@ const worksWithItems = [
           class="inline-flex items-center min-h-[44px] text-sm text-accent hover:text-accent-hover transition-colors no-underline"
         >Set up the relay</a>
       </p>
+    </section>
+
+    <!-- Other versions of an email -->
+    <section id="other-versions" class="py-16 lg:py-20 border-t border-landing-border-subtle">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
+        <div class="text-center mb-10">
+          <h2 class="text-section font-bold text-white mb-3">Apple Watch, AMP, calendar invite: see every version of an email</h2>
+          <p class="text-lg text-on-dark-secondary leading-relaxed">
+            An email can carry more than HTML and plain text. An order email can have a short version for the Apple
+            Watch; an invite carries the event itself. Buggregator shows each version in its own tab, after the main
+            preview. Nothing to set up: send the email as usual.
+          </p>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2 text-on-dark-secondary leading-relaxed list-none p-0 m-0">
+          <li><strong class="text-white">Apple Watch.</strong> The watch version at phone width, with its source.</li>
+          <li><strong class="text-white">AMP.</strong> A static view of the AMP version (its scripts do not run), with its source.</li>
+          <li><strong class="text-white">Calendar invite.</strong> A card above the email: what, when, where, the organizer and who accepted, declined or has not answered. The time is in your time zone; a cancelled invite is struck out.</li>
+          <li><strong class="text-white">Bounces and receipts.</strong> Delivery status, Read receipt and Original headers tabs.</li>
+          <li class="sm:col-span-2"><strong class="text-white">In the list.</strong> Emails are marked Watch, AMP, Invite or Cancelled, and an invite shows its title and time in one line.</li>
+        </ul>
+      </div>
+      <div class="mt-10 px-4 sm:px-6 lg:px-8">
+        <FeatureScreenshot
+          src="/features/email-calendar-invite.png"
+          alt="Buggregator showing a calendar invite email: the invite card with time, place, organizer and each guest's answer, above the HTML preview"
+          caption="An invite to «Release sync»: the time in the viewer's zone, the organizer, and who accepted, declined or has not answered."
+        />
+      </div>
     </section>
 
     <!-- Setup -->
