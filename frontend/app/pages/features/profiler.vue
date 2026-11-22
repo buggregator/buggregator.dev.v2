@@ -17,7 +17,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'PHP Performance Profiler with Flame Graphs — Buggregator',
-  description: 'Profile your PHP application with XHProf. See flame graphs, call graphs, and the slowest functions. Free, open-source, no Blackfire subscription needed.',
+  description: 'Profile your PHP application with XHProf. See flame graphs, call graphs, and the slowest functions. Compare two runs to see what got faster or slower. Free, open-source, no Blackfire subscription needed.',
   ogTitle: 'PHP Performance Profiler with Flame Graphs — Buggregator',
   ogDescription: 'Flame graphs, call graphs, top functions. Profile PHP apps with XHProf. Free alternative to Blackfire.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -147,6 +147,11 @@ const highlights = [
     icon: '\u{1F9E0}',
     title: 'Memory tracking',
     description: 'See memory allocation per function. Find memory-hungry code before it causes problems.',
+  },
+  {
+    icon: '\u{1F50D}',
+    title: 'Profile comparison',
+    description: 'Compare two runs side by side: wall time, CPU and memory, with the change for each function. See whether your fix helped.',
   },
   {
     icon: '\u{1F916}',
