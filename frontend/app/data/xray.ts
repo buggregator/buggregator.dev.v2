@@ -21,18 +21,9 @@ export function coverRect(sw: number, sh: number, pos: Point): Rect {
   return { l: (sw - w) * pos.x, t: (sh - h) * pos.y, w, h, s }
 }
 
-// Idle (no pointer, or 2 s without input): a slow pass along the body, head
-// to tail and back, with a gentle sway across it. t in seconds.
-export function autoPoint(t: number, r: Rect): Point {
-  return {
-    x: r.l + (BUG.x + Math.sin(t * 0.32) * BUG.rx * 0.72) * r.s,
-    y: r.t + (BUG.y + Math.sin(t * 0.64) * BUG.ry * 0.45) * r.s,
-  }
-}
-
-// Reduced motion: the lens rests on the wing cases right of the copy (as far
-// from the text as the body allows: never past the tail end, never left of
-// the body's centre).
+// Where the lens appears when X-ray is turned on: on the wing cases right of
+// the copy (as far from the text as the body allows: never past the tail
+// end, never left of the body's centre).
 export const REST_TAIL = 0.85
 export function restPoint(r: Rect, copyRight: number, lensR: number): Point {
   const centre = r.l + BUG.x * r.s

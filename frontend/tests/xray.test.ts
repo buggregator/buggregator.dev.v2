@@ -5,7 +5,7 @@ import assert from 'node:assert/strict'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {
-  BUG, IMG, REST_TAIL, autoPoint, coverRect, easeFactor, keyStep, readout, readoutHidden, restPoint, ringTicks,
+  BUG, IMG, REST_TAIL, coverRect, easeFactor, keyStep, readout, readoutHidden, restPoint, ringTicks,
 } from '../app/data/xray.ts'
 
 const root = join(import.meta.dirname, '..')
@@ -26,21 +26,7 @@ test('coverRect covers the stage like object-fit: cover with the given object-po
   assert.ok(tall.l <= 0 && tall.l + tall.w >= 800)
 })
 
-test('the auto scan stays on the body and passes from head to tail', () => {
-  const r = coverRect(1440, 860, { x: 0.51, y: 0.47 })
-  const xs: number[] = []
-  for (let t = 0; t < 20; t += 0.1) {
-    const p = autoPoint(t, r)
-    const ix = (p.x - r.l) / r.s
-    const iy = (p.y - r.t) / r.s
-    assert.ok(Math.abs(ix - BUG.x) <= BUG.rx * 0.72 + 0.5, `x ${ix}`)
-    assert.ok(Math.abs(iy - BUG.y) <= BUG.ry * 0.45 + 0.5, `y ${iy}`)
-    xs.push(ix)
-  }
-  assert.ok(Math.min(...xs) < BUG.x - BUG.rx * 0.6 && Math.max(...xs) > BUG.x + BUG.rx * 0.6)
-})
-
-test('with reduced motion the lens rests right of the copy, on the body', () => {
+test('turned on, the lens appears right of the copy, on the body', () => {
   const r = coverRect(1440, 860, { x: 0.51, y: 0.47 })
   const p = restPoint(r, 1000, 160)
   assert.ok(p.x >= 1000 + 160 * 0.55 - 0.01, 'clear of the copy')
@@ -93,10 +79,10 @@ test('every picture the hero asks for is on disk', () => {
   for (const f of files) assert.ok(existsSync(join(root, 'public/img/xray-hero', f)), f)
 })
 
-test('the hero hint speaks en, ru and es', () => {
+test('the X-ray toggle speaks en, ru and es', () => {
   for (const code of ['en', 'ru', 'es']) {
     const l = JSON.parse(readFileSync(join(root, 'i18n/locales', `${code}.json`), 'utf8'))
-    for (const key of ['label', 'hintPointer', 'hintTouch', 'hintStill']) {
+    for (const key of ['button', 'on', 'off', 'saidOn', 'saidOff']) {
       assert.ok(l.hero?.xray?.[key], `${code}: hero.xray.${key}`)
     }
   }

@@ -9,10 +9,11 @@
   },
   "hero": {
     "xray": {
-      "label": "X-ray view of a bug behind the heading: move the pointer, drag sideways on a touch screen, or use the arrow keys.",
-      "hintPointer": "Move the cursor over the bug",
-      "hintTouch": "Drag sideways to scan the bug",
-      "hintStill": "Point at the bug to look inside"
+      "button": "X-ray",
+      "on": "on",
+      "off": "off",
+      "saidOn": "X-ray on. Move the pointer over the page, or use the arrow keys.",
+      "saidOff": "X-ray off"
     },
     "badge": {
       "version": "v{version} · just released",

@@ -6,8 +6,8 @@ import { FEATURE_RELEASE } from '~/data/features'
 
 // First screen, «product first»: who and what in one line, one line about
 // other languages, one `docker run` with Copy, then the real interface:
-// one tab per feature (FeatureViewer). Behind the copy: the X-ray beetle
-// (HeroXray, #6838).
+// one tab per feature (FeatureViewer). Behind the copy: the dimmed beetle with
+// an X-ray toggle (HeroXray, #6838, #6842).
 // Other ways to install live in «How it works», step 1.
 const { t } = useI18n()
 const { trackEvent } = useGtag()
@@ -19,10 +19,11 @@ const AGENT_SETUP_URL = 'https://docs.buggregator.dev/agent-setup.html'
 <template>
   <section class="hero" aria-labelledby="hero-title">
     <HeroXray
-      :label="t('hero.xray.label')"
-      :hint-pointer="t('hero.xray.hintPointer')"
-      :hint-touch="t('hero.xray.hintTouch')"
-      :hint-still="t('hero.xray.hintStill')"
+      :button="t('hero.xray.button')"
+      :on="t('hero.xray.on')"
+      :off="t('hero.xray.off')"
+      :said-on="t('hero.xray.saidOn')"
+      :said-off="t('hero.xray.saidOff')"
     >
       <div class="hero__inner">
         <a

@@ -1,31 +1,36 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import {
-  autoPoint, coverRect, easeFactor, keyStep, readout, readoutHidden, restPoint, ringTicks,
+  coverRect, easeFactor, keyStep, readout, readoutHidden, restPoint, ringTicks,
   type Box, type Point, type Rect,
 } from '~/data/xray'
 
-// The hero background (#6838, owner's pick A on #6837): the closed beetle,
-// dimmed, fills the band; a ring lens shows the X-ray layer at full
-// brightness. The copy (default slot) sits on top and stays usable.
+// The hero background (#6838): the closed beetle, dimmed, fills the band.
+// X-ray is off by default (owner's pick A on #6842): a small «X-ray» toggle
+// turns on a ring lens that shows the X-ray layer under the pointer. No
+// auto movement, no hint. The copy (default slot) sits on top.
 //
-// Server: renders the dimmed base picture only (LCP), no lens.
-// Client, after mount: measures the stage, loads the X-ray picture when idle,
-// then shows the lens. Moves only by transform, written straight to the DOM
-// in requestAnimationFrame while the hero is on screen; no reactivity per
-// frame. Reduced motion: no auto scan, no easing, no loop; the lens rests
-// right of the copy and jumps to the pointer.
-defineProps<{
-  label: string
-  hintPointer: string
-  hintTouch: string
-  hintStill: string
+// Server: renders the dimmed base picture and the toggle, off.
+// Client, after mount: restores the choice for this tab (sessionStorage).
+// The X-ray picture loads on the first turn-on (or a hover over the toggle).
+// While on, the lens follows the mouse over the hero and hides when it
+// leaves; a finger shows it while touching and 1.5 s after; arrow keys move
+// it while the toggle has focus. Moves only by transform, written straight
+// to the DOM in requestAnimationFrame while the lens is shown and the hero is
+// on screen. Reduced motion: no easing, no loop; the lens jumps.
+const props = defineProps<{
+  button: string
+  on: string
+  off: string
+  saidOn: string
+  saidOff: string
 }>()
 
 // Where the picture sits on wide screens (CSS object-position, the same
 // numbers go to coverRect). On phones the stage is the picture's own box.
 const POS: Point = { x: 0.51, y: 0.47 }
-const IDLE_MS = 2000
+const TOUCH_HIDE_MS = 1500
+const STORE_KEY = 'xray'
 
 const base = '/img/xray-hero'
 const closedAvif = `${base}/closed-960.avif 960w, ${base}/closed-1672.avif 1672w`
@@ -43,14 +48,17 @@ const lensIn = ref<HTMLElement>()
 const lensImg = ref<HTMLImageElement>()
 const hud = ref<HTMLElement>()
 const rd = ref<HTMLElement>()
+const toggle = ref<HTMLButtonElement>()
 
 const lensR = ref(160)
 const ticks = computed(() => ringTicks(lensR.value))
 const hudSize = computed(() => (lensR.value + 14) * 2)
+const enabled = ref(false)
 const showXray = ref(false)
-const ready = ref(false)
-const reduced = ref(false)
-const hintKind = ref<'pointer' | 'touch' | 'still'>('pointer')
+const loaded = ref(false)
+const shown = ref(false)
+const said = ref('')
+let reduced = false
 
 // Per-frame state: plain variables, not refs.
 let R: Rect = { l: 0, t: 0, w: 0, h: 0, s: 1 }
@@ -58,23 +66,19 @@ let SW = 0
 let CR: Box | null = null
 const pos: Point = { x: 0, y: 0 }
 const target: Point = { x: 0, y: 0 }
-let placed = false
-let lastInput = -Infinity
-let pointerInside = false
-let autoT = 0
 let prev = 0
 let rdLast = 0
 let raf = 0
 let visible = false
+let hideTimer: ReturnType<typeof setTimeout> | undefined
 const cleanups: Array<() => void> = []
 
 function layout() {
   const st = stage.value
   if (!st || !root.value) return
   SW = st.clientWidth
-  const SH = st.clientHeight
   // On phones the stage is shaped like the picture, so cover = its own box.
-  R = coverRect(SW, SH, POS)
+  R = coverRect(SW, st.clientHeight, POS)
   lensR.value = parseFloat(getComputedStyle(root.value).getPropertyValue('--xr-lens-r')) || 160
   const d = lensR.value * 2
   lens.value!.style.width = lens.value!.style.height = `${d}px`
@@ -82,12 +86,6 @@ function layout() {
   const c = copy.value!.getBoundingClientRect()
   const sb = st.getBoundingClientRect()
   CR = { l: c.left - sb.left, t: c.top - sb.top, r: c.right - sb.left, b: c.bottom - sb.top }
-  if (!placed) {
-    const p = reduced.value ? restPoint(R, CR.r, lensR.value) : autoPoint(0, R)
-    pos.x = target.x = p.x
-    pos.y = target.y = p.y
-    placed = true
-  }
   place()
 }
 
@@ -112,30 +110,22 @@ function place(now = performance.now()) {
   }
 }
 
-function idle(now: number) {
-  return !pointerInside || now - lastInput > IDLE_MS
-}
-
 function tick(now: number) {
   raf = 0
   const dt = Math.min(64, now - prev)
   prev = now
-  if (idle(now)) {
-    autoT += dt / 1000
-    const a = autoPoint(autoT, R)
-    target.x = a.x
-    target.y = a.y
-  }
   const k = easeFactor(dt, false)
   pos.x += (target.x - pos.x) * k
   pos.y += (target.y - pos.y) * k
   place(now)
-  start()
+  if (Math.abs(target.x - pos.x) > 0.05 || Math.abs(target.y - pos.y) > 0.05) start()
 }
 
-// The loop runs only while the hero is on screen and motion is allowed.
+// The loop runs only while the lens is shown, on screen, still catching up
+// with its target, and motion is allowed.
 function start() {
-  if (raf || !visible || reduced.value || !ready.value) return
+  if (raf || !visible || reduced || !shown.value) return
+  prev = performance.now()
   raf = requestAnimationFrame(tick)
 }
 function stop() {
@@ -143,17 +133,49 @@ function stop() {
   raf = 0
 }
 
-// Reduced motion: no loop; every input places the lens at once.
-function jump() {
-  if (!reduced.value) return
-  if (idle(performance.now())) {
-    const p = restPoint(R, CR?.r ?? 0, lensR.value)
-    target.x = p.x
-    target.y = p.y
+function moveTo(p: Point) {
+  target.x = p.x
+  target.y = p.y
+  if (reduced) {
+    pos.x = p.x
+    pos.y = p.y
+    place()
+  } else {
+    start()
   }
-  pos.x = target.x
-  pos.y = target.y
+}
+
+function jumpTo(p: Point) {
+  pos.x = target.x = p.x
+  pos.y = target.y = p.y
   place()
+}
+
+function show(v: boolean) {
+  clearTimeout(hideTimer)
+  shown.value = v && enabled.value
+  if (!shown.value) stop()
+}
+
+function loadXray() {
+  showXray.value = true
+}
+
+function setEnabled(v: boolean, announce: boolean) {
+  enabled.value = v
+  try {
+    sessionStorage.setItem(STORE_KEY, v ? 'on' : 'off')
+  } catch {
+    // Private mode or blocked storage: the choice lasts for this page only.
+  }
+  if (v) {
+    loadXray()
+    jumpTo(restPoint(R, CR?.r ?? 0, lensR.value))
+    show(true)
+  } else {
+    show(false)
+  }
+  if (announce) said.value = v ? props.saidOn : props.saidOff
 }
 
 function toStage(e: PointerEvent): Point {
@@ -161,69 +183,59 @@ function toStage(e: PointerEvent): Point {
   return { x: e.clientX - b.left, y: e.clientY - b.top }
 }
 
-function onPointer(e: PointerEvent) {
+function onMove(e: PointerEvent) {
+  if (!enabled.value) return
+  // On the toggle itself the lens stays where it is.
+  if (e.pointerType === 'mouse' && toggle.value?.contains(e.target as Node)) return
   const p = toStage(e)
-  target.x = p.x
-  target.y = p.y
-  lastInput = performance.now()
-  pointerInside = true
-  jump()
+  if (!shown.value) jumpTo(p)
+  show(true)
+  moveTo(p)
+}
+
+function onDown(e: PointerEvent) {
+  if (!enabled.value || e.pointerType === 'mouse') return
+  if ((e.target as Element).closest('a, button')) return
+  jumpTo(toStage(e))
+  show(true)
+}
+
+function onUp(e: PointerEvent) {
+  if (!enabled.value || e.pointerType === 'mouse') return
+  clearTimeout(hideTimer)
+  hideTimer = setTimeout(() => show(false), TOUCH_HIDE_MS)
 }
 
 function onLeave(e: PointerEvent) {
-  if (e.pointerType === 'mouse') pointerInside = false
-  if (reduced.value) {
-    lastInput = -Infinity
-    jump()
-  }
+  if (e.pointerType === 'mouse') show(false)
 }
 
-// A vertical swipe turned into a page scroll: keep the lens where it was.
-function onCancel() {
-  lastInput = performance.now()
-}
-
-function onKey(e: KeyboardEvent) {
-  if (e.target !== root.value) return
+// Arrow keys on the focused toggle move the lens while X-ray is on.
+function onToggleKey(e: KeyboardEvent) {
+  if (!enabled.value) return
   const step = keyStep(e.key, e.shiftKey)
   if (!step) return
   e.preventDefault()
-  const now = performance.now()
-  if (idle(now)) {
-    target.x = pos.x
-    target.y = pos.y
-  }
-  target.x = Math.max(0, Math.min(SW, target.x + step[0]))
-  target.y = Math.max(0, Math.min(stage.value!.clientHeight, target.y + step[1]))
-  lastInput = now
-  pointerInside = true
-  jump()
+  show(true)
+  moveTo({
+    x: Math.max(0, Math.min(SW, target.x + step[0])),
+    y: Math.max(0, Math.min(stage.value!.clientHeight, target.y + step[1])),
+  })
 }
 
 function onXrayLoad() {
   sizeLensImg()
-  ready.value = true
-  if (reduced.value) jump()
-  else start()
+  loaded.value = true
 }
 
 onMounted(() => {
   const rm = matchMedia('(prefers-reduced-motion: reduce)')
-  const coarse = matchMedia('(pointer: coarse)')
-  const setHint = () => {
-    hintKind.value = reduced.value ? 'still' : coarse.matches ? 'touch' : 'pointer'
-  }
-  reduced.value = rm.matches
-  setHint()
+  reduced = rm.matches
   const onRm = () => {
-    reduced.value = rm.matches
-    setHint()
-    if (reduced.value) {
+    reduced = rm.matches
+    if (reduced) {
       stop()
-      jump()
-    } else {
-      prev = performance.now()
-      start()
+      jumpTo(target)
     }
   }
   rm.addEventListener('change', onRm)
@@ -236,30 +248,24 @@ onMounted(() => {
 
   const io = new IntersectionObserver(([entry]) => {
     visible = !!entry?.isIntersecting
-    if (visible) {
-      prev = performance.now()
-      start()
-    } else {
-      stop()
-    }
+    if (visible) start()
+    else stop()
   })
   io.observe(root.value!)
   cleanups.push(() => io.disconnect())
 
-  // The X-ray layer is decoration: it waits until the page is idle, so the
-  // closed beetle (the LCP picture) loads first.
-  const load = () => { showXray.value = true }
-  if ('requestIdleCallback' in window) {
-    const id = requestIdleCallback(load, { timeout: 1500 })
-    cleanups.push(() => cancelIdleCallback(id))
-  } else {
-    const id = setTimeout(load, 300)
-    cleanups.push(() => clearTimeout(id))
+  let stored = false
+  try {
+    stored = sessionStorage.getItem(STORE_KEY) === 'on'
+  } catch {
+    // No storage: X-ray starts off.
   }
+  if (stored) setEnabled(true, false)
 })
 
 onBeforeUnmount(() => {
   stop()
+  clearTimeout(hideTimer)
   cleanups.forEach(fn => fn())
 })
 </script>
@@ -268,15 +274,12 @@ onBeforeUnmount(() => {
   <div
     ref="root"
     class="xray"
-    :class="{ 'xray--ready': ready, 'xray--still': reduced }"
-    role="group"
-    tabindex="0"
-    :aria-label="label"
-    @pointermove="onPointer"
-    @pointerdown="onPointer"
+    :class="{ 'xray--on': enabled, 'xray--shown': shown && loaded }"
+    @pointermove="onMove"
+    @pointerenter="onMove"
+    @pointerdown="onDown"
+    @pointerup="onUp"
     @pointerleave="onLeave"
-    @pointercancel="onCancel"
-    @keydown="onKey"
   >
     <div ref="stage" class="xray__stage" aria-hidden="true">
       <picture>
@@ -342,9 +345,21 @@ onBeforeUnmount(() => {
       <slot />
     </div>
 
-    <p class="xray__hint" aria-hidden="true">
-      {{ hintKind === 'still' ? hintStill : hintKind === 'touch' ? hintTouch : hintPointer }}
-    </p>
+    <button
+      ref="toggle"
+      type="button"
+      class="xray__toggle"
+      :aria-pressed="enabled"
+      @click="setEnabled(!enabled, true)"
+      @pointerenter="loadXray"
+      @focus="loadXray"
+      @keydown="onToggleKey"
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 0.5v3M8 12.5v3M0.5 8h3M12.5 8h3" /></svg>
+      <span>{{ button }}</span>
+      <span class="xray__toggle-state">{{ enabled ? on : off }}</span>
+    </button>
+    <p class="xray__said" aria-live="polite">{{ said }}</p>
   </div>
 </template>
 
@@ -366,13 +381,12 @@ onBeforeUnmount(() => {
   justify-content: center;
   min-height: clamp(640px, 92svh, 900px);
   padding: 112px 32px 72px;
-  cursor: crosshair;
-  touch-action: pan-y;
-  outline: none;
 }
 
-.xray:focus-visible {
-  box-shadow: inset 0 0 0 2px theme('colors.accent.DEFAULT');
+/* X-ray on: the pointer is a crosshair, a sideways drag moves the lens. */
+.xray--on {
+  cursor: crosshair;
+  touch-action: pan-y;
 }
 
 .xray__stage {
@@ -474,14 +488,16 @@ onBeforeUnmount(() => {
   transition: opacity 250ms;
 }
 
-.xray--ready .xray__lens,
-.xray--ready .xray__hud {
+.xray--shown .xray__lens,
+.xray--shown .xray__hud {
   opacity: 1;
 }
 
-.xray--still .xray__lens,
-.xray--still .xray__hud {
-  transition: none;
+@media (prefers-reduced-motion: reduce) {
+  .xray__lens,
+  .xray__hud {
+    transition: none;
+  }
 }
 
 /* Top edge under the navbar, bottom edge into the product preview. */
@@ -521,19 +537,71 @@ onBeforeUnmount(() => {
   );
 }
 
-.xray__hint {
+.xray__toggle {
   position: absolute;
-  z-index: 1;
-  left: 32px;
+  z-index: 2;
+  right: 32px;
   bottom: 28px;
-  margin: 0;
-  padding: 5px 9px;
-  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px 0 12px;
+  border: 0;
+  border-radius: 8px;
   background: rgba(12, 14, 20, 0.85);
-  font: 500 12px "JetBrains Mono", monospace;
-  letter-spacing: 0.03em;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  color: theme('colors.on-dark.secondary');
+  font: 500 13px "JetBrains Mono", monospace;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.xray__toggle svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.xray__toggle:hover {
+  color: theme('colors.on-dark.primary');
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+}
+
+.xray__toggle:active {
+  background: #1f2430;
+}
+
+.xray__toggle:focus-visible {
+  outline: 2px solid theme('colors.accent.DEFAULT');
+  outline-offset: 2px;
+}
+
+.xray__toggle[aria-pressed="true"] {
+  color: var(--xr-cyan);
+  box-shadow: inset 0 0 0 1px rgba(94, 234, 212, 0.55), 0 0 18px rgba(94, 234, 212, 0.12);
+}
+
+.xray__toggle-state {
   color: theme('colors.on-dark.muted');
-  pointer-events: none;
+}
+
+.xray__toggle[aria-pressed="true"] .xray__toggle-state {
+  color: var(--xr-cyan);
+}
+
+.xray__said {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 @media (max-width: 1023px) {
@@ -576,9 +644,14 @@ onBeforeUnmount(() => {
     display: none;
   }
 
-  .xray__hint {
-    left: 16px;
-    bottom: 20px;
+  /* Under the copy, full width, 44 px tall. */
+  .xray__toggle {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 28px;
   }
 }
 </style>

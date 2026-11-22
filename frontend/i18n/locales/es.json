@@ -9,10 +9,11 @@
   },
   "hero": {
     "xray": {
-      "label": "Vista de rayos X de un bicho detrás del título: mueve el puntero, desliza de lado en una pantalla táctil o usa las flechas.",
-      "hintPointer": "Pasa el cursor sobre el bicho",
-      "hintTouch": "Desliza de lado para escanear el bicho",
-      "hintStill": "Señala el bicho para ver por dentro"
+      "button": "X-ray",
+      "on": "sí",
+      "off": "no",
+      "saidOn": "Rayos X activados. Mueve el puntero por la página o usa las flechas.",
+      "saidOff": "Rayos X desactivados"
     },
     "badge": {
       "version": "v{version} · recién lanzada",
