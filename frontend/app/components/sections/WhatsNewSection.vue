@@ -4,32 +4,32 @@ const { t } = useI18n()
 // An `href` starting with http opens in a new tab; others are pages of this site.
 const cards = [
   {
-    key: 'timeline',
-    href: '/features/request-timeline',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h6M17 15l3 3-3 3" /></svg>`,
+    key: 'html',
+    href: '/features/html-pages',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
   {
-    key: 'queues',
-    href: '/features/queue-jobs',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h10M18 15v4m0 0l-2-2m2 2l2-2" /></svg>`,
+    key: 'mcp',
+    href: 'https://github.com/buggregator/server/releases/tag/v2.15.0',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
   {
-    key: 'logs',
-    href: '/features/logs',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" /></svg>`,
+    key: 'phones',
+    href: 'https://github.com/buggregator/frontend/releases/tag/1.43.0',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
   {
-    key: 'filters',
-    href: '/features/feed-filters',
-    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18l-7 8v6l-4 2v-8L3 4z" /></svg>`,
+    key: 'fixes',
+    href: 'https://github.com/buggregator/frontend/releases/tag/1.43.0',
+    icon: `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>`,
     links: [] as { key: string, href: string }[],
   },
 ]
 
-const notesHref = 'https://github.com/buggregator/server/releases/tag/v2.14.0'
+const notesHref = 'https://github.com/buggregator/server/releases/tag/v2.15.0'
 
 const isExternal = (href: string) => href.startsWith('http')
 </script>

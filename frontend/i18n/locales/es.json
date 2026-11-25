@@ -18,7 +18,7 @@
     "badge": {
       "version": "v{version} · recién lanzada",
       "free": "Gratuito y de código abierto",
-      "release": "v{version}: línea de tiempo de una petición, colas, búsqueda en logs"
+      "release": "v{version}: tus propias páginas HTML, MCP de solo lectura"
     },
     "headline": "Errores, dumps, emails y logs de tu app PHP.",
     "headlineSub": "En una sola ventana.",
@@ -345,31 +345,31 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "Novedades en v2.14",
-    "title": "Una petición en una sola pantalla, y cada tarea de la cola",
+    "eyebrow": "Novedades en v2.15",
+    "title": "Tus propias páginas HTML, junto a tus errores",
     "cards": {
-      "timeline": {
-        "title": "Todo lo que hizo una petición",
-        "desc": "Abre una traza de Sentry y verás sus consultas SQL, llamadas a la caché, logs, correos, llamadas salientes, tareas y errores en una sola escala de tiempo. Si la misma consulta se ejecuta cinco veces o más, un aviso la nombra y, si el SDK los envía, también el archivo y la línea: el clásico N+1.",
-        "cta": "Ver la línea de tiempo"
+      "html": {
+        "title": "Envía tu propia página HTML",
+        "desc": "Un informe de tests, el resumen de una tarea nocturna, una vista previa de maquetación: envíalo con un POST a Buggregator y lo verás tal cual, con su propio CSS y JavaScript, en un marco aislado. La pestaña Source muestra el marcado y la búsqueda encuentra la página por su texto.",
+        "cta": "Ver páginas HTML"
       },
-      "queues": {
-        "title": "Tareas de la cola, intento a intento",
-        "desc": "Sentry → Queues muestra las tareas que ejecutó tu worker de Laravel: cuáles fallaron, cuántos intentos hicieron falta, la excepción de cada intento, cuánto esperaron en la cola y qué petición las encoló.",
-        "cta": "Ver las tareas de la cola"
+      "mcp": {
+        "title": "Modo de solo lectura para agentes de IA",
+        "desc": "Activa mcp.read_only: true y tu agente de IA conserva todas las herramientas que leen eventos, pero ya no puede borrarlos ni controlar Xdebug.",
+        "cta": "Leer las notas de la versión"
       },
-      "logs": {
-        "title": "Una pantalla de logs con búsqueda",
-        "desc": "Todas las líneas de Monolog en un solo flujo en vivo, como tail -f con búsqueda. Filtra por nivel, canal y tiempo, mira las líneas por minuto en un gráfico, pausa para leer y abre todas las líneas de una petición.",
-        "cta": "Ver la pantalla de logs"
+      "phones": {
+        "title": "Cabe en tu móvil",
+        "desc": "Abre Buggregator en el móvil: el menú hamburguesa funciona y la cabecera con los filtros del feed cabe en la pantalla.",
+        "cta": "Ver los cambios de la interfaz"
       },
-      "filters": {
-        "title": "Filtros del feed para un servidor compartido",
-        "desc": "¿Un Buggregator para todo el equipo? Muestra solo los eventos de tu máquina, o de un entorno, usuario, canal de Monolog, nivel, release o etiqueta. Los filtros van en el enlace que compartes.",
-        "cta": "Ver los filtros del feed"
+      "fixes": {
+        "title": "Sentry Go y el profiler, corregidos",
+        "desc": "Los eventos de mensaje de sentry-go vuelven a abrirse y las notificaciones de escritorio nombran la excepción de Go. El grafo de llamadas del Profiler ha vuelto, Logs, Metrics y Traces se recargan al cambiar de proyecto y las barras de desplazamiento siguen el tema.",
+        "cta": "Ver todas las correcciones"
       }
     },
-    "notes": "Más en las notas de la versión v2.14.0"
+    "notes": "Más en las notas de la versión v2.15.0"
   },
   "harnsy": {
     "title": "Un equipo de IA desarrolla Buggregator. Las decisiones las tomamos nosotros.",
