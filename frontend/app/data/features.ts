@@ -8,7 +8,7 @@ export type FeatureId =
   | 'email' | 'sms' | 'broadcast'
   | 'dumps' | 'logs' | 'cron'
   | 'requestTimeline' | 'queues' | 'feedFilters'
-  | 'mcp'
+  | 'mcp' | 'htmlPages'
 
 export type FeaturePage = {
   label: string
@@ -21,7 +21,7 @@ export type FeaturePage = {
 export const FEATURE_PAGES: Record<FeatureId, FeaturePage> = {
   sentry: { label: 'Sentry', to: '/features/sentry', icon: 'sentry' },
   csp: { label: 'CSP reports', to: '/features/csp-reports', icon: 'shield' },
-  requestTimeline: { label: 'Request timeline', to: '/features/request-timeline', icon: 'trace', isNew: true },
+  requestTimeline: { label: 'Request timeline', to: '/features/request-timeline', icon: 'trace' },
   profiler: { label: 'Profiler', to: '/features/profiler', icon: 'profiler' },
   xdebug: { label: 'Xdebug', to: '/features/xdebug', icon: 'trace' },
   httpDumps: { label: 'HTTP dumps', to: '/features/http-dumps', icon: 'http-dump' },
@@ -31,10 +31,11 @@ export const FEATURE_PAGES: Record<FeatureId, FeaturePage> = {
   sms: { label: 'SMS testing', to: '/features/sms', icon: 'sms' },
   broadcast: { label: 'Broadcast events', to: '/features/broadcast-events', icon: 'broadcast' },
   dumps: { label: 'Dumps (Ray, VarDumper)', to: '/features/dumps', icon: 'var-dump' },
-  logs: { label: 'Logs', to: '/features/logs', icon: 'monolog', isNew: true },
-  queues: { label: 'Queue jobs', to: '/features/queue-jobs', icon: 'sentry', isNew: true },
+  htmlPages: { label: 'HTML pages', to: '/features/html-pages', icon: 'http-dump', isNew: true },
+  logs: { label: 'Logs', to: '/features/logs', icon: 'monolog' },
+  queues: { label: 'Queue jobs', to: '/features/queue-jobs', icon: 'sentry' },
   cron: { label: 'Cron monitoring', to: '/features/cron-monitoring', icon: 'heartBeat' },
-  feedFilters: { label: 'Feed filters', to: '/features/feed-filters', icon: 'events', isNew: true },
+  feedFilters: { label: 'Feed filters', to: '/features/feed-filters', icon: 'events' },
   mcp: { label: 'MCP & API', to: '/features/mcp-api', icon: 'bolt' },
 }
 
@@ -52,14 +53,14 @@ export const FEATURE_MENU_COLUMNS: FeatureGroup[][] = [
     { id: 'mail', features: ['email', 'sms', 'broadcast'] },
   ],
   [
-    { id: 'logs', features: ['dumps', 'logs', 'queues', 'cron'] },
+    { id: 'logs', features: ['dumps', 'htmlPages', 'logs', 'queues', 'cron'] },
     { id: 'agents', features: ['feedFilters', 'mcp'] },
   ],
 ]
 
 // The release the NEW marks and the «What's new» link speak about.
 export const FEATURE_RELEASE = {
-  version: '2.14',
-  tag: '2.14.0',
-  url: 'https://github.com/buggregator/server/releases/tag/v2.14.0',
+  version: '2.15',
+  tag: '2.15.0',
+  url: 'https://github.com/buggregator/server/releases/tag/v2.15.0',
 }

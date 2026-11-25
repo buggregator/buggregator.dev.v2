@@ -18,7 +18,7 @@
     "badge": {
       "version": "v{version} · just released",
       "free": "Free & Open Source",
-      "release": "v{version}: request timeline, queue jobs, log search"
+      "release": "v{version}: your own HTML pages, read-only MCP"
     },
     "headline": "Errors, dumps, emails and logs from your PHP app.",
     "headlineSub": "In one window.",
@@ -345,31 +345,31 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "New in v2.14",
-    "title": "One request on one screen, and every queue job",
+    "eyebrow": "New in v2.15",
+    "title": "Your own HTML pages, next to your errors",
     "cards": {
-      "timeline": {
-        "title": "Everything one request did",
-        "desc": "Open a Sentry trace and see its SQL queries, cache calls, logs, mails, outgoing calls, jobs and errors on one time scale. When the same query runs five times or more, a hint names it and, when the SDK sends it, the file and line: the classic N+1.",
-        "cta": "See the request timeline"
+      "html": {
+        "title": "Send your own HTML page",
+        "desc": "A test report, a nightly job summary, a markup preview: POST it to Buggregator and see it as it is, with its own CSS and JavaScript, in a sandboxed frame. The Source tab shows the markup, and search finds the page by its text.",
+        "cta": "See HTML pages"
       },
-      "queues": {
-        "title": "Queue jobs, attempt by attempt",
-        "desc": "Sentry → Queues lists the jobs your Laravel worker ran: which failed, how many attempts they took, the exception of each attempt, how long they waited, and the request that queued them.",
-        "cta": "See queue jobs"
+      "mcp": {
+        "title": "Read-only mode for AI agents",
+        "desc": "Set mcp.read_only: true and your AI agent keeps every tool that reads, but can no longer delete events, change mock rules or drive Xdebug.",
+        "cta": "See MCP & API"
       },
-      "logs": {
-        "title": "A Logs screen with search",
-        "desc": "All Monolog lines as one live stream, like tail -f with search. Filter by level, channel and time, see lines per minute on a chart, pause to read, and open all lines of one request.",
-        "cta": "See the Logs screen"
+      "phones": {
+        "title": "Fits your phone",
+        "desc": "Open Buggregator on a phone: the burger menu works, and the page header with feed filters fits the screen.",
+        "cta": "See the UI changes"
       },
-      "filters": {
-        "title": "Feed filters for a shared server",
-        "desc": "One Buggregator for the whole team? Show only your machine’s events, or one environment, user, Monolog channel, level, release or tag. The filters go into the link you share.",
-        "cta": "See feed filters"
+      "fixes": {
+        "title": "Sentry Go and the profiler, fixed",
+        "desc": "Message events from sentry-go open again, and desktop notifications name the Go exception. The Profiler Call graph is back, Logs, Metrics and Traces reload when you switch the project, and scrollbars follow the theme.",
+        "cta": "See all fixes"
       }
     },
-    "notes": "More in the v2.14.0 release notes"
+    "notes": "More in the v2.15.0 release notes"
   },
   "harnsy": {
     "title": "An AI team builds Buggregator. We make the decisions.",

@@ -19,6 +19,7 @@ export const SITEMAP_PAGES = [
   '/features/request-timeline',
   '/features/queue-jobs',
   '/features/feed-filters',
+  '/features/html-pages',
   '/features/csp-reports',
   '/tips',
   '/sponsors',
