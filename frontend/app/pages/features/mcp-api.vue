@@ -201,6 +201,11 @@ const highlights = [
     title: 'Mock APIs, from your assistant or a script',
     description: 'Your assistant can create, edit and delete mock rules, preview what a rule would answer, and turn a captured request into a rule. Give it an OpenAPI spec, and it makes one rule per endpoint, with example or fake data. Scripts can manage rules and import specs through the REST API.',
   },
+  {
+    icon: '\u{1F512}',
+    title: 'Read-only, if you prefer',
+    description: 'Set mcp.read_only: true (or MCP_READ_ONLY=true) and your assistant keeps every tool that reads, but can no longer delete events or drive Xdebug. Since v2.15.0.',
+  },
 ]
 
 const worksWithItems = [

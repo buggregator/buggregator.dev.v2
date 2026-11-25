@@ -356,7 +356,7 @@
       "mcp": {
         "title": "Read-only mode for AI agents",
         "desc": "Set mcp.read_only: true and your AI agent keeps every tool that reads events, but can no longer delete them or drive Xdebug.",
-        "cta": "Read the release notes"
+        "cta": "See MCP & API"
       },
       "phones": {
         "title": "Fits your phone",
