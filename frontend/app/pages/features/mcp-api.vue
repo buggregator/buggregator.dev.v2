@@ -204,7 +204,7 @@ const highlights = [
   {
     icon: '\u{1F512}',
     title: 'Read-only, if you prefer',
-    description: 'Set mcp.read_only: true (or MCP_READ_ONLY=true) and your assistant keeps every tool that reads, but can no longer delete events or drive Xdebug. Since v2.15.0.',
+    description: 'Set mcp.read_only: true (or MCP_READ_ONLY=true) and your assistant keeps every tool that reads, but can no longer delete events, change mock rules or drive Xdebug. Since v2.15.0.',
   },
 ]
 

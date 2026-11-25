@@ -355,7 +355,7 @@
       },
       "mcp": {
         "title": "Modo de solo lectura para agentes de IA",
-        "desc": "Activa mcp.read_only: true y tu agente de IA conserva todas las herramientas que leen eventos, pero ya no puede borrarlos ni controlar Xdebug.",
+        "desc": "Activa mcp.read_only: true y tu agente de IA conserva todas las herramientas que leen, pero ya no puede borrar eventos, cambiar reglas de mock ni controlar Xdebug.",
         "cta": "Ver MCP y API"
       },
       "phones": {
