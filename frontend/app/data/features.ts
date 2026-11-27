@@ -26,12 +26,12 @@ export const FEATURE_PAGES: Record<FeatureId, FeaturePage> = {
   xdebug: { label: 'Xdebug', to: '/features/xdebug', icon: 'trace' },
   httpDumps: { label: 'HTTP dumps', to: '/features/http-dumps', icon: 'http-dump' },
   proxy: { label: 'HTTP proxy', to: '/features/http-proxy', icon: 'host' },
-  mock: { label: 'Mock server', to: '/features/mock-server', icon: 'mock-server' },
+  mock: { label: 'Mock server', to: '/features/mock-server', icon: 'mock-server', isNew: true },
   email: { label: 'Email testing', to: '/features/email-testing', icon: 'smtp' },
   sms: { label: 'SMS testing', to: '/features/sms', icon: 'sms' },
   broadcast: { label: 'Broadcast events', to: '/features/broadcast-events', icon: 'broadcast' },
   dumps: { label: 'Dumps (Ray, VarDumper)', to: '/features/dumps', icon: 'var-dump' },
-  htmlPages: { label: 'HTML pages', to: '/features/html-pages', icon: 'http-dump', isNew: true },
+  htmlPages: { label: 'HTML pages', to: '/features/html-pages', icon: 'http-dump' },
   logs: { label: 'Logs', to: '/features/logs', icon: 'monolog' },
   queues: { label: 'Queue jobs', to: '/features/queue-jobs', icon: 'sentry' },
   cron: { label: 'Cron monitoring', to: '/features/cron-monitoring', icon: 'heartBeat' },
@@ -60,7 +60,7 @@ export const FEATURE_MENU_COLUMNS: FeatureGroup[][] = [
 
 // The release the NEW marks and the «What's new» link speak about.
 export const FEATURE_RELEASE = {
-  version: '2.15',
-  tag: '2.15.0',
-  url: 'https://github.com/buggregator/server/releases/tag/v2.15.0',
+  version: '2.16',
+  tag: '2.16.0',
+  url: 'https://github.com/buggregator/server/releases/tag/v2.16.0',
 }

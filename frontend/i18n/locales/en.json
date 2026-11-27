@@ -18,7 +18,7 @@
     "badge": {
       "version": "v{version} · just released",
       "free": "Free & Open Source",
-      "release": "v{version}: your own HTML pages, read-only MCP"
+      "release": "v{version}: mock rules with conditions"
     },
     "headline": "Errors, dumps, emails and logs from your PHP app.",
     "headlineSub": "In one window.",
@@ -345,31 +345,31 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "New in v2.15",
-    "title": "Your own HTML pages, next to your errors",
+    "eyebrow": "New in v2.16",
+    "title": "One mock endpoint, different answers",
     "cards": {
-      "html": {
-        "title": "Send your own HTML page",
-        "desc": "A test report, a nightly job summary, a markup preview: POST it to Buggregator and see it as it is, with its own CSS and JavaScript, in a sandboxed frame. The Source tab shows the markup, and search finds the page by its text.",
-        "cta": "See HTML pages"
+      "conditions": {
+        "title": "Mock rules with conditions",
+        "desc": "A rule can now require request headers and JSON body fields, like card.token or items.*.sku. One endpoint answers 200 for one payment token, 402 for another, and 401 without the right Authorization header. Set conditions in the rule editor, in buggregator.yaml, over REST or MCP.",
+        "cta": "See the mock server"
       },
-      "mcp": {
-        "title": "Read-only mode for AI agents",
-        "desc": "Set mcp.read_only: true and your AI agent keeps every tool that reads, but can no longer delete events, change mock rules or drive Xdebug.",
-        "cta": "See MCP & API"
+      "missed": {
+        "title": "See which condition missed",
+        "desc": "When a rule misses a request only on a condition, the captured request names that rule and the first condition that failed. A header name matches in any case, and a missing field never equals. Rules without conditions work as before.",
+        "cta": "How rules match"
       },
-      "phones": {
-        "title": "Fits your phone",
-        "desc": "Open Buggregator on a phone: the burger menu works, and the page header with feed filters fits the screen.",
-        "cta": "See the UI changes"
+      "recursion": {
+        "title": "Profiler: collapse recursion",
+        "desc": "Turn on «Collapse recursion» on the Call graph, and a recursive function shows as one node instead of a node per recursion level.",
+        "cta": "See the profiler"
       },
-      "fixes": {
-        "title": "Sentry Go and the profiler, fixed",
-        "desc": "Message events from sentry-go open again, and desktop notifications name the Go exception. The Profiler Call graph is back, Logs, Metrics and Traces reload when you switch the project, and scrollbars follow the theme.",
-        "cta": "See all fixes"
+      "traces": {
+        "title": "Sentry traces list, fixed",
+        "desc": "A trace's duration now covers the whole trace, other services' work included, so its preview bars fit their track.",
+        "cta": "See the fix"
       }
     },
-    "notes": "More in the v2.15.0 release notes"
+    "notes": "More in the v2.16.0 release notes"
   },
   "harnsy": {
     "title": "An AI team builds Buggregator. We make the decisions.",

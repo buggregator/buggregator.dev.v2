@@ -15,7 +15,7 @@ defineI18nRoute(false)
 
 useSeoMeta({
   title: 'Mock Server — Fake API Responses for Local Development — Buggregator',
-  description: 'Fake any API in a minute: method and path in, status, headers, body and delay out. Every call is captured, with the rule that answered. Rules in the UI, the REST API or buggregator.yaml for CI. Free and open source.',
+  description: 'Fake any API in a minute: method and path in, status, headers, body and delay out. Match on headers and JSON body fields too. Every call is captured, with the rule that answered. Rules in the UI, the REST API or buggregator.yaml for CI. Free and open source.',
   ogTitle: 'Mock Server — Fake API Responses — Buggregator',
   ogDescription: 'Fake the API you are waiting for. Status, headers, body and delay per rule. Every call captured.',
   ogImage: 'https://buggregator.dev/buggregator.png',
@@ -27,11 +27,34 @@ useSeoMeta({
 
 const accentColor = '#0ea5e9'
 const TEMPLATE_DOCS = 'https://docs.buggregator.dev/config/mock-templates.html'
+const CONDITIONS_DOCS = 'https://docs.buggregator.dev/config/mock-server.html#request-conditions'
+
+// One endpoint, three answers: rules with conditions go above the general rule.
+const conditionsYaml = `mocks:
+  - name: no valid key
+    method: POST
+    path: /payments
+    conditions:
+      - { in: header, name: authorization, op: not_equals, value: 'Bearer sk_test_123' }
+    status: 401
+    body: '{"error": "unauthorized"}'
+  - name: payment ok
+    method: POST
+    path: /payments
+    conditions:
+      - { in: body, name: card.token, op: equals, value: tok_ok }
+    status: 200
+    body: '{"status": "paid"}'
+  - name: card declined
+    method: POST
+    path: /payments
+    status: 402
+    body: '{"error": "card_declined"}'`
 
 const steps = [
   {
     title: 'Start Buggregator',
-    description: `Requires Buggregator v2.6.0 or later; the template editor and OpenAPI import in the UI need v2.7.0. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
+    description: `Requires Buggregator v2.6.0 or later; the template editor and OpenAPI import in the UI need v2.7.0, request conditions need v2.16.0. The mock server answers on the UI port, 8000. Nothing to turn on. One file, about ${BINARY_SIZE_MB} MB, installed with one command. Prefer containers? Use the Docker tab.`,
     tabs: [
       {
         id: 'binary',
@@ -130,6 +153,12 @@ const highlights = [
     link: { href: TEMPLATE_DOCS, label: 'Template reference' },
   },
   {
+    icon: '\u{1F500}',
+    title: 'One endpoint, different answers',
+    description: 'Since v2.16.0 a rule can require request headers and JSON body fields: card.token, items.*.sku. Check that a value equals, does not equal, is present or is missing. All conditions must hold, or the next rule is tried. Rules without conditions work as before.',
+    link: { href: CONDITIONS_DOCS, label: 'Request conditions' },
+  },
+  {
     icon: '\u{1F4A5}',
     title: 'Errors on demand',
     description: 'Answer 500 or 429 and see how your app handles a failing API.',
@@ -147,7 +176,7 @@ const highlights = [
   {
     icon: '\u{1F50D}',
     title: 'Why didn\'t it match?',
-    description: 'An unmatched call gets 404 and is still captured, with the rules that almost matched and why: method, project or disabled. Start a rule from that request in one click — method and path prefilled.',
+    description: 'An unmatched call gets 404 and is still captured, with the rules that almost matched and why: method, project, disabled, or the condition that missed. Start a rule from that request in one click — method and path prefilled.',
   },
   {
     icon: '\u{1F501}',
@@ -208,6 +237,36 @@ const worksWithItems = [
       :items="highlights"
       :accent-color="accentColor"
     />
+
+    <!-- Use case: request conditions -->
+    <section id="conditions" class="py-16 lg:py-20 bg-section-dark border-t border-landing-border-subtle" aria-labelledby="conditions-title">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
+        <div class="text-center">
+          <h2 id="conditions-title" class="text-section font-bold text-white mb-3">One payment endpoint, three answers: 200, 402, 401</h2>
+          <p class="text-lg text-on-dark-secondary leading-relaxed">
+            Your checkout calls POST /payments. You want to test the happy path, a declined card and a bad API key, without
+            three different URLs. Give the rules conditions: 200 for one card token, 402 for any other card, 401 without the
+            right Authorization header. Since v2.16.0.
+          </p>
+        </div>
+        <div class="mt-8 rounded-xl border border-code-border bg-code-bg p-4 font-mono text-xs leading-relaxed overflow-x-auto">
+          <pre class="text-code-text whitespace-pre">{{ conditionsYaml }}</pre>
+        </div>
+        <p class="mt-3 text-sm text-on-dark-secondary leading-relaxed">
+          Rules are tried top to bottom, so put the rules with conditions above the general one. Header names ignore case. A
+          missing field never equals. Set conditions in the rule editor, in buggregator.yaml (<code class="font-mono text-xs">mocks[].conditions</code>),
+          over the REST API or MCP. When a rule misses only on a condition, the captured request names the rule and the first condition that failed.
+          <a :href="CONDITIONS_DOCS" target="_blank" rel="noopener" class="text-accent hover:underline">Request conditions in the docs</a>.
+        </p>
+      </div>
+      <div class="mt-10 px-4 sm:px-6 lg:px-8">
+        <FeatureScreenshot
+          src="/features/mock-server-conditions.png"
+          alt="Buggregator mock server rule editor: rule payment ok for POST /payments with two conditions, body field card.token equals tok_ok and header Authorization equals Bearer sk_test_123; the rule list shows rules with +1 and +2 conditions tags"
+          caption="The Conditions block in the rule editor: all must hold. In the list, a tag shows how many conditions a rule has."
+        />
+      </div>
+    </section>
 
     <!-- Setup -->
     <section id="setup">
