@@ -355,7 +355,7 @@
       },
       "missed": {
         "title": "Ve qué condición falló",
-        "desc": "Cuando ninguna regla responde a una petición, Buggregator indica la condición que no se cumplió. El nombre de una cabecera vale en mayúsculas o minúsculas, y un campo que falta nunca es igual. Las reglas sin condiciones funcionan como antes.",
+        "desc": "Si una regla falla solo por una condición, la petición capturada indica esa regla y la primera condición que no se cumplió. El nombre de una cabecera vale en mayúsculas o minúsculas, y un campo que falta nunca es igual. Las reglas sin condiciones funcionan como antes.",
         "cta": "Cómo se elige la regla"
       },
       "recursion": {

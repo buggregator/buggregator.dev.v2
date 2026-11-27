@@ -255,7 +255,7 @@ const worksWithItems = [
         <p class="mt-3 text-sm text-on-dark-secondary leading-relaxed">
           Rules are tried top to bottom, so put the rules with conditions above the general one. Header names ignore case. A
           missing field never equals. Set conditions in the rule editor, in buggregator.yaml (<code class="font-mono text-xs">mocks[].conditions</code>),
-          over the REST API or MCP. When no rule answers, the captured request names the condition that missed.
+          over the REST API or MCP. When a rule misses only on a condition, the captured request names the rule and the first condition that failed.
           <a :href="CONDITIONS_DOCS" target="_blank" rel="noopener" class="text-accent hover:underline">Request conditions in the docs</a>.
         </p>
       </div>

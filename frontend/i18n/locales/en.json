@@ -355,7 +355,7 @@
       },
       "missed": {
         "title": "See which condition missed",
-        "desc": "When no rule answers a request, Buggregator names the condition that missed. A header name matches in any case, and a missing field never equals. Rules without conditions work as before.",
+        "desc": "When a rule misses a request only on a condition, the captured request names that rule and the first condition that failed. A header name matches in any case, and a missing field never equals. Rules without conditions work as before.",
         "cta": "How rules match"
       },
       "recursion": {
