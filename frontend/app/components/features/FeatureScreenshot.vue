@@ -30,6 +30,7 @@ const KNOWN_SIZES: Record<string, [number, number]> = {
   '/features/html-pages.png': [1600, 1000],
   '/features/html-pages-feed.png': [1600, 1000],
   '/features/email-calendar-invite.png': [1600, 1000],
+  '/features/mock-server-conditions.png': [1600, 1000],
 }
 
 const size = computed(() => {

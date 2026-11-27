@@ -18,7 +18,7 @@
     "badge": {
       "version": "v{version} · recién lanzada",
       "free": "Gratuito y de código abierto",
-      "release": "v{version}: tus propias páginas HTML, MCP de solo lectura"
+      "release": "v{version}: reglas de mock con condiciones"
     },
     "headline": "Errores, dumps, emails y logs de tu app PHP.",
     "headlineSub": "En una sola ventana.",
@@ -345,31 +345,31 @@
     }
   },
   "whatsNew": {
-    "eyebrow": "Novedades en v2.15",
-    "title": "Tus propias páginas HTML, junto a tus errores",
+    "eyebrow": "Novedades en v2.16",
+    "title": "Un endpoint simulado, respuestas distintas",
     "cards": {
-      "html": {
-        "title": "Envía tu propia página HTML",
-        "desc": "Un informe de tests, el resumen de una tarea nocturna, una vista previa de maquetación: envíalo con un POST a Buggregator y lo verás tal cual, con su propio CSS y JavaScript, en un marco aislado. La pestaña Source muestra el marcado y la búsqueda encuentra la página por su texto.",
-        "cta": "Ver páginas HTML"
+      "conditions": {
+        "title": "Reglas de mock con condiciones",
+        "desc": "Ahora una regla puede exigir cabeceras de la petición y campos del cuerpo JSON, como card.token o items.*.sku. Un mismo endpoint responde 200 para un token de pago, 402 para otro y 401 si falta la cabecera Authorization correcta. Define las condiciones en el editor de reglas, en buggregator.yaml, por REST o por MCP.",
+        "cta": "Ver el servidor mock"
       },
-      "mcp": {
-        "title": "Modo de solo lectura para agentes de IA",
-        "desc": "Activa mcp.read_only: true y tu agente de IA conserva todas las herramientas que leen, pero ya no puede borrar eventos, cambiar reglas de mock ni controlar Xdebug.",
-        "cta": "Ver MCP y API"
+      "missed": {
+        "title": "Ve qué condición falló",
+        "desc": "Cuando ninguna regla responde a una petición, Buggregator indica la condición que no se cumplió. El nombre de una cabecera vale en mayúsculas o minúsculas, y un campo que falta nunca es igual. Las reglas sin condiciones funcionan como antes.",
+        "cta": "Cómo se elige la regla"
       },
-      "phones": {
-        "title": "Cabe en tu móvil",
-        "desc": "Abre Buggregator en el móvil: el menú hamburguesa funciona y la cabecera con los filtros del feed cabe en la pantalla.",
-        "cta": "Ver los cambios de la interfaz"
+      "recursion": {
+        "title": "Profiler: contraer la recursión",
+        "desc": "Activa «Collapse recursion» en el Call graph y una función recursiva aparece como un solo nodo, no como un nodo por cada nivel de recursión.",
+        "cta": "Ver el profiler"
       },
-      "fixes": {
-        "title": "Sentry Go y el profiler, corregidos",
-        "desc": "Los eventos de mensaje de sentry-go vuelven a abrirse y las notificaciones de escritorio nombran la excepción de Go. El grafo de llamadas del Profiler ha vuelto, Logs, Metrics y Traces se recargan al cambiar de proyecto y las barras de desplazamiento siguen el tema.",
-        "cta": "Ver todas las correcciones"
+      "traces": {
+        "title": "Lista de trazas de Sentry, corregida",
+        "desc": "La duración de una traza ahora abarca toda la traza, incluido el trabajo de otros servicios, así que sus barras de vista previa caben en su pista.",
+        "cta": "Ver la corrección"
       }
     },
-    "notes": "Más en las notas de la versión v2.15.0"
+    "notes": "Más en las notas de la versión v2.16.0"
   },
   "harnsy": {
     "title": "Un equipo de IA desarrolla Buggregator. Las decisiones las tomamos nosotros.",
